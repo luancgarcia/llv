@@ -1,0 +1,17 @@
+=grid
+
+.container
+	background-color: $cor-11
+	+container
+
+.grid 
+	+span-columns(1, $coluna_responsive)
+	margin-bottom: 5px
+	&.last
+		+span-columns(1 omega, $coluna_responsive)
+
+.grid2 
+	+span-columns(2, $coluna_responsive)
+	margin-bottom: 5px
+	&.last
+		+span-columns(2 omega, $coluna_responsive)

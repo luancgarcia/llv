@@ -1,0 +1,129 @@
+=elementos
+
+.dois-itens-v
+	.item
+
+		margin-bottom: 5px
+
+		&.last
+			margin-bottom: 0
+
+
+.item
+	@include box-shadow(1px, 1px,  1px, 0, $cor-21)
+	background-color: $cor-10
+	position: relative
+	padding-bottom: 1px
+
+	.desconto
+		font-family: $trebuchet
+		position: absolute
+		z-index: 20
+		width: 33px
+		height: 33px
+		background-color: $cor-19
+		border: 1px solid $cor-20
+		line-height: 33px
+		text-align: center
+		color: $cor-10
+		font-size: 1.4em		
+		top: 12px
+		right: 10px
+		@include border-radius(50%)
+		@include box-shadow(1px, 1px,  1px, 0, $cor-3)
+
+	figure
+		padding: 5px
+
+		img
+			display: block
+			width: 100%
+
+	.content
+		margin: 0 12px 5px
+		position: relative
+
+		.marca
+			position: absolute
+			width: 120px
+			height: 50px
+			border: 1px solid $cor-15
+			top: 50%
+			margin-top: -25px
+			right: 4px
+
+		.titulo
+			color: $cor-16
+
+
+		.descricao
+			color: $cor-16
+
+		.outro
+
+			a
+				font-size: 1.4em
+				color: $cor-17
+
+			.valor1
+				font-size: 1.2em
+				color: $cor-18
+				text-decoration: line-through
+
+			.valor2
+				color: $cor-17
+				span
+					font-size: 1.4em
+
+				strong
+					font-size: 1.8em
+					font-weight: normal
+
+	footer
+		margin: 0 1px
+		height: 26px
+		background-color: $cor-12
+		font-size: 1.1em
+
+		.like
+			background: url(#{$url-img}/ico-like.png) no-repeat 0 0		
+			color: $cor-13
+			padding-left: 18px
+			margin-left: 8px
+			height: 26px
+			line-height: 26px
+
+		.share
+			color: $cor-14
+			height: 26px
+			line-height: 26px
+			margin-right: 8px
+
+			&:hover
+				text-decoration: underline
+
+.grid
+	.content
+		margin: 0 5px 0
+		height: 42px
+		.descricao
+			font-size: 1.3em
+
+
+.grid2
+	.item
+		figure
+			margin-bottom: 6px
+		.content
+			.titulo
+				font-size: 1.6em
+				height: 27px
+
+			.descricao
+				font-size: 1.4em
+				width: 230px
+				line-height: 14px
+				height: 41px
+
+			.outro
+				height: 31px

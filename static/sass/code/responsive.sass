@@ -1,0 +1,104 @@
+@import base
+@import grid
+@import menu_responsivo
+
++at-breakpoint($contexto-smartphone)
+	$coluna_responsive: 2
+
+	.grid, .grid.last
+		+span-columns(1, $coluna_responsive)
+		&.lastmob
+			+span-columns(1 omega, $coluna_responsive)
+
+		.content
+			height: 60px
+
+			.descricao
+				font-size: 1.2em
+				letter-spacing: -0.06em
+
+		&.dois-itens-v
+			display: none
+			+span-columns(2 omega, $coluna_responsive)
+
+			.item
+				.content
+					height: auto
+					padding-bottom: 10px
+
+
+
+
+	.grid2, .grid4, .grid2.last 
+		+span-columns(2 omega, $coluna_responsive)
+
+
+		.item
+			.content
+				.descricao
+					width: 100%
+
+				.marca
+					display: none
+
+
++at-breakpoint($contexto-tablet-vertical)
+	.item 
+		.content 
+			.marca
+				display: none
+	.grid
+		.item
+			.content
+			
+
+				.descricao
+					font-size: 1.1em
+	.dois-itens-v 
+		.vertical
+			.content
+				height: 53px
++at-breakpoint($contexto-max-tablet-vert)
+	+menu_responsivo
+
++at-breakpoint($contexto-facebook)
+	
+
++at-breakpoint($contexto-tv)
+	$coluna_responsive: 8
+
+	br.cl
+		display: none
+
+	.container
+		max-width: 100%
+
+	.grid , .grid.last, .grid2 , .grid2.last
+		+span-columns(2, $coluna_responsive)
+
+		&.lasttv
+			+span-columns(2 omega, $coluna_responsive)
+
+		&.dois-itens-v
+			display: none
+
+
+		.item
+			figure
+				margin-bottom: 0px
+			.content
+				height: 42px
+				margin: 0 5px
+				.titulo, .marca, .outro
+					display: none
+
+				.descricao
+					height: auto
+					width: auto
+					font-size: 1.3em
+					line-height: normal
+
+
+	body, html 
+		min-width: 990px
+	
