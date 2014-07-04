@@ -1,0 +1,95 @@
+// Bibliotecas
+@import susy
+@import compass/css3
+@import compass/utilities/general/min
+
+// caminhos e fonte
+$font: "Tahoma"
+$roboto: "Roboto"
+$trebuchet: "Trebuchet MS"
+$url-img: '../img'
+$url-font: '../font'
+
+$coluna_responsive: 4
+
+// Susy
+$column-width: 190px
+$container-style: magic 
+$grid-padding: 10px
+$gutter-width: 6px
+$omega-float: left
+$total-columns: $coluna_responsive
+
+
+// Contextos
+$contexto-smartphone: 0 480px
+$contexto-tablet-vertical: 481px 728px
+$contexto-max-tablet-vert: 0 728px
+$contexto-facebook: 481px 800px 
+$contexto-tv: 801px 9999999px 
+
+// Cores
+$cor-0: #000000
+$cor-3: #333333
+$cor-4: #444444
+$cor-5: #555555
+$cor-6: #666666
+$cor-7: #777777
+$cor-9: #999999
+$cor-10: #ffffff
+$cor-11: #f3f3f3
+$cor-12: #faf9f9
+$cor-13: #4d4d4c
+$cor-14: #3c599b
+$cor-15: #f7f7f7
+$cor-16: #2e2e2e
+$cor-17: #d11924
+$cor-18: #6e6e70
+$cor-19: #ce1e06
+$cor-20: #b61904
+$cor-21: #c2c2c2
+$cor-22: #016e55
+
+@mixin border-radius($radius)
+	-webkit-border-radius: $radius
+	-moz-border-radius: $radius
+	-ms-border-radius: $radius
+	-o-border-radius: $radius
+	border-radius: $radius
+
+@mixin box-shadow($h, $v,  $blur, $spread, $cor)
+	-webkit-box-shadow: $h $v $blur $spread $cor
+	box-shadow: $h $v $blur $spread $cor
+
+@mixin linear-gradient($fromColor, $toColor)
+	background-color: $toColor
+	background-image: -webkit-gradient(linear, left top, left bottom, from(0%, $fromColor), to(100%, $toColor))
+	background-image: -webkit-linear-gradient(top, $fromColor 0%, $toColor 100%)
+	background-image: -moz-linear-gradient(top, $fromColor 0%, $toColor 100%)
+	background-image: -ms-linear-gradient(top, $fromColor 0%, $toColor 100%)
+	background-image: -o-linear-gradient(top, $fromColor 0%, $toColor 100%)
+	background-image: linear-gradient(top, $fromColor 0%, $toColor 100%)
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}')
+
+@mixin linear-gradient-percent($fromColor, $toColor, $percentFrom, $percentTo)
+	background-color: $toColor
+	background-image: -webkit-gradient(linear, left top, left bottom, from($percentFrom, $fromColor), to($percentTo, $toColor))
+	background-image: -webkit-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
+	background-image: -moz-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
+	background-image: -ms-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
+	background-image: -o-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
+	background-image: linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}')	
+
+
+@mixin transition($transition-property, $transition-time, $method)
+	-webkit-transition: $transition-property $transition-time $method
+	-moz-transition: $transition-property $transition-time $method
+	-ms-transition: $transition-property $transition-time $method
+	-o-transition: $transition-property $transition-time $method
+	transition: $transition-property $transition-time $method
+
+@mixin opacity($opacity, $opacityIE)
+	opacity: $opacity
+	-moz-opacity:  $opacity
+	filter: alpha(opacity=$opacityIE)

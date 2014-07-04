@@ -1,0 +1,156 @@
+.container {
+  background-color: #f3f3f3;
+  *zoom: 1;
+  max-width: 778px;
+  _width: 778px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid {
+  width: 24.42159%;
+  float: left;
+  margin-right: 0.77121%;
+  display: inline;
+  margin-bottom: 5px;
+}
+.grid.last {
+  width: 24.42159%;
+  float: left;
+  margin-right: 0;
+  *margin-right: -6px;
+  display: inline;
+}
+
+.grid2 {
+  width: 49.6144%;
+  float: left;
+  margin-right: 0.77121%;
+  display: inline;
+  margin-bottom: 5px;
+}
+.grid2.last {
+  width: 49.6144%;
+  float: left;
+  margin-right: 0;
+  *margin-right: -6px;
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  .grid, .grid.last {
+    width: 49.2228%;
+    float: left;
+    margin-right: 1.5544%;
+  }
+  .grid.lastmob, .grid.last.lastmob {
+    width: 49.2228%;
+    float: left;
+    margin-right: 0;
+  }
+  .grid .content, .grid.last .content {
+    height: 60px;
+  }
+  .grid .content .descricao, .grid.last .content .descricao {
+    font-size: 1.2em;
+    letter-spacing: -0.06em;
+  }
+  .grid.dois-itens-v, .grid.last.dois-itens-v {
+    display: none;
+    width: 100%;
+    float: left;
+    margin-right: 0;
+  }
+  .grid.dois-itens-v .item .content, .grid.last.dois-itens-v .item .content {
+    height: auto;
+    padding-bottom: 10px;
+  }
+
+  .grid2, .grid4, .grid2.last {
+    width: 100%;
+    float: left;
+    margin-right: 0;
+  }
+  .grid2 .item .content .descricao, .grid4 .item .content .descricao, .grid2.last .item .content .descricao {
+    width: 100%;
+  }
+  .grid2 .item .content .marca, .grid4 .item .content .marca, .grid2.last .item .content .marca {
+    display: none;
+  }
+}
+@media (min-width: 481px) and (max-width: 728px) {
+  .item .content .marca {
+    display: none;
+  }
+
+  .grid .item .content .descricao {
+    font-size: 1.1em;
+  }
+
+  .dois-itens-v .vertical .content {
+    height: 53px;
+  }
+}
+@media (max-width: 728px) {
+  #ico-menu {
+    display: block;
+  }
+
+  #Menu {
+    height: auto;
+    position: relative;
+  }
+  #Menu .navegacao {
+    float: none;
+  }
+}
+@media (min-width: 801px) and (max-width: 9999999px) {
+  br.cl {
+    display: none;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .grid, .grid.last, .grid2, .grid2.last {
+    width: 24.71191%;
+    float: left;
+    margin-right: 0.38412%;
+  }
+  .grid.lasttv, .grid.last.lasttv, .grid2.lasttv, .grid2.last.lasttv {
+    width: 24.71191%;
+    float: left;
+    margin-right: 0;
+  }
+  .grid.dois-itens-v, .grid.last.dois-itens-v, .grid2.dois-itens-v, .grid2.last.dois-itens-v {
+    display: none;
+  }
+  .grid .item figure, .grid.last .item figure, .grid2 .item figure, .grid2.last .item figure {
+    margin-bottom: 0px;
+  }
+  .grid .item .content, .grid.last .item .content, .grid2 .item .content, .grid2.last .item .content {
+    height: 42px;
+    margin: 0 5px;
+  }
+  .grid .item .content .titulo, .grid .item .content .marca, .grid .item .content .outro, .grid.last .item .content .titulo, .grid.last .item .content .marca, .grid.last .item .content .outro, .grid2 .item .content .titulo, .grid2 .item .content .marca, .grid2 .item .content .outro, .grid2.last .item .content .titulo, .grid2.last .item .content .marca, .grid2.last .item .content .outro {
+    display: none;
+  }
+  .grid .item .content .descricao, .grid.last .item .content .descricao, .grid2 .item .content .descricao, .grid2.last .item .content .descricao {
+    height: auto;
+    width: auto;
+    font-size: 1.3em;
+    line-height: normal;
+  }
+
+  body, html {
+    min-width: 990px;
+  }
+}
