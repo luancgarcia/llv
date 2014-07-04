@@ -36,6 +36,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'geral',
+    'html',
+    'lojas',
+    'utils',
+
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,9 +64,24 @@ WSGI_APPLICATION = 'geral.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+       'ENGINE': 'django.db.backends.mysql',
+       'NAME': 'llv',
+       'USER': '',
+       'PASSWORD': '',
+       'HOST': '',
+       'PORT': '',
+   },
+   'mysql-inno-init': {
+       'ENGINE': 'django.db.backends.mysql',
+       'NAME': 'llv',
+       'USER': '',
+       'PASSWORD': '',
+       'HOST': '',
+       'PORT': '',
+       'OPTIONS': {
+           'init_command': 'SET storage_engine=INNODB',
+       },
+   },
 }
 
 # Internationalization
@@ -80,3 +102,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from custom_settings import *
+except ImportError:
+    pass
