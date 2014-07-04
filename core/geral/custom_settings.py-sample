@@ -1,0 +1,25 @@
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.mysql',
+       'NAME': 'llv',
+       'USER': 'root',
+       'PASSWORD': '',
+       'HOST': '',
+       'PORT': '',
+   },
+   'mysql-inno-init': {
+       'ENGINE': 'django.db.backends.mysql',
+       'NAME': 'llv',
+       'USER': 'root',
+       'PASSWORD': '',
+       'HOST': '',
+       'PORT': '',
+       'OPTIONS': {
+           'init_command': 'SET storage_engine=INNODB',
+       }
+   },
+}
+
+# USE_TZ = False
+FACEBOOK_APP_ID = "509683049065920"
+FACEBOOK_APP_SECRET = "01c48e5ea8bb246d1e4ab4ba15df1227"
