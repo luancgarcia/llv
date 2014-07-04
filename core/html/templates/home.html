@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -8,34 +9,27 @@
 	<title>LLV</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="static/css/reset.css">
-	<link rel="stylesheet" href="static/css/comum.css">
-	<link rel="stylesheet" href="static/css/responsive.css">
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/comum.css' %}">
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 
-	<script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
 	<script type="text/javascript">
-
 		// alert($(window).width());
-
 	</script>
 
 </head>
 <body>
-
 	<!--
-
 		a cada dois .grid, no segundo adicionar classe lastmob
 
 		a cada 4 itens, para tv, adicionar a class lasttv
-
 	-->
-
-
 
 	<div class="container">
 
 		<header id="Header">
-			<figure class="grid2.last"><a href=""><img src="static/img/header-banner.jpg"></a></figure>
+			<figure class="grid2.last"><a href=""><img src="{% static 'img/header-banner.jpg' %}"></a></figure>
 
 			<section id="Menu">
 				<span id="ico-menu"></span>
@@ -90,12 +84,12 @@
 				<span class="desconto">10%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
 				<section class="content">
-					<span class="marca"><img src="static/img/marca.jpg" alt=''></span>
+					<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
 					<h2 class="titulo">Giraffas</h2>
 					<p class="descricao">Devore um prato e ganhe 30% de
 					desconto no hambúrguer.</p>
@@ -114,7 +108,7 @@
 				<span class="desconto">50%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -135,7 +129,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -156,7 +150,7 @@
 				<span class="desconto">80%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -177,7 +171,7 @@
 				<span class="desconto">30%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -203,7 +197,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -222,7 +216,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -243,7 +237,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item-vertical.jpg" alt="">
+						<img src="{% static 'img/item-vertical.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -265,12 +259,12 @@
 				<span class="desconto">20%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
 				<section class="content">
-					<span class="marca"><img src="static/img/marca.jpg" alt=''></span>
+					<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
 					<h2 class="titulo">Giraffas</h2>
 					<p class="descricao">Devore um prato e ganhe 30% de
 					desconto no hambúrguer.</p>
@@ -300,12 +294,12 @@
 				<span class="desconto">30%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
 				<section class="content">
-					<span class="marca"><img src="static/img/marca.jpg" alt=''></span>
+					<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
 					<h2 class="titulo">Giraffas</h2>
 					<p class="descricao">Devore um prato e ganhe 30% de
 					desconto no hambúrguer.</p>
@@ -324,7 +318,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -343,7 +337,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -364,7 +358,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item-vertical.jpg" alt="">
+						<img src="{% static 'img/item-vertical.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -389,7 +383,7 @@
 				<span class="desconto">60%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item-vertical.jpg" alt="">
+						<img src="{% static 'img/item-vertical.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -410,7 +404,7 @@
 				<span class="desconto">50%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -431,7 +425,7 @@
 				<span class="desconto">50%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -452,7 +446,7 @@
 				<span class="desconto">50%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -473,7 +467,7 @@
 				<span class="desconto">50%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -494,7 +488,7 @@
 				<span class="desconto">50%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
@@ -515,7 +509,7 @@
 				<span class="desconto">50%</span>
 				<figure>
 					<a href="" title="">
-						<img src="static/img/item.jpg" alt="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
 					</a>
 				</figure>
 
