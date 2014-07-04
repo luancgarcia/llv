@@ -1,0 +1,8 @@
+Django==1.6.5
+MySQL-python==1.2.5
+South==1.0
+django-appconf==0.6
+django-imagekit==3.2.1
+pilkit==1.1.9
+six==1.7.3
+wsgiref==0.1.2
