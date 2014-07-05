@@ -62,7 +62,6 @@ INSTALLED_APPS = (
     'utils',
 
     'south',
-    'xadmin',
     'crispy_forms'
 )
 

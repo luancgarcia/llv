@@ -1,11 +1,11 @@
 Django==1.6.5
 MySQL-python==1.2.5
+Pillow==2.5.0
 South==1.0
+bootstrap-admin==0.3.0
 django-appconf==0.6
+django-crispy-forms==1.4.0
 django-imagekit==3.2.1
 pilkit==1.1.9
 six==1.7.3
 wsgiref==0.1.2
-django-xadmin==0.5.0
-Pillow==2.5.0
-django-crispy-forms==1.4.0
