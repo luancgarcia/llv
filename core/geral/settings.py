@@ -110,6 +110,10 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, 'core/templates'),
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
