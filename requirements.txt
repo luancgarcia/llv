@@ -6,3 +6,6 @@ django-imagekit==3.2.1
 pilkit==1.1.9
 six==1.7.3
 wsgiref==0.1.2
+django-xadmin==0.5.0
+Pillow==2.5.0
+django-crispy-forms==1.4.0
