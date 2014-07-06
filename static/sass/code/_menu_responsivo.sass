@@ -1,11 +1,168 @@
 =menu_responsivo
+	.container
+		padding-top: 70px
+	#Header
+		position: fixed
+		max-height: 47px
+		min-height: 32px
+		top: 0px
+		left: 10px
+		right: 10px
+		z-index: 50
+
+		.chamada
+			background-color: $cor-32
+			height: 27px
+			clear: both
+			text-align: center
+
+			a
+				font:
+					size: 1.3em
+					family: $roboto
+				color: $cor-10
+				display: block
+				line-height: 27px
+
+
+		.head-mob
+			background: url(#{$url-img}/bg-head-mob.png) repeat-x 0 0
+			height: 33px
+			position: relative
+			min-width: 100%
+
+			img
+				display: block
+				margin: 0 auto
+
+			.ico-brs
+				background: url(#{$url-img}/ico-brs.png) no-repeat 0 0
+				width: 43px
+				height: 33px
+				position: absolute
+				right: 0
+				top: 0
 
 	#ico-menu
+		background: url(#{$url-img}/ico-menu-mob.png) no-repeat 0 0
 		display: block
+		width: 41px
+		height: 33px
+		position: absolute
+		left: 0
+		top: 0
 
 	#Menu
+		background: $cor-27
 		height: auto
-		position: relative
+		position: fixed
+		top: 0
+		left: -275px
+		bottom: 0
+		width: 275px
+		overflow-y: scroll
+		overflow-x: hidden
+		z-index: 999
 
 		.navegacao
 			float: none
+			padding-left: 0px		
+
+			header
+				display: block
+				height: 33px
+				font-family: $font
+				font-size: 1.2em
+
+				.user
+					line-height: 33px
+					height: 33px
+					margin-left: 9px
+					padding-left: 27px
+					position: relative
+					color: $cor-10
+
+					img
+						position: absolute
+						border: 1px solid $cor-30
+						border-bottom: none
+						left: 0
+						top: 7px
+						max-width: 19px
+
+
+				.sair
+					line-height: 33px
+					height: 33px
+					margin-right: 9px
+					color: $cor-31
+
+			.item-menu
+				height: auto
+				float: none
+				margin-bottom: 5px
+
+				.lnk
+					height: 23px
+					line-height: 23px
+					background:
+						color: $cor-28
+						position: right -54px
+					color: $cor-29
+					font-size: 1.3em
+
+					&.ativo
+						background-position: right -74px
+
+				&.dia-namorados
+					display: none
+
+
+
+				.submenu
+					display: none
+					background: none
+					position: relative
+					top: 0
+					left: 0
+					width: 100%
+					padding: 5px 0 
+					@include box-shadow(0, 0,  0, 0, transparent)
+					border: none
+
+
+					li
+						width: 135px
+						height: 20px
+						border: none !important
+						font-size: 1.2em
+
+						&.mid, &.last
+							border: none !important
+
+						a
+							color: $cor-10
+							line-height: 20px
+							padding-left: 10px
+
+							&:hover
+								color: $cor-10
+				&:hover
+					.lnk
+						background:
+							color: $cor-28
+							position: right -54px
+						color: $cor-29
+						border: none
+						margin: 0px
+
+						&.ativo
+							background-position: right -74px
+
+					.submenu
+						display: none
+				&.last
+					.submenu
+						left: 0
+						margin-left: 0px
+

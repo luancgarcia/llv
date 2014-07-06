@@ -1,6 +1,9 @@
 #Header {
   margin-bottom: 10px;
 }
+#Header figure {
+  overflow: hidden;
+}
 #Header figure img {
   display: block;
   width: 100%;
@@ -74,6 +77,27 @@
 
 .rel {
   position: relative;
+}
+
+.mob {
+  display: none;
+}
+
+.notmob {
+  display: block;
+}
+
+.mask {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  background-color: black;
+  opacity: 0.6;
+  -moz-opacity: 0.6;
+  filter: alpha(opacity=60);
+  z-index: 80;
 }
 
 .dois-itens-v .item {
@@ -218,6 +242,9 @@
 }
 #Menu .navegacao {
   padding-left: 5px;
+}
+#Menu .navegacao header {
+  display: none;
 }
 #Menu .navegacao .item-menu {
   height: 27px;

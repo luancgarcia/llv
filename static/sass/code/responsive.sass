@@ -5,6 +5,15 @@
 +at-breakpoint($contexto-smartphone)
 	$coluna_responsive: 2
 
+	.mob, img.mob
+		display: block
+
+	img.mob
+		width: 100%
+
+	.notmob
+		display: none
+
 	.grid, .grid.last
 		+span-columns(1, $coluna_responsive)
 		&.lastmob
