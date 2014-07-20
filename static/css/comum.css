@@ -87,7 +87,7 @@
   display: block;
 }
 
-.mask {
+.maskmenu {
   position: fixed;
   right: 0;
   left: 0;
@@ -263,9 +263,8 @@
   font-size: 1.4em;
 }
 #Menu .navegacao .item-menu.dia-namorados {
-  background: url(../img/bg-dia-dos-namorados.png) no-repeat 0 0;
+  background: url(../img/bg-dia-dos-namorados.png) repeat-x 0 0;
   float: right;
-  width: 167px;
   text-align: center;
 }
 #Menu .navegacao .item-menu.dia-namorados a {
@@ -275,6 +274,7 @@
   color: white;
   font-family: "Roboto";
   font-size: 1.4em;
+  padding: 0 20px;
 }
 #Menu .navegacao .item-menu .submenu {
   display: none;
@@ -336,6 +336,241 @@
 }
 #Menu .navegacao .item-menu:hover .submenu {
   display: block;
+}
+
+.mask {
+  background-color: black;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  opacity: 0.85;
+  -moz-opacity: 0.85;
+  filter: alpha(opacity=85);
+}
+
+.preloading {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+}
+
+#lightbox {
+  position: fixed;
+  z-index: 9990;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#lightbox .lightbox {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  background: url(../img/branco-20.png) repeat 0 0;
+  z-index: 200;
+}
+#lightbox .loading {
+  background: url(../img/loading.gif) no-repeat bottom left;
+  position: fixed;
+  z-index: 9999;
+  width: 220px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  margin: -20px 0 0 -110px;
+}
+#lightbox.absolute {
+  position: fixed;
+}
+
+.fechar_modal {
+  width: 13px;
+  height: 17px;
+  background: url(../img/fechar_modal.png) no-repeat 0 0px;
+  right: 16px;
+  top: 16px;
+  position: absolute;
+  z-index: 10;
+}
+
+#ligbtox_content {
+  background-color: white;
+}
+#ligbtox_content .content {
+  background-color: white;
+  margin: 2px;
+  padding: 25px 13px;
+}
+
+.loading-modal {
+  padding: 10px 110px 10px 80px;
+  font-size: 1.6em;
+  color: #999999;
+  border: 1px solid #f7f7f7;
+  background-color: black;
+  height: 24px;
+  line-height: 24px;
+  float: left;
+  position: fixed;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  margin: -23px 0 0 -155px;
+}
+.loading-modal img {
+  margin-right: 10px;
+}
+
+.colunaProduto {
+  width: 388px;
+  margin-right: 15px;
+}
+.colunaProduto .thumbs-list li {
+  margin-right: 15px;
+  width: 94px;
+  height: 94px;
+  border: 1px solid #e6e5e5;
+}
+
+.colunaDados {
+  width: 350px;
+}
+.colunaDados.small {
+  width: 194px;
+}
+.colunaDados .chapeu {
+  font-size: 1.5em;
+  color: #ce1e06;
+  margin-bottom: 7px;
+}
+.colunaDados .titulo {
+  font-size: 2.2em;
+  color: #535252;
+  margin-bottom: 7px;
+}
+.colunaDados .descricao {
+  color: #2e2e2e;
+  font-size: 1.5em;
+  width: 275px;
+  margin-bottom: 15px;
+}
+.colunaDados .preco_anterior {
+  color: #808182;
+  font-size: 1.2em;
+  text-decoration: line-through;
+  margin-bottom: 10px;
+}
+.colunaDados .preco_atual {
+  margin-bottom: 20px;
+}
+.colunaDados .preco_atual .por {
+  font-size: 1.2em;
+  color: #919293;
+}
+.colunaDados .preco_atual .valor, .colunaDados .preco_atual .cifrao {
+  color: #ce1e06;
+}
+.colunaDados .preco_atual .valor {
+  font-size: 2.2em;
+}
+.colunaDados .preco_atual .cifrao {
+  font-size: 1.8em;
+}
+.colunaDados .qualMarca {
+  width: 311px;
+  margin: 0 auto 25px;
+}
+.colunaDados .qualMarca .foot {
+  text-align: center;
+  color: #7d7b7b;
+  font-size: 1em;
+  padding-top: 5px;
+}
+.colunaDados .qualMarca .box {
+  background-color: #fcfafa;
+  border: 1px solid #e8e8e8;
+  padding: 19px 0 16px;
+}
+.colunaDados .qualMarca .box figure {
+  margin-left: 35px;
+  margin-right: 19px;
+}
+.colunaDados .qualMarca .box p {
+  color: black;
+  text-align: center;
+  width: 100px;
+  padding-top: 8px;
+}
+.colunaDados .qualMarca .box p .txt {
+  font-size: 1.1em;
+}
+.colunaDados .qualMarca .box p .tel {
+  font-size: 1.4em;
+}
+.colunaDados .curtidas {
+  line-height: 40px;
+  font-size: 1.4em;
+  color: #4d4d4c;
+  text-align: center;
+  margin-bottom: 23px;
+}
+.colunaDados .curtidas span {
+  background: url(../img/ico-curtidas.png) no-repeat 0 0;
+  padding-left: 40px;
+  display: inline-block;
+}
+.colunaDados .share {
+  line-height: 25px;
+  font-size: 1.4em;
+  text-align: center;
+}
+.colunaDados .share a {
+  background: url(../img/ico-share.png) no-repeat 0 0;
+  color: #3c599b;
+  padding-left: 40px;
+  display: inline-block;
+}
+
+#fotoProduto {
+  border: 1px solid #f4f4f4;
+  background-color: white;
+  padding: 5px;
+  position: relative;
+  margin-bottom: 15px;
+}
+#fotoProduto .desconto {
+  font-family: "Trebuchet MS";
+  position: absolute;
+  z-index: 20;
+  width: 33px;
+  height: 33px;
+  background-color: #ce1e06;
+  border: 1px solid #b61904;
+  line-height: 33px;
+  text-align: center;
+  color: white;
+  font-size: 1.4em;
+  top: 12px;
+  right: 10px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 1px 1px 0 #333333;
+  box-shadow: 1px 1px 1px 0 #333333;
+}
+
+#modalEvento .colunaProduto {
+  width: 194px;
+}
+#modalEvento .colunaDados {
+  width: 320px;
 }
 
 body {
