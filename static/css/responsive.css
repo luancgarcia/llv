@@ -96,6 +96,80 @@
   .grid2 .item .content .marca, .grid4 .item .content .marca, .grid2.last .item .content .marca {
     display: none;
   }
+
+  .fechar_modal {
+    background-image: url(../img/fechar-modal-mobile.png);
+    width: 9px;
+    height: 8px;
+    top: 4px;
+    right: 5px;
+  }
+
+  #ligbtox_content .content {
+    padding: 10px;
+  }
+
+  .colunaProduto, .colunaDados {
+    width: 100%;
+    float: none;
+    clear: both;
+  }
+  .colunaProduto .thumbs-list, .colunaDados .thumbs-list {
+    display: none;
+  }
+
+  #lightbox .lightbox {
+    top: 20px;
+    left: 10px !important;
+    right: 10px !important;
+    margin: 0 !important;
+    width: auto !important;
+    padding-bottom: 20px;
+  }
+
+  #fotoProduto {
+    margin-bottom: 0px;
+  }
+  #fotoProduto img {
+    width: 100%;
+  }
+
+  .colunaDados .preco_anterior {
+    float: left;
+    padding: 10px 15px 0 0;
+  }
+  .colunaDados .preco_atual {
+    float: left;
+  }
+  .colunaDados .qualMarca {
+    width: 100%;
+  }
+  .colunaDados .curtidas {
+    line-height: 16px;
+    float: left;
+    width: 45%;
+    text-align: center;
+    padding: 0 2%;
+  }
+  .colunaDados .curtidas span {
+    display: block;
+    background-position: top center;
+    padding-top: 40px;
+    padding-left: 0;
+  }
+  .colunaDados .share {
+    line-height: 16px;
+    float: left;
+    width: 45%;
+    text-align: center;
+    padding: 0 2%;
+  }
+  .colunaDados .share a {
+    display: block;
+    background-position: top center;
+    padding-top: 40px;
+    padding-left: 0;
+  }
 }
 @media (min-width: 481px) and (max-width: 728px) {
   .item .content .marca {
