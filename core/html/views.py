@@ -8,3 +8,12 @@ def html_grid(request):
 
 def html_home(request):
     return render(request, 'home.html', {})
+
+def html_modal_produtos(request):
+    return render(request, 'modais/produto.html')
+
+def html_modal_destaque(request):
+    return render(request, 'modais/destaque.html')
+
+def html_modal_evento(request):
+    return render(request, 'modais/evento.html')

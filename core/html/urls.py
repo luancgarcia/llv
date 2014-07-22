@@ -11,4 +11,16 @@ urlpatterns = patterns('',
    	url(r'home/$',
         'html.views.html_home',
         name='html_home'),
+
+   	url(r'^home/modais/produto',
+        'html.views.html_modal_produtos',
+        name='html_modal_produtos'),
+
+   	url(r'^home/modais/destaque',
+        'html.views.html_modal_destaque',
+        name='html_modal_destaque'),
+
+   	url(r'^home/modais/evento',
+        'html.views.html_modal_evento',
+        name='html_modal_evento'),
 )
