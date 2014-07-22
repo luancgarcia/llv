@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<script>
+	$(".thumbs-list  a[data-img]").on({
+		click: function(){
+			var thumb = $(this);
+			var url_thumb = thumb.attr("data-img");
+			var img_gde = $("#fotoProduto img");
+
+			img_gde.attr("src", url_thumb);
+
+			return false;
+		}
+	})
+
+</script>
+
+<div class="content fix">
+	<div class="colunaProduto fl">
+		<figure id="fotoProduto" class="fix">
+			<span class="desconto">30%</span>
+			<img src="{% static 'img/fotogd3-modal.png' %}" alt="" width="" height="" class="fl">
+		</figure>
+
+		<section class="thumbs-list">
+			<ul>
+				<li class="fl">
+					<a href="javascript:;" data-img="{% static 'img/fotogd3-modal.png' %}"><img src="{% static 'img/fotopq3-modal.png' %}" alt=""></a>
+				</li>
+				<li class="fl">
+					<a href="javascript:;" data-img="{% static 'img/fotogd-modal.png' %}"><img src="{% static 'img/fotopq-modal.png' %}" alt=""></a>
+				</li>
+				<li class="fl">
+					<a href="javascript:;" data-img="{% static 'img/fotogd2-modal.png' %}"><img src="{% static 'img/fotopq2-modal.png' %}" alt=""></a>
+				</li>
+			</ul>
+		</section>
+	</div>
+
+
+	<div class="colunaDados fl">
+		<article class="fix">
+			<p class="chapeu">Aproveite a promoção</p>
+			<h2 class="titulo">Tênis Riva Sport Masculino</h2>
+			<p class="descricao">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales sodales auctor.</p>
+
+			<p class="preco_anterior">de R$ 499,99</p>
+			<p class="preco_atual">
+				<span class="por">por: </span>
+				<span class="cifrao">R$ </span>
+				<span class="valor">299,99</span>
+			</p>
+
+			<section class="qualMarca fix">
+				<div class="box fix">
+					<figure class="fl">
+						<img src="{% static 'img/marca.png' %}" alt="">
+					</figure>
+					<p class="fl">
+						<span class="txt">Ligue para a loja </span>
+						<span class="tel">(21) 3322-6719 </span>
+					</p>
+				</div>
+				<p class="foot">Verificar disponibilidade dos produtos na loja</p>
+			</section>
+
+			<p class="curtidas"><span>2.189 pessoas curtiram essa oferta</span></p>
+
+			<p class="share"><a href="">Compartilhe com seus amigos</a></p>
+
+		</article>
+
+	</div>
+</div>
