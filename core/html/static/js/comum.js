@@ -3,7 +3,7 @@ var largura_window = $(window).width();
 $(function(){
 
 	var isiDevice = /ipad|iphone|ipod|android/i.test(navigator.userAgent.toLowerCase());
-	
+
 
 	$("#ico-menu").on({
 		click: function(){
@@ -14,11 +14,11 @@ $(function(){
 			var menu = $("#Menu");
 
 			var altura_window = $(window).height();
-			
+
 			if(ico.hasClass("ativo")) {
 				ico.removeClass("ativo");
 				html_body.removeAttr("style");
-			
+
 				banner.animate({
 					marginLeft: "0"
 				})
@@ -33,18 +33,18 @@ $(function(){
 
 				$(".mask").remove();
 				return false;
-				
+
 			}
 
 			ico.addClass("ativo");
 
 
-			
+
 			html_body.css({
 				"overflow":"hidden",
 				"height": altura_window+"px"
 			});
-			
+
 			banner.animate({
 				marginLeft: "265px"
 			})
@@ -103,7 +103,7 @@ $(function(){
 			var tamanho = $(this).attr('data-param');
 			var qualclasse = $(this).attr("data-class");
 
-			
+
 
 			disparaModalRequest($(this).attr("href"), tamanho, qualclasse);
 		}
@@ -123,7 +123,7 @@ $(function(){
 //FUNCAO PRA ABRIR O LIGHTBOX POR AJAX
 function exibirConteudo(conteudo, tamanho, qualclasse) {
 
-	
+
 
 	$('body').append("<div id='lightbox' class="+qualclasse+">"
 	+"  <div class='mask' data-param='closemodal'></div>"
@@ -149,7 +149,7 @@ function disparaModalRequest(url, tamanho, qualclasse) {
 		url: url,
 		data:'html',
 		beforeSend: function(){
-			$('body').append("<div class='lightbox preloading'><p class='loading-modal'><img src='"+static_url+"img/loader-bgescuro.gif' alt='' class='fl' /> <span class='fl'>Carregando</span></p></div>");
+			$('body').append("<div class='lightbox preloading'><p class='loading-modal'><img src='/static/"+static_url+"loader-bgescuro.gif' alt='' class='fl' /> <span class='fl'>Carregando</span></p></div>");
 			// return false;
 		},
 		success: function(conteudo){

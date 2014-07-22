@@ -15,14 +15,14 @@
 
 
 	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'static/js/jquery-1.10.2.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'static/js/jquery.mobile-1.4.3.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.mobile-1.4.3.min.js' %}"></script>
 
 	<script>
 		static_url = "img/";
 	</script>
 
-	<script type="text/javascript" src="{% static 'static/js/comum.js?v=10' %}"></script>
+	<script type="text/javascript" src="{% static 'js/comum.js' %}"></script>
 	<script type="text/javascript">
 		// alert($(window).width());
 	</script>
@@ -54,7 +54,7 @@
 				<nav class="navegacao">
 					<header class="fix">
 						<p class="user fl">
-							<img src="static/img/user.jpg">
+							<img src="{% static 'img/user.jpg' %}">
 							Nome Usuário
 						</p>
 						<a href="" class="sair fr">sair</a>
