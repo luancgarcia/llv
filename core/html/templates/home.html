@@ -15,14 +15,14 @@
 
 
 	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
-	<script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="static/js/jquery.mobile-1.4.3.min.js"></script>
-	
+	<script type="text/javascript" src="{% static 'static/js/jquery-1.10.2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'static/js/jquery.mobile-1.4.3.min.js' %}"></script>
+
 	<script>
 		static_url = "img/";
 	</script>
 
-	<script type="text/javascript" src="static/js/comum.js?v=10"></script>
+	<script type="text/javascript" src="{% static 'static/js/comum.js?v=10' %}"></script>
 	<script type="text/javascript">
 		// alert($(window).width());
 	</script>
@@ -39,11 +39,11 @@
 
 		<header id="Header" class="clearfix">
 			<figure class="grid4 last notmob">
-				<a href="" class=""><img src="static/img/header-banner.jpg"></a>
+				<a href="" class=""><img src="{% static 'img/header-banner.jpg' %}"></a>
 			</figure>
 			<div class="head-mob mob">
 				<a class="ico-brs fr"></a>
-				<img src="static/img/text-head-mob.png">
+				<img src="{% static 'img/text-head-mob.png' %}">
 			</div>
 			<aside class="chamada mob">
 				<a href="">Produtos com até 70% de desconto</a>
@@ -195,10 +195,6 @@
 									<li class="last"><a href="">item 3</a></li>
 								</ul>
 							</div>
-						</li>
-
-						<li class="item-menu dia-namorados">
-							<a href="#" class="">Dia dos namorados</a>
 						</li>
 					</ul>
 
