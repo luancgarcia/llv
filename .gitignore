@@ -1,0 +1,16 @@
+.DS_Store
+*.pyc
+*.sql
+core/geral/custom_settings.py
+*.sublime-project
+*.sublime-workspace
+.idea/*
+*/.idea/*
+media/
+#static/
+static/*
+#*.sassc
+core/geral/static/sass/.sass-cache/*
+!procedures/*.sql
+!triggers/*.sql
+
