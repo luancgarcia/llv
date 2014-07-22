@@ -92,9 +92,9 @@ $(function(){
 		}
 	});
 
-	disparaModalRequest("modais/produto.html","786","");
-	//disparaModalRequest("modais/destaque.html","786","");
-	// disparaModalRequest("modais/evento.html","560","");
+	disparaModalRequest("modais/produto","786","");
+	// disparaModalRequest("modais/destaque","786","");
+	// disparaModalRequest("modais/evento","560","");
 
 	//abre modal
 
