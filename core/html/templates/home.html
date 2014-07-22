@@ -13,7 +13,11 @@
 	<link rel="stylesheet" href="{% static 'css/comum.css' %}">
 	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 
+
 	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+	<script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="static/js/jquery.mobile-1.4.3.min.js"></script>
+	<script type="text/javascript" src="static/js/comum.js?v=10"></script>
 	<script type="text/javascript">
 		// alert($(window).width());
 	</script>
@@ -28,48 +32,168 @@
 
 	<div class="container">
 
-		<header id="Header">
-			<figure class="grid2.last"><a href=""><img src="{% static 'img/header-banner.jpg' %}"></a></figure>
-
-			<section id="Menu">
-				<span id="ico-menu"></span>
+		<header id="Header" class="clearfix">
+			<figure class="grid4 last notmob">
+				<a href="" class=""><img src="static/img/header-banner.jpg"></a>
+			</figure>
+			<div class="head-mob mob">
+				<a class="ico-brs fr"></a>
+				<img src="static/img/text-head-mob.png">
+			</div>
+			<aside class="chamada mob">
+				<a href="">Produtos com até 70% de desconto</a>
+			</aside>
+			<span id="ico-menu"></span>
+			<section id="Menu" class="cl">
 
 				<nav class="navegacao">
+					<header class="fix">
+						<p class="user fl">
+							<img src="static/img/user.jpg">
+							Nome Usuário
+						</p>
+						<a href="" class="sair fr">sair</a>
+					</header>
 
 					<ul>
 						<li class="item-menu">
-							<a class="lnk" href="">Categorias</a>
-							<div class="submenu">
-								test
+
+							<a class="lnk" href="javascript:;">Categorias</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
 							</div>
 						</li>
 
 						<li class="item-menu">
-							<a class="lnk" href="">Gênero</a>
-							<div class="submenu">
+							<a class="lnk" href="javascript:;">Gênero</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
 
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
 							</div>
 						</li>
 
 						<li class="item-menu">
-							<a class="lnk" href="">Lojas</a>
-							<div class="submenu">
+							<a class="lnk" href="javascript:;">Lojas</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
 
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
 							</div>
 						</li>
 
 						<li class="item-menu">
-							<a class="lnk" href="">Faixa de Preço</a>
-							<div class="submenu">
+							<a class="lnk" href="javascript:;">Faixa de Preço</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
 
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
 							</div>
 						</li>
 
-						<li class="item-menu">
-							<a class="lnk" href="">Faixa de Desconto</a>
-							<div class="submenu">
+						<li class="item-menu last">
+							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
 
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
 							</div>
+						</li>
+
+						<li class="item-menu dia-namorados">
+							<a href="#" class="">Dia dos namorados</a>
 						</li>
 					</ul>
 
@@ -77,7 +201,6 @@
 
 			</section>
 		</header><!-- #Header -->
-
 
 		<div class="grid2">
 			<article class="item">

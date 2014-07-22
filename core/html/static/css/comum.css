@@ -1,6 +1,9 @@
 #Header {
   margin-bottom: 10px;
 }
+#Header figure {
+  overflow: hidden;
+}
 #Header figure img {
   display: block;
   width: 100%;
@@ -74,6 +77,27 @@
 
 .rel {
   position: relative;
+}
+
+.mob {
+  display: none;
+}
+
+.notmob {
+  display: block;
+}
+
+.mask {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  background-color: black;
+  opacity: 0.6;
+  -moz-opacity: 0.6;
+  filter: alpha(opacity=60);
+  z-index: 80;
 }
 
 .dois-itens-v .item {
@@ -214,10 +238,13 @@
   background: url(../img/menu-bg-repeat.png) repeat-x 0 0;
   height: 27px;
   position: relative;
+  z-index: 100;
 }
 #Menu .navegacao {
-  float: left;
   padding-left: 5px;
+}
+#Menu .navegacao header {
+  display: none;
 }
 #Menu .navegacao .item-menu {
   height: 27px;
@@ -235,22 +262,80 @@
   font-family: "Roboto";
   font-size: 1.4em;
 }
+#Menu .navegacao .item-menu.dia-namorados {
+  background: url(../img/bg-dia-dos-namorados.png) no-repeat 0 0;
+  float: right;
+  width: 167px;
+  text-align: center;
+}
+#Menu .navegacao .item-menu.dia-namorados a {
+  display: block;
+  line-height: 27px;
+  height: 27px;
+  color: white;
+  font-family: "Roboto";
+  font-size: 1.4em;
+}
 #Menu .navegacao .item-menu .submenu {
+  display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  left: -1px;
   background-color: white;
+  width: 360px;
+  padding: 10px;
+  z-index: 10;
+  -webkit-box-shadow: 1px 1px 2px 0 #c2c2c2;
+  box-shadow: 1px 1px 2px 0 #c2c2c2;
+  border: 1px solid #f9e0e1;
+  border-top: none;
+}
+#Menu .navegacao .item-menu .submenu li {
+  float: left;
+  width: 118px;
+  height: 19px;
+  line-height: 19px;
+  border-bottom: 1px solid #f1f0f0;
+  font-family: "Roboto";
+  font-size: 1.3em;
+}
+#Menu .navegacao .item-menu .submenu li.mid {
+  border-left: 1px solid #f1f0f0;
+  border-right: 1px solid #f1f0f0;
+}
+#Menu .navegacao .item-menu .submenu li.last {
+  border-bottom: none;
+}
+#Menu .navegacao .item-menu .submenu li a {
+  display: block;
+  color: #1a1a1a;
+  padding-left: 15px;
+}
+#Menu .navegacao .item-menu .submenu li a:hover {
+  color: #cd2228;
+}
+#Menu .navegacao .item-menu.last .submenu {
+  left: 50%;
+  margin-left: -190px;
 }
 #Menu .navegacao .item-menu:hover .lnk {
   background-position: right -27px;
   background-color: white;
   color: #016e55;
-  -webkit-border-top-left-radius: 2px;
-  -webkit-border-top-right-radius: 2px;
-  -moz-border-radius-topleft: 2px;
-  -moz-border-radius-topright: 2px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+  margin: -1px -1px 0px;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  position: relative;
+  z-index: 20;
+  border: 1px solid #f9e0e1;
+  border-bottom: none;
+}
+#Menu .navegacao .item-menu:hover .submenu {
+  display: block;
 }
 
 body {
