@@ -78,6 +78,12 @@
 			margin: 0 !important
 			width: auto !important
 			padding-bottom: 20px
+
+		&.share_produto
+			.fechar_modal
+				background-position: 0 -8px !important
+				top: 16px !important
+				right: 10px !important
 	#fotoProduto
 		margin-bottom: 0px
 		img
@@ -124,7 +130,76 @@
 					top: 40px
 					left: 0
 
+	#ShareProduto
+		.content-share
+			padding:
+				left: 8px
+				right: 8px
+			.col-produto
+				width: auto !important
+				float: none
+				margin-bottom: 10px
+				clear: both
+				padding-bottom: 0px
 
+				footer
+					padding-bottom: 10px
+
+				.bt-reset
+					font-size: 1.2em
+		
+					margin-left: 0px
+
+				.bt-share
+					font-size: 1.3em
+					margin-right: 0px
+
+
+			.col-opcoes
+				width: auto !important
+				float: none
+				clear: both
+				
+				.content-opcoes
+					padding-right: 0px
+					border-right: 1px solid $cor-46
+					overflow: auto
+
+					ul
+						overflow: auto !important
+						height: 115px
+
+						li
+							margin-bottom: 0px
+							width: 92px
+							height: 91px
+
+							a
+								width: 90px
+								height: 89px
+			
+							img					
+								width: 100%
+
+
+	
+	#foto-share
+		width: auto !important
+		height: auto !important
+		overflow: hidden
+		padding: 4px
+
+		div
+			position: relative
+
+		.prod
+			float: left
+
+		.sec
+			width: 100%
+			display: block
+			top: 0px
+			left: 0px
 
 +at-breakpoint($contexto-tablet-vertical)
 	.item 

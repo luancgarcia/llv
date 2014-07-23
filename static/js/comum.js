@@ -1,4 +1,4 @@
-var largura_window = $(window).width();
+largura_window = $(window).width();
 
 $(function(){
 
@@ -92,7 +92,8 @@ $(function(){
 		}
 	});
 
-	disparaModalRequest("modais/produto.html","786","");
+	disparaModalRequest("modais/share.html","786","share_produto");
+	// disparaModalRequest("modais/produto.html","786","");
 	//disparaModalRequest("modais/destaque.html","786","");
 	// disparaModalRequest("modais/evento.html","560","");
 
@@ -115,6 +116,68 @@ $(function(){
 			fechaModal();
 		}
 	}, "[data-param='closemodal']");
+
+	$(document.body).on({
+		click: function(){
+			var thumb = $(this);
+			var url_thumb = thumb.attr("data-img");
+			var img_gde = $("#fotoProduto img");
+
+			img_gde.attr("src", url_thumb);
+
+			return false;
+		}
+	}, ".thumbs-list  a[data-img]");
+
+
+	//muda as abas do share
+	$(document.body).on({
+		click: function(){
+			var aba = $(this);
+			var qualaba = aba.attr("data-aba");
+
+			var box_aba = $("#ShareProduto .col-opcoes .content-opcoes ul");
+			var box_certo = $("#ShareProduto .col-opcoes .content-opcoes ul[data-box='"+qualaba+"']");
+
+			$("#ShareProduto .col-opcoes .abas li").removeClass("ativo");
+			aba.parent().addClass("ativo");
+
+			box_aba.hide();
+			box_certo.show();
+
+			return false;
+		}
+	}, "#ShareProduto .col-opcoes .abas li a");
+
+	//poe a foto por cima
+
+	$(document.body).on({
+		click: function(){
+			var foto = $(this);
+			var foto_gd = foto.attr("data-src");
+
+			var box_foto = $("#foto-share .sec");
+
+			$("#ShareProduto .col-opcoes .content-opcoes li a").removeClass("ativo");
+			foto.addClass("ativo");
+
+			box_foto.attr("src", foto_gd).show();
+
+			return false;
+		}
+	}, "#ShareProduto .col-opcoes .content-opcoes li a");
+
+	// limpar foto share
+	$(document.body).on({
+		click: function(){
+			var foto_clear = $("#foto-share .sec");
+
+			foto_clear.removeAttr("style").attr("src","");
+
+			return false;
+		}
+
+	}, '#ShareProduto .bt-reset');
 
 });
 

@@ -127,3 +127,135 @@
 
 			.outro
 				height: 31px
+
+#ShareProduto
+	padding: 0px !important
+	margin: 0px !important
+	.head
+		background-color: $cor-41
+		height: 39px
+		margin-bottom: 10px
+
+		.titulo
+			font:
+				family: $roboto
+				size: 1.5em
+			color: $cor-10
+			line-height: 39px
+			padding-left: 12px
+
+	.content-share
+		padding: 0 0 0 14px
+
+		.col-produto
+			width: 388px 
+			float: left
+			padding-bottom: 13px
+			
+			.bt-reset,.bt-share
+				background:
+					repeat: repeat-x
+					position: 0 0
+				height: 28px
+				line-height: 28px
+				border: 1px solid
+				@include border-radius(3px)
+
+			.bt-reset
+				background-image: url(#{$url-img}/bg-reset.png)
+				color: $cor-45
+				margin-left: 6px
+				border-color: $cor-43
+				padding: 0 10px 0 16px
+				font-size: 1.3em
+
+			.bt-share
+				background-image: url(#{$url-img}/bg-share.png)
+				color: $cor-10
+				margin-right: 8px
+				border-color: $cor-44
+				padding: 0 8px
+				font-size: 1.4em
+
+		.col-opcoes
+			width: 368px
+			float: right
+
+			.abas
+				height: 29px
+				position: relative
+				z-index: 10
+				li
+					font-size: 1.2em
+
+					a
+						color: $cor-50
+						display: block
+						line-height: 29px
+						padding: 0 15px
+
+						&:hover 
+							color: $cor-51
+
+					&.ativo
+						background-color: $cor-47
+						border: 1px solid $cor-46
+						border-bottom: none
+						margin: 0 0 -1px 0
+
+						a
+							color: $cor-51
+							line-height: 28px
+							padding: 0 14px 1px
+			.content-opcoes
+				background-color: $cor-47
+				border-left: 1px solid $cor-46
+				border-top: 1px solid $cor-46
+				padding:
+					right: 13px
+					top: 9px
+
+				ul
+					overflow-x: hidden
+					overflow-y: auto
+					height: 407px
+
+				li
+					width: 100px
+					height: 99px
+					margin:
+						left: 11px
+						bottom: 11px
+					overflow: hidden
+
+					a
+						width: 98px
+						height: 97px
+						display: block
+						border: 1px solid $cor-48
+
+						&:hover,  &.ativo
+							border-color: $cor-49
+
+
+#foto-share
+	position: relative
+	width: 376px
+	height: 376px
+	border: 1px solid $cor-42
+	padding: 6px 5px
+	margin-bottom: 13px
+
+	div
+		position: relative
+
+	.prod
+		position: relative
+		z-index: 1
+		width: 100%
+
+	.sec
+		position: absolute
+		top: 0
+		left: 0
+		z-index: 10

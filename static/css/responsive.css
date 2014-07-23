@@ -126,6 +126,11 @@
     width: auto !important;
     padding-bottom: 20px;
   }
+  #lightbox.share_produto .fechar_modal {
+    background-position: 0 -8px !important;
+    top: 16px !important;
+    right: 10px !important;
+  }
 
   #fotoProduto {
     margin-bottom: 0px;
@@ -169,6 +174,74 @@
     background-position: top center;
     padding-top: 40px;
     padding-left: 0;
+  }
+
+  #ShareProduto .content-share {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  #ShareProduto .content-share .col-produto {
+    width: auto !important;
+    float: none;
+    margin-bottom: 10px;
+    clear: both;
+    padding-bottom: 0px;
+  }
+  #ShareProduto .content-share .col-produto footer {
+    padding-bottom: 10px;
+  }
+  #ShareProduto .content-share .col-produto .bt-reset {
+    font-size: 1.2em;
+    margin-left: 0px;
+  }
+  #ShareProduto .content-share .col-produto .bt-share {
+    font-size: 1.3em;
+    margin-right: 0px;
+  }
+  #ShareProduto .content-share .col-opcoes {
+    width: auto !important;
+    float: none;
+    clear: both;
+  }
+  #ShareProduto .content-share .col-opcoes .content-opcoes {
+    padding-right: 0px;
+    border-right: 1px solid #d2daea;
+    overflow: auto;
+  }
+  #ShareProduto .content-share .col-opcoes .content-opcoes ul {
+    overflow: auto !important;
+    height: 115px;
+  }
+  #ShareProduto .content-share .col-opcoes .content-opcoes ul li {
+    margin-bottom: 0px;
+    width: 92px;
+    height: 91px;
+  }
+  #ShareProduto .content-share .col-opcoes .content-opcoes ul li a {
+    width: 90px;
+    height: 89px;
+  }
+  #ShareProduto .content-share .col-opcoes .content-opcoes ul li img {
+    width: 100%;
+  }
+
+  #foto-share {
+    width: auto !important;
+    height: auto !important;
+    overflow: hidden;
+    padding: 4px;
+  }
+  #foto-share div {
+    position: relative;
+  }
+  #foto-share .prod {
+    float: left;
+  }
+  #foto-share .sec {
+    width: 100%;
+    display: block;
+    top: 0px;
+    left: 0px;
   }
 }
 @media (min-width: 481px) and (max-width: 728px) {
