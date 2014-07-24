@@ -92,7 +92,7 @@ $(function(){
 		}
 	});
 
-	disparaModalRequest("modais/share.html","786","share_produto");
+	// disparaModalRequest("modais/share.html","786","share_produto");
 	// disparaModalRequest("modais/produto.html","786","");
 	//disparaModalRequest("modais/destaque.html","786","");
 	// disparaModalRequest("modais/evento.html","560","");
