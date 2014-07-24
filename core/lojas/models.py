@@ -7,6 +7,8 @@ from utils.models import EditorialModel, BaseManager
 
 class Loja(EditorialModel):
     nome = models.CharField(u'Nome', max_length=100, null=True, blank=False)
+    logo = models.CharField(u'Logo', max_length=100, null=True, blank=False)
+    telefone = models.CharField(u'telefone', max_length=100, null=True, blank=False)
 
     class Meta:
         verbose_name=u'Loja'
