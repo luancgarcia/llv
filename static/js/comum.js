@@ -31,7 +31,7 @@ $(function(){
 					left: "-275px"
 				});
 
-				$(".mask").remove();
+				$(".maskmenu").remove();
 				return false;
 				
 			}
@@ -57,7 +57,62 @@ $(function(){
 				left: "0px"
 			});
 
-			header.append("<div class='mask'></div>")
+			header.append("<div class='maskmenu'></div>")
+		}
+	});
+
+	$("#ico-brs").on({
+		click: function(){
+			var ico = $(this);
+			var ico_menu = $("#ico-menu");
+			var html_body = $("html,body");
+			var header = $("#Header");
+			var banner = $("#Header .head-mob");
+			var menu_shp = $("#menu-shoppings");
+
+			var altura_window = $(window).height();
+			
+			if(ico.hasClass("ativo")) {
+				ico.removeClass("ativo");
+				html_body.removeAttr("style");
+			
+				banner.animate({
+					marginLeft: "0"
+				});
+
+				ico_menu.animate({
+					marginLeft: "0"
+				});
+
+				menu_shp.animate({
+					right: "-276px"
+				});
+
+				$(".maskmenushp").remove();
+				return false;
+				
+			}
+
+			ico.addClass("ativo");
+			
+			html_body.css({
+				"overflow":"hidden",
+				"height": altura_window+"px"
+			});
+			
+			banner.animate({
+				marginLeft: "-266px"
+			});
+
+			ico_menu.animate({
+				marginLeft: "-266px"
+			});
+
+			menu_shp.animate({
+				right: "0px"
+			});
+
+			header.append("<div class='maskmenushp'></div>")
 		}
 	});
 
@@ -67,6 +122,13 @@ $(function(){
 			ico.trigger("click");
 		}
 	}, ".maskmenu");
+
+	$(document.body).on({
+		tap: function(){
+			var ico = $("#ico-brs");
+			ico.trigger("click");
+		}
+	}, ".maskmenushp");
 
 	$(".item-menu .lnk").on({
 		click: function(){
@@ -92,7 +154,7 @@ $(function(){
 		}
 	});
 
-	disparaModalRequest("modais/share.html","786","share_produto");
+	// disparaModalRequest("modais/share.html","786","share_produto");
 	// disparaModalRequest("modais/produto.html","786","");
 	//disparaModalRequest("modais/destaque.html","786","");
 	// disparaModalRequest("modais/evento.html","560","");
