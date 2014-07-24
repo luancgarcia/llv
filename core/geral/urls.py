@@ -13,4 +13,6 @@ urlpatterns = patterns('',
     url(r'^html/', include('html.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^$', 'geral.views.home', name='home'),
 )
