@@ -1,0 +1,628 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>LLV</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/comum.css' %}">
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+
+	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.mobile-1.4.3.min.js' %}"></script>
+
+	<script>
+		static_url = "img/";
+	</script>
+
+	<script type="text/javascript" src="{% static 'js/comum.js' %}"></script>
+	<script type="text/javascript">
+		// alert($(window).width());
+	</script>
+
+</head>
+<body>
+	<!--
+		a cada dois .grid, no segundo adicionar classe lastmob
+
+		a cada 4 itens, para tv, adicionar a class lasttv
+	-->
+
+	<div class="container">
+
+		<header id="Header" class="clearfix">
+			<figure class="grid4 last notmob">
+				<a href="" class=""><img src="{% static 'img/header-banner.jpg' %}"></a>
+			</figure>
+			<div class="head-mob mob">
+				<a class="ico-brs fr"></a>
+				<img src="{% static 'img/text-head-mob.png' %}">
+			</div>
+			<aside class="chamada mob">
+				<a href="">Produtos com até 70% de desconto</a>
+			</aside>
+			<span id="ico-menu"></span>
+			<section id="Menu" class="cl">
+
+				<nav class="navegacao">
+					<header class="fix">
+						<p class="user fl">
+							<img src="{% static 'img/user.jpg' %}">
+							Nome Usuário
+						</p>
+						<a href="" class="sair fr">sair</a>
+					</header>
+
+					<ul>
+						<li class="item-menu">
+
+							<a class="lnk" href="javascript:;">Categorias</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu">
+							<a class="lnk" href="javascript:;">Gênero</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu">
+							<a class="lnk" href="javascript:;">Lojas</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li><a href="">item 1</a></li>
+									<li class="mid"><a href="">item 2</a></li>
+									<li><a href="">item 3</a></li>
+
+									<li class="last"><a href="">item 1</a></li>
+									<li class="mid last"><a href="">item 2</a></li>
+									<li class="last"><a href="">item 3</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu">
+							<a class="lnk" href="javascript:;">Faixa de Preço</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">abaixo de R$ 30</a></li>
+									<li class="mid"><a href="">de R$ 30 a R$ 50</a></li>
+									<li><a href="">de R$ 50 a R$ 70</a></li>
+
+									<li><a href="">de R$ 70 a R$ 100</a></li>
+									<li class="mid"><a href="">acima de R$ 100</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu last">
+							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
+							<div class="submenu fix">
+								<ul>
+									<li><a href="">até 30%</a></li>
+									<li class="mid"><a href="">de 30% a 50%</a></li>
+									<li><a href="">de 50% a 70%</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+
+				</nav>
+
+			</section>
+		</header><!-- #Header -->
+
+		<div class="grid2">
+			<article class="item">
+				<span class="desconto">10%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
+					<h2 class="titulo">Giraffas</h2>
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+					<p class="outro"><a href="">Devore agora mesmo</a></p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid ">
+			<article class="item">
+				<span class="desconto">50%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+				desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid last lastmob">
+			<article class="item">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid lasttv">
+			<article class="item">
+				<span class="desconto">80%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid last lastmob">
+			<article class="item">
+				<span class="desconto">30%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<!-- =========================================== -->
+		<br class="cl">
+		<!-- =========================================== -->
+
+		<!-- coluna com dois itens verticais -->
+		<div class="grid dois-itens-v">
+			<article class="item">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+
+			<article class="item last">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid dois-itens-v lasttv">
+			<article class="item vertical">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item-vertical.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+
+		</div>
+
+		<div class="grid2 last lastmob lasttv">
+			<article class="item">
+				<span class="desconto">20%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
+					<h2 class="titulo">Giraffas</h2>
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+					<p class="outro">
+						<span class="valor1">de: R$ 459,90 por</span>
+						<span class="valor2"><span>R$</span> <strong>349,90</strong></span>
+
+					</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+
+
+		</div>
+
+		<!-- =========================================== -->
+		<br class="cl">
+		<!-- =========================================== -->
+
+
+		<div class="grid2">
+			<article class="item">
+				<span class="desconto">30%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
+					<h2 class="titulo">Giraffas</h2>
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+					<p class="outro"><a href="">Devore agora mesmo</a></p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid dois-itens-v">
+			<article class="item">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+
+			<article class="item last">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid last dois-itens-v lasttv">
+			<article class="item vertical">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item-vertical.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<!-- =========================================== -->
+		<br class="cl">
+		<!-- =========================================== -->
+
+		<div class="grid dois-itens-v lasttv">
+			<article class="item vertical">
+				<span class="desconto">60%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item-vertical.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+					desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid ">
+			<article class="item">
+				<span class="desconto">50%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+				desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid lastmob">
+			<article class="item">
+				<span class="desconto">50%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+				desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid last ">
+			<article class="item">
+				<span class="desconto">50%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+				desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid lastmob">
+			<article class="item">
+				<span class="desconto">50%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+				desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid ">
+			<article class="item">
+				<span class="desconto">50%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+				desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+		<div class="grid last lastmob">
+			<article class="item">
+				<span class="desconto">50%</span>
+				<figure>
+					<a href="" title="">
+						<img src="{% static 'img/item.jpg' %}" alt="">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">Devore um prato e ganhe 30% de
+				desconto no hambúrguer.</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+
+
+
+	</div>
+
+</body>
+</html>
