@@ -92,7 +92,7 @@ $(function(){
 		}
 	});
 
-	// disparaModalRequest("modais/share.html","786","share_produto");
+	disparaModalRequest("modais/share.html","786","share_produto");
 	// disparaModalRequest("modais/produto.html","786","");
 	//disparaModalRequest("modais/destaque.html","786","");
 	// disparaModalRequest("modais/evento.html","560","");
@@ -139,6 +139,15 @@ $(function(){
 			var box_aba = $("#ShareProduto .col-opcoes .content-opcoes ul");
 			var box_certo = $("#ShareProduto .col-opcoes .content-opcoes ul[data-box='"+qualaba+"']");
 
+
+			if(largura_window <=480) {
+				var qtd_itens = box_certo.children("li").length;
+				var largura_itens = box_certo.children("li").outerWidth(true);
+
+				box_certo.width(qtd_itens*largura_itens+10);
+			}
+
+
 			$("#ShareProduto .col-opcoes .abas li").removeClass("ativo");
 			aba.parent().addClass("ativo");
 
@@ -161,6 +170,10 @@ $(function(){
 			$("#ShareProduto .col-opcoes .content-opcoes li a").removeClass("ativo");
 			foto.addClass("ativo");
 
+			$("#foto-share .sec").remove();
+
+			$("#foto-share  div").append("<img src='"+foto_gd+"' class='sec'>");
+
 			box_foto.attr("src", foto_gd).show();
 
 			return false;
@@ -172,7 +185,7 @@ $(function(){
 		click: function(){
 			var foto_clear = $("#foto-share .sec");
 
-			foto_clear.removeAttr("style").attr("src","");
+			foto_clear.remove();
 
 			return false;
 		}
