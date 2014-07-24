@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.template.defaultfilters import date as _date
+from django.template.defaultfilters import slugify
 from django.core.validators import validate_email
 from django.conf import settings
 
@@ -148,3 +149,6 @@ def envia_email_smtp(contexto, s):
         enviado = False
 
     return enviado
+
+def slug_upload(value):
+   value.name = '/'.join(['.'.join([slugify(j) for j in i.split('.')]) for i in value.name.split('/')])
