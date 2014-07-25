@@ -157,7 +157,7 @@ $(function(){
 	// disparaModalRequest("modais/produto","786","");
 	// disparaModalRequest("modais/destaque","786","");
 	// disparaModalRequest("modais/evento","560","");
-	disparaModalRequest("html/home/modais/share","786","share_produto");
+	disparaModalRequest("modais/share","786","share_produto");
 	// disparaModalRequest("modais/produto.html","786","");
 	//disparaModalRequest("modais/destaque.html","786","");
 	// disparaModalRequest("modais/evento.html","560","");

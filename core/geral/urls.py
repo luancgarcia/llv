@@ -26,5 +26,9 @@ urlpatterns = patterns('',
         'html.views.html_modal_evento',
         name='html_modal_evento'),
 
+    url(r'^modais/share',
+        'html.views.html_modal_share',
+        name='html_modal_share'),
+
     url(r'^$', 'geral.views.home', name='home'),
 )
