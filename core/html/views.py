@@ -17,3 +17,6 @@ def html_modal_destaque(request):
 
 def html_modal_evento(request):
     return render(request, 'modais/evento.html')
+
+def html_modal_share(request):
+    return render(request, 'modais/share.html')

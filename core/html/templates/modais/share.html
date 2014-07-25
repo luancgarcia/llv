@@ -1,0 +1,84 @@
+<script>
+	if(largura_window <=480) {
+		console.log("entrou aqui");
+		var qtd_itens = $("#ShareProduto .content-share .col-opcoes .content-opcoes ul:not(.off) li").length;
+		var largura_itens = $("#ShareProduto .content-share .col-opcoes .content-opcoes ul:not(.off) li").outerWidth(true);
+
+		$("#ShareProduto .content-share .col-opcoes .content-opcoes ul:not(.off)").width(qtd_itens*largura_itens+10);
+
+		console.log(qtd_itens*largura_itens);
+	}
+
+</script>
+
+<div class="content fix" id="ShareProduto">
+	<header class="head">
+		<h3 class="titulo">Compartilhar Produto</h3>
+	</header>
+	<section class="fix content-share">
+		<div class="col-produto fl fix">
+
+			<figure id="foto-share">
+				<div class="fix">
+					<img src="static/img/foto-share.png" alt="" class="prod">
+					<img src="" alt="" class="sec off">
+				</div>
+			</figure>
+			<footer class="fix cl">
+				<a href="javascript:;" class="bt-reset fl">Limpar foto</a>
+
+				<a href="javascript:;" class="bt-share fr">Compartilhe com seus amigos</a>
+
+			</footer>
+			
+		</div>
+
+		<div class="col-opcoes fr fix">
+			<nav class="abas">
+				<ul>
+					<li class="fl ativo"><a href="javascript;;" data-aba="aba-1">DIA-A-DIA</a></li>
+					<li class="fl"><a href="javascript;;"  data-aba="aba-2">DIA DOS NAMORADOS</a></li>
+				</ul>
+			</nav>
+			<section class="fix content-opcoes">
+				<ul data-box="aba-1">
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/meu-aniversario-gd.png"><img src="static/img/meu-aniversario-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+				</ul>
+				
+				<ul data-box="aba-2" class="off">
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+				</ul>
+			</section>
+		</div>
+	</section>
+</div>
