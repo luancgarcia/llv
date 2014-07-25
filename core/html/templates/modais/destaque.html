@@ -11,7 +11,7 @@
 	<div class="colunaDados fl">
 		<article class="fix">
 			<p class="chapeu">Devore agora mesmo</p>
-			<h2 class="titulo">Giraffas</h2>
+			<h2 class="titulo">Giraffas{{loja.nome}}</h2>
 			<p class="descricao">Devore um prato e ganhe 30% de desconto no hambúrguer.</p>
 
 			<p class="preco_anterior">de R$ 499,99</p>
@@ -24,11 +24,11 @@
 			<section class="qualMarca fix">
 				<div class="box fix">
 					<figure class="fl">
-						<img src="{% static 'img/girafas-modal.png' %}" alt="">
+						<img src="{% static 'img/girafas-modal.png' %}" alt="{{loja.nome}}">
 					</figure>
 					<p class="fl">
 						<span class="txt">Ligue para a loja </span>
-						<span class="tel">(21) 3322-6719 </span>
+						<span class="tel">(21) 3322-6719{{loja.telefone}}</span>
 					</p>
 				</div>
 				<p class="foot">Verificar disponibilidade dos produtos na loja</p>

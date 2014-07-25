@@ -100,6 +100,10 @@
   z-index: 80;
 }
 
+#menu-shoppings {
+  display: none;
+}
+
 .dois-itens-v .item {
   margin-bottom: 5px;
 }
@@ -115,26 +119,19 @@
   padding-bottom: 1px;
 }
 .item .desconto {
+  background: url(../img/desconto.png) no-repeat 0 0;
+  background-size: 100% 100%;
   font-family: "Trebuchet MS";
   position: absolute;
   z-index: 20;
-  width: 33px;
-  height: 33px;
-  background-color: #ce1e06;
-  border: 1px solid #b61904;
-  line-height: 33px;
-  text-align: center;
+  width: 56px;
+  height: 49px;
+  line-height: 49px;
   color: white;
-  font-size: 1.4em;
+  padding-left: 10px;
+  font-size: 2.2em;
   top: 12px;
-  right: 10px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
-  -webkit-box-shadow: 1px 1px 1px 0 #333333;
-  box-shadow: 1px 1px 1px 0 #333333;
+  left: 2px;
 }
 .item figure {
   padding: 5px;
@@ -228,6 +225,142 @@
 }
 .grid2 .item .content .outro {
   height: 31px;
+}
+
+#ShareProduto {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+#ShareProduto .head {
+  background-color: #425e9e;
+  height: 39px;
+  margin-bottom: 10px;
+}
+#ShareProduto .head .titulo {
+  font-family: "Roboto";
+  font-size: 1.5em;
+  color: white;
+  line-height: 39px;
+  padding-left: 12px;
+}
+#ShareProduto .content-share {
+  padding: 0 0 0 14px;
+}
+#ShareProduto .content-share .col-produto {
+  width: 388px;
+  float: left;
+  padding-bottom: 13px;
+}
+#ShareProduto .content-share .col-produto .bt-reset, #ShareProduto .content-share .col-produto .bt-share {
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  height: 28px;
+  line-height: 28px;
+  border: 1px solid;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+#ShareProduto .content-share .col-produto .bt-reset {
+  background-image: url(../img/bg-reset.png);
+  color: #3d5b9c;
+  margin-left: 6px;
+  border-color: #c4c4c6;
+  padding: 0 10px 0 16px;
+  font-size: 1.3em;
+}
+#ShareProduto .content-share .col-produto .bt-share {
+  background-image: url(../img/bg-share.png);
+  color: white;
+  margin-right: 8px;
+  border-color: #284689;
+  padding: 0 8px;
+  font-size: 1.4em;
+}
+#ShareProduto .content-share .col-opcoes {
+  width: 368px;
+  float: right;
+}
+#ShareProduto .content-share .col-opcoes .abas {
+  height: 29px;
+  position: relative;
+  z-index: 10;
+}
+#ShareProduto .content-share .col-opcoes .abas li {
+  font-size: 1.2em;
+}
+#ShareProduto .content-share .col-opcoes .abas li a {
+  color: #737375;
+  display: block;
+  line-height: 29px;
+  padding: 0 15px;
+}
+#ShareProduto .content-share .col-opcoes .abas li a:hover {
+  color: #3b599b;
+}
+#ShareProduto .content-share .col-opcoes .abas li.ativo {
+  background-color: #e7ebf3;
+  border: 1px solid #d2daea;
+  border-bottom: none;
+  margin: 0 0 -1px 0;
+}
+#ShareProduto .content-share .col-opcoes .abas li.ativo a {
+  color: #3b599b;
+  line-height: 28px;
+  padding: 0 14px 1px;
+}
+#ShareProduto .content-share .col-opcoes .content-opcoes {
+  background-color: #e7ebf3;
+  border-left: 1px solid #d2daea;
+  border-top: 1px solid #d2daea;
+  padding-right: 13px;
+  padding-top: 9px;
+}
+#ShareProduto .content-share .col-opcoes .content-opcoes ul {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 407px;
+}
+#ShareProduto .content-share .col-opcoes .content-opcoes li {
+  width: 100px;
+  height: 99px;
+  margin-left: 11px;
+  margin-bottom: 11px;
+  overflow: hidden;
+}
+#ShareProduto .content-share .col-opcoes .content-opcoes li a {
+  width: 98px;
+  height: 97px;
+  display: block;
+  border: 1px solid #4c4b4b;
+}
+#ShareProduto .content-share .col-opcoes .content-opcoes li a:hover, #ShareProduto .content-share .col-opcoes .content-opcoes li a.ativo {
+  border-color: #f9f57f;
+}
+
+#foto-share {
+  position: relative;
+  width: 376px;
+  height: 376px;
+  border: 1px solid whitesmoke;
+  padding: 6px 5px;
+  margin-bottom: 13px;
+}
+#foto-share div {
+  position: relative;
+}
+#foto-share .prod {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+#foto-share .sec {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 
 #ico-menu {
@@ -338,7 +471,7 @@
   display: block;
 }
 
-.mask {
+.mask, .maskmenushp, .maskmenu {
   background-color: black;
   position: fixed;
   z-index: 100;
@@ -385,6 +518,11 @@
 }
 #lightbox.absolute {
   position: fixed;
+}
+#lightbox.share_produto .fechar_modal {
+  background-position: 0 -17px !important;
+  top: 12px !important;
+  right: 10px !important;
 }
 
 .fechar_modal {

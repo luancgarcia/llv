@@ -67,6 +67,18 @@ $cor-37: #919293
 $cor-38: #fcfafa
 $cor-39: #e8e8e8
 $cor-40: #7d7b7b
+$cor-41: #425e9e
+$cor-42: #f5f5f5
+$cor-43: #c4c4c6
+$cor-44: #284689
+$cor-45: #3d5b9c
+$cor-46: #d2daea
+$cor-47: #e7ebf3
+$cor-48: #4c4b4b
+$cor-49: #f9f57f
+$cor-50: #737375
+$cor-51: #3b599b
+$cor-52: #d21e26
 
 @mixin border-radius($radius)
 	-webkit-border-radius: $radius
@@ -88,17 +100,6 @@ $cor-40: #7d7b7b
 	background-image: -o-linear-gradient(top, $fromColor 0%, $toColor 100%)
 	background-image: linear-gradient(top, $fromColor 0%, $toColor 100%)
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}')
-
-@mixin linear-gradient-percent($fromColor, $toColor, $percentFrom, $percentTo)
-	background-color: $toColor
-	background-image: -webkit-gradient(linear, left top, left bottom, from($percentFrom, $fromColor), to($percentTo, $toColor))
-	background-image: -webkit-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
-	background-image: -moz-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
-	background-image: -ms-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
-	background-image: -o-linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
-	background-image: linear-gradient(top, $fromColor $percentFrom, $toColor $percentTo)
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}')	
-
 
 @mixin transition($transition-property, $transition-time, $method)
 	-webkit-transition: $transition-property $transition-time $method
