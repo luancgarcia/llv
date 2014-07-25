@@ -24,6 +24,16 @@ class Categoria(EditorialModel):
 
 
 class Oferta(EditorialModel):
+    OFERTA = 0
+    DESTAQUE = 1
+    EVENTO = 2
+
+    TIPOS = (
+        (OFERTA, u'Oferta'),
+        (DESTAQUE, u'Destaque'),
+        (EVENTO, u'Evento')
+    )
+
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
     nome = models.CharField(u'Nome', max_length=200, null=True, blank=False)
@@ -37,6 +47,7 @@ class Oferta(EditorialModel):
     preco_final = models.CharField(u'Por: R$', max_length=70, null=True,
                                    blank=False)
     desconto = models.IntegerField(u'Desconto', null=True, blank=True)
+    tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
 
     class Meta:
         verbose_name=u'Oferta'
@@ -53,6 +64,20 @@ class Oferta(EditorialModel):
     @property
     def desconto_value(self):
         return u'%s%' % self.desconto if self.desconto else ''
+
+
+class Destaque(Oferta):
+    class Meta:
+        proxy = True
+        verbose_name=u'Destaque'
+        verbose_name_plural=u'Destaques'
+
+
+class Evento(Oferta):
+    class Meta:
+        proxy = True
+        verbose_name=u'Evento'
+        verbose_name_plural=u'Eventos'
 
 
 class ImagemOferta(EditorialModel):
