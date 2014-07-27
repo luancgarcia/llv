@@ -36,8 +36,8 @@ class Oferta(EditorialModel):
 
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
-    nome = models.CharField(u'Nome', max_length=200, null=True, blank=False)
-    slug = models.SlugField(max_length=250, blank=False, null=False, unique=True)
+    nome = models.CharField(u'Nome', max_length=200, null=True, blank=True)
+    slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
     evento = models.TextField(u'Descrição do Evento', blank=True, null=True)
     texto_promocional = models.TextField(u'Chamada Promocional',
@@ -48,6 +48,7 @@ class Oferta(EditorialModel):
                                    blank=False)
     desconto = models.IntegerField(u'Desconto', null=True, blank=True)
     tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
+    texto_link = models.CharField(u'Texto do link', max_length="140", null=True, blank=False)
 
     class Meta:
         verbose_name=u'Oferta'
@@ -56,14 +57,32 @@ class Oferta(EditorialModel):
         unique_together = (('loja','slug'))
 
     def __unicode__(self):
-        return u'%s (%s off) %s - %s' % (self.nome,
-                                         self.desconto_value,
-                                         self.preco_final,
-                                         self.preco_final)
+        return u'%s - %s[ %s off %s - %s ]' % (self.nome,
+                                               self.texto_link,
+                                               self.desconto_value,
+                                               self.preco_inicial,
+                                               self.preco_final)
 
     @property
     def desconto_value(self):
-        return u'%s%' % self.desconto if self.desconto else ''
+        return u'%s%%' % self.desconto if self.desconto else ''
+
+    def porcentagem_desconto(self):
+        antes = float(self.preco_inicial.replace(',','.'))
+        depois = float(self.preco_final.replace(',','.'))
+        return int(100-(100*int(depois)/int(antes)))
+
+    @classmethod
+    def get_ofertas(cls):
+        return cls.objects.filter(publicada=True,tipo=cls.OFERTA)
+
+    def to_dict(self):
+        return {'loja': self.loja,
+                'descricao': self.descricao,
+                'porcentagem': self.porcentagem_desconto(),
+                'desconto': self.desconto,
+                'preco_final': self.preco_final,
+                'preco_inicial': self.preco_inicial}
 
 
 class Destaque(Oferta):

@@ -13,7 +13,14 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 
 class OfertaAdmin(admin.ModelAdmin):
-    exclude = ('tipo',)
+    exclude = ('tipo','evento',)
+    prepopulated_fields = {'slug': ('nome',), }
+    list_filter = ['loja', 'publicada']
+    list_display = ['__unicode__','publicada']
+    list_editable = ['publicada']
+
+    # class Media:
+        # js = []
 
     def queryset(self, request):
         qs = super(OfertaAdmin, self).queryset(request)
@@ -21,6 +28,11 @@ class OfertaAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.OFERTA
+        # apagar quando implementar o js
+        if obj.preco_final and obj.preco_inicial:
+            antes = float(obj.preco_inicial.replace(',','.'))
+            depois = float(obj.preco_final.replace(',','.'))
+            obj.desconto = int(100-(100*int(depois)/int(antes)))
         obj.save()
 
 
