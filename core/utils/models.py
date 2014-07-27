@@ -51,6 +51,9 @@ class EditorialModel(BaseModel):
     '''
     publicada = models.BooleanField(u'Publicada', default=False)
 
+    class Meta:
+        abstract = True
+
 
 class OrderedModel(BaseModel):
 
