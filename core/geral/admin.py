@@ -18,7 +18,15 @@ class CategoriaAdmin(admin.ModelAdmin):
     list_filter = ['publicada']
 
 
+class ImagemInline(admin.StackedInline):
+    classes = ('grp-collapse grp-open',)
+    inline_classes = ('grp-collapse grp-open',)
+    model = ImagemOferta
+    exclude = ('principal','vertical')
+    extra = 1
+
 class OfertaAdmin(admin.ModelAdmin):
+    inlines = [ImagemInline,]
     exclude = ('tipo','evento',)
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'publicada']
@@ -69,7 +77,7 @@ class EventoAdmin(admin.ModelAdmin):
 admin.site.register(Shopping, ShoppingAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
-admin.site.register(Destaque, DestaqueAdmin)
+# admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta)
 admin.site.register(Log)
