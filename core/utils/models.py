@@ -51,3 +51,66 @@ class EditorialModel(BaseModel):
     '''
     publicada = models.BooleanField(u'Publicada', default=False)
 
+
+class OrderedModel(BaseModel):
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            try:
+                self.ordem = self.__class__.objects.all().order_by("-ordem")[0].ordem + 1
+            except IndexError:
+                self.ordem = 0
+        super(OrderedModel, self).save()
+
+    def order_link(self):
+        model_type_id = ContentType.objects.get_for_model(self.__class__).id
+        model_id = self.id
+        kwargs = {"direction": "up", "model_type_id": model_type_id, "model_id": model_id}
+        url_up = reverse("admin-move", kwargs=kwargs)
+        kwargs["direction"] = "down"
+        url_down = reverse("admin-move", kwargs=kwargs)
+        return '<a href="%s">Sobe</a> - <a href="%s">Desce</a>' % (url_up, url_down)
+    order_link.allow_tags = True
+    order_link.short_description = 'Mover'
+    order_link.admin_order_field = 'order'
+
+    @staticmethod
+    def move_down(model_type_id, model_id):
+        try:
+            ModelClass = ContentType.objects.get(id=model_type_id).model_class()
+
+            lower_model = ModelClass.objects.get(id=model_id)
+            higher_model = ModelClass.objects.filter(ordem__gt=lower_model.ordem)[0]
+
+            lower_model.ordem, higher_model.ordem = higher_model.ordem, lower_model.ordem
+
+            higher_model.save()
+            lower_model.save()
+        except IndexError:
+            pass
+        except ModelClass.DoesNotExist:
+            pass
+
+    @staticmethod
+    def move_up(model_type_id, model_id):
+        try:
+            ModelClass = ContentType.objects.get(id=model_type_id).model_class()
+
+            higher_model = ModelClass.objects.get(id=model_id)
+            lower_model = ModelClass.objects.filter(ordem__lt=higher_model.ordem).order_by('-ordem')[0]
+
+            lower_model.ordem, higher_model.ordem = higher_model.ordem, lower_model.ordem
+
+            higher_model.save()
+            lower_model.save()
+        except IndexError:
+            pass
+        except ModelClass.DoesNotExist:
+            pass
+
+    ordem = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        ordering = ["ordem"]
+        abstract = True
+
