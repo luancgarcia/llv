@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
-from utils.models import BaseModel, EditorialModel, BaseManager
+from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
 from lojas.models import Loja
 
 
@@ -112,7 +112,7 @@ class Evento(Oferta):
         verbose_name_plural=u'Eventos'
 
 
-class ImagemOferta(EditorialModel):
+class ImagemOferta(OrderedModel):
     oferta = models.ForeignKey(Oferta, verbose_name=u'Oferta',
                                related_name='imagens')
     imagem = models.ImageField(u'Imagem', upload_to='ofertas',
