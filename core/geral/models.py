@@ -49,7 +49,7 @@ class Oferta(EditorialModel):
 
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
-    nome = models.CharField(u'Nome', max_length=200, null=True, blank=True)
+    nome = models.CharField(u'Título', max_length=200, null=True, blank=True)
     slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
     evento = models.TextField(u'Descrição do Evento', blank=True, null=True)
@@ -70,7 +70,7 @@ class Oferta(EditorialModel):
         unique_together = (('loja','slug'))
 
     def __unicode__(self):
-        return u'%s - %s[ %s off %s - %s ]' % (self.nome,
+        return u'%s - %s [ %s off %s - %s ]' % (self.nome,
                                                self.texto_link,
                                                self.desconto_value,
                                                self.preco_inicial,
@@ -131,6 +131,7 @@ class ImagemOferta(OrderedModel):
     class Meta:
         verbose_name=u'Imagem da oferta'
         verbose_name_plural=u'Imagens das ofertas'
+        ordering = ['oferta','ordem']
 
 
 class Log(BaseModel):

@@ -74,10 +74,15 @@ class EventoAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class ImagemOfertaAdmin(admin.ModelAdmin):
+    list_display = ['oferta','ordem','order_link',]
+    exclude = ['principal','vertical']
+
+
 admin.site.register(Shopping, ShoppingAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
 # admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
-admin.site.register(ImagemOferta)
+admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log)
