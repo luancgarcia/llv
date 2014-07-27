@@ -2,7 +2,13 @@
 
 from django.contrib import admin
 
-from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
+from geral.models import Shopping, Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
+
+class ShoppingAdmin(admin.ModelAdmin):
+    list_display = ['nome','publicada','id_multiplan']
+    prepopulated_fields = {'slug': ('nome',), }
+    list_editable = ['publicada']
+    list_filter = ['publicada']
 
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada']
@@ -60,6 +66,7 @@ class EventoAdmin(admin.ModelAdmin):
         obj.save()
 
 
+admin.site.register(Shopping, ShoppingAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
 admin.site.register(Destaque, DestaqueAdmin)
