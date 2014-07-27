@@ -5,7 +5,11 @@ from django.contrib import admin
 from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
 
 class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ['nome']
+    list_display = ['nome','publicada']
+    prepopulated_fields = {'slug': ('nome',), }
+    exclude = ['default']
+    list_editable = ['publicada']
+    list_filter = ['publicada']
 
 
 class OfertaAdmin(admin.ModelAdmin):
@@ -44,7 +48,7 @@ class EventoAdmin(admin.ModelAdmin):
         obj.save()
 
 
-admin.site.register(Categoria)
+admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
 admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
