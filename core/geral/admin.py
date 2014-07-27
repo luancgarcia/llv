@@ -24,6 +24,11 @@ class ImagemInline(admin.StackedInline):
     model = ImagemOferta
     exclude = ('principal','vertical')
     extra = 1
+    fieldsets = (
+        ('', {
+            'fields': (('imagem','ordem'),)
+        }),
+    )
 
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
@@ -32,6 +37,17 @@ class OfertaAdmin(admin.ModelAdmin):
     list_filter = ['loja', 'publicada']
     list_display = ['__unicode__','publicada']
     list_editable = ['publicada']
+    readonly_fields = ['desconto']
+
+    fieldsets = (
+        ('Informações', {
+            'fields': ('loja','nome','slug', 'descricao',
+                       'texto_promocional', 'texto_link',)
+        }),
+        ('Digite os valores do produto', {
+            'fields': (('preco_inicial','preco_final'),'desconto')
+        }),
+    )
 
     # class Media:
         # js = []

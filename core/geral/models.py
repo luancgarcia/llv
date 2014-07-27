@@ -129,9 +129,12 @@ class ImagemOferta(OrderedModel):
     vertical = models.BooleanField(u'Imagem vertical', default=False)
 
     class Meta:
-        verbose_name=u'Imagem da oferta'
+        verbose_name=u'Imagem'
         verbose_name_plural=u'Imagens das ofertas'
         ordering = ['oferta','ordem']
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.oferta.nome, self.ordem)
 
 
 class Log(BaseModel):
