@@ -121,6 +121,10 @@ class ImagemOferta(EditorialModel):
                                  resize.ResizeToFill(376, 376)],
                                  source='imagem', format='JPG',
                                  options={'quality': 90})
+    evento_180x445 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
+                                 resize.ResizeToFill(180, 445)],
+                                 source='imagem', format='JPG',
+                                 options={'quality': 90})
     principal = models.BooleanField(u'Imagem principal', default=False)
     vertical = models.BooleanField(u'Imagem vertical', default=False)
 
