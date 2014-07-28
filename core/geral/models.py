@@ -47,6 +47,15 @@ class Oferta(EditorialModel):
         (EVENTO, u'Evento')
     )
 
+    PENDENTE = 0
+    PUBLICADO = 1
+    EXPIRADO = 2
+    STATUSES = (
+        (PENDENTE, u'Pendete'),
+        (PUBLICADO, u'Publicado'),
+        (EXPIRADO, u'Expirado'),
+    )
+
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
     nome = models.CharField(u'Título', max_length=200, null=True, blank=True)
@@ -62,6 +71,7 @@ class Oferta(EditorialModel):
     desconto = models.IntegerField(u'Desconto', null=True, blank=True)
     tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
     texto_link = models.CharField(u'Texto do link', max_length="140", null=True, blank=False)
+    status = models.IntegerField(u'Status', choices=STATUSES, default=PENDENTE)
 
     class Meta:
         verbose_name=u'Oferta'
