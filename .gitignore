@@ -8,7 +8,7 @@ core/geral/custom_settings.py
 */.idea/*
 media/
 #static/
-static/*
+#static/*
 #*.sassc
 core/geral/static/sass/.sass-cache/*
 !procedures/*.sql
