@@ -26,7 +26,14 @@
 	<script type="text/javascript">
 		// alert($(window).width());
 	</script>
+    <!--[if lte IE 9]>
+       <script type="text/javascript" src="static/js/cria-elemento.js"></script>
+       <link rel="stylesheet" type="text/css" href="static/css/ie.css" >
+    <![endif]-->
 
+    <!--[if IE 8]>
+       <link rel="stylesheet" type="text/css" href="static/css/ie8.css">
+    <![endif]-->
 </head>
 <body>
 	<!--
@@ -174,8 +181,8 @@
 									<li class="mid"><a href="">de R$ 30 a R$ 50</a></li>
 									<li><a href="">de R$ 50 a R$ 70</a></li>
 
-									<li><a href="">de R$ 70 a R$ 100</a></li>
-									<li class="mid"><a href="">acima de R$ 100</a></li>
+									<li class="last"><a href="">de R$70 a R$100</a></li>
+									<li class="mid last"><a href="">acima de R$100</a></li>
 								</ul>
 							</div>
 						</li>
