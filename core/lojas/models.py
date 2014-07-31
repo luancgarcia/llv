@@ -20,6 +20,11 @@ class Shopping(EditorialModel):
     def __unicode__(self):
         return u'%s' % self.nome
 
+    def to_dict(self):
+        return {'nome': self.nome,
+                'slug': self.slug,
+                'id_multiplan': self.id_multiplan}
+
 
 class Loja(EditorialModel):
     shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping', related_name='lojas')
@@ -40,3 +45,9 @@ class Loja(EditorialModel):
 
     def __unicode__(self):
         return u'%s' % self.nome
+
+    def to_dict(self):
+        return {'nome': self.nome,
+                'logo': self.logo_120x50.url if self.logo else None,
+                'telefone': self.telefone,
+                'shopping': self.shopping.to_dict()}
