@@ -5,9 +5,10 @@ from django.contrib import admin
 from lojas.models import Loja, Shopping
 
 class LojaAdmin(admin.ModelAdmin):
-	list_display = ['nome','telefone','publicada']
-	list_filter = ['publicada']
+	list_display = ['nome','shopping','telefone','publicada']
+	list_filter = ['shopping','publicada']
 	list_editable = ['publicada']
+	search_fields= ['nome']
 
 class ShoppingAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada','id_multiplan']
