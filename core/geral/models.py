@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from datetime import datetime
 
 from django.db import models
 from django.utils.text import slugify
@@ -73,6 +74,11 @@ class Oferta(EditorialModel):
                                                self.desconto_value,
                                                self.preco_inicial,
                                                self.preco_final)
+
+    def save(self, *args, **kwargs):
+        if self.status == Oferta.PUBLICADO:
+            self.data_aprovacao = datetime.now()
+        super(Oferta, self).save(*args, **kwargs)
 
     @property
     def desconto_value(self):
