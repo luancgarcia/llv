@@ -5,6 +5,8 @@ from django.contrib import admin
 from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
 
 
+OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada')
+
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada']
     prepopulated_fields = {'slug': ('nome',), }
@@ -27,11 +29,10 @@ class ImagemInline(admin.StackedInline):
 
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
-    exclude = ('tipo','evento',)
+    exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
-    list_filter = ['loja', 'publicada']
-    list_display = ['__unicode__','publicada']
-    list_editable = ['publicada']
+    list_filter = ['loja', 'status']
+    list_display = ['__unicode__','status']
     readonly_fields = ['desconto']
 
     fieldsets = (
@@ -62,7 +63,9 @@ class OfertaAdmin(admin.ModelAdmin):
 
 
 class DestaqueAdmin(admin.ModelAdmin):
-    exclude = ('tipo',)
+    inlines = [ImagemInline,]
+    exclude = OCULTA_NO_ADMIN
+    prepopulated_fields = {'slug': ('nome',), }
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
@@ -70,11 +73,17 @@ class DestaqueAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.DESTAQUE
+        if obj.preco_final and obj.preco_inicial:
+            antes = float(obj.preco_inicial.replace(',','.'))
+            depois = float(obj.preco_final.replace(',','.'))
+            obj.desconto = int(100-(100*int(depois)/int(antes)))
         obj.save()
 
 
 class EventoAdmin(admin.ModelAdmin):
-    exclude = ('tipo',)
+    inlines = [ImagemInline,]
+    exclude = OCULTA_NO_ADMIN
+    prepopulated_fields = {'slug': ('nome',), }
 
     def queryset(self, request):
         qs = super(EventoAdmin, self).queryset(request)
@@ -82,6 +91,10 @@ class EventoAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.EVENTO
+        if obj.preco_final and obj.preco_inicial:
+            antes = float(obj.preco_inicial.replace(',','.'))
+            depois = float(obj.preco_final.replace(',','.'))
+            obj.desconto = int(100-(100*int(depois)/int(antes)))
         obj.save()
 
 
@@ -92,7 +105,7 @@ class ImagemOfertaAdmin(admin.ModelAdmin):
 
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
-# admin.site.register(Destaque, DestaqueAdmin)
+admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log)
