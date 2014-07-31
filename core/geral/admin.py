@@ -66,6 +66,7 @@ class DestaqueAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
+    list_display = ['__unicode__','status']
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
@@ -84,6 +85,7 @@ class EventoAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
+    list_display = ['__unicode__','status']
 
     def queryset(self, request):
         qs = super(EventoAdmin, self).queryset(request)
