@@ -105,19 +105,19 @@ class Oferta(EditorialModel):
     def destaques_prontos(cls):
         destaques = cls.objects.filter(tipo=cls.DESTAQUE,
                                        status=cls.PUBLICADO)
-        return [d for d in destaques]
+        return [d.to_dict() for d in destaques]
 
     @classmethod
     def eventos_prontos(cls):
         eventos = cls.objects.filter(tipo=cls.EVENTO,
                                      status=cls.PUBLICADO)
-        return [e for e in eventos]
+        return [e.to_dict() for e in eventos]
 
     @classmethod
     def ofertas_prontas(cls):
         ofertas = cls.objects.filter(tipo=cls.OFERTA,
                                      status=cls.PUBLICADO)
-        return [o for o in ofertas]
+        return [o.to_dict() for o in ofertas]
 
 
 class Destaque(Oferta):
