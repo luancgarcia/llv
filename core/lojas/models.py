@@ -29,7 +29,7 @@ class Loja(EditorialModel):
                                null=True, blank=True)
     logo_120x50 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(120, 50)],
-                                 source='logo', format='JPG',
+                                 source='logo', format='PNG',
                                  options={'quality': 90})
     telefone = models.CharField(u'telefone', max_length=100, null=True, blank=True)
 
