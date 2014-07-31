@@ -60,7 +60,7 @@ class Oferta(EditorialModel):
     tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
     texto_link = models.CharField(u'Texto do link', max_length="140", null=True, blank=False)
     status = models.IntegerField(u'Status', choices=STATUSES, default=PENDENTE)
-    data_aprovacao = models.DateTimeField(u"Data de aprovação", auto_now_add=True, editable=False, null=True)
+    data_aprovacao = models.DateTimeField(u"Data de aprovação", null=True)
 
     class Meta:
         verbose_name=u'Oferta'
