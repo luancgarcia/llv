@@ -8,7 +8,21 @@ from django.db import models
 from utils.models import EditorialModel, BaseManager
 
 
+class Shopping(EditorialModel):
+    nome = models.CharField(u'Nome', max_length=100, blank=False, null=True)
+    slug = models.SlugField(max_length=150, blank=False, null=False, unique=True)
+    id_multiplan = models.IntegerField(u'id do shopping na multiplan', null=True, blank=True)
+
+    class Meta:
+        verbose_name=u'Shopping'
+        verbose_name_plural=u'Shoppings'
+
+    def __unicode__(self):
+        return u'%s' % self.nome
+
+
 class Loja(EditorialModel):
+    shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping', related_name='lojas')
     nome = models.CharField(u'Nome', max_length=100, null=True, blank=False)
     logo = models.CharField(u'Logo', max_length=100, null=True, blank=True)
     logo = models.ImageField(u'Imagem', upload_to='lojas',

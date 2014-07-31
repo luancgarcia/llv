@@ -9,19 +9,6 @@ from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
 from lojas.models import Loja
 
 
-class Shopping(EditorialModel):
-    nome = models.CharField(u'Nome', max_length=100, blank=False, null=True)
-    slug = models.SlugField(max_length=150, blank=False, null=False, unique=True)
-    id_multiplan = models.IntegerField(u'id do shopping na multiplan', null=True, blank=True)
-
-    class Meta:
-        verbose_name=u'Shopping'
-        verbose_name_plural=u'Shoppings'
-
-    def __unicode__(self):
-        return u'%s' % self.nome
-
-
 class Categoria(EditorialModel):
     nome = models.CharField(u'Nome', max_length=100, blank=False, null=True)
     slug = models.SlugField(max_length=150, blank=False, null=False, unique=True)
