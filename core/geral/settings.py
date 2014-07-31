@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'html',
     'lojas',
     'utils',
+    'imagekit',
 
     'south',
     'crispy_forms'
