@@ -94,12 +94,30 @@ class Oferta(EditorialModel):
         return cls.objects.filter(publicada=True,tipo=cls.OFERTA)
 
     def to_dict(self):
+        imagem = None
+        if self.tipo == Oferta.OFERTA:
+            imagens = self.imagens.filter(oferta__tipo=Oferta.OFERTA)
+            if imagens:
+                imagem = imagens[0].img_172x172.url
+        elif self.tipo == Oferta.EVENTO:
+            imagens = self.imagens.filter(oferta__tipo=Oferta.EVENTO)
+            if imagens:
+                imagem = imagens[0].evento_180x445.url
+        else:
+            imagens = self.imagens.filter(oferta__tipo=Oferta.DESTAQUE)
+            if imagens:
+                imagem = imagens[0].img_376x376.url
+
         return {'loja': self.loja,
                 'descricao': self.descricao,
                 'porcentagem': self.porcentagem_desconto(),
                 'desconto': self.desconto,
                 'preco_final': self.preco_final,
-                'preco_inicial': self.preco_inicial}
+                'preco_inicial': self.preco_inicial,
+                'texto_do_link': self.texto_link,
+                'chamada_promocional': self.texto_promocional,
+                'loja': self.loja.to_dict(),
+                'imagem': imagem}
 
     @classmethod
     def destaques_prontos(cls):
