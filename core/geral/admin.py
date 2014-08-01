@@ -67,6 +67,7 @@ class DestaqueAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_display = ['__unicode__','status']
+    list_editable = ['status']
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
@@ -86,6 +87,7 @@ class EventoAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_display = ['__unicode__','status']
+    list_editable = ['status']
 
     def queryset(self, request):
         qs = super(EventoAdmin, self).queryset(request)
