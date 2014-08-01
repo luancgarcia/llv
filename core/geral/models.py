@@ -122,19 +122,22 @@ class Oferta(EditorialModel):
     @classmethod
     def destaques_prontos(cls):
         destaques = cls.objects.filter(tipo=cls.DESTAQUE,
-                                       status=cls.PUBLICADO)
+                                       status=cls.PUBLICADO)\
+                               .order_by('-data_aprovacao')
         return [d.to_dict() for d in destaques][:3]
 
     @classmethod
     def eventos_prontos(cls):
         eventos = cls.objects.filter(tipo=cls.EVENTO,
-                                     status=cls.PUBLICADO)
+                                     status=cls.PUBLICADO)\
+                             .order_by('-data_aprovacao')
         return [e.to_dict() for e in eventos][:3]
 
     @classmethod
     def ofertas_prontas(cls):
         ofertas = cls.objects.filter(tipo=cls.OFERTA,
-                                     status=cls.PUBLICADO)
+                                     status=cls.PUBLICADO)\
+                             .order_by('-data_aprovacao')
         return [o.to_dict() for o in ofertas][:32]
 
 
