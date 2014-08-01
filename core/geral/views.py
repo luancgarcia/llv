@@ -26,5 +26,5 @@ def home(request):
                 'ofertas': ofertas}
     return render(request, "home.html", contexto)
 
-def modal(request):
+def modal(request, tipo, id_item):
     return
