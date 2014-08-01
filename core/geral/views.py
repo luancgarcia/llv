@@ -15,13 +15,15 @@ def slice_oferta(total_destaques, total_eventos):
 def home(request):
     destaques = Oferta.destaques_prontos()
     eventos = Oferta.eventos_prontos()
-    total_destaques = len(destaques)
-    total_eventos = len(eventos)
+
+    ofertas = Oferta.ofertas_prontas()
+    ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
+
 
     contexto = {'lojas': Loja.objects.all(),
                 'destaques': destaques,
                 'eventos': eventos,
-                'ofertas': Oferta.ofertas_prontas()}
+                'ofertas': ofertas}
     return render(request, "home.html", contexto)
 
 def modal(request):
