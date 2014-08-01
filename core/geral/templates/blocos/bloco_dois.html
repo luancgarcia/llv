@@ -5,43 +5,13 @@
 
 <!-- coluna com dois itens verticais -->
 <div class="grid dois-itens-v">
-	<article class="item">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+	{% if ofertas.4 %}
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.4 %}
+	{% endif %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-	<article class="item last">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
+	{% if ofertas.5 %}
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.5 last_div=True %}
+	{% endif %}
 </div>
 
 {% include 'blocos/evento.html' %}
