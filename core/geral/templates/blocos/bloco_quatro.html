@@ -5,128 +5,29 @@
 
 {% include 'blocos/evento.html' with lasttv=True %}
 
-<div class="grid ">
-	<article class="item">
-		<span class="desconto">50</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+{% if ultimo %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.8 %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-		desconto no hambúrguer.</p>
-		</section>
+	{% include 'blocos/oferta.html' with oferta=ofertas.9 lastmob=True %}
 
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+	{% include 'blocos/oferta.html' with oferta=ofertas.10 last_div=True %}
 
-<div class="grid lastmob">
-	<article class="item">
-		<span class="desconto">50</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+	{% include 'blocos/oferta.html' with oferta=ofertas.11 lastmob=True %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-		desconto no hambúrguer.</p>
-		</section>
+	{% include 'blocos/oferta.html' with oferta=ofertas.12 %}
 
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+	{% include 'blocos/oferta.html' with oferta=ofertas.13 last_div=True lastmob=True %}
+{% else %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.15 %}
 
-<div class="grid last ">
-	<article class="item">
-		<span class="desconto">50</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+	{% include 'blocos/oferta.html' with oferta=ofertas.16 lastmob=True %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-		desconto no hambúrguer.</p>
-		</section>
+	{% include 'blocos/oferta.html' with oferta=ofertas.17 last_div=True %}
 
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+	{% include 'blocos/oferta.html' with oferta=ofertas.18 lastmob=True %}
 
-<div class="grid lastmob">
-	<article class="item">
-		<span class="desconto">50</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+	{% include 'blocos/oferta.html' with oferta=ofertas.19 %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-		desconto no hambúrguer.</p>
-		</section>
+	{% include 'blocos/oferta.html' with oferta=ofertas.20 last_div=True lastmob=True %}
+{% endif %}
 
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
-
-<div class="grid ">
-	<article class="item">
-		<span class="desconto">50</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-		desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
-
-<div class="grid last lastmob">
-	<article class="item">
-		<span class="desconto">50</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-		desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
