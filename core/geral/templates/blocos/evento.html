@@ -1,10 +1,9 @@
-{% load staticfiles %}
 <div class="grid dois-itens-v{% if last_div %} last{%endif%}{%if lastmob%} lastmob{%endif%}{%if lasttv%} lasttv{%endif%}">
 	<article class="item vertical">
 		<span class="desconto">{{ evento.desconto }}</span>
 		<figure>
 			<a href="" title="">
-				<img src="{% static 'img/item-vertical.jpg' %}" alt="{{ evento.descricao }}">
+				<img src="{{ evento.imagem }}" alt="{{ evento.descricao }}">
 			</a>
 		</figure>
 
