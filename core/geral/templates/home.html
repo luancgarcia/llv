@@ -213,7 +213,7 @@
 						{% if eventos.1 %}
 							{% include 'blocos/bloco_tres.html' with destaque=destaques.2 evento=eventos.1 %}
 							{% if eventos.2 %}
-								{% include 'blocos/bloco_quatro.html' with evento=eventos.2 %}
+								{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=True %}
 							{% else %}
 								{% include 'blocos/so_ofertas.html' %}
 							{% endif%}
@@ -244,7 +244,7 @@
 				{% include 'blocos/so_ofertas.html' %}
 			{% endif%}
 			{% if eventos.2 %}
-				{% include 'blocos/bloco_quatro.html' with evento=eventos.2 %}
+				{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=False %}
 			{% else %}
 				{% include 'blocos/so_ofertas.html' %}
 			{% endif%}
