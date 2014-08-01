@@ -34,6 +34,7 @@ class OfertaAdmin(admin.ModelAdmin):
     list_filter = ['loja', 'status']
     list_display = ['__unicode__','status']
     readonly_fields = ['desconto']
+    list_editable = ['status']
 
     fieldsets = (
         ('Informações', {
