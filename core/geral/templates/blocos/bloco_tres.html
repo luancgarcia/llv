@@ -6,43 +6,13 @@
 {% include 'blocos/destaque.html' %}
 
 <div class="grid dois-itens-v">
-	<article class="item">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+	{% if ofertas.6 %}
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.6 %}
+	{% endif %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-	<article class="item last">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
+	{% if ofertas.7 %}
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.7 last_div=True %}
+	{% endif %}
 </div>
 
 {% include 'blocos/evento.html' with last_div=True lasttv=True %}
