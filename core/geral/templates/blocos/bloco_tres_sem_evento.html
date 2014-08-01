@@ -1,0 +1,107 @@
+{% load staticfiles %}
+<div class="grid2">
+	<article class="item">
+		<span class="desconto">{{ destaque.desconto }}</span>
+		<figure>
+			<a href="" title="">
+				<img src="{{ destaque.imagem }}" alt="{{ destaque.loja.nome }} - {{ destaque.desconto }}% off">
+			</a>
+		</figure>
+
+		<section class="content">
+			<span class="marca"><img src="{{ destaque.loja.logo }}" alt='{{ destaque.loja.nome }}'></span>
+			<h2 class="titulo">{{ destaque.loja.nome }}</h2>
+			<p class="descricao">{{ destaque.chamada_promocional }}</p>
+			<p class="outro"><a href="">{{ destaque.texto_do_link }}</a></p>
+		</section>
+
+		<footer>
+			<a class="like fl" href="" title="">189</a>
+			<a class="share fr" href="">Compartilhar</a>
+		</footer>
+	</article><!-- .item -->
+</div>
+
+<div class="grid ">
+	<article class="item">
+		<span class="desconto">50</span>
+		<figure>
+			<a href="" title="">
+				<img src="{% static 'img/item.jpg' %}" alt="">
+			</a>
+		</figure>
+
+		<section class="content">
+			<p class="descricao">Devore um prato e ganhe 30% de
+		desconto no hambúrguer.</p>
+		</section>
+
+		<footer>
+			<a class="like fl" href="" title="">189</a>
+			<a class="share fr" href="">Compartilhar</a>
+		</footer>
+	</article><!-- .item -->
+</div>
+
+<div class="grid last lastmob">
+	<article class="item">
+		<span class="desconto">60</span>
+		<figure>
+			<a href="" title="">
+				<img src="{% static 'img/item.jpg' %}" alt="">
+			</a>
+		</figure>
+
+		<section class="content">
+			<p class="descricao">Devore um prato e ganhe 30% de
+			desconto no hambúrguer.</p>
+		</section>
+
+		<footer>
+			<a class="like fl" href="" title="">189</a>
+			<a class="share fr" href="">Compartilhar</a>
+		</footer>
+	</article><!-- .item -->
+</div>
+
+<div class="grid lasttv">
+	<article class="item">
+		<span class="desconto">80</span>
+		<figure>
+			<a href="" title="">
+				<img src="{% static 'img/item.jpg' %}" alt="">
+			</a>
+		</figure>
+
+		<section class="content">
+			<p class="descricao">Devore um prato e ganhe 30% de
+			desconto no hambúrguer.</p>
+		</section>
+
+		<footer>
+			<a class="like fl" href="" title="">189</a>
+			<a class="share fr" href="">Compartilhar</a>
+		</footer>
+	</article><!-- .item -->
+</div>
+
+<div class="grid last lastmob">
+	<article class="item">
+		<span class="desconto">30</span>
+		<figure>
+			<a href="" title="">
+				<img src="{% static 'img/item.jpg' %}" alt="">
+			</a>
+		</figure>
+
+		<section class="content">
+			<p class="descricao">Devore um prato e ganhe 30% de
+			desconto no hambúrguer.</p>
+		</section>
+
+		<footer>
+			<a class="like fl" href="" title="">189</a>
+			<a class="share fr" href="">Compartilhar</a>
+		</footer>
+	</article><!-- .item -->
+</div>
