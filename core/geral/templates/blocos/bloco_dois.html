@@ -44,54 +44,6 @@
 	</article><!-- .item -->
 </div>
 
-<div class="grid dois-itens-v lasttv">
-	<article class="item vertical">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item-vertical.jpg' %}" alt="">
-			</a>
-		</figure>
+{% include 'blocos/evento.html' %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-</div>
-
-<div class="grid2 last lastmob lasttv">
-	<article class="item">
-		<span class="desconto">20</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
-			<h2 class="titulo">Giraffas</h2>
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-			<p class="outro">
-				<span class="valor1">de: R$ 459,90 por</span>
-				<span class="valor2"><span>R$</span> <strong>349,90</strong></span>
-
-			</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-
-</div>
+{% include 'blocos/destaque.html' with last_div=True lastmob=True lasttv=True %}

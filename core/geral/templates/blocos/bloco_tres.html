@@ -3,29 +3,7 @@
 <br class="cl">
 <!-- =========================================== -->
 
-<div class="grid2">
-	<article class="item">
-		<span class="desconto">30</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<span class="marca"><img src="{% static 'img/marca.jpg' %}" alt=''></span>
-			<h2 class="titulo">Giraffas</h2>
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-			<p class="outro"><a href="">Devore agora mesmo</a></p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+{% include 'blocos/destaque.html' %}
 
 <div class="grid dois-itens-v">
 	<article class="item">
@@ -67,23 +45,4 @@
 	</article><!-- .item -->
 </div>
 
-<div class="grid last dois-itens-v lasttv">
-	<article class="item vertical">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item-vertical.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+{% include 'blocos/evento.html' with last_div=True lasttv=True %}

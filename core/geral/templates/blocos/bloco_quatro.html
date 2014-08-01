@@ -3,26 +3,7 @@
 <br class="cl">
 <!-- =========================================== -->
 
-<div class="grid dois-itens-v lasttv">
-	<article class="item vertical">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item-vertical.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+{% include 'blocos/evento.html' with lasttv=True %}
 
 <div class="grid ">
 	<article class="item">
