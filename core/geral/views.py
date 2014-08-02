@@ -2,6 +2,7 @@
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404, HttpResponse
 
 from geral.models import Categoria, ImagemOferta, Oferta, Log
 from lojas.models import Loja
@@ -25,6 +26,15 @@ def home(request):
                 'eventos': eventos,
                 'ofertas': ofertas}
     return render(request, "home.html", contexto)
+
+@csrf_exempt
+def mais_ofertas(request):
+    ultimo_destaque = request.POST.get('ultimo_destaque')
+    ultimo_evento = request.GET.get('ultimo_evento')
+    ultima_oferta = request.GET.get('ultima_oferta')
+    if not any([ultimo_destaque,ultimo_evento,ultima_oferta]):
+        raise Http404
+    return
 
 def modal(request, tipo, id_item):
     return
