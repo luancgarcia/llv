@@ -27,6 +27,7 @@ class Command(BaseCommand):
             if cliente:
                 print ' Contectou'
                 shoppings = Shopping.get_publicadas()
+                print ' Iterando sobre %s shoppings' % shoppings.count()
                 for shopping in shoppings:
                     print ' Buscando lojas do %s' % shopping
                     dados = cliente.service.findLoja(codEmpreendimento=shopping.id_multiplan)
