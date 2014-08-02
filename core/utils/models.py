@@ -56,6 +56,10 @@ class EditorialModel(BaseModel):
     class Meta:
         abstract = True
 
+    @classmethod
+    def get_publicadas(cls):
+        return cls.objects.filter(publicada=True)
+
 
 class OrderedModel(BaseModel):
 
