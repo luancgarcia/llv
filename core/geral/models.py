@@ -16,6 +16,9 @@ class Perfil(BaseModel):
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='usuarios',
                              null=True, blank=True)
 
+    def __unicode__(self):
+        return u'%s' % self.user.first_name
+
 
 class Categoria(EditorialModel):
     nome = models.CharField(u'Nome', max_length=100, blank=False, null=True)

@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 
-from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
+from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento, Perfil
 
 
 OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada')
@@ -108,9 +108,15 @@ class ImagemOfertaAdmin(admin.ModelAdmin):
     exclude = ['principal','vertical']
 
 
+class PerfilAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__','loja']
+    list_filter = ['loja__shopping']
+
+
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
 admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log)
+admin.site.register(Perfil, PerfilAdmin)
