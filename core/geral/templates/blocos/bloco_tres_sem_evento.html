@@ -1,1 +1,10 @@
-{% include 'blocos/bloco_um.html' %}
+{% load staticfiles %}
+{% include 'blocos/destaque.html' %}
+
+{% include 'blocos/oferta.html' with oferta=ofertas.8 %}
+
+{% include 'blocos/oferta.html' with oferta=ofertas.9 last_div=True lastmob=True %}
+
+{% include 'blocos/oferta.html' with oferta=ofertas.10 lasttv=True %}
+
+{% include 'blocos/oferta.html' with oferta=ofertas.11 last_div=True lastmob=True %}
