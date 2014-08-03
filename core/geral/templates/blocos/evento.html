@@ -2,7 +2,7 @@
 	<article class="item vertical">
 		<span class="desconto">{{ evento.desconto }}</span>
 		<figure>
-			<a href="" title="">
+			<a href="javascript:;" title="{{evento.loja.nome}}" data-href="{% url 'modal' 'evento' evento.id %}" rel="modal" data-param=560>
 				<img src="{{ evento.imagem }}" alt="{{ evento.descricao }}">
 			</a>
 		</figure>
@@ -12,9 +12,8 @@
 		</section>
 
 		<footer>
-			<a class="like fl" href="" title="">189</a>
+			<a class="like fl" href="" title="">{{ evento.compartilhamentos }}</a>
 			<a class="share fr" href="">Compartilhar</a>
 		</footer>
 	</article><!-- .item -->
-
 </div>

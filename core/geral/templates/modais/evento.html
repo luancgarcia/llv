@@ -2,26 +2,18 @@
 <div class="content fix" id="modalEvento">
 	<div class="colunaProduto fl">
 		<figure id="fotoProduto" class="fix">
-			<span class="desconto">30%</span>
-			<img src="{% static 'img/img-vertical-modal.png' %}" alt="" width="" height="" class="fl">
+			<span class="desconto">{{ evento.desconto }}%</span>
+			<img src="{{ evento.imagem }}" alt="{{ evento.loja.nome }}" width="" height="" class="fl">
 		</figure>
 	</div>
 
 	<div class="colunaDados  fl">
 		<article class="fix">
-			<p class="chapeu">Participe</p>
-			<h2 class="titulo">Dia das Mães Barra Shopping</h2>
-			<p class="descricao">
-				A cada R$ 500,00 em compras você ganha 1 bolsa térmica bem colorida e moderna.
+			<p class="chapeu">{{ evento.texto_do_link }}</p>
+			<h2 class="titulo">{{ evento.titulo }}</h2>
+			<p class="descricao">{{ evento.descricao }}</p>
 
-				<br><br>
-				Você ainda recebe 1 cupom para concorrer a 1 BMW X1.
-
-				<br><br>
-				Consulte o regulamento em nosso site e participe
-			</p>
-
-			<p class="curtidas"><span>2.189 pessoas curtiram essa oferta</span></p>
+			<p class="curtidas"><span>{{ evento.compartilhamentos }} pessoas curtiram essa oferta</span></p>
 
 			<p class="share"><a href="">Compartilhe com seus amigos</a></p>
 
