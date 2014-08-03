@@ -1,0 +1,132 @@
+{% if destaques %}
+	{% include 'blocos/bloco_um.html' with destaque=destaques.0 %}
+	{% if eventos %}
+		{% if destaques.1 %}
+			{% include 'blocos/bloco_dois.html' with destaque=destaques.1 evento=eventos.0 %}
+			{% if destaques.2 %}
+				{% if eventos.1 %}
+					{% include 'blocos/bloco_tres.html' with destaque=destaques.2 evento=eventos.1 %}
+					{% if eventos.2 %}
+						{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=True %}
+					{% else %}
+						{% for oferta in ofertas|slice:"8:" %}
+							<div class="grid {% cycle '' '' '' 'last' %}">
+								<article class="item">
+									<span class="desconto">{{ oferta.desconto }}</span>
+									<figure>
+										<a href="" title="">
+											<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+										</a>
+									</figure>
+
+									<section class="content">
+										<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+									</section>
+
+									<footer>
+										<a class="like fl" href="" title="">189</a>
+										<a class="share fr" href="">Compartilhar</a>
+									</footer>
+								</article><!-- .item -->
+							</div>
+						{% endfor %}
+					{% endif%}
+				{% else %}
+					{% include 'blocos/bloco_tres_sem_evento.html' with destaque=destaques.2 antes=True %}
+					{% for oferta in ofertas|slice:"10:" %}
+						<div class="grid {% cycle '' '' '' 'last' %}">
+							<article class="item">
+								<span class="desconto">{{ oferta.desconto }}</span>
+								<figure>
+									<a href="" title="">
+										<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+									</a>
+								</figure>
+
+								<section class="content">
+									<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+								</section>
+
+								<footer>
+									<a class="like fl" href="" title="">189</a>
+									<a class="share fr" href="">Compartilhar</a>
+								</footer>
+							</article><!-- .item -->
+						</div>
+					{% endfor %}
+				{% endif%}
+			{% else %}
+				{% if eventos.1 %}
+					{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 %}
+				{% endif %}
+			{% endif%}
+		{% else %}
+			{% include 'blocos/bloco_dois_sem_destaque.html' with evento=eventos.0 %}
+		{% endif%}
+	{% else %}
+		{% if destaques.1 %}
+			{% include 'blocos/bloco_dois_sem_evento.html' with destaque=destaques.1 %}
+			{% if destaques.2 %}
+				{% include 'blocos/bloco_tres_sem_evento.html' with destaque=destaques.2 %}
+			{% else %}
+				{% include 'blocos/so_ofertas.html' %}
+			{% endif %}
+		{% else %}
+			{% include 'blocos/so_ofertas.html' %}
+		{% endif %}
+	{% endif %}
+{% elif eventos %}
+	{% include 'blocos/bloco_dois_sem_destaque.html' with evento=eventos.0 sem_destaque=True %}
+	{% if eventos.1 %}
+		{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 sem_destaque=True %}
+	{% else %}
+		{% include 'blocos/so_ofertas.html' %}
+	{% endif%}
+	{% if eventos.2 %}
+		{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=False sem_destaque=True %}
+	{% else %}
+		{% for oferta in ofertas|slice:"15:" %}
+			<div class="grid {% cycle '' '' '' 'last lastmob' %}">
+				<article class="item">
+					<span class="desconto">{{ oferta.desconto }}</span>
+					<figure>
+						<a href="" title="">
+							<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+						</a>
+					</figure>
+
+					<section class="content">
+						<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+					</section>
+
+					<footer>
+						<a class="like fl" href="" title="">189</a>
+						<a class="share fr" href="">Compartilhar</a>
+					</footer>
+				</article><!-- .item -->
+			</div>
+		{% endfor %}
+	{% endif%}
+{% else %}
+	{% for oferta in ofertas %}
+		<div class="grid {% cycle '' '' '' 'last' %}">
+			<article class="item">
+				<span class="desconto">{{ oferta.desconto }}</span>
+				<figure>
+					<a href="" title="">
+						<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+	{% endfor %}
+{% endif %}

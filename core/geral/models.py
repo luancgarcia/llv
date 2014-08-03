@@ -122,7 +122,8 @@ class Oferta(EditorialModel):
             if imagens:
                 imagem = imagens[0].img_376x376.url
 
-        return {'loja': self.loja,
+        return {'id': self.id,
+                'loja': self.loja,
                 'descricao': self.descricao,
                 'porcentagem': self.porcentagem_desconto(),
                 'desconto': self.desconto,

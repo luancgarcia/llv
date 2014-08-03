@@ -23,8 +23,11 @@ def home(request):
 
     contexto = {'lojas': Loja.objects.all(),
                 'destaques': destaques,
+                'ultimo_destaque_id': destaques[::-1][0]['id'],
                 'eventos': eventos,
-                'ofertas': ofertas}
+                'ultimo_evento_id': eventos[::-1][0]['id'],
+                'ofertas': ofertas,
+                'ultima_oferta_id': ofertas[::-1][0]['id']}
     return render(request, "home.html", contexto)
 
 @csrf_exempt
