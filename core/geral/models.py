@@ -107,7 +107,7 @@ class Oferta(EditorialModel):
     def get_ofertas(cls):
         return cls.objects.filter(publicada=True,tipo=cls.OFERTA)
 
-    def to_dict(self):
+    def to_dict(self, modal=False):
         imagem = None
         if self.tipo == Oferta.OFERTA:
             imagens = self.imagens.filter(oferta__tipo=Oferta.OFERTA)
@@ -122,16 +122,25 @@ class Oferta(EditorialModel):
             if imagens:
                 imagem = imagens[0].img_376x376.url
 
-        return {'id': self.id,
-                'loja': self.loja.to_dict(),
-                'descricao': self.descricao,
-                'porcentagem': self.porcentagem_desconto(),
-                'desconto': self.desconto,
-                'preco_final': self.preco_final,
-                'preco_inicial': self.preco_inicial,
-                'texto_do_link': self.texto_link,
-                'chamada_promocional': self.texto_promocional,
-                'imagem': imagem}
+        contexto =  {'id': self.id,
+                     'loja': self.loja.to_dict(),
+                     'descricao': self.descricao,
+                     'porcentagem': self.porcentagem_desconto(),
+                     'desconto': self.desconto,
+                     'preco_final': self.preco_final,
+                     'preco_inicial': self.preco_inicial,
+                     'texto_do_link': self.texto_link,
+                     'chamada_promocional': self.texto_promocional,
+                     'imagem': imagem,
+                     'compartilhamentos': self.total_visto}
+
+        if modal:
+            imagens = [{'maior':img.img_376x376.url,
+                        'menor':img.img_94x94.url} for img in self.imagens.all()]
+            contexto.update({'titulo': self.nome,
+                             'descricao': self.descricao,
+                             'imagens': imagens})
+        return contexto
 
     @classmethod
     def prontos(cls, tipo=OFERTA, from_id=None):
