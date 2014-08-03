@@ -1,10 +1,23 @@
 {% load staticfiles %}
+<!-- =========================================== -->
+<br class="cl">
+<!-- =========================================== -->
 {% include 'blocos/destaque.html' %}
 
-{% include 'blocos/oferta.html' with oferta=ofertas.8 %}
+{% if antes %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.6 %}
 
-{% include 'blocos/oferta.html' with oferta=ofertas.9 last_div=True lastmob=True %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.7 last_div=True lastmob=True %}
 
-{% include 'blocos/oferta.html' with oferta=ofertas.10 lasttv=True %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.8 lasttv=True %}
 
-{% include 'blocos/oferta.html' with oferta=ofertas.11 last_div=True lastmob=True %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.9 last_div=True lastmob=True %}
+{% else %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.8 %}
+
+	{% include 'blocos/oferta.html' with oferta=ofertas.9 last_div=True lastmob=True %}
+
+	{% include 'blocos/oferta.html' with oferta=ofertas.10 lasttv=True %}
+
+	{% include 'blocos/oferta.html' with oferta=ofertas.11 last_div=True lastmob=True %}
+{% endif %}
