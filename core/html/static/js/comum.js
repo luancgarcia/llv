@@ -262,8 +262,27 @@ $(function(){
 $( document ).ready(function() {
 	$(window).scroll(function() {
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
-			console.log("carregar mais");
-			// getData();
+			var container = $('.cl.final');
+			var ultimo_destaque = container.attr('data-destaque');
+			var ultimo_evento = container.attr('data-evento');
+			var ultima_oferta = container.attr('data-oferta');
+			// console.log(ultimo_destaque,ultimo_evento,ultima_oferta);
+			$.ajax({
+	            type: "POST",
+	            url: 'mais_ofertas/',
+	            dataType: "html",
+	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta},
+	            beforeSend: function(){
+	                // console.log("before send");
+	            },
+	            success: function(data) {
+	                $(".grid:last").after(data);
+	            },
+	            error: function(){
+	                console.log("erro enviar");
+	            }
+	       });
+	       return false;
 		}
 	});
 });
