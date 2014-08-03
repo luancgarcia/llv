@@ -2,7 +2,7 @@
 	<article class="item">
 		<span class="desconto">{{ oferta.desconto }}</span>
 		<figure>
-			<a href="" title="">
+			<a href="javascript:;" title="{{oferta.loja.nome}}" data-href="{% url 'modal' 'oferta' oferta.id %}" rel="modal" data-param=786>
 				<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
 			</a>
 		</figure>
@@ -12,7 +12,7 @@
 		</section>
 
 		<footer>
-			<a class="like fl" href="" title="">189</a>
+			<a class="like fl" href="" title="">{{ oferta.compartilhamentos }}</a>
 			<a class="share fr" href="">Compartilhar</a>
 		</footer>
 	</article><!-- .item -->
