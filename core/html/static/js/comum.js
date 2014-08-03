@@ -259,6 +259,15 @@ $(function(){
 
 });
 
+$( document ).ready(function() {
+	$(window).scroll(function() {
+		if($(window).scrollTop() + $(window).height() == $(document).height()) {
+			console.log("carregar mais");
+			// getData();
+		}
+	});
+});
+
 
 
 //FUNCAO PRA ABRIR O LIGHTBOX POR AJAX
