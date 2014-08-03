@@ -17,6 +17,34 @@
 	{% include 'blocos/oferta.html' with oferta=ofertas.12 %}
 
 	{% include 'blocos/oferta.html' with oferta=ofertas.13 last_div=True lastmob=True %}
+{% elif sem_destaque %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.12 %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.13 lastmob=True %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.14 last_div=True %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.15 lastmob=True %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.16 %}
+	{% include 'blocos/oferta.html' with oferta=ofertas.17 last_div=True lastmob=True %}
+	{% for oferta in ofertas|slice:"18:" %}
+		<div class="grid {% cycle '' '' '' 'last lastmob' %}">
+			<article class="item">
+				<span class="desconto">{{ oferta.desconto }}</span>
+				<figure>
+					<a href="" title="">
+						<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+					</a>
+				</figure>
+
+				<section class="content">
+					<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+				</section>
+
+				<footer>
+					<a class="like fl" href="" title="">189</a>
+					<a class="share fr" href="">Compartilhar</a>
+				</footer>
+			</article><!-- .item -->
+		</div>
+	{% endfor %}
 {% else %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.15 %}
 
