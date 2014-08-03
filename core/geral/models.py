@@ -1,13 +1,20 @@
 # -*- encoding: utf-8 -*-
 from datetime import datetime
-
-from django.db import models
-from django.utils.text import slugify
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
+from django.db import models
+from django.utils.text import slugify
+from django.contrib.auth.models import User
+
 from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
 from lojas.models import Loja
+
+
+class Perfil(BaseModel):
+    user = models.ForeignKey(User, related_name='perfil', verbose_name='Usuário')
+    loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='usuarios',
+                             null=True, blank=True)
 
 
 class Categoria(EditorialModel):
