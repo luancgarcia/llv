@@ -33,6 +33,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/orderedmove/(?P<direction>up|down)/(?P<model_type_id>\d+)/(?P<model_id>\d+)/$', 'utils.views.admin_move_ordered_model', name="admin-move"),
 
+    url(r'^mais_ofertas/$', 'geral.views.mais_ofertas', name='mais_ofertas'),
+
     url(r'^$', 'geral.views.home', name='home'),
 )
 
