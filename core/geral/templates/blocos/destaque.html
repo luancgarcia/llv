@@ -13,7 +13,14 @@
 			{% endif %}
 			<h2 class="titulo">{{ destaque.loja.nome }}</h2>
 			<p class="descricao">{{ destaque.chamada_promocional }}</p>
-			<p class="outro"><a href="">{{ destaque.texto_do_link }}</a></p>
+			{% if destaque.texto_do_link %}
+				<p class="outro"><a href="">{{ destaque.texto_do_link }}</a></p>
+			{% else %}
+				<p class="outro">
+					<span class="valor1">de: R$ {{ destaque.preco_inicial }} por</span>
+					<span class="valor2"><span>R$</span> <strong>{{ destaque.preco_final }}</strong></span>
+				</p>
+			{% endif %}
 		</section>
 
 		<footer>
