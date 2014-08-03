@@ -215,10 +215,51 @@
 							{% if eventos.2 %}
 								{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=True %}
 							{% else %}
-								{% include 'blocos/so_ofertas.html' %}
+								{% for oferta in ofertas|slice:"8:" %}
+									<div class="grid {% cycle '' '' '' 'last' %}">
+										<article class="item">
+											<span class="desconto">{{ oferta.desconto }}</span>
+											<figure>
+												<a href="" title="">
+													<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+												</a>
+											</figure>
+
+											<section class="content">
+												<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+											</section>
+
+											<footer>
+												<a class="like fl" href="" title="">189</a>
+												<a class="share fr" href="">Compartilhar</a>
+											</footer>
+										</article><!-- .item -->
+									</div>
+								{% endfor %}
 							{% endif%}
 						{% else %}
 							{% include 'blocos/bloco_tres_sem_evento.html' with destaque=destaques.2 antes=True %}
+							{% for oferta in ofertas|slice:"10:" %}
+								<div class="grid {% cycle '' '' '' 'last' %}">
+									<article class="item">
+										<span class="desconto">{{ oferta.desconto }}</span>
+										<figure>
+											<a href="" title="">
+												<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+											</a>
+										</figure>
+
+										<section class="content">
+											<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+										</section>
+
+										<footer>
+											<a class="like fl" href="" title="">189</a>
+											<a class="share fr" href="">Compartilhar</a>
+										</footer>
+									</article><!-- .item -->
+								</div>
+							{% endfor %}
 						{% endif%}
 					{% endif%}
 				{% else %}
@@ -250,7 +291,27 @@
 			{% endif%}
 			{% include 'blocos/so_ofertas.html' %}
 		{% else %}
-			{% include 'blocos/so_ofertas.html' %}
+			{% for oferta in ofertas %}
+				<div class="grid {% cycle '' '' '' 'last' %}">
+					<article class="item">
+						<span class="desconto">{{ oferta.desconto }}</span>
+						<figure>
+							<a href="" title="">
+								<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+							</a>
+						</figure>
+
+						<section class="content">
+							<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+						</section>
+
+						<footer>
+							<a class="like fl" href="" title="">189</a>
+							<a class="share fr" href="">Compartilhar</a>
+						</footer>
+					</article><!-- .item -->
+				</div>
+			{% endfor %}
 		{% endif %}
 
 	</div>
