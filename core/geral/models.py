@@ -123,7 +123,7 @@ class Oferta(EditorialModel):
                 imagem = imagens[0].img_376x376.url
 
         return {'id': self.id,
-                'loja': self.loja,
+                'loja': self.loja.to_dict(),
                 'descricao': self.descricao,
                 'porcentagem': self.porcentagem_desconto(),
                 'desconto': self.desconto,
@@ -131,7 +131,6 @@ class Oferta(EditorialModel):
                 'preco_inicial': self.preco_inicial,
                 'texto_do_link': self.texto_link,
                 'chamada_promocional': self.texto_promocional,
-                'loja': self.loja.to_dict(),
                 'imagem': imagem}
 
     @classmethod
