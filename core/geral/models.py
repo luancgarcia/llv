@@ -209,7 +209,7 @@ class Log(BaseModel):
         ordering = ['data_criacao',]
 
     def __unicode__(self):
-        return u'%s - %s' % (self.oferta, ACOES[self.acao][1])
+        return u'%s - %s' % (self.oferta, self.ACOES[self.acao-1][1])
 
     @classmethod
     def regitra_acao(cls, oferta, acao):
