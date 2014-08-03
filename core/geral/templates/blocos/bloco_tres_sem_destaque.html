@@ -3,123 +3,43 @@
 <br class="cl">
 <!-- =========================================== -->
 <div class="grid dois-itens-v">
-	<article class="item">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-	<article class="item last">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
+		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.6 %}
+		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.9 last_div=True %}
 </div>
 
 <div class="grid dois-itens-v">
-	<article class="item">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-	<article class="item last">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
+		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.7 %}
+		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.10 last_div=True %}
 </div>
 
 <div class="grid dois-itens-v">
-	<article class="item">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-	<article class="item last">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
+		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.8 %}
+		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.11 last_div=True %}
 </div>
 
 {% include 'blocos/evento.html' with last_div=True lasttv=True %}
+
+{% if not sem_destaque %}
+<!-- seria o so_ofertas abaixo mas nao precisou -->
+{% for oferta in ofertas|slice:"12:" %}
+	<div class="grid {% cycle '' '' '' 'last lastmob' %}">
+		<article class="item">
+			<span class="desconto">{{ oferta.desconto }}</span>
+			<figure>
+				<a href="" title="">
+					<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+				</a>
+			</figure>
+
+			<section class="content">
+				<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+			</section>
+
+			<footer>
+				<a class="like fl" href="" title="">189</a>
+				<a class="share fr" href="">Compartilhar</a>
+			</footer>
+		</article><!-- .item -->
+	</div>
+{% endfor %}
+{% endif %}
