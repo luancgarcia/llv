@@ -132,7 +132,8 @@ class Oferta(EditorialModel):
                      'texto_do_link': self.texto_link,
                      'chamada_promocional': self.texto_promocional,
                      'imagem': imagem,
-                     'compartilhamentos': self.total_visto}
+                     'compartilhamentos': self.total_visto,
+                     'curtidas'; self.total_curtido}
 
         if modal:
             imagens = [{'maior':img.img_376x376.url,
