@@ -135,25 +135,15 @@ class Oferta(EditorialModel):
                 'imagem': imagem}
 
     @classmethod
-    def destaques_prontos(cls):
-        destaques = cls.objects.filter(tipo=cls.DESTAQUE,
-                                       status=cls.PUBLICADO)\
-                               .order_by('-data_aprovacao')
-        return [d.to_dict() for d in destaques[:3]]
-
-    @classmethod
-    def eventos_prontos(cls):
-        eventos = cls.objects.filter(tipo=cls.EVENTO,
-                                     status=cls.PUBLICADO)\
-                             .order_by('-data_aprovacao')
-        return [e.to_dict() for e in eventos[:3]]
-
-    @classmethod
-    def ofertas_prontas(cls):
-        ofertas = cls.objects.filter(tipo=cls.OFERTA,
-                                     status=cls.PUBLICADO)\
-                             .order_by('-data_aprovacao')
-        return [o.to_dict() for o in ofertas[:32]]
+    def prontos(cls, tipo=OFERTA, from_id=None):
+        items = cls.objects.filter(tipo=tipo,
+                                   status=cls.PUBLICADO)\
+                           .order_by('-data_aprovacao')
+        if from_id:
+            items = items.filter(id__gt=from_id)
+        if tipo == cls.OFERTA:
+            return [i.to_dict() for i in items[:32]]
+        return [i.to_dict() for i in items[:3]]
 
 
 class Destaque(Oferta):

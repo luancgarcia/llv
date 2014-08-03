@@ -14,10 +14,10 @@ def slice_oferta(total_destaques, total_eventos):
     return 32 - total_destaques - total_eventos
 
 def home(request):
-    destaques = Oferta.destaques_prontos()
-    eventos = Oferta.eventos_prontos()
+    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE)
+    eventos = Oferta.prontos(tipo=Oferta.EVENTO)
 
-    ofertas = Oferta.ofertas_prontas()
+    ofertas = Oferta.prontos()
     ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
 
