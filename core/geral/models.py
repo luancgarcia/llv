@@ -161,6 +161,10 @@ class Oferta(EditorialModel):
     def total_visto(self):
         return u'%s' % self.logs.filter(acao=Log.CLIQUE).count()
 
+    @property
+    def total_curtido(self):
+        return u'%s' % self.logs.filter(acao=Log.CURTIDA).count()
+
 
 class Destaque(Oferta):
     class Meta:
