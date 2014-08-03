@@ -3,9 +3,10 @@
 from django.contrib import admin
 
 from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento, Perfil
+from lojas.models import Loja
 
 
-OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada')
+OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada',)
 
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada']
@@ -32,9 +33,7 @@ class OfertaAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'status']
-    list_display = ['__unicode__','status']
     readonly_fields = ['desconto']
-    list_editable = ['status']
 
     fieldsets = (
         ('Informações', {
@@ -51,7 +50,24 @@ class OfertaAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(OfertaAdmin, self).queryset(request)
+        if not request.user.is_superuser:
+            qs = qs.filter(loja=request.user.perfil.get().loja)
         return qs.filter(tipo=Oferta.OFERTA)
+
+    def changelist_view(self, request, extra_context=None):
+        self.list_display = ('__unicode__',)
+        if not request.user.is_superuser:
+            self.list_display = self.list_display + ('status_string',)
+            self.list_editable = None
+        else:
+            self.list_display = self.list_display + ('status',)
+            self.list_editable = ('status',)
+        return super(OfertaAdmin, self).changelist_view(request, extra_context)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "loja" and not request.user.is_superuser:
+            kwargs["queryset"] = Loja.objects.filter(id=request.user.perfil.get().loja.id)
+        return super(OfertaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.OFERTA

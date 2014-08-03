@@ -94,6 +94,10 @@ class Oferta(EditorialModel):
     def desconto_value(self):
         return u'%s%%' % self.desconto if self.desconto else ''
 
+    def status_string(self):
+        return u'%s' % Oferta.STATUSES[self.status][1]
+    status_string.short_description = u'Status'
+
     def porcentagem_desconto(self):
         antes = float(self.preco_inicial.replace(',','.'))
         depois = float(self.preco_final.replace(',','.'))
