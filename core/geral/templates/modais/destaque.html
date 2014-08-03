@@ -2,39 +2,43 @@
 <div class="content fix">
 	<div class="colunaProduto fl">
 		<figure id="fotoProduto" class="fix">
-			<span class="desconto">30%</span>
-			<img src="{% static 'img/destaque-modal.png' %}" alt="" width="" height="" class="fl">
+			<span class="desconto">{{ destaque.desconto }}%</span>
+			<img src="{{ destaque.imagem }}" alt="{{ destaque.loja.nome }}" width="" height="" class="fl">
 		</figure>
 	</div>
 
 
 	<div class="colunaDados fl">
 		<article class="fix">
-			<p class="chapeu">Devore agora mesmo</p>
-			<h2 class="titulo">Giraffas</h2>
-			<p class="descricao">Devore um prato e ganhe 30% de desconto no hambúrguer.</p>
+			<p class="chapeu">{{ destaque.texto_do_link }}</p>
+			<h2 class="titulo">{{ destaque.titulo }}</h2>
+			<p class="descricao">{{ destaque.descricao }}</p>
 
-			<p class="preco_anterior">de R$ 499,99</p>
+			<p class="preco_anterior">de R$ {{ destaque.preco_inicial }}/p>
 			<p class="preco_atual">
 				<span class="por">por: </span>
 				<span class="cifrao">R$ </span>
-				<span class="valor">299,99</span>
+				<span class="valor">{{ destaque.preco_final }}</span>
 			</p>
 
 			<section class="qualMarca fix">
 				<div class="box fix">
-					<figure class="fl">
-						<img src="{% static 'img/girafas-modal.png' %}" alt="">
-					</figure>
+					{% if destaque.loja.logo %}
+						<img src="{{ destaque.loja.logo }}" alt="{{ destaque.loja.nome }}">
+					{% else %}
+						{{ destaque.loja.nome }}
+					{% endif %}
+					{% if destaque.loja.telefone %}
 					<p class="fl">
 						<span class="txt">Ligue para a loja </span>
-						<span class="tel">(21) 3322-6719 </span>
+						<span class="tel">{{ destaque.loja.telefone }}</span>
 					</p>
+					{% endif %}
 				</div>
 				<p class="foot">Verificar disponibilidade dos produtos na loja</p>
 			</section>
 
-			<p class="curtidas"><span>2.189 pessoas curtiram essa oferta</span></p>
+			<p class="curtidas"><span>{{ destaque.compartilhamentos }} pessoas curtiram essa oferta</span></p>
 
 			<p class="share"><a href="">Compartilhe com seus amigos</a></p>
 
