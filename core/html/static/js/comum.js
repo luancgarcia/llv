@@ -1,9 +1,7 @@
 largura_window = $(window).width();
 
 $(function(){
-
 	var isiDevice = /ipad|iphone|ipod|android/i.test(navigator.userAgent.toLowerCase());
-
 
 	$("#ico-menu").on({
 		click: function(){
@@ -157,7 +155,7 @@ $(function(){
 	// disparaModalRequest("modais/produto","786","");
 	// disparaModalRequest("modais/destaque","786","");
 	// disparaModalRequest("modais/evento","560","");
-	disparaModalRequest("modais/share","786","share_produto");
+	// disparaModalRequest("modais/share","786","share_produto");
 	// disparaModalRequest("modais/produto.html","786","");
 	//disparaModalRequest("modais/destaque.html","786","");
 	// disparaModalRequest("modais/evento.html","560","");
@@ -168,10 +166,9 @@ $(function(){
 		click: function(){
 			var tamanho = $(this).attr('data-param');
 			var qualclasse = $(this).attr("data-class");
-
-
-
-			disparaModalRequest($(this).attr("href"), tamanho, qualclasse);
+			var url = $(this).attr('data-href')
+			// disparaModalRequest($(this).attr("href"), tamanho, qualclasse);
+			disparaModalRequest(url, tamanho, qualclasse);
 		}
 	});
 
@@ -291,9 +288,6 @@ $( document ).ready(function() {
 
 //FUNCAO PRA ABRIR O LIGHTBOX POR AJAX
 function exibirConteudo(conteudo, tamanho, qualclasse) {
-
-
-
 	$('body').append("<div id='lightbox' class="+qualclasse+">"
 	+"  <div class='mask' data-param='closemodal'></div>"
 	+       "<div class='lightbox' style='width:"+ tamanho +"px; margin-left:-"+ tamanho/2 +"px;'>"
