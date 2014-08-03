@@ -144,6 +144,14 @@ class Oferta(EditorialModel):
             return [i.to_dict() for i in items[:32]]
         return [i.to_dict() for i in items[:3]]
 
+    @property
+    def total_compartilhado(self):
+        return u'%s' % self.logs.filter(acao=Log.COMPARTILHADA).count()
+
+    @property
+    def total_visto(self):
+        return u'%s' % self.logs.filter(acao=Log.CLIQUE).count()
+
 
 class Destaque(Oferta):
     class Meta:
