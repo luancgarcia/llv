@@ -64,4 +64,18 @@ def mais_ofertas(request):
     return render(request, "home-part.html", contexto)
 
 def modal(request, tipo, id_item):
-    return
+    contexto = {}
+    if not tipo in ['oferta','destaque','evento']:
+        raise Http404
+
+    nome_template = "modais/%s.html" % tipo
+
+    item = Oferta.objects.get_or_none(id=id_item)
+    if item:
+        Log.regitra_acao(item, Log.CLIQUE)
+        contexto[tipo] = item.to_dict(modal=True)
+
+    if not contexto:
+        raise Http404
+
+    return render(request, nome_template, contexto)
