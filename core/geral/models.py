@@ -75,7 +75,7 @@ class Oferta(EditorialModel):
     class Meta:
         verbose_name=u'Oferta'
         verbose_name_plural=u'Ofertas'
-        ordering = ['nome']
+        ordering = ['-data_aprovacao','nome']
         unique_together = (('loja','slug'))
 
     def __unicode__(self):
