@@ -44,7 +44,7 @@ class Loja(EditorialModel):
         ordering = ['nome']
 
     def __unicode__(self):
-        return u'%s' % self.nome
+        return u'%s - %s' % (self.nome, self.shopping)
 
     def to_dict(self):
         return {'nome': self.nome,
