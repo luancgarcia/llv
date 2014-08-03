@@ -282,18 +282,37 @@
 				{% endif %}
 			{% endif %}
 		{% elif eventos %}
-			{% include 'blocos/bloco_dois_sem_destaque.html' with evento=eventos.0 %}
+			{% include 'blocos/bloco_dois_sem_destaque.html' with evento=eventos.0 sem_destaque=True %}
 			{% if eventos.1 %}
-				{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 %}
+				{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 sem_destaque=True %}
 			{% else %}
 				{% include 'blocos/so_ofertas.html' %}
 			{% endif%}
 			{% if eventos.2 %}
-				{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=False %}
+				{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=False sem_destaque=True %}
 			{% else %}
-				{% include 'blocos/so_ofertas.html' %}
+				{% for oferta in ofertas|slice:"15:" %}
+					<div class="grid {% cycle '' '' '' 'last lastmob' %}">
+						<article class="item">
+							<span class="desconto">{{ oferta.desconto }}</span>
+							<figure>
+								<a href="" title="">
+									<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+								</a>
+							</figure>
+
+							<section class="content">
+								<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+							</section>
+
+							<footer>
+								<a class="like fl" href="" title="">189</a>
+								<a class="share fr" href="">Compartilhar</a>
+							</footer>
+						</article><!-- .item -->
+					</div>
+				{% endfor %}
 			{% endif%}
-			{% include 'blocos/so_ofertas.html' %}
 		{% else %}
 			{% for oferta in ofertas %}
 				<div class="grid {% cycle '' '' '' 'last' %}">
