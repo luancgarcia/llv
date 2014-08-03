@@ -4,128 +4,89 @@
 <!-- =========================================== -->
 
 <!-- coluna com dois itens verticais -->
+{% if not sem_destaque %}
 <div class="grid dois-itens-v">
-	<article class="item">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.4 %}
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-
-	<article class="item last">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.5 last_div=True %}
 </div>
+{% else %}
+<div class="grid dois-itens-v">
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.0 %}
+
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.1 last_div=True %}
+</div>
+{% endif %}
 
 {% include 'blocos/evento.html' with lasttv=True %}
 
-<div class="grid ">
-	<article class="item">
-		<span class="desconto">50</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+{% if not sem_destaque %}
+{% for oferta in ofertas|slice:"6:10" %}
+	<div class="grid {% cycle '' 'last lastmob' 'lasttv' 'last lastmob' %}">
+		<article class="item">
+			<span class="desconto">{{ oferta.desconto }}</span>
+			<figure>
+				<a href="" title="">
+					<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+				</a>
+			</figure>
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-		desconto no hambúrguer.</p>
-		</section>
+			<section class="content">
+				<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+			</section>
 
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+			<footer>
+				<a class="like fl" href="" title="">189</a>
+				<a class="share fr" href="">Compartilhar</a>
+			</footer>
+		</article><!-- .item -->
+	</div>
+{% endfor %}
+{% else %}
+{% for oferta in ofertas|slice:"2:6" %}
+	<div class="grid {% cycle '' 'last lastmob' 'lasttv' 'last lastmob' %}">
+		<article class="item">
+			<span class="desconto">{{ oferta.desconto }}</span>
+			<figure>
+				<a href="" title="">
+					<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+				</a>
+			</figure>
 
-<div class="grid last lastmob">
-	<article class="item">
-		<span class="desconto">60</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+			<section class="content">
+				<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+			</section>
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
+			<footer>
+				<a class="like fl" href="" title="">189</a>
+				<a class="share fr" href="">Compartilhar</a>
+			</footer>
+		</article><!-- .item -->
+	</div>
+{% endfor %}
+{% endif %}
 
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+{% if not sem_destaque %}
+<!-- seria o so_ofertas abaixo mas nao precisou -->
+{% for oferta in ofertas|slice:"10:" %}
+	<div class="grid {% cycle '' '' '' 'last lastmob' %}">
+		<article class="item">
+			<span class="desconto">{{ oferta.desconto }}</span>
+			<figure>
+				<a href="" title="">
+					<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
+				</a>
+			</figure>
 
-<div class="grid lasttv">
-	<article class="item">
-		<span class="desconto">80</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
+			<section class="content">
+				<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
+			</section>
 
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
-
-<div class="grid last lastmob">
-	<article class="item">
-		<span class="desconto">30</span>
-		<figure>
-			<a href="" title="">
-				<img src="{% static 'img/item.jpg' %}" alt="">
-			</a>
-		</figure>
-
-		<section class="content">
-			<p class="descricao">Devore um prato e ganhe 30% de
-			desconto no hambúrguer.</p>
-		</section>
-
-		<footer>
-			<a class="like fl" href="" title="">189</a>
-			<a class="share fr" href="">Compartilhar</a>
-		</footer>
-	</article><!-- .item -->
-</div>
+			<footer>
+				<a class="like fl" href="" title="">189</a>
+				<a class="share fr" href="">Compartilhar</a>
+			</footer>
+		</article><!-- .item -->
+	</div>
+{% endfor %}
+{% endif %}
