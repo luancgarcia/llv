@@ -76,6 +76,8 @@ class OfertaAdmin(admin.ModelAdmin):
             antes = float(obj.preco_inicial.replace(',','.'))
             depois = float(obj.preco_final.replace(',','.'))
             obj.desconto = int(100-(100*int(depois)/int(antes)))
+        if request.user.is_superuser:
+            obj.status = Oferta.PUBLICADO
         obj.save()
 
 
