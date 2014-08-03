@@ -211,3 +211,7 @@ class Log(BaseModel):
     def __unicode__(self):
         return u'%s - %s' % (self.oferta, ACOES[self.acao][1])
 
+    @classmethod
+    def regitra_acao(cls, oferta, acao):
+        cls.objects.create(oferta=oferta,acao=acao)
+
