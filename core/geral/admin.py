@@ -131,10 +131,14 @@ class PerfilAdmin(admin.ModelAdmin):
     list_filter = ['loja__shopping']
 
 
+class LogAdmin(admin.ModelAdmin):
+    list_filter = ['acao']
+
+
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
 admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
-admin.site.register(Log)
+admin.site.register(Log, LogAdmin)
 admin.site.register(Perfil, PerfilAdmin)
