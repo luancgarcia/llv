@@ -130,3 +130,6 @@
 		</div>
 	{% endfor %}
 {% endif %}
+{% if ultimo_destaque_id or ultimo_evento_id or ultima_oferta_id %}
+<br class="cl final" data-destaque="{{ ultimo_destaque_id }}" data-evento="{{ ultimo_evento_id }}" data-oferta="{{ ultima_oferta_id }}">
+{% endif %}
