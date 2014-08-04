@@ -179,6 +179,29 @@ $(function(){
 		}
 	}, "[data-param='closemodal']");
 
+	$("a.like").on({
+		click: function(){
+			var link = $(this);
+			var id_item = link.attr("data-id");
+			$.ajax({
+	            type: "POST",
+	            url: 'curtir/',
+	            dataType: "json",
+	            data: {id_item: id_item},
+	            beforeSend: function(){
+	                // console.log("before send");
+	            },
+	            success: function(data) {
+	                link.text(data.total);
+	            },
+	            error: function(){
+	                console.log("erro curtir");
+	            }
+	       });
+	       return false;
+		}
+	});
+
 	$(document.body).on({
 		click: function(){
 			var thumb = $(this);
