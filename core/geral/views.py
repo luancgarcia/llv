@@ -6,7 +6,7 @@ from django.http import Http404, HttpResponse
 
 from utils.functions import jsonResponse
 
-from geral.models import Categoria, ImagemOferta, Oferta, Log
+from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara
 from lojas.models import Loja
 
 
@@ -95,13 +95,14 @@ def curtir(request):
 
 @csrf_exempt
 def modal_share(request, id_item):
-    # if not request.is_ajax():
-        # raise Http404
+    if not request.is_ajax():
+        raise Http404
 
     item = Oferta.objects.get(id=id_item)
     imagem = item.imagens.all()[:1].get()
     contexto = {'item': item.to_dict(modal=True),
                 'imagem_url': imagem.img_376x376.url,
-                'imagem_id': imagem.id}
+                'imagem_id': imagem.id,
+                'mascaras': Mascara.serializado()}
 
     return render(request, "modais/share.html", contexto)
