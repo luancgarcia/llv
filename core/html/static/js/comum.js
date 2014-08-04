@@ -179,6 +179,7 @@ $(function(){
 		}
 	}, "[data-param='closemodal']");
 
+	// curtir
 	$("a.like").on({
 		click: function(){
 			var link = $(this);
@@ -244,12 +245,11 @@ $(function(){
 	}, "#ShareProduto .col-opcoes .abas li a");
 
 	//poe a foto por cima
-
 	$(document.body).on({
 		click: function(){
 			var foto = $(this);
 			var foto_gd = foto.attr("data-src");
-
+			var foto_id = foto.attr("data-mask");
 			var box_foto = $("#foto-share .sec");
 
 			$("#ShareProduto .col-opcoes .content-opcoes li a").removeClass("ativo");
@@ -258,6 +258,8 @@ $(function(){
 			$("#foto-share .sec").remove();
 
 			$("#foto-share  div").append("<img src='"+foto_gd+"' class='sec'>");
+
+			$(".bt-share").attr("data-mask",foto_id);
 
 			box_foto.attr("src", foto_gd).show();
 
