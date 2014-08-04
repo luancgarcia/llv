@@ -241,3 +241,15 @@ class Log(BaseModel):
     def regitra_acao(cls, oferta, acao):
         cls.objects.create(oferta=oferta,acao=acao)
 
+
+class Mascara(EditorialModel):
+    imagem = models.ImageField(u'Imagem', upload_to='mascaras',
+                               null=True, blank=True)
+    img_376x376 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
+                                 resize.ResizeToFill(376, 376)],
+                                 source='imagem', format='PNG',
+                                 options={'quality': 90})
+
+    class Meta:
+        verbose_name = u'Imagem para compartilhar'
+        verbose_name_plural = u'Imagens para compartilhar'
