@@ -259,3 +259,9 @@ class Mascara(EditorialModel):
     class Meta:
         verbose_name = u'Imagem para compartilhar'
         verbose_name_plural = u'Imagens para compartilhar'
+
+    @classmethod
+    def serializado(cls):
+        return [{'id': i.id,
+                 'imagem': i.img_376x376.url,
+                 'thumb': i.thumb_98x98.url} for i in cls.get_publicadas()]
