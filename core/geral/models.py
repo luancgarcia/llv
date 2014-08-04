@@ -141,7 +141,7 @@ class Oferta(EditorialModel):
                      'imagem': imagem,
                      'compartilhamentos': self.total_visto,
                      'curtidas': self.total_curtido,
-                     'categoria': self.categoria.to_dict()}
+                     'categoria': self.categoria.to_dict() if self.categoria else None}
 
         if modal:
             imagens = [{'maior':img.img_376x376.url,
