@@ -249,7 +249,7 @@ class Mascara(EditorialModel):
                                  resize.ResizeToFill(376, 376)],
                                  source='imagem', format='PNG',
                                  options={'quality': 90})
-    thumb = models.ImageField(u'Imagem', upload_to='mascaras',
+    thumb = models.ImageField(u'Thumbnail', upload_to='mascaras',
                                null=True, blank=True)
     thumb_98x98 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(98, 98)],
