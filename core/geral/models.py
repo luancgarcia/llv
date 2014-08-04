@@ -33,6 +33,11 @@ class Categoria(EditorialModel):
     def __unicode__(self):
         return u'%s' % self.nome
 
+    def to_dict(self):
+        return {'id': self.id,
+                'nome': self.nome,
+                'slug': self.slug}
+
 
 class Oferta(EditorialModel):
     OFERTA = 0
@@ -56,6 +61,8 @@ class Oferta(EditorialModel):
 
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
+    categoria = models.ForeignKey(Categoria, verbose_name=u'Categoria', null=True,
+                                  blank=True, related_name='ofertas')
     nome = models.CharField(u'Título', max_length=200, null=True, blank=True)
     slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
@@ -133,7 +140,8 @@ class Oferta(EditorialModel):
                      'chamada_promocional': self.texto_promocional,
                      'imagem': imagem,
                      'compartilhamentos': self.total_visto,
-                     'curtidas': self.total_curtido}
+                     'curtidas': self.total_curtido,
+                     'categoria': self.categoria.to_dict()}
 
         if modal:
             imagens = [{'maior':img.img_376x376.url,
