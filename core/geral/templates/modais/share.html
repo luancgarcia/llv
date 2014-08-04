@@ -27,7 +27,7 @@
 			<footer class="fix cl">
 				<a href="javascript:;" class="bt-reset fl">Limpar foto</a>
 
-				<a href="javascript:;" class="bt-share fr">Compartilhe com seus amigos</a>
+				<a href="javascript:;" class="bt-share fr" data-base="{{imagem_id}}" data-mask="">Compartilhe com seus amigos</a>
 
 			</footer>
 
@@ -37,46 +37,13 @@
 			<nav class="abas">
 				<ul>
 					<li class="fl ativo"><a href="javascript;;" data-aba="aba-1">DIA-A-DIA</a></li>
-					<li class="fl"><a href="javascript;;"  data-aba="aba-2">DIA DOS NAMORADOS</a></li>
 				</ul>
 			</nav>
 			<section class="fix content-opcoes">
 				<ul data-box="aba-1">
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/meu-aniversario-gd.png"><img src="static/img/meu-aniversario-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-				</ul>
-
-				<ul data-box="aba-2" class="off">
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
-					<li class="fl"><a href="javascript:;" data-src="static/img/keep-calm-gd.png"><img src="static/img/keep-calm-thumb.png" alt=""></a></li>
+				{% for mascara in mascaras %}
+					<li class="fl"><a href="javascript:;" data-src="{{ mascara.imagem }}" data-mask="{{mascara.id}}"><img src="{{ mascara.thumb }}" alt=""></a></li>
+				{% endfor %}
 				</ul>
 			</section>
 		</div>
