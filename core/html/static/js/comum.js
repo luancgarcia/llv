@@ -274,6 +274,8 @@ $(function(){
 
 			foto_clear.remove();
 
+			$(".bt-share").attr("data-mask","");
+
 			return false;
 		}
 
