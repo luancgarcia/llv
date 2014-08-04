@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404, HttpResponse
 
+from utils.functions import jsonResponse
+
 from geral.models import Categoria, ImagemOferta, Oferta, Log
 from lojas.models import Loja
 
@@ -79,3 +81,14 @@ def modal(request, tipo, id_item):
         raise Http404
 
     return render(request, nome_template, contexto)
+
+@csrf_exempt
+def curtir(request):
+    id_item = request.POST.get('id_item')
+    if not id_item and not request.is_ajax():
+        raise Http404
+
+    item = Oferta.objects.get(id=id_item)
+    Log.objects.create(acao=Log.CURTIDA,oferta=item)
+
+    return jsonResponse({'total': item.total_curtido})

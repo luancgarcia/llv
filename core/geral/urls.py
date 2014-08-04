@@ -19,6 +19,8 @@ urlpatterns = patterns('',
         'geral.views.modal',
         name='modal'),
 
+    url(r'^curtir/$', 'geral.views.curtir', name='curtir'),
+
     # url(r'^modais/destaque/(?P<id_item>\d+)/$',
     #     'geral.views.modal',
     #     name='modal_destaque'),
