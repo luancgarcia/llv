@@ -19,6 +19,10 @@ urlpatterns = patterns('',
         'geral.views.modal',
         name='modal'),
 
+    url(r'^compartilhar/(?P<id_item>\d+)/$',
+        'geral.views.modal_share',
+        name='modal_share'),
+
     url(r'^curtir/$', 'geral.views.curtir', name='curtir'),
 
     # url(r'^modais/destaque/(?P<id_item>\d+)/$',
@@ -29,9 +33,9 @@ urlpatterns = patterns('',
     #     'geral.views.modal',
     #     name='modal_evento'),
 
-    url(r'^modais/share',
-        'html.views.html_modal_share',
-        name='html_modal_share'),
+    # url(r'^modais/share',
+    #     'html.views.html_modal_share',
+    #     name='html_modal_share'),
 
     url(r'^admin/orderedmove/(?P<direction>up|down)/(?P<model_type_id>\d+)/(?P<model_id>\d+)/$', 'utils.views.admin_move_ordered_model', name="admin-move"),
 

@@ -92,3 +92,16 @@ def curtir(request):
     Log.objects.create(acao=Log.CURTIDA,oferta=item)
 
     return jsonResponse({'total': item.total_curtido})
+
+@csrf_exempt
+def modal_share(request, id_item):
+    # if not request.is_ajax():
+        # raise Http404
+
+    item = Oferta.objects.get(id=id_item)
+    imagem = item.imagens.all()[:1].get()
+    contexto = {'item': item.to_dict(modal=True),
+                'imagem_url': imagem.img_376x376.url,
+                'imagem_id': imagem.id}
+
+    return render(request, "modais/share.html", contexto)
