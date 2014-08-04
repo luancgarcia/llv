@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 
-from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento, Perfil
+from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento, Perfil, Mascara
 from lojas.models import Loja
 
 
@@ -142,3 +142,4 @@ admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log, LogAdmin)
 admin.site.register(Perfil, PerfilAdmin)
+admin.site.register(Mascara)
