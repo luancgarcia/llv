@@ -31,6 +31,8 @@ MANAGERS = ADMINS = (
     ('Luan Garcia', 'contato@luangarcia.com'),
 )
 
+SITE_URL = "https://apps.facebook.com/llv-dev/"
+
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 
@@ -134,7 +136,14 @@ USE_TZ = False
 
 AUTH_PROFILE_MODULE = 'geral.Perfil'
 
+FACEBOOK_APP_ID = "698128933600347"
+FACEBOOK_APP_SECRET = "af6ed6874f6e259644ad69b62b8ffc4f"
+
 WSDL_URL = 'http://wiseit.multiplan.com.br:8080/WebService2/services/wiseitws?wsdl'
+
+COMPARTILHADAS_PASTA = os.path.join(MEDIA_ROOT, 'compartilhar')
+COMPARTILHADAS_URL = SITE_URL+'/media/compartilhar'
+
 
 try:
     from custom_settings import *
