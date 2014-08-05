@@ -130,7 +130,7 @@ class Oferta(EditorialModel):
                 imagem = imagens[0].img_376x376.url
 
         contexto =  {'id': self.id,
-                     'loja': self.loja.to_dict(),
+                     'loja': self.loja.to_dict() if self.loja else None,
                      'descricao': self.descricao,
                      'porcentagem': self.porcentagem_desconto(),
                      'desconto': self.desconto,
