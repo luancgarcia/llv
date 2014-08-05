@@ -88,6 +88,17 @@ class Oferta(EditorialModel):
         (EXPIRADO, u'Expirado'),
     )
 
+    MASCULINO =0
+    FEMININO = 1
+    INFANTIL = 2
+    UNISSEX = 3
+    GENEROS = (
+        (MASCULINO, u'Masculino'),
+        (FEMININO, u'Feminino'),
+        (INFANTIL,u'Infantil'),
+        (UNISSEX,u'Unissex'),
+    )
+
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
     categoria = models.ForeignKey(Categoria, verbose_name=u'Categoria', null=True,
@@ -107,6 +118,8 @@ class Oferta(EditorialModel):
     texto_link = models.CharField(u'Texto do link', max_length="140", null=True, blank=True)
     status = models.IntegerField(u'Status', choices=STATUSES, default=PENDENTE)
     data_aprovacao = models.DateTimeField(u"Data de aprovação", null=True)
+    genero = models.IntegerField(u'Gênero', choices=GENEROS, default=UNISSEX,
+                                 null=True, blank=False)
 
     class Meta:
         verbose_name=u'Oferta'
