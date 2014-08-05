@@ -32,6 +32,20 @@ class Perfil(BaseModel):
         return u'%s' % self.user.first_name
 
 
+class PerfilMarketing(Perfil):
+    class Meta:
+        proxy = True
+        verbose_name = u'Perfil Marketing'
+        verbose_name_plural = u'Perfis Marketing'
+
+
+class PerfilLojista(Perfil):
+    class Meta:
+        proxy = True
+        verbose_name = u'Perfil Lojista'
+        verbose_name_plural = u'Perfis Lojistas'
+
+
 class Categoria(EditorialModel):
     shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping',
                                  related_name='categorias', null=True, blank=True)

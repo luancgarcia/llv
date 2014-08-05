@@ -2,7 +2,8 @@
 
 from django.contrib import admin
 
-from geral.models import Categoria, Oferta, ImagemOferta, Log, Destaque, Evento, Perfil, Mascara
+from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
+                          Mascara, PerfilMarketing, PerfilLojista)
 from lojas.models import Loja
 
 
@@ -126,9 +127,32 @@ class ImagemOfertaAdmin(admin.ModelAdmin):
     exclude = ['principal','vertical']
 
 
-class PerfilAdmin(admin.ModelAdmin):
-    list_display = ['__unicode__','loja']
+class PerfilMktAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__','shopping']
+    exclude = ['loja']
     list_filter = ['loja__shopping']
+
+    def queryset(self, request):
+        qs = super(PerfilMktAdmin, self).queryset(request)
+        return qs.filter(tipo=PerfilMarketing.MARKETING)
+
+    def save_model(self, request, obj, form, change):
+        obj.tipo = PerfilMarketing.MARKETING
+        obj.save()
+
+
+class PerfilLojistaAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__','loja']
+    exclude = ['shopping']
+    list_filter = ['loja__shopping']
+
+    def queryset(self, request):
+        qs = super(PerfilLojistaAdmin, self).queryset(request)
+        return qs.filter(tipo=PerfilMarketing.LOJISTA)
+
+    def save_model(self, request, obj, form, change):
+        obj.tipo = PerfilMarketing.LOJISTA
+        obj.save()
 
 
 class LogAdmin(admin.ModelAdmin):
@@ -141,5 +165,6 @@ admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log, LogAdmin)
-admin.site.register(Perfil, PerfilAdmin)
+admin.site.register(PerfilMarketing, PerfilMktAdmin)
+admin.site.register(PerfilLojista, PerfilLojistaAdmin)
 admin.site.register(Mascara)
