@@ -1,8 +1,12 @@
 # -*- encoding: utf-8 -*-
 
+import os
+from PIL import Image
+
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404, HttpResponse
+from django.conf import settings
 
 from utils.functions import jsonResponse
 
@@ -106,3 +110,38 @@ def modal_share(request, id_item):
                 'mascaras': Mascara.serializado()}
 
     return render(request, "modais/share.html", contexto)
+
+@csrf_exempt
+def mesclar(request):
+    imagem_id = request.POST.get('imagem_id', None)
+    mascara_id = request.POST.get('mascara_id', None)
+    id_item = request.POST.get('id_item', None)
+
+    if not all([imagem_id,mascara_id,id_item]):
+        raise Http404
+
+    item = Oferta.objects.get(id=id_item)
+    imagem = ImagemOferta.objects.get(id=imagem_id)
+    mascara = Mascara.objects.get(id=mascara_id)
+
+    background_arquivo = '%s%s' % (settings.PROJECT_DIR, imagem.img_376x376.url)
+    background = Image.open(background_arquivo)
+    foreground_arquivo = '%s%s' % (settings.PROJECT_DIR, mascara.img_376x376.url)
+    foreground = Image.open(foreground_arquivo)
+    background.paste(foreground, (0, 0), foreground)
+
+    arquivo = '%s_%s_%s.png' % (id_item, imagem_id, mascara_id)
+    destino = os.path.join(settings.COMPARTILHADAS_PASTA, arquivo)
+    destino_url = '%s%s' % (settings.COMPARTILHADAS_URL, arquivo)
+
+    try:
+        background.save(destino)
+    except Exception, e:
+        raise e
+
+    item_dict = item.to_dict(modal=True)
+    contexto = {'titulo': item_dict['titulo'],
+                'descricao': item_dict['chamada_promocional'],
+                'imagem': destino_url}
+
+    return jsonResponse(contexto)

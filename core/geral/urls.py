@@ -24,6 +24,7 @@ urlpatterns = patterns('',
         name='modal_share'),
 
     url(r'^curtir/$', 'geral.views.curtir', name='curtir'),
+    url(r'^mesclar/$', 'geral.views.mesclar', name='mesclar'),
 
     # url(r'^modais/destaque/(?P<id_item>\d+)/$',
     #     'geral.views.modal',
