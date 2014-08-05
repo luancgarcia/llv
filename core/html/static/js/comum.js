@@ -299,7 +299,7 @@ $(function(){
 	            },
 	            success: function(data) {
 	                finalUrl = encodeURIComponent("https://apps.facebook.com/llv-dev/");
-	                finalImagem = encodeURI(data.imagem;
+	                finalImagem = encodeURI(data.imagem);
 	                var finalMensagem = '&tt='+data.titulo+'&dp='+data.descricao+'&url='+finalUrl+'&img='+finalImagem;
 	                var shareUrl = 'http://www.facebook.com/share.php?u='+finalUrl+finalMensagem;
 	                window.open(shareUrl,"pop"," scrollbars=0, statusbar=no, menubar=no, titlebar=no, resizable=no, toolbar=no");
