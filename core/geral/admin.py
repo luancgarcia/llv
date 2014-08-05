@@ -129,8 +129,8 @@ class ImagemOfertaAdmin(admin.ModelAdmin):
 
 class PerfilMktAdmin(admin.ModelAdmin):
     list_display = ['__unicode__','shopping']
-    exclude = ['loja']
-    list_filter = ['loja__shopping']
+    exclude = ['loja','tipo']
+    list_filter = ['shopping__nome']
 
     def queryset(self, request):
         qs = super(PerfilMktAdmin, self).queryset(request)
@@ -143,7 +143,7 @@ class PerfilMktAdmin(admin.ModelAdmin):
 
 class PerfilLojistaAdmin(admin.ModelAdmin):
     list_display = ['__unicode__','loja']
-    exclude = ['shopping']
+    exclude = ['shopping','tipo']
     list_filter = ['loja__shopping']
 
     def queryset(self, request):

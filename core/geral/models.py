@@ -29,7 +29,7 @@ class Perfil(BaseModel):
                                blank=True, null=True)
 
     def __unicode__(self):
-        return u'%s' % self.user.first_name
+        return u'%s' % self.user
 
 
 class PerfilMarketing(Perfil):
