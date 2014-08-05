@@ -298,11 +298,18 @@ $(function(){
 	                // console.log("before send");
 	            },
 	            success: function(data) {
-	                finalUrl = encodeURIComponent("https://apps.facebook.com/llv-dev/");
-	                finalImagem = encodeURI(data.imagem);
-	                var finalMensagem = '&tt='+data.titulo+'&dp='+data.descricao+'&url='+finalUrl+'&img='+finalImagem;
-	                var shareUrl = 'http://www.facebook.com/share.php?u='+finalUrl+finalMensagem;
-	                window.open(shareUrl,"pop"," scrollbars=0, statusbar=no, menubar=no, titlebar=no, resizable=no, toolbar=no");
+	                // finalUrl = encodeURIComponent("https://apps.facebook.com/llv-dev/");
+	                // finalImagem = encodeURI(data.imagem);
+	                // var finalMensagem = '&tt='+data.titulo+'&dp='+data.descricao+'&url='+finalUrl+'&img='+finalImagem;
+	                // var shareUrl = 'http://www.facebook.com/share.php?u='+finalUrl+finalMensagem;
+	                FB.ui({
+					  method: 'feed',
+					  link: "https://apps.facebook.com/llv-dev/",
+					  caption: data.titulo,
+					  description: data.descricao,
+					  picture: data.imagem,
+					}, function(response){});
+	                // window.open(shareUrl,"pop"," scrollbars=0, statusbar=no, menubar=no, titlebar=no, resizable=no, toolbar=no");
 	                return false;
 	            },
 	            error: function(){
