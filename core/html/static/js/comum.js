@@ -281,6 +281,39 @@ $(function(){
 
 	}, '#ShareProduto .bt-reset');
 
+	// Compartilhar
+	$(document.body).on({
+		click: function(){
+			var botao_share = $('#ShareProduto .bt-share');
+			var imagem_id = botao_share.attr("data-base");
+			var mascara_id = botao_share.attr("data-mask");
+			var id_item = botao_share.attr("data-id");
+
+			$.ajax({
+	            type: "POST",
+	            url: 'mesclar/',
+	            dataType: "json",
+	            data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
+	            beforeSend: function(){
+	                // console.log("before send");
+	            },
+	            success: function(data) {
+	                finalUrl = encodeURIComponent("https://apps.facebook.com/llv-dev/");
+	                finalImagem = encodeURI(data.imagem;
+	                var finalMensagem = '&tt='+data.titulo+'&dp='+data.descricao+'&url='+finalUrl+'&img='+finalImagem;
+	                var shareUrl = 'http://www.facebook.com/share.php?u='+finalUrl+finalMensagem;
+	                window.open(shareUrl,"pop"," scrollbars=0, statusbar=no, menubar=no, titlebar=no, resizable=no, toolbar=no");
+	                return false;
+	            },
+	            error: function(){
+	                console.log("erro mesclar");
+	            }
+	       });
+	       return false;
+		}
+
+	}, '#ShareProduto .bt-share');
+
 });
 
 $( document ).ready(function() {
