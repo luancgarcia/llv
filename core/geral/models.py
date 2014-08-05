@@ -12,9 +12,21 @@ from lojas.models import Loja, Shopping
 
 
 class Perfil(BaseModel):
+    LOJISTA = 0
+    MARKETING = 1
+
+    TIPOS = (
+        (LOJISTA, u'Lojista'),
+        (MARKETING, u'Marketing')
+    )
+
     user = models.ForeignKey(User, related_name='perfil', verbose_name='Usuário')
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='usuarios',
                              null=True, blank=True)
+    shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping',
+                                 related_name='usuarios', null=True, blank=True)
+    tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=LOJISTA,
+                               blank=True, null=True)
 
     def __unicode__(self):
         return u'%s' % self.user.first_name
