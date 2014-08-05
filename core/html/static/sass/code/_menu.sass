@@ -19,7 +19,7 @@
 			height: 27px
 			position: relative
 			float: left
-			.lnk 	
+			.lnk
 				display: block
 				background: url(#{$url-img}/seta-menu.png) no-repeat right top
 				line-height: 27px
@@ -35,7 +35,7 @@
 			&.dia-namorados
 				background: url(#{$url-img}/bg-dia-dos-namorados.png) repeat-x 0 0
 				float: right
-				
+
 				text-align: center
 
 				a
@@ -45,8 +45,8 @@
 					color: $cor-10
 					font:
 						family: $roboto
-						size: 1.4em		
-					padding: 0 20px	
+						size: 1.4em
+					padding: 0 20px
 			.submenu
 				display: none
 				position: absolute
@@ -54,7 +54,6 @@
 				left: -1px
 				background-color: $cor-10
 				width: 360px
-				padding: 10px
 				z-index: 10
 				@include box-shadow(1px, 1px,  2px, 0, $cor-21)
 				border: 1px solid $cor-26
@@ -80,6 +79,9 @@
 						display: block
 						color: $cor-24
 						padding-left: 15px
+						text-overflow: ellipsis
+						white-space: nowrap
+						overflow: hidden
 
 						&:hover
 							color: $cor-25
@@ -105,10 +107,10 @@
 					position: relative
 					z-index: 20
 					border: 1px solid $cor-26
-					border-bottom: none	
+					border-bottom: none
 
 				.submenu
 					display: block
 
-			
+
 
