@@ -8,7 +8,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
-from lojas.models import Loja
+from lojas.models import Loja, Shopping
 
 
 class Perfil(BaseModel):
@@ -21,6 +21,8 @@ class Perfil(BaseModel):
 
 
 class Categoria(EditorialModel):
+    shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping',
+                                 related_name='categorias', null=True, blank=True)
     nome = models.CharField(u'Nome', max_length=100, blank=False, null=True)
     slug = models.SlugField(max_length=150, blank=False, null=False, unique=True)
     default = models.BooleanField(u'Categoria default?', default=False)
@@ -31,7 +33,8 @@ class Categoria(EditorialModel):
         ordering = ['nome']
 
     def __unicode__(self):
-        return u'%s' % self.nome
+        shopping = ' (%s)' % self.shopping.nome if self.shopping else ''
+        return u'%s%s' % (self.nome, shopping)
 
     def to_dict(self):
         return {'id': self.id,
