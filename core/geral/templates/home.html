@@ -103,25 +103,10 @@
 							<a class="lnk" href="javascript:;">Categorias</a>
 							<div class="submenu fix">
 								<ul>
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
+									{% for categoria in categorias %}
+									<li class="{% cycle '' 'mid' '' %}{% if forloop.last %} last{% endif %}"><a href="?categoria={{categoria.id}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									{% endfor %}
 
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li class="last"><a href="">item 1</a></li>
-									<li class="mid last"><a href="">item 2</a></li>
-									<li class="last"><a href="">item 3</a></li>
 								</ul>
 							</div>
 						</li>

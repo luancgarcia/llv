@@ -40,7 +40,8 @@ def home(request):
                 'eventos': eventos,
                 'ultimo_evento_id': ultimo_id(eventos),
                 'ofertas': ofertas,
-                'ultima_oferta_id': ultimo_id(ofertas)}
+                'ultima_oferta_id': ultimo_id(ofertas),
+                'categorias': Categoria.get_publicadas()}
     return render(request, "home.html", contexto)
 
 @csrf_exempt
