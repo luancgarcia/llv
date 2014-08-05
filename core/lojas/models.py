@@ -16,6 +16,7 @@ class Shopping(EditorialModel):
     class Meta:
         verbose_name=u'Shopping'
         verbose_name_plural=u'Shoppings'
+        ordering = ['nome']
 
     def __unicode__(self):
         return u'%s' % self.nome
