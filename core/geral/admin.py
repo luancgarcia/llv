@@ -38,7 +38,7 @@ class OfertaAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Informações', {
-            'fields': ('loja','nome','slug', 'descricao',
+            'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
                        'texto_promocional', 'texto_link',)
         }),
         ('Digite os valores do produto', {
