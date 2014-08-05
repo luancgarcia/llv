@@ -31,7 +31,8 @@ MANAGERS = ADMINS = (
     ('Luan Garcia', 'contato@luangarcia.com'),
 )
 
-SITE_URL = "https://apps.facebook.com/llv-dev/"
+# SITE_URL = "https://apps.facebook.com/llv-dev/"
+SITE_URL = "https://jonatascd.pythonanywhere.com/"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
