@@ -230,19 +230,13 @@
 					{% include 'blocos/bloco_dois_sem_evento.html' with destaque=destaques.1 %}
 					{% if destaques.2 %}
 						{% include 'blocos/bloco_tres_sem_evento.html' with destaque=destaques.2 %}
-					{% else %}
-						{% include 'blocos/so_ofertas.html' %}
 					{% endif %}
-				{% else %}
-					{% include 'blocos/so_ofertas.html' %}
 				{% endif %}
 			{% endif %}
 		{% elif eventos %}
 			{% include 'blocos/bloco_dois_sem_destaque.html' with evento=eventos.0 sem_destaque=True %}
 			{% if eventos.1 %}
 				{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 sem_destaque=True %}
-			{% else %}
-				{% include 'blocos/so_ofertas.html' %}
 			{% endif%}
 			{% if eventos.2 %}
 				{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=False sem_destaque=True %}
