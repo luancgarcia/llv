@@ -104,7 +104,7 @@
 							<div class="submenu fix">
 								<ul>
 									{% for categoria in categorias %}
-									<li class="{% cycle '' 'mid' '' %}{% if forloop.last %} last{% endif %}"><a href="?categoria={{categoria.id}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}{% if forloop.last %} last{% endif %}"><a href="?categoria={{categoria.slug}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
 									{% endfor %}
 
 								</ul>
