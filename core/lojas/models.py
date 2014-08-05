@@ -52,3 +52,8 @@ class Loja(EditorialModel):
                 'logo': self.logo_120x50.url if self.logo else None,
                 'telefone': self.telefone,
                 'shopping': self.shopping.to_dict()}
+
+    @classmethod
+    def publicadas_com_oferta(cls):
+        lojas = cls.objects.filter(shopping=1,publicada=True).order_by('nome')
+        return [l.to_dict() for l in lojas if l.ofertas.filter(status=1)]
