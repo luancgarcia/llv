@@ -307,6 +307,7 @@ $(function(){
 					  picture: data.imagem,
 					  image: data.imagem,
 					}, function(response){});
+					fechaModal();
 	                return false;
 	            },
 	            error: function(){
