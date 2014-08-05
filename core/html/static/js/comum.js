@@ -172,6 +172,17 @@ $(function(){
 		}
 	});
 
+	// chama modal a partir de outro modal
+	$(document.body).on({
+		click: function(){
+			var tamanho = $(this).attr('data-param');
+			var qualclasse = $(this).attr("data-class");
+			var url = $(this).attr('data-href')
+			fechaModal();
+			disparaModalRequest(url, tamanho, qualclasse);
+		}
+	}, "a.share-modal");
+
 	//fechar modal
 	$(document.body).on({
 		click: function(){
