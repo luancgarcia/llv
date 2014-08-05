@@ -67,6 +67,11 @@ class Categoria(EditorialModel):
                 'nome': self.nome,
                 'slug': self.slug}
 
+    @classmethod
+    def publicadas_com_oferta(cls):
+        categorias = cls.objects.filter(shopping=1,publicada=True).order_by('nome')
+        return [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
+
 
 class Oferta(EditorialModel):
     OFERTA = 0
