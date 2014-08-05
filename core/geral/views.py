@@ -144,4 +144,6 @@ def mesclar(request):
                 'descricao': item_dict['chamada_promocional'],
                 'imagem': destino_url}
 
+    Log.regitra_acao(item,Log.COMPARTILHADA)
+
     return jsonResponse(contexto)
