@@ -104,7 +104,9 @@
 							<div class="submenu fix">
 								<ul>
 									{% for categoria in categorias %}
-									<li class="{% cycle '' 'mid' '' %}{% if forloop.last %} last{% endif %}"><a href="?categoria={{categoria.slug}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}"><a href="?categoria={{categoria.slug}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									{% empty %}
+									<li>Sem categoria com ofertas cadastradas</li>
 									{% endfor %}
 
 								</ul>
@@ -115,25 +117,11 @@
 							<a class="lnk" href="javascript:;">Gênero</a>
 							<div class="submenu fix">
 								<ul>
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
+									<li><a href="">Masculino</a></li>
+									<li class="mid"><a href="">Feminino</a></li>
+									<li><a href="">Infantil</a></li>
 
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li class="last"><a href="">item 1</a></li>
-									<li class="mid last"><a href="">item 2</a></li>
-									<li class="last"><a href="">item 3</a></li>
+									<li class="last"><a href="">Unissex</a></li>
 								</ul>
 							</div>
 						</li>
@@ -142,25 +130,11 @@
 							<a class="lnk" href="javascript:;">Lojas</a>
 							<div class="submenu fix">
 								<ul>
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li><a href="">item 1</a></li>
-									<li class="mid"><a href="">item 2</a></li>
-									<li><a href="">item 3</a></li>
-
-									<li class="last"><a href="">item 1</a></li>
-									<li class="mid last"><a href="">item 2</a></li>
-									<li class="last"><a href="">item 3</a></li>
+									{% for loja in lojas %}
+									<li class="{% cycle '' 'mid' '' %}"><a href="{{ loja.slug }}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+									{% empty %}
+									<li>Sem loja com ofertas cadastradas</li>
+									{% endfor %}
 								</ul>
 							</div>
 						</li>
