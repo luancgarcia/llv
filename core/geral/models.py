@@ -31,6 +31,12 @@ class Perfil(BaseModel):
     def __unicode__(self):
         return u'%s' % self.user
 
+    def is_marketing(self):
+        return True if self.tipo == Perfil.MARKETING else None
+
+    def is_lojista(self):
+        return True if self.tipo == Perfil.LOJISTA else None
+
 
 class PerfilMarketing(Perfil):
     class Meta:
