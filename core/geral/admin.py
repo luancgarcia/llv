@@ -66,8 +66,11 @@ class OfertaAdmin(admin.ModelAdmin):
         return super(OfertaAdmin, self).changelist_view(request, extra_context)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "loja" and not request.user.is_superuser:
-            kwargs["queryset"] = Loja.objects.filter(id=request.user.perfil.get().loja.id)
+        if db_field.name == "loja":
+            if request.user.perfil.get().is_lojista():
+                kwargs["queryset"] = Loja.objects.filter(id=request.user.perfil.get().loja.id)
+            if request.user.perfil.is_marketing():
+                kwargs["queryset"] = Loja.objects.filter(shopping=request.user.perfil.get().shopping)
         return super(OfertaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, obj, form, change):
@@ -77,7 +80,9 @@ class OfertaAdmin(admin.ModelAdmin):
             antes = float(obj.preco_inicial.replace(',','.'))
             depois = float(obj.preco_final.replace(',','.'))
             obj.desconto = int(100-(100*int(depois)/int(antes)))
-        if request.user.is_superuser:
+        if request.user.perfil.get().is_lojista():
+            obj.status = Oferta.PENDENTE
+        else:
             obj.status = Oferta.PUBLICADO
         obj.save()
 
