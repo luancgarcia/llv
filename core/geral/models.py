@@ -1,11 +1,12 @@
 # -*- encoding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.template.defaultfilters import date as _date
 
 from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
 from lojas.models import Loja, Shopping
@@ -155,6 +156,14 @@ class Oferta(EditorialModel):
     def desconto_value(self):
         return u'%s%%' % self.desconto if self.desconto else ''
 
+    @property
+    def expira(self):
+        return self.data_aprovacao + timedelta(days=7) if self.data_aprovacao else None
+
+    @property
+    def expira_str(self):
+        return _date(self.expira, 'd/m/Y') if self.expira else None
+
     def status_string(self):
         return u'%s' % Oferta.STATUSES[self.status][1]
     status_string.short_description = u'Status'
@@ -195,7 +204,9 @@ class Oferta(EditorialModel):
                      'imagem': imagem,
                      'compartilhamentos': self.total_visto,
                      'curtidas': self.total_curtido,
-                     'categoria': self.categoria.to_dict() if self.categoria else None}
+                     'categoria': self.categoria.to_dict() if self.categoria else None,
+                     'expira': self.expira,
+                     'expira_str': self.expira_str}
 
         if modal:
             imagens = [{'maior':img.img_376x376.url,
