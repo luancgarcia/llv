@@ -15,10 +15,12 @@ from lojas.models import Loja, Shopping
 class Perfil(BaseModel):
     LOJISTA = 0
     MARKETING = 1
+    ADMINISTRADOR = 2
 
     TIPOS = (
         (LOJISTA, u'Lojista'),
-        (MARKETING, u'Marketing')
+        (MARKETING, u'Marketing'),
+        (ADMINISTRADOR, u'Administrador'),
     )
 
     user = models.ForeignKey(User, related_name='perfil', verbose_name='Usuário')
@@ -32,11 +34,17 @@ class Perfil(BaseModel):
     def __unicode__(self):
         return u'%s' % self.user
 
+    @property
     def is_marketing(self):
         return True if self.tipo == Perfil.MARKETING else None
 
+    @property
     def is_lojista(self):
         return True if self.tipo == Perfil.LOJISTA else None
+
+    @property
+    def is_adm(self):
+        return True if self.tipo == Perfil.ADMINISTRADOR else None
 
 
 class PerfilMarketing(Perfil):
@@ -51,6 +59,13 @@ class PerfilLojista(Perfil):
         proxy = True
         verbose_name = u'Perfil Lojista'
         verbose_name_plural = u'Perfis Lojistas'
+
+
+class PerfilAdministrador(Perfil):
+    class Meta:
+        proxy = True
+        verbose_name = u'Perfil Administrador'
+        verbose_name_plural = u'Perfis Administradores'
 
 
 class Categoria(EditorialModel):

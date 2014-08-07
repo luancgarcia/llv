@@ -3,7 +3,7 @@
 from django.contrib import admin
 
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
-                          Mascara, PerfilMarketing, PerfilLojista)
+                          Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador)
 from lojas.models import Loja
 
 
@@ -51,13 +51,15 @@ class OfertaAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(OfertaAdmin, self).queryset(request)
-        if not request.user.is_superuser:
-            qs = qs.filter(loja=request.user.perfil.get().loja)
+        perfil = request.user.perfil.get()
+        if perfil.is_lojista:
+            qs = qs.filter(loja=perfil.loja)
         return qs.filter(tipo=Oferta.OFERTA)
 
     def changelist_view(self, request, extra_context=None):
         self.list_display = ('__unicode__',)
-        if not request.user.is_superuser:
+        perfil = request.user.perfil.get()
+        if perfil.is_lojista:
             self.list_display = self.list_display + ('status_string',)
             self.list_editable = None
         else:
@@ -66,11 +68,14 @@ class OfertaAdmin(admin.ModelAdmin):
         return super(OfertaAdmin, self).changelist_view(request, extra_context)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
         if db_field.name == "loja":
-            if request.user.perfil.get().is_lojista():
-                kwargs["queryset"] = Loja.objects.filter(id=request.user.perfil.get().loja.id)
-            if request.user.perfil.is_marketing():
-                kwargs["queryset"] = Loja.objects.filter(shopping=request.user.perfil.get().shopping)
+            if perfil.is_lojista:
+                kwargs["queryset"] = Loja.objects.filter(id=perfil.loja.id)
+            elif perfil.is_marketing:
+                kwargs["queryset"] = Loja.objects.filter(shopping=perfil.shopping)
+            else:
+                kwargs["queryset"] = Loja.objects.all()
         return super(OfertaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, obj, form, change):
@@ -159,9 +164,21 @@ class PerfilLojistaAdmin(admin.ModelAdmin):
         obj.tipo = PerfilMarketing.LOJISTA
         obj.save()
 
+class PerfilAdministradorAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__',]
+
+    def queryset(self, request):
+        qs = super(PerfilAdministradorAdmin, self).queryset(request)
+        return qs.filter(tipo=PerfilAdministrador.ADMINISTRADOR)
+
+    def save_model(self, request, obj, form, change):
+        obj.tipo = PerfilAdministrador.ADMINISTRADOR
+        obj.save()
+
 
 class LogAdmin(admin.ModelAdmin):
     list_filter = ['acao']
+    exclude = ['tipo','shopping','loja']
 
 
 admin.site.register(Categoria, CategoriaAdmin)
@@ -173,3 +190,4 @@ admin.site.register(Log, LogAdmin)
 admin.site.register(PerfilMarketing, PerfilMktAdmin)
 admin.site.register(PerfilLojista, PerfilLojistaAdmin)
 admin.site.register(Mascara)
+admin.site.register(PerfilAdministrador, PerfilAdministradorAdmin)
