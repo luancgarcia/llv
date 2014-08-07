@@ -2,7 +2,7 @@
 <div class="content fix">
 	<div class="colunaProduto fl">
 		<figure id="fotoProduto" class="fix">
-			<span class="desconto">{{ destaque.desconto }}%</span>
+			<span class="desconto">{{ destaque.desconto }}</span>
 			<img src="{{ destaque.imagem }}" alt="{{ destaque.loja.nome }}" width="" height="" class="fl">
 		</figure>
 	</div>
@@ -26,7 +26,7 @@
 					{% if destaque.loja.logo %}
 						<img src="{{ destaque.loja.logo }}" alt="{{ destaque.loja.nome }}">
 					{% else %}
-						{{ destaque.loja.nome }}
+						<p class="center">{{ destaque.loja.nome }}</p>
 					{% endif %}
 					{% if destaque.loja.telefone %}
 					<p class="fl">

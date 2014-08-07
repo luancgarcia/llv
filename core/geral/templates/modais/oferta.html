@@ -17,7 +17,7 @@
 		{% for imagem in oferta.imagens %}
 			{% if forloop.first %}
 			<figure id="fotoProduto" class="fix">
-				<span class="desconto">{{ oferta.desconto }}%</span>
+				<span class="desconto">{{ oferta.desconto }}</span>
 				<img src="{{ imagem.maior }}" alt="" width="" height="" class="fl">
 			</figure>
 			<section class="thumbs-list">
@@ -49,13 +49,13 @@
 
 			<section class="qualMarca fix">
 				<div class="box fix">
-					<figure class="fl">
 					{% if oferta.loja.logo %}
-						<img src="{{ oferta.loja.logo }}" alt="{{ oferta.loja.nome }}">
+						<figure class="fl">						
+							<img src="{{ oferta.loja.logo }}" alt="{{ oferta.loja.nome }}">						
+						</figure>
 					{% else %}
-						{{ oferta.loja.nome }}
+						<p class="center">{{ oferta.loja.nome }}</p>
 					{% endif %}
-					</figure>
 					{% if oferta.loja.telefone %}
 					<p class="fl">
 						<span class="txt">Ligue para a loja </span>

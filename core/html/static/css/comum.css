@@ -87,6 +87,13 @@
   display: block;
 }
 
+.center {
+  text-align: center;
+  width: 100% !important;
+  padding-top: 0px !important;
+  font-size: 1.6em;
+}
+
 .maskmenu {
   position: fixed;
   right: 0;
@@ -683,26 +690,19 @@
   margin-bottom: 15px;
 }
 #fotoProduto .desconto {
+  background: url(../img/desconto.png) no-repeat 0 0;
+  background-size: 100% 100%;
   font-family: "Trebuchet MS";
   position: absolute;
   z-index: 20;
-  width: 33px;
-  height: 33px;
-  background-color: #ce1e06;
-  border: 1px solid #b61904;
-  line-height: 33px;
-  text-align: center;
+  width: 56px;
+  height: 49px;
+  line-height: 49px;
   color: white;
-  font-size: 1.4em;
+  padding-left: 10px;
+  font-size: 2.2em;
   top: 12px;
-  right: 10px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
-  -webkit-box-shadow: 1px 1px 1px 0 #333333;
-  box-shadow: 1px 1px 1px 0 #333333;
+  left: 2px;
 }
 
 #modalEvento .colunaProduto {
