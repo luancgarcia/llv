@@ -2,6 +2,9 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
 <title>{% block title %}{% endblock %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
 {# bootstrap #}
 {% block css_commons %}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/commons.css" %}" />
@@ -11,6 +14,7 @@
 
 {% block extrastyle %}
 <style type="text/css">
+#ico-menu {display: none;}
 #blank {display: block;}
 #blank, .sb-fixed {max-width: 217px !important;}
 .navbar-inverse .navbar-inner {
@@ -51,6 +55,67 @@ a.brand {
     font-size: 1.3em;
     margin-bottom: 20px;
 }
+@media (max-width: 480px) {
+    body{
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    .btn {
+        float: none;
+        display: inline-block;
+        padding-left: 5px;
+        padding-right: 5px;
+     
+
+        text-align: center;
+    }
+
+    a.brand {
+        font-size: 14px !important;
+    }
+
+    #blank, .sb-fixed{
+        max-width: 100% !important;
+    }
+
+    .logo-multiplan  {
+        display: none;
+    }
+    .navbar .brand {
+        display: none;
+    }
+    .sb-fixed {
+        background: none repeat scroll 0 0 #445958 !important;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        border: none;
+        display: none;
+    }
+    .sb-fixed .sidebar-nav {
+        border: none; 
+        background: none repeat scroll 0 0 #445958 !important; 
+        margin-bottom: 0px !important;
+    }
+    .navbar-inverse .navbar-inner {
+        background: none repeat scroll 0 0 #445958 !important;
+    }
+    #ico-menu {
+        display: block;
+        width: 47px;
+        height: 43px;
+        position: absolute;
+        z-index: 100;
+        left: 0;
+        top: 5px;
+        overflow: hidden;
+    }
+}
+
 </style>
 {% endblock %}
 
@@ -60,6 +125,24 @@ a.brand {
 
 <script type="text/javascript">
     window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";
+</script>
+
+<script>
+    $(function(){
+        $("#ico-menu").on({
+            click: function(){
+                if($(this).is(".ativo")) {
+                    $(".sb-fixed ").hide();
+                    $(this).removeClass("ativo");
+                    return false;
+                }
+
+                $(this).addClass("ativo");
+                $(".sb-fixed ").show();
+                return false;
+            }
+        });
+    });
 </script>
 
 {% block extrahead %}{% endblock %}
@@ -73,6 +156,7 @@ a.brand {
 {% if not is_popup %}
     <!-- Header -->
     <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+        <a href="javascript:;" id="ico-menu"><img src="{% static 'img/ico-menu-admin.gif' %}"></a>
         {% if user.is_active and user.is_staff %}
             <div class="navbar-inner" id="nav-menu-top-bar">
                 <div class="container-fluid">
