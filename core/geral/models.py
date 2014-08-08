@@ -189,9 +189,10 @@ class Oferta(EditorialModel):
             self.data_aprovacao = datetime.now()
         super(Oferta, self).save(*args, **kwargs)
 
-    @property
     def desconto_value(self):
         return u'%s%%' % self.desconto if self.desconto else ''
+    desconto_value.short_description = u'Desconto'
+    desconto_value = property(desconto_value)
 
     @property
     def expira(self):

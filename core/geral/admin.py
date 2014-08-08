@@ -51,7 +51,7 @@ class OfertaAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'status']
-    readonly_fields = ('desconto','total_compartilhado','total_visto','total_curtido')
+    readonly_fields = ('desconto','total_compartilhado','total_visto','total_curtido','desconto_value')
 
     fieldsets = (
         ('Estatísticas', {
@@ -62,7 +62,7 @@ class OfertaAdmin(admin.ModelAdmin):
                        'texto_promocional', 'texto_link',)
         }),
         ('Digite os valores do produto', {
-            'fields': (('preco_inicial','preco_final'),'desconto')
+            'fields': (('preco_inicial','preco_final'),'desconto_value')
         }),
     )
 
