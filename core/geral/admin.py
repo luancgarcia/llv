@@ -3,7 +3,8 @@
 from django.contrib import admin
 
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
-                          Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador)
+                          Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador,
+                          Sazonal)
 from lojas.models import Loja
 
 
@@ -12,9 +13,24 @@ OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada',)
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada']
     prepopulated_fields = {'slug': ('nome',), }
-    exclude = ['default']
+    exclude = ['sazonal','imagem']
     list_editable = ['publicada']
     list_filter = ['publicada']
+
+    def queryset(self, request):
+        qs = super(CategoriaAdmin, self).queryset(request)
+        return qs.filter(sazonal=False)
+
+
+class SazonalAdmin(admin.ModelAdmin):
+    list_display = ['nome','publicada']
+    prepopulated_fields = {'slug': ('nome',), }
+    exclude = ['sazonal']
+    list_editable = ['publicada']
+    list_filter = ['publicada']
+    def queryset(self, request):
+        qs = super(SazonalAdmin, self).queryset(request)
+        return qs.filter(sazonal=True)
 
 
 class ImagemInline(admin.StackedInline):
@@ -191,3 +207,4 @@ admin.site.register(PerfilMarketing, PerfilMktAdmin)
 admin.site.register(PerfilLojista, PerfilLojistaAdmin)
 admin.site.register(Mascara)
 admin.site.register(PerfilAdministrador, PerfilAdministradorAdmin)
+admin.site.register(Sazonal, SazonalAdmin)

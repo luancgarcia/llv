@@ -73,7 +73,13 @@ class Categoria(EditorialModel):
                                  related_name='categorias', null=True, blank=True)
     nome = models.CharField(u'Nome', max_length=100, blank=False, null=True)
     slug = models.SlugField(max_length=150, blank=False, null=False, unique=True)
-    default = models.BooleanField(u'Categoria default?', default=False)
+    sazonal = models.BooleanField(u'Categoria sazonal?', default=False)
+    imagem = models.ImageField(u'Imagem', upload_to='categorias',
+                               null=True, blank=True)
+    img_162x27 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
+                                 resize.ResizeToFill(162, 27)],
+                                 source='imagem', format='PNG',
+                                 options={'quality': 90})
 
     class Meta:
         verbose_name=u'Categoria'
@@ -89,11 +95,23 @@ class Categoria(EditorialModel):
                 'nome': self.nome,
                 'slug': self.slug}
 
+    def save(self, *args, **kwargs):
+        if self.publicada and self.sazonal:
+            Categoria.objects.filter(publicada=True,sazonal=True).update(publicada=False)
+        super(Categoria, self).save(*args, **kwargs)
+
     @classmethod
     def publicadas_com_oferta(cls):
         shopping = Shopping.objects.get(id=1)
         categorias = cls.objects.filter(shopping=shopping,publicada=True).order_by('nome')
         return [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
+
+
+class Sazonal(Categoria):
+    class Meta:
+        proxy = True
+        verbose_name = u'Categoria Sazonal'
+        verbose_name_plural = u'Categorias Sazonais'
 
 
 class Oferta(EditorialModel):
