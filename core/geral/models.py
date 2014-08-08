@@ -234,10 +234,6 @@ class Oferta(EditorialModel):
         contexto =  {'id': self.id,
                      'loja': self.loja.to_dict() if self.loja else None,
                      'descricao': self.descricao,
-                     'porcentagem': self.porcentagem_desconto(),
-                     'desconto': self.desconto,
-                     'preco_final': self.preco_final,
-                     'preco_inicial': self.preco_inicial,
                      'texto_do_link': self.texto_link,
                      'chamada_promocional': self.texto_promocional,
                      'imagem': imagem,
@@ -246,6 +242,12 @@ class Oferta(EditorialModel):
                      'categoria': self.categoria.to_dict() if self.categoria else None,
                      'expira': self.expira,
                      'expira_str': self.expira_str}
+
+        if not self.tipo == Oferta.EVENTO:
+            contexto.update({'porcentagem': self.porcentagem_desconto(),
+                             'desconto': self.desconto,
+                             'preco_final': self.preco_final,
+                             'preco_inicial': self.preco_inicial,})
 
         if modal:
             imagens = [{'maior':img.img_376x376.url,
