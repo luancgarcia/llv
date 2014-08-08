@@ -153,16 +153,16 @@ class Oferta(EditorialModel):
                              null=True, blank=True)
     categoria = models.ForeignKey(Categoria, verbose_name=u'Categoria', null=True,
                                   blank=True, related_name='ofertas')
-    nome = models.CharField(u'Título', max_length=200, null=True, blank=True)
+    nome = models.CharField(u'Título', max_length=200, null=True, blank=False)
     slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
     evento = models.TextField(u'Descrição do Evento', blank=True, null=True)
     texto_promocional = models.TextField(u'Chamada Promocional',
                                          blank=True, null=True)
     preco_inicial = models.CharField(u'De: R$', max_length=70, null=True,
-                                     blank=False)
+                                     blank=True)
     preco_final = models.CharField(u'Por: R$', max_length=70, null=True,
-                                   blank=False)
+                                   blank=True)
     desconto = models.IntegerField(u'Desconto', null=True, blank=True)
     tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
     texto_link = models.CharField(u'Texto do link', max_length="140", null=True, blank=True)
@@ -289,6 +289,9 @@ class Evento(Oferta):
         proxy = True
         verbose_name=u'Evento'
         verbose_name_plural=u'Eventos'
+
+    def __unicode__(self):
+        return u'%s' % self.nome
 
 
 class ImagemOferta(OrderedModel):

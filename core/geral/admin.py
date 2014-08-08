@@ -45,6 +45,7 @@ class ImagemInline(admin.StackedInline):
         }),
     )
 
+
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
     exclude = OCULTA_NO_ADMIN
@@ -130,10 +131,11 @@ class DestaqueAdmin(admin.ModelAdmin):
 
 class EventoAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
-    exclude = OCULTA_NO_ADMIN
+    exclude = OCULTA_NO_ADMIN + ('preco_inicial','preco_final','desconto')
     prepopulated_fields = {'slug': ('nome',), }
-    list_display = ['__unicode__','status']
+    list_display = ['nome','genero','status']
     list_editable = ['status']
+    list_display_links = ['nome','genero']
 
     def queryset(self, request):
         qs = super(EventoAdmin, self).queryset(request)
@@ -141,10 +143,6 @@ class EventoAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.EVENTO
-        if obj.preco_final and obj.preco_inicial:
-            antes = float(obj.preco_inicial.replace(',','.'))
-            depois = float(obj.preco_final.replace(',','.'))
-            obj.desconto = int(100-(100*int(depois)/int(antes)))
         obj.save()
 
 
@@ -179,6 +177,7 @@ class PerfilLojistaAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.tipo = PerfilMarketing.LOJISTA
         obj.save()
+
 
 class PerfilAdministradorAdmin(admin.ModelAdmin):
     list_display = ['__unicode__',]
