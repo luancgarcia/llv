@@ -91,9 +91,13 @@ class Categoria(EditorialModel):
         return u'%s%s' % (self.nome, shopping)
 
     def to_dict(self):
-        return {'id': self.id,
-                'nome': self.nome,
-                'slug': self.slug}
+        contexto =  {'id': self.id,
+                     'nome': self.nome,
+                     'slug': self.slug}
+        if self.sazonal:
+            contexto.update({'imagem': self.img_162x27.url if self.imagem else None})
+
+        return contexto
 
     def save(self, *args, **kwargs):
         if self.publicada and self.sazonal:
