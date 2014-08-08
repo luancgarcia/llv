@@ -669,6 +669,7 @@
   background: url(../img/ico-curtidas.png) no-repeat 0 0;
   padding-left: 40px;
   display: inline-block;
+  cursor: pointer;
 }
 .colunaDados .share {
   line-height: 25px;

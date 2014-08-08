@@ -216,6 +216,29 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
+			var link = $(this);
+			var id_item = link.attr("data-id");
+			$.ajax({
+	            type: "POST",
+	            url: 'curtir/',
+	            dataType: "json",
+	            data: {id_item: id_item},
+	            beforeSend: function(){
+	                // console.log("before send");
+	            },
+	            success: function(data) {
+	                link.text(data.total+" pessoas curtiram essa oferta");
+	            },
+	            error: function(){
+	                console.log("erro curtir");
+	            }
+	       });
+	       return false;
+		}
+	}, "p.curtidas span");
+
+	$(document.body).on({
+		click: function(){
 			var thumb = $(this);
 			var url_thumb = thumb.attr("data-img");
 			var img_gde = $("#fotoProduto img");

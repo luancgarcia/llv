@@ -50,8 +50,8 @@
 			<section class="qualMarca fix">
 				<div class="box fix">
 					{% if oferta.loja.logo %}
-						<figure class="fl">						
-							<img src="{{ oferta.loja.logo }}" alt="{{ oferta.loja.nome }}">						
+						<figure class="fl">
+							<img src="{{ oferta.loja.logo }}" alt="{{ oferta.loja.nome }}">
 						</figure>
 					{% else %}
 						<p class="center">{{ oferta.loja.nome }}</p>
@@ -66,7 +66,7 @@
 				<p class="foot">Essa oferta expira em {{ oferta.expira_str }} ou enquanto durarem os estoques.</p>
 			</section>
 
-			<p class="curtidas"><span>{{ oferta.curtidas }} pessoas curtiram essa oferta</span></p>
+			<p class="curtidas"><span data-id="{{ oferta.id }}">{{ oferta.curtidas }} pessoas curtiram essa oferta</span></p>
 
 			<p class="share"><a class="share-modal" href="javascript:;" data-href="{% url 'modal_share' oferta.id %}" data-param=786>Compartilhe com seus amigos</a></p>
 

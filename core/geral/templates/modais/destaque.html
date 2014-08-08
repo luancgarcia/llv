@@ -38,7 +38,7 @@
 				<p class="foot">Essa oferta expira em {{ destaque.expira_str }} ou enquanto durarem os estoques.</p>
 			</section>
 
-			<p class="curtidas"><span>{{ destaque.curtidas }} pessoas curtiram essa oferta</span></p>
+			<p class="curtidas"><span data-id="{{ destaque.id }}">{{ destaque.curtidas }} pessoas curtiram essa oferta</span></p>
 
 			<p class="share"><a class="share-modal" href="javascript:;" data-href="{% url 'modal_share' destaque.id %}" data-param=786>Compartilhe com seus amigos</a></p>
 
