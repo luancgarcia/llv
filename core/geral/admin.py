@@ -51,9 +51,12 @@ class OfertaAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'status']
-    readonly_fields = ['desconto']
+    readonly_fields = ('desconto','total_compartilhado','total_visto','total_curtido')
 
     fieldsets = (
+        ('Estatísticas', {
+            'fields': ('total_visto','total_curtido', 'total_compartilhado',)
+        }),
         ('Informações', {
             'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
                        'texto_promocional', 'texto_link',)
