@@ -170,6 +170,7 @@ class Oferta(EditorialModel):
     data_aprovacao = models.DateTimeField(u"Data de aprovação", null=True)
     genero = models.IntegerField(u'Gênero', choices=GENEROS, default=UNISSEX,
                                  null=True, blank=False)
+    autor = models.ForeignKey(Perfil, verbose_name=u'Autor', null=True, blank=False)
 
     class Meta:
         verbose_name=u'Oferta'

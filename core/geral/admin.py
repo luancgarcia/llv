@@ -8,7 +8,7 @@ from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
 from lojas.models import Loja
 
 
-OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada',)
+OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada','autor')
 
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada']
@@ -51,11 +51,11 @@ class OfertaAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'status']
-    readonly_fields = ('desconto','total_compartilhado','total_visto','total_curtido','desconto_value')
+    readonly_fields = ('desconto','total_compartilhado','total_visto','total_curtido','desconto_value','autor')
 
     fieldsets = (
-        ('Estatísticas', {
-            'fields': ('total_visto','total_curtido', 'total_compartilhado',)
+        ('Dados', {
+            'fields': ('total_visto','total_curtido', 'total_compartilhado','autor')
         }),
         ('Informações', {
             'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
@@ -83,7 +83,7 @@ class OfertaAdmin(admin.ModelAdmin):
             self.list_display = self.list_display + ('status_string',)
             self.list_editable = None
         else:
-            self.list_display = self.list_display + ('status',)
+            self.list_display = self.list_display + ('status','autor')
             self.list_editable = ('status',)
         return super(OfertaAdmin, self).changelist_view(request, extra_context)
 
@@ -99,13 +99,15 @@ class OfertaAdmin(admin.ModelAdmin):
         return super(OfertaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def save_model(self, request, obj, form, change):
+        perfil = request.user.perfil.get()
+        obj.autor = perfil
         obj.tipo = Oferta.OFERTA
         # apagar quando implementar o js
         if obj.preco_final and obj.preco_inicial:
             antes = float(obj.preco_inicial.replace(',','.'))
             depois = float(obj.preco_final.replace(',','.'))
             obj.desconto = int(100-(100*int(depois)/int(antes)))
-        if request.user.perfil.get().is_lojista():
+        if perfil.is_lojista:
             obj.status = Oferta.PENDENTE
         else:
             obj.status = Oferta.PUBLICADO
