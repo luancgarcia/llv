@@ -1,0 +1,75 @@
+=spash
+
+#Splash
+	width: 322px
+	position: absolute
+	z-index: 333
+	left: 50%
+	margin-left: -(322px/2)
+	top: 135px
+
+	header
+		text-align: center
+		height: 180px
+		position: relative
+
+	.close-splash
+		background: url(#{$url-img}/fechar-splash.png) no-repeat 0 0
+		width: 35px
+		height: 35px
+		position: absolute
+		top: 0
+		left: 88px
+
+	.content
+		background-color: $cor-32
+		padding-top: 80px
+		margin-top: -75px
+	
+		form
+			padding: 0 17px 10px
+			> .ui-btn
+				text-indent: -999em
+				padding-top: 5px
+		.txt
+			text-align: center
+			color: $cor-10
+			font-size: 1.3em
+			font-family: $font
+			margin-bottom: 9px
+
+		.campo
+			padding-bottom: 7px
+			position: relative
+			input, select
+				display: block
+				color: $cor-54
+				font-size: 1.2em
+				border: none
+				background-color: $cor-55
+				padding: 6px 0 5px 3px
+				border: 1px solid $cor-56
+
+			input
+				width: 283px
+
+			select
+				width: 100%
+
+
+		label
+			display: block
+			font-size: 1.2em
+			color: $cor-53
+			padding: 0 0 6px 4px
+
+		input[type='submit']
+			border: none
+			background: none transparent
+			font-size: 1.4em
+			color: $cor-10
+		
+
+#select-6-button
+	> span
+		display: none

@@ -1,3 +1,20 @@
+function validaEmail(email) {
+    if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+        return false;
+    }else {
+        return true;
+    }    
+}
+
+function validaCampo(campo){
+    if(campo.val() =="") {
+        return false;
+    }else {
+        return true;
+    }
+}  
+
+
 largura_window = $(window).width();
 
 $(function(){
@@ -381,6 +398,58 @@ $( document ).ready(function() {
 	       return false;
 		}
 	});
+
+	// abre splash 
+
+	$(".splash-menu a").on({
+		click: function(){
+			$("#Splash").show();
+		}	
+	});
+
+	$(".close-splash").on({
+		click: function(){
+			$("#Splash").hide();
+		}	
+	});
+
+	// $("form#SplashForm").submit(function(){
+	// 	var erro = false;
+ //        var formulario = $(this);
+ //        var email = $(".valida_email");
+ //        var valida_campo = $(".valida");
+
+	// 	if(!validaCampo(valida_campo)){			
+	// 		$(valida_campo).parents('.campo').children(".error").remove();
+ //            $(valida_campo).parents('.campo').append("<span class='error>Campo obrigatório</span>");
+
+ //            erro = true;
+ //        } else {
+ //            $(valida_campo).parents('.campo').children(".error").remove();
+ //        }      
+        
+ //        if(!validaCampo(email)){
+ //            $(email).parents('.campo').children(".error").remove();
+ //            $(email).parents('.campo').append("<span class='error>Campo obrigatório</span>");
+
+ //            erro = true;
+ //        }else if(!validaEmail(email.val())) {
+ //            $(email).parents('.campo').children(".error").remove();
+ //            $(email).parents('.campo').append("<span class='error>Insira um email válido.</span>");
+
+ //            erro = true;
+ //        }else {
+ //            $(email).parents('.campo').children(".error").remove();
+ //        }
+
+ //        if(erro == true) {            
+ //            return false;
+ //        } else {
+
+ //        }
+            
+
+	// });
 });
 
 

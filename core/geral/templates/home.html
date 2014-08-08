@@ -114,7 +114,7 @@
 
 						<li class="item-menu">
 							<a class="lnk" href="javascript:;">Gênero</a>
-							<div class="submenu fix">
+							<div class="submenu auto fix">
 								<ul>
 									<li class="cl"><a href="">Masculino</a></li>
 									<li class="cl"><a href="">Feminino</a></li>
@@ -139,7 +139,7 @@
 
 						<li class="item-menu">
 							<a class="lnk" href="javascript:;">Faixa de Preço</a>
-							<div class="submenu fix">
+							<div class="submenu auto fix">
 								<ul>
 									<li class="cl"><a href="">abaixo de R$ 30</a></li>
 									<li class="cl"><a href="">de R$ 31 a R$ 50</a></li>
@@ -152,13 +152,17 @@
 
 						<li class="item-menu last">
 							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
-							<div class="submenu fix">
+							<div class="submenu auto fix">
 								<ul>
 									<li class="cl"><a href="">até 30%</a></li>
 									<li class="cl"><a href="">de 31% a 50%</a></li>
 									<li class="cl"><a href="">de 51% a 70%</a></li>
 								</ul>
 							</div>
+						</li>
+
+						<li class="fl splash-menu">
+							<a href="javascript:;" class="rpl">sacola-splasy.png</a>
 						</li>
 					</ul>
 
@@ -224,6 +228,6 @@
 		<br class="cl final" data-destaque="{{ ultimo_destaque_id }}" data-evento="{{ ultimo_evento_id }}" data-oferta="{{ ultima_oferta_id }}">
 
 	</div>
-
+	{% include 'modais/splash.html' %}
 </body>
 </html>

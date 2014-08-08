@@ -386,6 +386,14 @@
 #Menu .navegacao header {
   display: none;
 }
+#Menu .navegacao .splash-menu {
+  padding: 5px 0 0 20px;
+}
+#Menu .navegacao .splash-menu a {
+  background: url(../img/sacola-splasy.png) no-repeat 0 0;
+  width: 14px;
+  height: 15px;
+}
 #Menu .navegacao .item-menu {
   height: 27px;
   position: relative;
@@ -456,9 +464,11 @@
 #Menu .navegacao .item-menu .submenu li a:hover {
   color: #cd2228;
 }
-#Menu .navegacao .item-menu.last .submenu {
-  left: 50%;
-  margin-left: -190px;
+#Menu .navegacao .item-menu .submenu.auto {
+  width: 170px;
+}
+#Menu .navegacao .item-menu .submenu.auto li {
+  width: 100%;
 }
 #Menu .navegacao .item-menu:hover .lnk {
   background-position: right -27px;
@@ -713,6 +723,87 @@
   width: 320px;
 }
 
+#Splash {
+  width: 322px;
+  position: absolute;
+  z-index: 333;
+  left: 50%;
+  margin-left: -161px;
+  top: 135px;
+}
+#Splash header {
+  text-align: center;
+  height: 180px;
+  position: relative;
+}
+#Splash .close-splash {
+  background: url(../img/fechar-splash.png) no-repeat 0 0;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 0;
+  left: 88px;
+}
+#Splash .content {
+  background-color: #d51924;
+  padding-top: 80px;
+  margin-top: -75px;
+}
+#Splash .content form {
+  padding: 0 17px 10px;
+}
+#Splash .content form > .ui-btn {
+  text-indent: -999em;
+  padding-top: 5px;
+}
+#Splash .content .txt {
+  text-align: center;
+  color: white;
+  font-size: 1.3em;
+  font-family: "Tahoma";
+  margin-bottom: 9px;
+}
+#Splash .content .campo {
+  padding-bottom: 7px;
+  position: relative;
+}
+#Splash .content .campo input, #Splash .content .campo select {
+  display: block;
+  color: #006642;
+  font-size: 1.2em;
+  border: none;
+  background-color: #fde7da;
+  padding: 6px 0 5px 3px;
+  border: 1px solid #c81520;
+}
+#Splash .content .campo input {
+  width: 283px;
+}
+#Splash .content .campo select {
+  width: 100%;
+}
+#Splash .content label {
+  display: block;
+  font-size: 1.2em;
+  color: #fdede1;
+  padding: 0 0 6px 4px;
+}
+#Splash .content input[type='submit'] {
+  border: none;
+  background: none transparent;
+  font-size: 1.4em;
+  color: white;
+}
+
+#select-6-button > span {
+  display: none;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #select-6-button select {
+    height: 27px;
+  }
+}
 body {
   font: 62.5% "Tahoma", verdana, tahoma, sans-serif;
 }

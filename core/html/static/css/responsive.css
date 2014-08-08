@@ -295,6 +295,10 @@
   }
 }
 @media (max-width: 728px) {
+  #Splash {
+    display: none;
+  }
+
   .container {
     padding-top: 70px;
   }
@@ -394,6 +398,9 @@
     margin-right: 9px;
     color: #570a0d;
   }
+  #Menu .navegacao .splash-menu {
+    display: none;
+  }
   #Menu .navegacao .item-menu {
     height: auto;
     float: none;
@@ -433,6 +440,9 @@
   }
   #Menu .navegacao .item-menu .submenu li.mid, #Menu .navegacao .item-menu .submenu li.last {
     border: none !important;
+  }
+  #Menu .navegacao .item-menu .submenu li.cl {
+    width: 100% !important;
   }
   #Menu .navegacao .item-menu .submenu li a {
     color: white;

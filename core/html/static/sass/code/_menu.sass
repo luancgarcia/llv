@@ -15,6 +15,13 @@
 		header
 			display: none
 
+		.splash-menu
+			padding: 5px 0 0 20px
+			a
+				background: url(#{$url-img}/sacola-splasy.png) no-repeat 0 0
+				width: 14px
+				height: 15px
+
 		.item-menu
 			height: 27px
 			position: relative
@@ -59,6 +66,8 @@
 				border: 1px solid $cor-26
 				border-top: none
 
+
+
 				li
 					float: left
 					width: 118px
@@ -85,11 +94,11 @@
 
 						&:hover
 							color: $cor-25
+				&.auto
+					width: 170px
 
-			&.last
-				.submenu
-					left: 50%
-					margin-left: -190px
+					li
+						width: 100%
 
 			&:hover
 				.lnk

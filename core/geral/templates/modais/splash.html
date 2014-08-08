@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<div id="Splash" class="fix">
+	<header class="fix">
+		<a href="javascript:;" class="close-splash rpl fix">fechar splash</a>
+		<img src="{% static 'img/header-splash.png' %}" alt="">
+	</header>
+	<section class="content fix">
+		<form action="" class="fix" id="SplashForm">
+			<p class="txt">Solicite abaixo qual loja <br>
+			você gostaria de ver na <br>
+			Liquidação Lápis Vermelho</p>
+			
+			<fieldset class="campo fix">
+				<label for="">Nome</label>
+				<input type="text" name="" id="" class="valida">
+			</fieldset>
+
+			<fieldset class="campo fix">
+				<label for="">Email</label>
+				<input type="text" name="" id="" class="valida_email">
+			</fieldset>
+
+			<fieldset class="campo fix">
+				<label for="">Lojas</label>
+				<select name="" id="">
+					<option value="">selecione a loja</option>
+					<option value=""></option>
+					<option value=""></option>
+					<option value=""></option>
+					<option value=""></option>
+				</select>
+			</fieldset>
+
+			<input type="submit" value="Enviar" class="fr">
+
+		</form>
+	</section>
+</div>
