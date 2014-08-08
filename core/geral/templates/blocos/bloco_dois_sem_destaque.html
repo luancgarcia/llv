@@ -6,15 +6,21 @@
 <!-- coluna com dois itens verticais -->
 {% if not sem_destaque %}
 <div class="grid dois-itens-v">
+	{% if ofertas.4 %}
 	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.4 %}
-
+	{% endif %}
+	{% if ofertas.5 %}
 	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.5 last_div=True %}
+	{% endif %}
 </div>
 {% else %}
 <div class="grid dois-itens-v">
+	{% if ofertas.0 %}
 	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.0 %}
-
+	{% endif %}
+	{% if ofertas.1 %}
 	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.1 last_div=True %}
+	{% endif %}
 </div>
 {% endif %}
 
