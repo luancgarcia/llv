@@ -3,20 +3,31 @@
 <br class="cl">
 <!-- =========================================== -->
 <div class="grid dois-itens-v">
+		{% if ofertas.6 %}
 		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.6 %}
+		{% endif %}
+		{% if ofertas.9 %}
 		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.9 last_div=True %}
+		{% endif %}
 </div>
 
 <div class="grid dois-itens-v">
+		{% if ofertas.7 %}
 		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.7 %}
+		{% endif %}
+		{% if ofertas.10 %}
 		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.10 last_div=True %}
+		{% endif %}
 </div>
 
 <div class="grid dois-itens-v">
+		{% if ofertas.8 %}
 		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.8 %}
+		{% endif %}
+		{% if ofertas.11 %}
 		{% include 'blocos/oferta_vertical.html' with oferta=ofertas.11 last_div=True %}
+		{% endif %}
 </div>
-
 {% include 'blocos/evento.html' with last_div=True lasttv=True %}
 
 {% if not sem_destaque %}
