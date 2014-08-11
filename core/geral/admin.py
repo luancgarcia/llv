@@ -53,19 +53,6 @@ class OfertaAdmin(admin.ModelAdmin):
     list_filter = ['loja', 'status']
     readonly_fields = ('desconto','total_compartilhado','total_visto','total_curtido','desconto_value','autor')
 
-    fieldsets = (
-        ('Dados', {
-            'fields': ('total_visto','total_curtido', 'total_compartilhado','autor')
-        }),
-        ('Informações', {
-            'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
-                       'texto_promocional', 'texto_link',)
-        }),
-        ('Digite os valores do produto', {
-            'fields': (('preco_inicial','preco_final'),'desconto_value')
-        }),
-    )
-
     # class Media:
         # js = []
 
@@ -97,6 +84,33 @@ class OfertaAdmin(admin.ModelAdmin):
             else:
                 kwargs["queryset"] = Loja.objects.all()
         return super(OfertaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(OfertaAdmin, self).get_fieldsets(request, obj)
+        perfil = request.user.perfil.get()
+        fieldsets = (
+            ('Informações', {
+                    'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
+                               'texto_promocional', 'texto_link',)
+            }),
+            ('Digite os valores do produto', {
+                'fields': (('preco_inicial','preco_final'),'desconto_value')
+            }),
+        )
+        if not perfil.is_lojista and not perfil.is_marketing:
+            fieldsets = (
+                ('Dados', {
+                    'fields': ('total_visto','total_curtido', 'total_compartilhado','autor')
+                }),
+                ('Informações', {
+                    'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
+                               'texto_promocional', 'texto_link',)
+                }),
+                ('Digite os valores do produto', {
+                    'fields': (('preco_inicial','preco_final'),'desconto_value')
+                }),
+            )
+        return fieldsets
 
     def save_model(self, request, obj, form, change):
         perfil = request.user.perfil.get()
