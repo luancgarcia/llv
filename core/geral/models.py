@@ -377,6 +377,12 @@ class Mascara(EditorialModel):
         verbose_name = u'Imagem para compartilhar'
         verbose_name_plural = u'Imagens para compartilhar'
 
+    def __unicode__(self):
+        return u'%s' % self.imagem
+
+    def custom_miniatura(self):
+        return u'<a href='
+
     @classmethod
     def serializado(cls):
         return [{'id': i.id,

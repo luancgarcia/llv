@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 
+from imagekit.admin import AdminThumbnail
+
 from django.contrib import admin
 
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
@@ -215,6 +217,11 @@ class LogAdmin(admin.ModelAdmin):
     exclude = ['tipo','shopping','loja']
 
 
+class MascaraAdmin(admin.ModelAdmin):
+    miniatura = AdminThumbnail(image_field='thumb_98x98')
+    list_display = ['__unicode__','miniatura']
+
+
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
 admin.site.register(Destaque, DestaqueAdmin)
@@ -223,6 +230,6 @@ admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log, LogAdmin)
 admin.site.register(PerfilMarketing, PerfilMktAdmin)
 admin.site.register(PerfilLojista, PerfilLojistaAdmin)
-admin.site.register(Mascara)
+admin.site.register(Mascara, MascaraAdmin)
 admin.site.register(PerfilAdministrador, PerfilAdministradorAdmin)
 admin.site.register(Sazonal, SazonalAdmin)
