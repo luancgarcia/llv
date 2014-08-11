@@ -9,7 +9,7 @@
 			<p class="txt">Solicite abaixo qual loja <br>
 			você gostaria de ver na <br>
 			Liquidação Lápis Vermelho</p>
-			
+
 			<fieldset class="campo fix">
 				<label for="">Nome</label>
 				<input type="text" name="" id="" class="valida">
@@ -24,10 +24,9 @@
 				<label for="">Lojas</label>
 				<select name="" id="">
 					<option value="">selecione a loja</option>
-					<option value=""></option>
-					<option value=""></option>
-					<option value=""></option>
-					<option value=""></option>
+					{% for loja in lojas_splash %}
+					<option value="{{ loja.nome }}">{{ loja.nome }}</option>
+					{% endfor %}
 				</select>
 			</fieldset>
 
