@@ -133,7 +133,7 @@ class Oferta(EditorialModel):
     PUBLICADO = 1
     EXPIRADO = 2
     STATUSES = (
-        (PENDENTE, u'Pendete'),
+        (PENDENTE, u'Pendente'),
         (PUBLICADO, u'Publicado'),
         (EXPIRADO, u'Expirado'),
     )
