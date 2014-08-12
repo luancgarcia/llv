@@ -163,7 +163,7 @@ class Oferta(EditorialModel):
                                      blank=True)
     preco_final = models.CharField(u'Por: R$', max_length=70, null=True,
                                    blank=True)
-    desconto = models.IntegerField(u'Desconto', null=True, blank=True)
+    desconto = models.IntegerField(u'Desconto (em %)', null=True, blank=True)
     tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
     texto_link = models.CharField(u'Texto do link', max_length="140", null=True, blank=True)
     status = models.IntegerField(u'Status', choices=STATUSES, default=PENDENTE)

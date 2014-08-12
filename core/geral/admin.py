@@ -53,10 +53,13 @@ class OfertaAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'status']
-    readonly_fields = ('desconto','total_compartilhado','total_visto','total_curtido','desconto_value','autor')
+    readonly_fields = ('total_compartilhado','total_visto','total_curtido','desconto_value','autor')
 
-    # class Media:
-        # js = []
+    class Media:
+        js = [
+            'js/preco_desconto_admin.js',
+            'js/jquery.maskedinput.min.js',
+        ]
 
     def queryset(self, request):
         qs = super(OfertaAdmin, self).queryset(request)
@@ -96,7 +99,7 @@ class OfertaAdmin(admin.ModelAdmin):
                                'texto_promocional', 'texto_link',)
             }),
             ('Digite os valores do produto', {
-                'fields': (('preco_inicial','preco_final'),'desconto_value')
+                'fields': (('preco_inicial','preco_final'),'desconto')
             }),
         )
         if not perfil.is_lojista and not perfil.is_marketing:
@@ -109,7 +112,7 @@ class OfertaAdmin(admin.ModelAdmin):
                                'texto_promocional', 'texto_link',)
                 }),
                 ('Digite os valores do produto', {
-                    'fields': (('preco_inicial','preco_final'),'desconto_value')
+                    'fields': (('preco_inicial','preco_final'),'desconto')
                 }),
             )
         return fieldsets
@@ -118,11 +121,6 @@ class OfertaAdmin(admin.ModelAdmin):
         perfil = request.user.perfil.get()
         obj.autor = perfil
         obj.tipo = Oferta.OFERTA
-        # apagar quando implementar o js
-        if obj.preco_final and obj.preco_inicial:
-            antes = float(obj.preco_inicial.replace(',','.'))
-            depois = float(obj.preco_final.replace(',','.'))
-            obj.desconto = int(100-(100*int(depois)/int(antes)))
         if perfil.is_lojista:
             obj.status = Oferta.PENDENTE
         else:
@@ -137,16 +135,18 @@ class DestaqueAdmin(admin.ModelAdmin):
     list_display = ['__unicode__','status']
     list_editable = ['status']
 
+    class Media:
+        js = [
+            'js/preco_desconto_admin.js',
+            'js/jquery.maskedinput.min.js',
+        ]
+
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
         return qs.filter(tipo=Oferta.DESTAQUE)
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.DESTAQUE
-        if obj.preco_final and obj.preco_inicial:
-            antes = float(obj.preco_inicial.replace(',','.'))
-            depois = float(obj.preco_final.replace(',','.'))
-            obj.desconto = int(100-(100*int(depois)/int(antes)))
         obj.save()
 
 
@@ -157,6 +157,12 @@ class EventoAdmin(admin.ModelAdmin):
     list_display = ['nome','genero','status']
     list_editable = ['status']
     list_display_links = ['nome','genero']
+
+    class Media:
+        js = [
+            'js/preco_desconto_admin.js',
+            'js/jquery.maskedinput.min.js',
+        ]
 
     def queryset(self, request):
         qs = super(EventoAdmin, self).queryset(request)
