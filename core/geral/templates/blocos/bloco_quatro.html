@@ -24,6 +24,7 @@
 	{% include 'blocos/oferta.html' with oferta=ofertas.15 lastmob=True %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.16 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.17 last_div=True lastmob=True %}
+	<br class="cl">
 	{% for oferta in ofertas|slice:"18:" %}
 		<div class="grid {% cycle '' '' '' 'last lastmob' %}">
 			<article class="item">
