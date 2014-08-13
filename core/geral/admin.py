@@ -58,7 +58,7 @@ class OfertaAdmin(admin.ModelAdmin):
     class Media:
         js = [
             'js/preco_desconto_admin.js',
-            'js/jquery.maskedinput.min.js',
+            'js/jquery.maskMoney.min.js',
         ]
 
     def queryset(self, request):
@@ -138,7 +138,7 @@ class DestaqueAdmin(admin.ModelAdmin):
     class Media:
         js = [
             'js/preco_desconto_admin.js',
-            'js/jquery.maskedinput.min.js',
+            'js/jquery.maskMoney.min.js',
         ]
 
     def queryset(self, request):
@@ -161,7 +161,7 @@ class EventoAdmin(admin.ModelAdmin):
     class Media:
         js = [
             'js/preco_desconto_admin.js',
-            'js/jquery.maskedinput.min.js',
+            'js/jquery.maskMoney.min.js',
         ]
 
     def queryset(self, request):
