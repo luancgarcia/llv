@@ -31,7 +31,8 @@
 {% include 'blocos/evento.html' with last_div=True lasttv=True %}
 
 {% if not sem_destaque %}
-<!-- seria o so_ofertas abaixo mas nao precisou -->
+<!-- 3 s/ d -->
+<br class="cl">
 {% for oferta in ofertas|slice:"12:" %}
 	<div class="grid {% cycle '' '' '' 'last lastmob' %}">
 		<article class="item">
