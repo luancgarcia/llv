@@ -14,7 +14,7 @@ from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara
 from lojas.models import Loja
 
 
-def slice_oferta(total_destaques, total_eventos):
+def slice_oferta(total_destaques=0, total_eventos=0):
     total_destaques = total_destaques * 4
     total_eventos = total_eventos * 2
     return 32 - total_destaques - total_eventos
@@ -36,11 +36,11 @@ def home(request):
 
     contexto = {'lojas': Loja.objects.all(),
                 'destaques': destaques,
-                'ultimo_destaque_id': ultimo_id(destaques),
+                'ultimo_destaque_id': [int(d['id']) for d in destaques],
                 'eventos': eventos,
-                'ultimo_evento_id': ultimo_id(eventos),
+                'ultimo_evento_id': [int(e['id']) for e in eventos],
                 'ofertas': ofertas,
-                'ultima_oferta_id': ultimo_id(ofertas),
+                'ultima_oferta_id': [int(o['id']) for o in ofertas],
                 'categorias': Categoria.publicadas_com_oferta(),
                 'lojas': Loja.publicadas_com_oferta(),
                 'lojas_splash': Loja.publicadas_sem_oferta()}
@@ -52,23 +52,36 @@ def mais_ofertas(request):
     ultimo_evento = request.POST.get('ultimo_evento', None)
     ultima_oferta = request.POST.get('ultima_oferta', None)
 
-    if not all([ultimo_destaque,ultimo_evento,ultima_oferta]):
-        contexto = {}
-    else:
-        destaques = Oferta.prontos(tipo=Oferta.DESTAQUE, from_id=ultimo_destaque)
+    destaques = eventos = ofertas = []
+    total_destaques = total_eventos = 0
+    if ultimo_destaque:
+        ids_destaques = [int(i) for i in ultimo_destaque.split(', ')]
+        destaques = Oferta.objects.filter(tipo=Oferta.DESTAQUE,
+                                          status=Oferta.PUBLICADO)\
+                                  .exclude(id__in=ids_destaques)
+        total_destaques = len(destaques)
+    if ultimo_evento:
+        ids_eventos = [int(i) for i in ultimo_evento.split(', ')]
+        eventos = Oferta.objects.filter(tipo=Oferta.EVENTO,
+                                        status=Oferta.PUBLICADO)\
+                                .exclude(id__in=ids_eventos)
+        total_eventos = len(eventos)
+    if ultima_oferta:
+        ids_ofertas = [int(i) for i in ultima_oferta.split(', ')]
+        ofertas = Oferta.objects.filter(tipo=Oferta.OFERTA,
+                                        status=Oferta.PUBLICADO)\
+                                .exclude(id__in=ids_ofertas)
+        ofertas = [o.to_dict() for o in ofertas]
+        if total_destaques or total_eventos:
+            ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
-        eventos = Oferta.prontos(tipo=Oferta.EVENTO, from_id=ultimo_evento)
-
-        ofertas = Oferta.prontos(from_id=ultima_oferta)
-        ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
-
-        contexto = {'lojas': Loja.objects.all(),
-                    'destaques': destaques,
-                    'ultimo_destaque_id': ultimo_id(destaques),
-                    'eventos': eventos,
-                    'ultimo_evento_id': ultimo_id(eventos),
-                    'ofertas': ofertas,
-                    'ultima_oferta_id': ultimo_id(ofertas)}
+    print total_destaques, total_eventos, len(ofertas)
+    contexto = {'destaques': destaques,
+                'ultimo_destaque_id': [int(d['id']) for d in ofertas],
+                'eventos': eventos,
+                'ultimo_evento_id': [int(e['id']) for e in eventos],
+                'ofertas': ofertas,
+                'ultima_oferta_id': [int(o['id']) for o in ofertas]}
 
     return render(request, "home-part.html", contexto)
 

@@ -78,5 +78,5 @@
 	{% endfor %}
 {% endif %}
 {% if ultimo_destaque_id or ultimo_evento_id or ultima_oferta_id %}
-<br class="cl final" data-destaque="{{ ultimo_destaque_id }}" data-evento="{{ ultimo_evento_id }}" data-oferta="{{ ultima_oferta_id }}">
+<br class="cl final" data-destaque="{% for d in ultimo_destaque_id %}{{ d }}{% if not forloop.last%}, {%endif%}{%endfor%}" data-evento="{% for e in ultimo_evento_id %}{{ e }}{% if not forloop.last%}, {%endif%}{%endfor%}" data-oferta="{% for o in ultima_oferta_id %}{{ o }}{% if not forloop.last%}, {%endif%}{%endfor%}">
 {% endif %}
