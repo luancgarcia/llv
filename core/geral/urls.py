@@ -42,11 +42,11 @@ urlpatterns = patterns('',
 
     url(r'^mais_ofertas/$', 'geral.views.mais_ofertas', name='mais_ofertas'),
 
-    url(r'^categoria/(?P<categoria>[\w-]+)/$', 'geral.views.home', name='home_categoria'),
-    url(r'^genero/(?P<genero>[\w]+)/$', 'geral.views.home', name='home_genero'),
-    url(r'^loja/(?P<loja>[\w-]+)/$', 'geral.views.home', name='home_loja'),
-    url(r'^preco/(?P<preco>\d+)/$', 'geral.views.home', name='home_preco'),
-    url(r'^desconto/(?P<desconto>\d+)/$', 'geral.views.home', name='home_desconto'),
+    url(r'^categoria/(?P<categoria>[\w-]+)/$', 'geral.views.home_com_filtro', name='home_categoria'),
+    url(r'^genero/(?P<genero>[\w]+)/$', 'geral.views.home_com_filtro', name='home_genero'),
+    url(r'^loja/(?P<loja>[\w-]+)/$', 'geral.views.home_com_filtro', name='home_loja'),
+    url(r'^preco/(?P<preco>\d+)/$', 'geral.views.home_com_filtro', name='home_preco'),
+    url(r'^desconto/(?P<desconto>\d+)/$', 'geral.views.home_com_filtro', name='home_desconto'),
     url(r'^$', 'geral.views.home', name='home'),
 )
 

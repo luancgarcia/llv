@@ -26,41 +26,32 @@ def ultimo_id(lista):
             ultimo_id = int(i['id'])
     return ultimo_id if ultimo_id > 0 else ''
 
-def home(request, *args, **kwargs):
-    categoria = kwargs.get('categoria', None)
-    genero = kwargs.get('genero', None)
-    loja = kwargs.get('loja', None)
-    preco = kwargs.get('preco', None)
-    desconto = kwargs.get('desconto', None)
+def home(request):
+    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE)
 
-    if any([categoria, genero, loja, preco, desconto]):
-        tipo = kwargs.keys()[0]
-        slug = kwargs.get(tipo)
-        contexto = home_com_filtro(slug, tipo)
-    else:
-        destaques = Oferta.prontos(tipo=Oferta.DESTAQUE)
+    eventos = Oferta.prontos(tipo=Oferta.EVENTO)
 
-        eventos = Oferta.prontos(tipo=Oferta.EVENTO)
+    ofertas = Oferta.prontos()
+    ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
-        ofertas = Oferta.prontos()
-        ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
+    mais_paginas = True if len(ofertas) > 14 else False
 
-        mais_paginas = True if len(ofertas) > 14 else False
-
-        contexto = {'lojas': Loja.objects.all(),
-                    'destaques': destaques,
-                    'ultimo_destaque_id': [int(d['id']) for d in destaques],
-                    'eventos': eventos,
-                    'ultimo_evento_id': [int(e['id']) for e in eventos],
-                    'ofertas': ofertas,
-                    'ultima_oferta_id': [int(o['id']) for o in ofertas],
-                    'categorias': Categoria.publicadas_com_oferta(),
-                    'lojas': Loja.publicadas_com_oferta(),
-                    'lojas_splash': Loja.publicadas_sem_oferta(),
-                    'mais_paginas': mais_paginas}
+    contexto = {'destaques': destaques,
+                'ultimo_destaque_id': [int(d['id']) for d in destaques],
+                'eventos': eventos,
+                'ultimo_evento_id': [int(e['id']) for e in eventos],
+                'ofertas': ofertas,
+                'ultima_oferta_id': [int(o['id']) for o in ofertas],
+                'categorias': Categoria.publicadas_com_oferta(),
+                'mais_paginas': mais_paginas,
+                'lojas': Loja.publicadas_com_oferta(),
+                'lojas_splash': Loja.publicadas_sem_oferta()}
     return render(request, "home.html", contexto)
 
-def home_com_filtro(slug, tipo):
+def home_com_filtro(request, *args, **kwargs):
+    tipo = kwargs.keys()[0]
+    slug = kwargs.get(tipo)
+
     if tipo == 'categoria':
         destaques, ofertas, eventos = home_por_categoria(slug)
     elif tipo == 'genero':
@@ -74,18 +65,17 @@ def home_com_filtro(slug, tipo):
 
     mais_paginas = True if len(ofertas) > 14 else False
 
-    contexto = {'lojas': Loja.objects.all(),
-                'destaques': destaques,
+    contexto = {'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in destaques],
                 'eventos': eventos,
                 'ultimo_evento_id': [int(e['id']) for e in eventos],
                 'ofertas': ofertas,
                 'ultima_oferta_id': [int(o['id']) for o in ofertas],
                 'categorias': Categoria.publicadas_com_oferta(),
+                'mais_paginas': mais_paginas,
                 'lojas': Loja.publicadas_com_oferta(),
-                'lojas_splash': Loja.publicadas_sem_oferta(),
-                'mais_paginas': mais_paginas}
-    return contexto
+                'lojas_splash': Loja.publicadas_sem_oferta()}
+    return render(request, "home_filtro.html", contexto)
 
 def destaques_ofertas_eventos(items):
     destaques = items.filter(tipo=Oferta.DESTAQUE)
@@ -144,13 +134,10 @@ def home_por_preco(preco):
 def home_por_desconto(porcentagem):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO)
     if porcentagem == '30':
-        print 30
         items.filter(desconto__lte='30')
     elif porcentagem == '50':
-        print 50
         items.filter(desconto__gte='31',desconto__lte='50')
     else:
-        print 70
         items.filter(desconto__gte='51',desconto__lte='70')
 
     return destaques_ofertas_eventos(items)
