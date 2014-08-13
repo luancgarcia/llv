@@ -1,8 +1,8 @@
-<div class="grid {% cycle '' '' '' 'last' %}">
+<div class="grid{% if forloop.counter|divisibleby:4 %} last{% endif %}">
 	<article class="item">
 		<span class="desconto">{{ oferta.desconto }}</span>
 		<figure>
-			<a href="javascript:;" title="{{oferta.loja.nome}}" data-href="{% url 'modal' 'oferta' oferta.id %}" rel="modal" data-param=786>
+			<a href="javascript:;" title="{{oferta.loja.nome}}" data-href="{% url 'modal' 'oferta' oferta.id %}" rel="modal" data-param="786">
 				<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
 			</a>
 		</figure>
@@ -13,7 +13,7 @@
 
 		<footer>
 			<a class="like fl" href="javascript:;" title="Curtir" data-id="{{ oferta.id}}">{{ oferta.curtidas }}</a>
-			<a class="share fr" href="javascript:;" rel="modal" data-href="{% url 'modal_share' oferta.id %}" data-param=786>Compartilhar</a>
+			<a class="share fr" href="javascript:;" rel="modal" data-href="{% url 'modal_share' oferta.id %}" data-param="786">Compartilhar</a>
 		</footer>
 	</article><!-- .item -->
 </div>
