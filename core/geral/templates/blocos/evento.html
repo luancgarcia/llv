@@ -1,6 +1,8 @@
 <div class="grid dois-itens-v{% if last_div %} last{%endif%}{%if lastmob%} lastmob{%endif%}{%if lasttv%} lasttv{%endif%}">
 	<article class="item vertical">
+		{% if evento.desconto %}
 		<span class="desconto">{{ evento.desconto }}</span>
+		{% endif %}
 		<figure>
 			<a href="javascript:;" title="{{evento.loja.nome}}" data-href="{% url 'modal' 'evento' evento.id %}" rel="modal" data-param=560>
 				<img src="{{ evento.imagem }}" alt="{{ evento.descricao }}">
