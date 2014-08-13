@@ -388,7 +388,7 @@ $( document ).ready(function() {
 			}
 			$.ajax({
 	            type: "POST",
-	            url: 'mais_ofertas/',
+	            url: '/mais_ofertas/',
 	            dataType: "html",
 	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta},
 	            beforeSend: function(){
