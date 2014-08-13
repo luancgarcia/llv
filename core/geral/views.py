@@ -32,11 +32,11 @@ def home(request):
     loja = request.GET.get('loja', None)
     preco = request.GET.get('preco', None)
     desconto = request.GET.get('desconto', None)
-    import ipdb; ipdb.set_trace()
+
     if any([categoria, genero, loja, preco, desconto]):
         tipo = request.GET.keys()[0]
         slug = request.GET.get(tipo)
-        return HttpResponse('tem filtro')
+        contexto = home_com_filtro(slug, tipo)
     else:
         destaques = Oferta.prontos(tipo=Oferta.DESTAQUE)
 
@@ -128,28 +128,30 @@ def home_por_loja(slug):
 
 def home_por_preco(preco):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO)
-
     if preco == '301':
-        item.filter(preco_final__gte=301.0)
+        items.filter(preco_final__gte='301')
     elif preco == '300':
-        item.filter(preco_final__lte=300.0,preco_final__gte=101.0)
+        items.filter(preco_final__lte='300',preco_final__gte='101')
     elif preco == '100':
-        item.filter(preco_final__lte=100.0,preco_final__gte=51.0)
+        items.filter(preco_final__lte='100',preco_final__gte='51')
     elif preco == '50':
-        item.filter(preco_final__lte=50.0,preco_final__gte=31.0)
+        item.filter(preco_final__lte='50',preco_final__gte='31')
     else:
-        item.filter(preco_final__lte=30.0)
+        items.filter(preco_final__lte='30')
 
     return destaques_ofertas_eventos(items)
 
 def home_por_desconto(porcentagem):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO)
     if porcentagem == '30':
-        item.filter(desconto__lte='30')
+        print 30
+        items.filter(desconto__lte='30')
     elif porcentagem == '50':
-        item.filter(desconto__gte='31',desconto__lte='50')
+        print 50
+        items.filter(desconto__gte='31',desconto__lte='50')
     else:
-        item.filter(desconto__gte='51',desconto__lte='70')
+        print 70
+        items.filter(desconto__gte='51',desconto__lte='70')
 
     return destaques_ofertas_eventos(items)
 
