@@ -34,6 +34,8 @@ def home(request):
     ofertas = Oferta.prontos()
     ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
+    mais_paginas = True if len(ofertas) > 14 else False
+
     contexto = {'lojas': Loja.objects.all(),
                 'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in destaques],
@@ -43,7 +45,8 @@ def home(request):
                 'ultima_oferta_id': [int(o['id']) for o in ofertas],
                 'categorias': Categoria.publicadas_com_oferta(),
                 'lojas': Loja.publicadas_com_oferta(),
-                'lojas_splash': Loja.publicadas_sem_oferta()}
+                'lojas_splash': Loja.publicadas_sem_oferta(),
+                'mais_paginas': mais_paginas}
     return render(request, "home.html", contexto)
 
 @csrf_exempt
@@ -75,13 +78,17 @@ def mais_ofertas(request):
         if total_destaques or total_eventos:
             ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
-    print total_destaques, total_eventos, len(ofertas)
+    mais_paginas = True
+    if not ofertas or len(ofertas) < 14:
+        mais_paginas = False
+
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in ofertas],
                 'eventos': eventos,
                 'ultimo_evento_id': [int(e['id']) for e in eventos],
                 'ofertas': ofertas,
-                'ultima_oferta_id': [int(o['id']) for o in ofertas]}
+                'ultima_oferta_id': [int(o['id']) for o in ofertas],
+                'mais_paginas': mais_paginas}
 
     return render(request, "home-part.html", contexto)
 

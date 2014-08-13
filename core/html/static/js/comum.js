@@ -3,7 +3,7 @@ function validaEmail(email) {
         return false;
     }else {
         return true;
-    }    
+    }
 }
 
 function validaCampo(campo){
@@ -12,7 +12,7 @@ function validaCampo(campo){
     }else {
         return true;
     }
-}  
+}
 
 
 largura_window = $(window).width();
@@ -379,7 +379,13 @@ $( document ).ready(function() {
 			var ultimo_destaque = container.attr('data-destaque');
 			var ultimo_evento = container.attr('data-evento');
 			var ultima_oferta = container.attr('data-oferta');
-			// console.log(ultimo_destaque,ultimo_evento,ultima_oferta);
+
+			// depois de guardar os valores em variaveis,
+			// remove elemento para ajustar paginacao
+			container.remove();
+			if (!ultima_oferta && !ultimo_evento && !ultimo_destaque){
+				return false;
+			}
 			$.ajax({
 	            type: "POST",
 	            url: 'mais_ofertas/',
@@ -399,18 +405,18 @@ $( document ).ready(function() {
 		}
 	});
 
-	// abre splash 
+	// abre splash
 
 	$(".splash-menu a").on({
 		click: function(){
 			$("#Splash").show();
-		}	
+		}
 	});
 
 	$(".close-splash").on({
 		click: function(){
 			$("#Splash").hide();
-		}	
+		}
 	});
 
 	// $("form#SplashForm").submit(function(){
@@ -419,15 +425,15 @@ $( document ).ready(function() {
  //        var email = $(".valida_email");
  //        var valida_campo = $(".valida");
 
-	// 	if(!validaCampo(valida_campo)){			
+	// 	if(!validaCampo(valida_campo)){
 	// 		$(valida_campo).parents('.campo').children(".error").remove();
  //            $(valida_campo).parents('.campo').append("<span class='error>Campo obrigatório</span>");
 
  //            erro = true;
  //        } else {
  //            $(valida_campo).parents('.campo').children(".error").remove();
- //        }      
-        
+ //        }
+
  //        if(!validaCampo(email)){
  //            $(email).parents('.campo').children(".error").remove();
  //            $(email).parents('.campo').append("<span class='error>Campo obrigatório</span>");
@@ -442,12 +448,12 @@ $( document ).ready(function() {
  //            $(email).parents('.campo').children(".error").remove();
  //        }
 
- //        if(erro == true) {            
+ //        if(erro == true) {
  //            return false;
  //        } else {
 
  //        }
-            
+
 
 	// });
 });
