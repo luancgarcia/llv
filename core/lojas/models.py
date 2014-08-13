@@ -48,7 +48,8 @@ class Loja(EditorialModel):
         return u'%s - %s' % (self.nome, self.shopping)
 
     def to_dict(self):
-        return {'nome': self.nome,
+        return {'id': self.id,
+                'nome': self.nome,
                 'logo': self.logo_120x50.url if self.logo else None,
                 'telefone': self.telefone,
                 'shopping': self.shopping.to_dict()}

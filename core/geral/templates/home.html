@@ -103,7 +103,7 @@
 							<div class="submenu fix">
 								<ul>
 									{% for categoria in categorias %}
-									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home' %}?categoria={{categoria.slug}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_categoria' categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
 									{% empty %}
 									<li>Sem categoria com ofertas cadastradas</li>
 									{% endfor %}
@@ -116,10 +116,10 @@
 							<a class="lnk" href="javascript:;">Gênero</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="{% url 'home' %}?genero=masculino">Masculino</a></li>
-									<li class="cl"><a href="{% url 'home' %}?genero=feminino">Feminino</a></li>
-									<li class="cl"><a href="{% url 'home' %}?genero=infantil">Infantil</a></li>
-									<li class="cl"><a href="{% url 'home' %}?genero=unissex">Unissex</a></li>
+									<li class="cl"><a href="{% url 'home_genero' 'masculino' %}">Masculino</a></li>
+									<li class="cl"><a href="{% url 'home_genero' 'feminino' %}">Feminino</a></li>
+									<li class="cl"><a href="{% url 'home_genero' 'infantil' %}">Infantil</a></li>
+									<li class="cl"><a href="{% url 'home_genero' 'unissex' %}">Unissex</a></li>
 								</ul>
 							</div>
 						</li>
@@ -129,7 +129,7 @@
 							<div class="submenu fix">
 								<ul>
 									{% for loja in lojas %}
-									<li class="{% cycle '' 'mid' '' %}"><a href="{{ loja.slug }}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' loja.id %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
 									{% empty %}
 									<li>Sem loja com ofertas cadastradas</li>
 									{% endfor %}
@@ -141,11 +141,11 @@
 							<a class="lnk" href="javascript:;">Faixa de Preço</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="{% url 'home' %}?preco=30">abaixo de R$ 30</a></li>
-									<li class="cl"><a href="{% url 'home' %}?preco=50">de R$ 31 a R$ 50</a></li>
-									<li class="cl"><a href="{% url 'home' %}?preco=100">de R$ 51 a R$ 100</a></li>
-									<li class="cl"><a href="{% url 'home' %}?preco=300">de R$101 a R$300</a></li>
-									<li class="cl"><a href="{% url 'home' %}?preco=301">acima de R$301</a></li>
+									<li class="cl"><a href="{% url 'home_preco' 30 %}">abaixo de R$ 30</a></li>
+									<li class="cl"><a href="{% url 'home_preco' 50 %}">de R$ 31 a R$ 50</a></li>
+									<li class="cl"><a href="{% url 'home_preco' 100 %}">de R$ 51 a R$ 100</a></li>
+									<li class="cl"><a href="{% url 'home_preco' 300 %}">de R$101 a R$300</a></li>
+									<li class="cl"><a href="{% url 'home_preco' 301 %}">acima de R$301</a></li>
 								</ul>
 							</div>
 						</li>
@@ -154,9 +154,9 @@
 							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="{% url 'home' %}?desconto=30">até 30%</a></li>
-									<li class="cl"><a href="{% url 'home' %}?desconto=50">de 31% a 50%</a></li>
-									<li class="cl"><a href="{% url 'home' %}?desconto=70">de 51% a 70%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' 30 %}">até 30%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' 50 %}">de 31% a 50%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' 70 %}">de 51% a 70%</a></li>
 								</ul>
 							</div>
 						</li>

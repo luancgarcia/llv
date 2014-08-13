@@ -26,16 +26,16 @@ def ultimo_id(lista):
             ultimo_id = int(i['id'])
     return ultimo_id if ultimo_id > 0 else ''
 
-def home(request):
-    categoria = request.GET.get('categoria', None)
-    genero = request.GET.get('genero', None)
-    loja = request.GET.get('loja', None)
-    preco = request.GET.get('preco', None)
-    desconto = request.GET.get('desconto', None)
+def home(request, *args, **kwargs):
+    categoria = kwargs.get('categoria', None)
+    genero = kwargs.get('genero', None)
+    loja = kwargs.get('loja', None)
+    preco = kwargs.get('preco', None)
+    desconto = kwargs.get('desconto', None)
 
     if any([categoria, genero, loja, preco, desconto]):
-        tipo = request.GET.keys()[0]
-        slug = request.GET.get(tipo)
+        tipo = kwargs.keys()[0]
+        slug = kwargs.get(tipo)
         contexto = home_com_filtro(slug, tipo)
     else:
         destaques = Oferta.prontos(tipo=Oferta.DESTAQUE)
@@ -120,8 +120,8 @@ def home_por_genero(slug):
                                   genero=genero)
     return destaques_ofertas_eventos(items)
 
-def home_por_loja(slug):
-    loja = Loja.objects.filter(slug=slug,shopping_id=1).get()
+def home_por_loja(id_loja):
+    loja = Loja.objects.filter(id=id_loja).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja=loja)
     return destaques_ofertas_eventos(items)
