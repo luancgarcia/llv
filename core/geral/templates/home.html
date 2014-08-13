@@ -75,14 +75,14 @@
 		</div>
 		<header id="Header" class="clearfix">
 			<figure class="grid4 last notmob">
-				<a href="" class=""><img src="{% static 'img/header-banner.jpg' %}"></a>
+				<a href="{% url 'home' %}" class=""><img src="{% static 'img/header-banner.jpg' %}"></a>
 			</figure>
 			<div class="head-mob mob">
 				<a class="ico-brs fr" id="ico-brs"></a>
 				<img src="{% static 'img/text-head-mob.png' %}">
 			</div>
 			<aside class="chamada mob">
-				<a href="">Produtos com até 70% de desconto</a>
+				<a href="{% url 'home' %}">Produtos com até 70% de desconto</a>
 			</aside>
 			<span id="ico-menu"></span>
 			<section id="Menu" class="cl">
@@ -116,10 +116,10 @@
 							<a class="lnk" href="javascript:;">Gênero</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="">Masculino</a></li>
-									<li class="cl"><a href="">Feminino</a></li>
-									<li class="cl"><a href="">Infantil</a></li>
-									<li class="cl"><a href="">Unissex</a></li>
+									<li class="cl"><a href="{% url 'home' %}?genero=masculino">Masculino</a></li>
+									<li class="cl"><a href="{% url 'home' %}?genero=feminino">Feminino</a></li>
+									<li class="cl"><a href="{% url 'home' %}?genero=infantil">Infantil</a></li>
+									<li class="cl"><a href="{% url 'home' %}?genero=unissex">Unissex</a></li>
 								</ul>
 							</div>
 						</li>
@@ -141,11 +141,11 @@
 							<a class="lnk" href="javascript:;">Faixa de Preço</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="">abaixo de R$ 30</a></li>
-									<li class="cl"><a href="">de R$ 31 a R$ 50</a></li>
-									<li class="cl"><a href="">de R$ 51 a R$ 100</a></li>
-									<li class="cl"><a href="">de R$101 a R$300</a></li>
-									<li class="cl"><a href="">acima de R$301</a></li>
+									<li class="cl"><a href="{% url 'home' %}?preco=30">abaixo de R$ 30</a></li>
+									<li class="cl"><a href="{% url 'home' %}?preco=50">de R$ 31 a R$ 50</a></li>
+									<li class="cl"><a href="{% url 'home' %}?preco=100">de R$ 51 a R$ 100</a></li>
+									<li class="cl"><a href="{% url 'home' %}?preco=300">de R$101 a R$300</a></li>
+									<li class="cl"><a href="{% url 'home' %}?preco=301">acima de R$301</a></li>
 								</ul>
 							</div>
 						</li>
@@ -154,9 +154,9 @@
 							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="">até 30%</a></li>
-									<li class="cl"><a href="">de 31% a 50%</a></li>
-									<li class="cl"><a href="">de 51% a 70%</a></li>
+									<li class="cl"><a href="{% url 'home' %}?desconto=30">até 30%</a></li>
+									<li class="cl"><a href="{% url 'home' %}?desconto=50">de 31% a 50%</a></li>
+									<li class="cl"><a href="{% url 'home' %}?desconto=70">de 51% a 70%</a></li>
 								</ul>
 							</div>
 						</li>
