@@ -182,12 +182,14 @@
 							{% if eventos.2 %}
 								{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=True %}
 							{% else %}
+								<br class="cl">
 								{% for oferta in ofertas|slice:"8:" %}
 									{% include 'blocos/oferta_item.html' %}
 								{% endfor %}
 							{% endif%}
 						{% else %}
 							{% include 'blocos/bloco_tres_sem_evento.html' with destaque=destaques.2 antes=True %}
+							<br class="cl">
 							{% for oferta in ofertas|slice:"10:" %}
 								{% include 'blocos/oferta_item.html' %}
 							{% endfor %}
@@ -195,16 +197,32 @@
 					{% else %}
 						{% if eventos.1 %}
 							{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 %}
+						{% else %}
+							<br class="cl">
+							{% for oferta in ofertas|slice:"6:" %}
+								{% include 'blocos/oferta_item.html' %}
+							{% endfor %}
 						{% endif %}
 					{% endif%}
 				{% else %}
 					{% include 'blocos/bloco_dois_sem_destaque.html' with evento=eventos.0 %}
+					{% if eventos.1 %}
+						{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 sem_destaque=True %}
+						{% if eventos.2 %}
+							{% include 'blocos/bloco_quatro_sem_destaque.html' with evento=eventos.2 %}
+						{% endif%}
+					{% endif%}
 				{% endif%}
 			{% else %}
 				{% if destaques.1 %}
 					{% include 'blocos/bloco_dois_sem_evento.html' with destaque=destaques.1 %}
 					{% if destaques.2 %}
 						{% include 'blocos/bloco_tres_sem_evento.html' with destaque=destaques.2 %}
+					{% else %}
+						<br class="cl">
+						{% for oferta in ofertas|slice:"8:" %}
+							{% include 'blocos/oferta_item.html' %}
+						{% endfor %}
 					{% endif %}
 				{% endif %}
 			{% endif %}
@@ -212,15 +230,22 @@
 			{% include 'blocos/bloco_dois_sem_destaque.html' with evento=eventos.0 sem_destaque=True %}
 			{% if eventos.1 %}
 				{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 sem_destaque=True %}
-			{% endif%}
-			{% if eventos.2 %}
-				{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=False sem_destaque=True %}
+				{% if eventos.2 %}
+					{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=False sem_destaque=True %}
+				{% else %}
+					<br class="cl">
+					{% for oferta in ofertas|slice:"15:" %}
+						{% include 'blocos/oferta_item.html' %}
+					{% endfor %}
+				{% endif%}
 			{% else %}
-				{% for oferta in ofertas|slice:"15:" %}
+				<br class="cl">
+				{% for oferta in ofertas|slice:"7:" %}
 					{% include 'blocos/oferta_item.html' %}
 				{% endfor %}
 			{% endif%}
 		{% else %}
+			<br class="cl">
 			{% for oferta in ofertas %}
 				{% include 'blocos/oferta_item.html' %}
 			{% endfor %}
