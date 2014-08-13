@@ -1,4 +1,4 @@
-<div class="grid{% if forloop.counter|divisibleby:4 %} last{% endif %}">
+<div class="grid{% if forloop.counter|divisibleby:2 %} lastmob{% endif %}{% if forloop.counter|divisibleby:4 %} last{% endif %}">
 	<article class="item">
 		<span class="desconto">{{ oferta.desconto }}</span>
 		<figure>
