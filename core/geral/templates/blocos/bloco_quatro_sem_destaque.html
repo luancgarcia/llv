@@ -6,11 +6,11 @@
 <!-- coluna com dois itens verticais -->
 {% if not sem_destaque %}
 <div class="grid dois-itens-v">
-	{% if ofertas.4 %}
-	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.4 %}
+	{% if ofertas.12 %}
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.12 %}
 	{% endif %}
-	{% if ofertas.5 %}
-	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.5 last_div=True %}
+	{% if ofertas.13 %}
+	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.13 last_div=True %}
 	{% endif %}
 </div>
 {% else %}
@@ -27,7 +27,7 @@
 {% include 'blocos/evento.html' with lasttv=True %}
 
 {% if not sem_destaque %}
-{% for oferta in ofertas|slice:"6:10" %}
+{% for oferta in ofertas|slice:"14:18" %}
 	<div class="grid {% cycle '' 'last lastmob' 'lasttv' 'last lastmob' %}">
 		<article class="item">
 			<span class="desconto">{{ oferta.desconto }}</span>
