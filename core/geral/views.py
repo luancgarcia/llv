@@ -75,7 +75,7 @@ def home_com_filtro(request, *args, **kwargs):
                 'mais_paginas': mais_paginas,
                 'lojas': Loja.publicadas_com_oferta(),
                 'lojas_splash': Loja.publicadas_sem_oferta()}
-    return render(request, "home_filtro.html", contexto)
+    return render(request, "home.html", contexto)
 
 def destaques_ofertas_eventos(items):
     destaques = items.filter(tipo=Oferta.DESTAQUE)
@@ -95,6 +95,25 @@ def home_por_categoria(slug):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria)
     return destaques_ofertas_eventos(items)
+
+def categoria(request, categoria):
+    categoria = Categoria.objects.filter(slug=categoria,shopping_id=1).get()
+    items = Oferta.objects.filter(status=Oferta.PUBLICADO,
+                                  categoria=categoria)
+    destaques, ofertas, eventos = destaques_ofertas_eventos(items)
+    mais_paginas = True if len(ofertas) > 14 else False
+
+    contexto = {'destaques': destaques,
+                'ultimo_destaque_id': [int(d['id']) for d in destaques],
+                'eventos': eventos,
+                'ultimo_evento_id': [int(e['id']) for e in eventos],
+                'ofertas': ofertas,
+                'ultima_oferta_id': [int(o['id']) for o in ofertas],
+                'categorias': Categoria.publicadas_com_oferta(),
+                'mais_paginas': mais_paginas,
+                'lojas': Loja.publicadas_com_oferta(),
+                'lojas_splash': Loja.publicadas_sem_oferta()}
+    return render(request, "home.html", contexto)
 
 def home_por_genero(slug):
     if slug == 'masculino':
