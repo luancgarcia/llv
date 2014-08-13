@@ -103,7 +103,7 @@
 							<div class="submenu fix">
 								<ul>
 									{% for categoria in categorias %}
-									<li class="{% cycle '' 'mid' '' %}"><a href="?categoria={{categoria.slug}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home' %}?categoria={{categoria.slug}}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
 									{% empty %}
 									<li>Sem categoria com ofertas cadastradas</li>
 									{% endfor %}
