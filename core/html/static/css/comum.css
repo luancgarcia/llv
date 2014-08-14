@@ -114,6 +114,9 @@
 .dois-itens-v .item {
   margin-bottom: 5px;
 }
+.dois-itens-v .item.vertical figure {
+  padding-bottom: 7px;
+}
 .dois-itens-v .item.last {
   margin-bottom: 0;
 }
@@ -551,7 +554,7 @@
   height: 17px;
   background: url(../img/fechar_modal.png) no-repeat 0 0px;
   right: 16px;
-  top: 16px;
+  top: 11px;
   position: absolute;
   z-index: 10;
 }
@@ -808,4 +811,10 @@
 }
 body {
   font: 62.5% "Tahoma", verdana, tahoma, sans-serif;
+}
+
+#Footer {
+  background-color: white;
+  height: 25px;
+  text-align: right;
 }

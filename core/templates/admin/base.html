@@ -15,17 +15,63 @@
 {% block extrastyle %}
 <style type="text/css">
 #ico-menu {display: none;}
-#blank {display: block;}
+#blank {display: none;}
 #blank, .sb-fixed {max-width: 217px !important;}
 .navbar-inverse .navbar-inner {
     background: #455958 !important;
     color: #fff;
+}
+a {
+    color: #cd2228;
+}
+
+a:hover {
+    color: #cd2228;
+}
+
+h3 a, h3 a:hover {
+    color: #A30002;
 }
 a.brand, .sb-fixed, .sb-fixed .sidebar-nav a {
     color: #fff !important;
 }
 a.brand {
     font-size: 16px !important;
+}
+.btn-primary {
+    border-color: #cd2228;
+    background: #cd2228; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NkMjIyOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhYTA4MDgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #cd2228 0%, #aa0808 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cd2228), color-stop(100%,#aa0808)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #cd2228 0%,#aa0808 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #cd2228 0%,#aa0808 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #cd2228 0%,#aa0808 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #cd2228 0%,#aa0808 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cd2228', endColorstr='#aa0808',GradientType=0 ); /* IE6-8 */
+
+}
+.btn-primary:hover {
+    background: #cd2228;
+}
+
+.btn-info {
+    border-color: #cd2228;
+    background: #cc5b5f; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NjNWI1ZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjZDIyMjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #cc5b5f 0%, #cd2228 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cc5b5f), color-stop(100%,#cd2228)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #cc5b5f 0%,#cd2228 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #cc5b5f 0%,#cd2228 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #cc5b5f 0%,#cd2228 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #cc5b5f 0%,#cd2228 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', endColorstr='#cd2228',GradientType=0 ); /* IE6-8 */
+
+}
+.btn-info:hover {
+    background: #cc5b5f;   
 }
 @media (min-width: 767px) {
   .sb-fixed{
@@ -54,6 +100,14 @@ a.brand {
 .sb-fixed .sidebar-nav p {
     font-size: 1.3em;
     margin-bottom: 20px;
+}
+#content .container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.row-fluid .span9 {
+    width: 100%;
+    margin: 0px;
 }
 @media (max-width: 480px) {
     body{
@@ -117,6 +171,14 @@ a.brand {
 }
 
 </style>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .btn-primary, .btn-info {
+       filter: none;
+    }
+  </style>
+<![endif]-->
 {% endblock %}
 
 {% if LANGUAGE_BIDI %}

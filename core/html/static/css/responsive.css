@@ -132,9 +132,11 @@
     padding-bottom: 20px;
   }
   #lightbox.share_produto .fechar_modal {
-    background-position: 0 -8px !important;
-    top: 16px !important;
-    right: 10px !important;
+    width: 13px;
+    height: 17px;
+    background: url(../img/fechar_modal.png) no-repeat 0 0px;
+    position: absolute;
+    z-index: 10;
   }
 
   #fotoProduto {
@@ -198,6 +200,7 @@
   #ShareProduto .content-share .col-produto .bt-reset {
     font-size: 1em;
     margin-left: 0px;
+    padding: 0 10px;
   }
   #ShareProduto .content-share .col-produto .bt-share {
     font-size: 1.1em;
