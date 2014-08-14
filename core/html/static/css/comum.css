@@ -165,6 +165,8 @@
 }
 .item .content .descricao {
   color: #2e2e2e;
+  height: 37px;
+  overflow: hidden;
 }
 .item .content .outro a {
   font-size: 1.4em;
