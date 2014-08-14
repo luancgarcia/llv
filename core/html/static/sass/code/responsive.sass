@@ -32,10 +32,13 @@
 				letter-spacing: -0.06em
 
 		&.dois-itens-v
-			display: none
 			+span-columns(2 omega, $coluna_responsive)
-
 			.item
+				figure
+					a
+						display: block
+						overflow: hidden
+						max-height: 250px
 				.content
 					height: auto
 					padding-bottom: 10px
@@ -107,6 +110,9 @@
 
 		.qualMarca
 			width: 100%
+
+			.foot
+				margin: 0 65px
 
 		.curtidas
 			line-height: 16px

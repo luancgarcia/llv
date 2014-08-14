@@ -80,10 +80,14 @@
     letter-spacing: -0.06em;
   }
   .grid.dois-itens-v, .grid.last.dois-itens-v {
-    display: none;
     width: 100%;
     float: left;
     margin-right: 0;
+  }
+  .grid.dois-itens-v .item figure a, .grid.last.dois-itens-v .item figure a {
+    display: block;
+    overflow: hidden;
+    max-height: 250px;
   }
   .grid.dois-itens-v .item .content, .grid.last.dois-itens-v .item .content {
     height: auto;
@@ -155,6 +159,9 @@
   }
   .colunaDados .qualMarca {
     width: 100%;
+  }
+  .colunaDados .qualMarca .foot {
+    margin: 0 65px;
   }
   .colunaDados .curtidas {
     line-height: 16px;
