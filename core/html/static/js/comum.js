@@ -20,6 +20,11 @@ largura_window = $(window).width();
 $(function(){
 	var isiDevice = /ipad|iphone|ipod|android/i.test(navigator.userAgent.toLowerCase());
 
+	if(isiDevice) {
+		$("body").attr("id","TabletSmart");
+
+	}
+
 	$("#ico-menu").on({
 		click: function(){
 			var ico = $(this);
@@ -46,7 +51,10 @@ $(function(){
 					left: "-275px"
 				});
 
-				$(".maskmenu").remove();
+				setTimeout(function(){
+					$(".maskmenu").remove();
+				},400);
+
 				return false;
 
 			}
@@ -102,8 +110,10 @@ $(function(){
 				menu_shp.animate({
 					right: "-276px"
 				});
-
-				$(".maskmenushp").remove();
+				setTimeout(function(){
+					$(".maskmenushp").remove();
+				},400);
+				
 				return false;
 
 			}

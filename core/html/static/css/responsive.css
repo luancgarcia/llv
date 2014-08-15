@@ -261,34 +261,6 @@
 
   #menu-shoppings {
     display: block;
-    position: fixed;
-    top: 0;
-    right: -276px;
-    bottom: 0px;
-    width: 276px;
-    background-color: #d21e26;
-    z-index: 60;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  #menu-shoppings header {
-    background: #cb1d24 url(../img/ico-brs-branco.png) no-repeat 0 0;
-    height: 33px;
-    line-height: 29px;
-    color: white;
-    font-size: 1.4em;
-    padding-left: 38px;
-  }
-  #menu-shoppings .content-mn {
-    padding: 0 13px;
-  }
-  #menu-shoppings .content-mn li {
-    height: 33px;
-    font-size: 1.2em;
-  }
-  #menu-shoppings .content-mn li a {
-    line-height: 33px;
-    color: white;
   }
 }
 @media (min-width: 481px) and (max-width: 728px) {

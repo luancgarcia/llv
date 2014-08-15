@@ -14,6 +14,7 @@
 
 {% block extrastyle %}
 <style type="text/css">
+body{padding-bottom: 0px !important;}
 #ico-menu {display: none;}
 #blank {display: none;}
 #blank, .sb-fixed {max-width: 217px !important;}
@@ -108,6 +109,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', end
 .row-fluid .span9 {
     width: 100%;
     margin: 0px;
+}
+#Footer {
+    background-color: #faf9f9;
+    height: 25px;
+    text-align: right;
+    margin: 0 -20px;
+    padding: 0 20px;
 }
 @media (max-width: 480px) {
     body{
@@ -313,7 +321,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', end
     </div>
     <!-- END Content -->
 
-    {% block footer %}<div id="footer"></div>{% endblock %}
+    {% block footer %}
+        
+
+    {% endblock %}
 </div>
 <!-- END Container -->
 {% block js_footer_commons %}
@@ -323,5 +334,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', end
 {% endblock js_footer_commons %}
 
 {% block js_footer %}{% endblock js_footer %}
+
+<footer id="Footer" class="fix cl">
+            <a href="http://www.kinda.com.br" target="_blank"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
+        </footer>
 </body>
 </html>

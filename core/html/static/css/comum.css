@@ -94,6 +94,14 @@
   font-size: 1.6em;
 }
 
+#TabletSmart .mob, #TabletSmart img.mob {
+  display: block !important;
+}
+
+#TabletSmart .notmob {
+  display: none !important;
+}
+
 .maskmenu {
   position: fixed;
   right: 0;
@@ -109,6 +117,41 @@
 
 #menu-shoppings {
   display: none;
+}
+
+#TabletSmart #menu-shoppings {
+  display: block;
+}
+
+#menu-shoppings {
+  position: fixed;
+  top: 0;
+  right: -276px;
+  bottom: 0px;
+  width: 276px;
+  background-color: #d21e26;
+  z-index: 60;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#menu-shoppings header {
+  background: #cb1d24 url(../img/ico-brs-branco.png) no-repeat 0 0;
+  height: 33px;
+  line-height: 29px;
+  color: white;
+  font-size: 1.4em;
+  padding-left: 38px;
+}
+#menu-shoppings .content-mn {
+  padding: 0 13px;
+}
+#menu-shoppings .content-mn li {
+  height: 33px;
+  font-size: 1.2em;
+}
+#menu-shoppings .content-mn li a {
+  line-height: 33px;
+  color: white;
 }
 
 .dois-itens-v .item {
@@ -373,6 +416,177 @@
   top: 0;
   left: 0;
   z-index: 10;
+}
+
+#TabletSmart #Splash {
+  display: none;
+}
+#TabletSmart .container {
+  padding-top: 70px;
+}
+#TabletSmart #Header {
+  position: fixed;
+  max-height: 47px;
+  min-height: 32px;
+  top: 0px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+#TabletSmart #Header .chamada {
+  background-color: #d51924;
+  height: 27px;
+  clear: both;
+  text-align: center;
+}
+#TabletSmart #Header .chamada a {
+  font-size: 1.3em;
+  font-family: "Roboto";
+  color: white;
+  display: block;
+  line-height: 27px;
+}
+#TabletSmart #Header .head-mob {
+  background: url(../img/bg-head-mob.png) repeat-x 0 0;
+  height: 33px;
+  position: relative;
+  min-width: 100%;
+}
+#TabletSmart #Header .head-mob img {
+  display: block;
+  margin: 0 auto;
+}
+#TabletSmart #Header .head-mob .ico-brs {
+  background: url(../img/ico-brs.png) no-repeat 0 0;
+  width: 43px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#TabletSmart #ico-menu {
+  background: url(../img/ico-menu-mob.png) no-repeat 0 0;
+  display: block;
+  width: 41px;
+  height: 33px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#TabletSmart #Menu {
+  background: #cb1d24;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: -275px;
+  bottom: 0;
+  width: 275px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 999;
+}
+#TabletSmart #Menu .navegacao {
+  float: none;
+  padding-left: 0px;
+}
+#TabletSmart #Menu .navegacao header {
+  display: block;
+  height: 33px;
+  font-family: "Tahoma";
+  font-size: 1.2em;
+}
+#TabletSmart #Menu .navegacao header .user {
+  line-height: 33px;
+  height: 33px;
+  margin-left: 9px;
+  padding-left: 27px;
+  position: relative;
+  color: white;
+}
+#TabletSmart #Menu .navegacao header .user img {
+  position: absolute;
+  border: 1px solid #344978;
+  border-bottom: none;
+  left: 0;
+  top: 7px;
+  max-width: 19px;
+}
+#TabletSmart #Menu .navegacao header .sair {
+  line-height: 33px;
+  height: 33px;
+  margin-right: 9px;
+  color: #570a0d;
+}
+#TabletSmart #Menu .navegacao .splash-menu {
+  display: none;
+}
+#TabletSmart #Menu .navegacao .item-menu {
+  height: auto;
+  float: none;
+  margin-bottom: 5px;
+}
+#TabletSmart #Menu .navegacao .item-menu .lnk {
+  height: 23px;
+  line-height: 23px;
+  background-color: #bb1f26;
+  background-position: right -54px;
+  color: #feefe3;
+  font-size: 1.3em;
+}
+#TabletSmart #Menu .navegacao .item-menu .lnk.ativo {
+  background-position: right -74px;
+}
+#TabletSmart #Menu .navegacao .item-menu.dia-namorados {
+  display: none;
+}
+#TabletSmart #Menu .navegacao .item-menu .submenu {
+  display: none;
+  background: none;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  -webkit-box-shadow: 0 0 0 0 transparent;
+  box-shadow: 0 0 0 0 transparent;
+  border: none;
+}
+#TabletSmart #Menu .navegacao .item-menu .submenu li {
+  width: 135px;
+  height: 20px;
+  border: none !important;
+  font-size: 1.2em;
+}
+#TabletSmart #Menu .navegacao .item-menu .submenu li.mid, #TabletSmart #Menu .navegacao .item-menu .submenu li.last {
+  border: none !important;
+}
+#TabletSmart #Menu .navegacao .item-menu .submenu li.cl {
+  width: 100% !important;
+}
+#TabletSmart #Menu .navegacao .item-menu .submenu li a {
+  color: white;
+  line-height: 20px;
+  padding-left: 10px;
+}
+#TabletSmart #Menu .navegacao .item-menu .submenu li a:hover {
+  color: white;
+}
+#TabletSmart #Menu .navegacao .item-menu:hover .lnk {
+  background-color: #bb1f26;
+  background-position: right -54px;
+  color: #feefe3;
+  border: none;
+  margin: 0px;
+}
+#TabletSmart #Menu .navegacao .item-menu:hover .lnk.ativo {
+  background-position: right -74px;
+}
+#TabletSmart #Menu .navegacao .item-menu:hover .submenu {
+  display: none;
+}
+#TabletSmart #Menu .navegacao .item-menu.last .submenu {
+  left: 0;
+  margin-left: 0px;
 }
 
 #ico-menu {
@@ -814,7 +1028,7 @@ body {
 }
 
 #Footer {
-  background-color: white;
+  background-color: #faf9f9;
   height: 25px;
   text-align: right;
 }
