@@ -360,6 +360,12 @@ class Log(BaseModel):
 
 
 class Mascara(EditorialModel):
+    NORMAL = 0
+    SAZONAL = 1
+    CATEGORIAS = (
+        (NORMAL, u'Normal'),
+        (SAZONAL, u'Sazonal')
+    )
     imagem = models.ImageField(u'Imagem', upload_to='mascaras',
                                null=True, blank=True)
     img_376x376 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
@@ -372,6 +378,8 @@ class Mascara(EditorialModel):
                                  resize.ResizeToFill(98, 98)],
                                  source='thumb', format='PNG',
                                  options={'quality': 90})
+    categoria = models.IntegerField(u'Tipo de categoria', choices=CATEGORIAS,
+                                    null=True, blank=True, default=NORMAL)
 
     class Meta:
         verbose_name = u'Imagem para compartilhar'
