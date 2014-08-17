@@ -53,7 +53,8 @@ class OfertaAdmin(admin.ModelAdmin):
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'status']
-    readonly_fields = ('total_compartilhado','total_visto','total_curtido','desconto_value','autor')
+    readonly_fields = ('total_compartilhado', 'total_visto', 'total_curtido',
+                       'desconto_value', 'autor')
 
     class Media:
         js = [
@@ -123,8 +124,6 @@ class OfertaAdmin(admin.ModelAdmin):
         obj.tipo = Oferta.OFERTA
         if perfil.is_lojista:
             obj.status = Oferta.PENDENTE
-        else:
-            obj.status = Oferta.PUBLICADO
         obj.save()
 
 
