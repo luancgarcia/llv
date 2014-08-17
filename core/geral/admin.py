@@ -94,23 +94,36 @@ class OfertaAdmin(admin.ModelAdmin):
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(OfertaAdmin, self).get_fieldsets(request, obj)
         perfil = request.user.perfil.get()
-        fieldsets = (
-            ('Informações', {
-                    'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
-                               'texto_promocional', 'texto_link',)
-            }),
-            ('Digite os valores do produto', {
-                'fields': (('preco_inicial','preco_final'),'desconto')
-            }),
-        )
+
         if not perfil.is_lojista and not perfil.is_marketing:
             fieldsets = (
                 ('Dados', {
                     'fields': ('total_visto','total_curtido', 'total_compartilhado','autor')
                 }),
                 ('Informações', {
-                    'fields': ('loja','nome','slug', 'categoria', 'genero', 'descricao',
-                               'texto_promocional', 'texto_link',)
+                    'fields': ('status','loja','nome','slug','categoria','genero',
+                               'descricao', 'texto_promocional', 'texto_link',)
+                }),
+                ('Digite os valores do produto', {
+                    'fields': (('preco_inicial','preco_final'),'desconto')
+                }),
+            )
+        elif not perfil.is_lojista:
+            fieldsets = (
+                ('Informações', {
+                    'fields': ('status','loja','nome','slug','categoria','genero',
+                               'descricao', 'texto_promocional', 'texto_link',)
+                }),
+                ('Digite os valores do produto', {
+                    'fields': (('preco_inicial','preco_final'),'desconto')
+                }),
+            )
+        else:
+            fieldsets = (
+                ('Informações', {
+                        'fields': ('loja', 'nome', 'slug', 'categoria', 'genero',
+                                   'descricao', 'texto_promocional',
+                                   'texto_link',)
                 }),
                 ('Digite os valores do produto', {
                     'fields': (('preco_inicial','preco_final'),'desconto')
