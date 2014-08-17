@@ -49,6 +49,20 @@ class ImagemInline(admin.StackedInline):
     )
 
 
+class ImagemNaoOfertaInline(admin.StackedInline):
+    classes = ('grp-collapse grp-open',)
+    inline_classes = ('grp-collapse grp-open',)
+    model = ImagemOferta
+    exclude = ('principal','vertical')
+    extra = 1
+    max_num = 1
+    fieldsets = (
+        ('', {
+            'fields': (('imagem','ordem'),)
+        }),
+    )
+
+
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
     exclude = OCULTA_NO_ADMIN
@@ -142,7 +156,7 @@ class OfertaAdmin(admin.ModelAdmin):
 
 
 class DestaqueAdmin(admin.ModelAdmin):
-    inlines = [ImagemInline,]
+    inlines = [ImagemNaoOfertaInline,]
     exclude = OCULTA_NO_ADMIN
     prepopulated_fields = {'slug': ('nome',), }
     list_display = ['__unicode__','status']
@@ -164,7 +178,7 @@ class DestaqueAdmin(admin.ModelAdmin):
 
 
 class EventoAdmin(admin.ModelAdmin):
-    inlines = [ImagemInline,]
+    inlines = [ImagemNaoOfertaInline,]
     exclude = OCULTA_NO_ADMIN + ('preco_inicial','preco_final','desconto')
     prepopulated_fields = {'slug': ('nome',), }
     list_display = ['nome','genero','status']
