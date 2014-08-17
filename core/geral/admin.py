@@ -40,7 +40,8 @@ class ImagemInline(admin.StackedInline):
     inline_classes = ('grp-collapse grp-open',)
     model = ImagemOferta
     exclude = ('principal','vertical')
-    extra = 1
+    extra = 0
+    max_num = 3
     fieldsets = (
         ('', {
             'fields': (('imagem','ordem'),)
