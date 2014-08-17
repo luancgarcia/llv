@@ -10,7 +10,7 @@ from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
 from lojas.models import Loja
 
 
-OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada','autor')
+OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada','autor','texto_link')
 
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada']
@@ -117,7 +117,7 @@ class OfertaAdmin(admin.ModelAdmin):
                 }),
                 ('Informações', {
                     'fields': ('status','loja','nome','slug','categoria','genero',
-                               'descricao', 'texto_promocional', 'texto_link',)
+                               'descricao', 'texto_promocional',)
                 }),
                 ('Digite os valores do produto', {
                     'fields': (('preco_inicial','preco_final'),'desconto')
@@ -127,7 +127,7 @@ class OfertaAdmin(admin.ModelAdmin):
             fieldsets = (
                 ('Informações', {
                     'fields': ('status','loja','nome','slug','categoria','genero',
-                               'descricao', 'texto_promocional', 'texto_link',)
+                               'descricao', 'texto_promocional',)
                 }),
                 ('Digite os valores do produto', {
                     'fields': (('preco_inicial','preco_final'),'desconto')
@@ -137,8 +137,7 @@ class OfertaAdmin(admin.ModelAdmin):
             fieldsets = (
                 ('Informações', {
                         'fields': ('loja', 'nome', 'slug', 'categoria', 'genero',
-                                   'descricao', 'texto_promocional',
-                                   'texto_link',)
+                                   'descricao', 'texto_promocional',)
                 }),
                 ('Digite os valores do produto', {
                     'fields': (('preco_inicial','preco_final'),'desconto')
