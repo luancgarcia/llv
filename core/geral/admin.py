@@ -27,7 +27,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 class SazonalAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada']
     prepopulated_fields = {'slug': ('nome',), }
-    exclude = ['sazonal']
+    exclude = ['sazonal','imagem']
     list_editable = ['publicada']
     list_filter = ['publicada']
     def queryset(self, request):
