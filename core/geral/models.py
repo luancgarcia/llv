@@ -159,9 +159,9 @@ class Oferta(EditorialModel):
     evento = models.TextField(u'Descrição do Evento', blank=True, null=True)
     texto_promocional = models.TextField(u'Chamada Promocional',
                                          blank=True, null=True)
-    preco_inicial = models.CharField(u'De: R$', max_length=70, null=True,
+    preco_inicial = models.CharField(u'De R$', max_length=70, null=True,
                                      blank=True)
-    preco_final = models.CharField(u'Por: R$', max_length=70, null=True,
+    preco_final = models.CharField(u'Por R$', max_length=70, null=True,
                                    blank=True)
     desconto = models.IntegerField(u'Desconto (em %)', null=True, blank=True)
     tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
@@ -179,11 +179,15 @@ class Oferta(EditorialModel):
         unique_together = (('loja','slug'))
 
     def __unicode__(self):
-        return u'%s - %s [ %s off %s - %s ]' % (self.nome,
-                                               self.texto_link,
-                                               self.desconto_value,
-                                               self.preco_inicial,
-                                               self.preco_final)
+        desconto_str = u'%s off' % self.desconto_value if self.desconto_value else ''
+        preco_final = u'%s' % self.preco_final if self.preco_final else ''
+        preco_inicial = u'%s' % self.preco_inicial if self.preco_inicial else ''
+        separador = ' - ' if preco_final and preco_inicial else ''
+        return u'%s [ %s %s%s%s ]' % (self.nome,
+                                    desconto_str,
+                                    separador,
+                                    preco_inicial,
+                                    preco_final)
 
     def save(self, *args, **kwargs):
         if self.status == Oferta.PUBLICADO:

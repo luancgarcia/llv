@@ -15,14 +15,16 @@ $(document).ready(function(){
             var inicial = parseFloat($("#id_preco_inicial").val().replace('.','').replace(',','.'));
             var pfinal = parseFloat($("#id_preco_final").val().replace('.','').replace(',','.'));
 
-            if (inicial > pfinal){
-                var result = parseInt((pfinal * 100)/ inicial);
-                var result_str = result+'';
-                // $('#id_desconto').val(result_str.substr(0,2)+'%');
-                // $('#id_desconto').val(result_str.substr(0,2));
-                $('#id_desconto').val(result);
-            }else{
-                $('#id_desconto').val('-');
+            if (inicial && pfinal){
+                if (inicial > pfinal){
+                    var result = parseInt((pfinal * 100)/ inicial);
+                    var result_str = result+'';
+                    // $('#id_desconto').val(result_str.substr(0,2)+'%');
+                    // $('#id_desconto').val(result_str.substr(0,2));
+                    $('#id_desconto').val(result);
+                }else{
+                    $('#id_desconto').val('-');
+                }
             }
         })
     });
