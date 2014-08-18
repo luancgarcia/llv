@@ -151,8 +151,8 @@ class Oferta(EditorialModel):
 
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
-    categoria = models.ForeignKey(Categoria, verbose_name=u'Categoria', null=True,
-                                  blank=True, related_name='ofertas')
+    categoria = models.ManyToManyField(Categoria, verbose_name=u'Categoria',null=True,
+                                       blank=True, related_name='ofertas')
     nome = models.CharField(u'Título', max_length=200, null=True, blank=False)
     slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
@@ -185,8 +185,8 @@ class Oferta(EditorialModel):
         separador = ' - ' if preco_final and preco_inicial else ''
         return u'%s [ %s %s%s%s ]' % (self.nome,
                                     desconto_str,
-                                    separador,
                                     preco_inicial,
+                                    separador,
                                     preco_final)
 
     def save(self, *args, **kwargs):

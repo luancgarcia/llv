@@ -106,6 +106,12 @@ class OfertaAdmin(admin.ModelAdmin):
                 kwargs["queryset"] = Loja.objects.all()
         return super(OfertaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "categoria" and perfil.shopping:
+            kwargs["queryset"] = Categoria.objects.filter(shopping=perfil.shopping)
+        return super(OfertaAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
+
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(OfertaAdmin, self).get_fieldsets(request, obj)
         perfil = request.user.perfil.get()
