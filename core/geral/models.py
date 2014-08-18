@@ -99,11 +99,6 @@ class Categoria(EditorialModel):
 
         return contexto
 
-    def save(self, *args, **kwargs):
-        if self.publicada and self.sazonal:
-            Categoria.objects.filter(publicada=True,sazonal=True).update(publicada=False)
-        super(Categoria, self).save(*args, **kwargs)
-
     @classmethod
     def publicadas_com_oferta(cls):
         shopping = Shopping.objects.get(id=1)
@@ -116,6 +111,12 @@ class Sazonal(Categoria):
         proxy = True
         verbose_name = u'Categoria Sazonal'
         verbose_name_plural = u'Categorias Sazonais'
+
+    def save(self, *args, **kwargs):
+        self.sazonal = True
+        if self.publicada:
+            Categoria.objects.filter(publicada=True,sazonal=True).update(publicada=False)
+        super(Categoria, self).save(*args, **kwargs)
 
 
 class Oferta(EditorialModel):
