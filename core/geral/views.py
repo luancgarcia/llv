@@ -10,7 +10,7 @@ from django.conf import settings
 
 from utils.functions import jsonResponse
 
-from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara
+from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara, Sazonal
 from lojas.models import Loja
 
 
@@ -45,7 +45,8 @@ def home(request):
                 'categorias': Categoria.publicadas_com_oferta(),
                 'mais_paginas': mais_paginas,
                 'lojas': Loja.publicadas_com_oferta(),
-                'lojas_splash': Loja.publicadas_sem_oferta()}
+                'lojas_splash': Loja.publicadas_sem_oferta(),
+                'sazonal': Sazonal.atual()}
     return render(request, "home.html", contexto)
 
 def home_com_filtro(request, *args, **kwargs):

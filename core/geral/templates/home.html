@@ -164,6 +164,12 @@
 						<li class="fl splash-menu">
 							<a href="javascript:;" class="rpl">sacola-splasy.png</a>
 						</li>
+
+						{% if sazonal %}
+						<li class="item-menu dia-namorados">
+							<a href="{% url 'home_categoria' sazonal.slug %}" class="ui-link">{{ sazonal.nome}}</a>
+						</li>
+						{% endif %}
 					</ul>
 
 				</nav>
@@ -174,7 +180,7 @@
 		{% include 'home-part.html' %}
 
 	</div>
-	
+
 	{% include 'modais/splash.html' %}
 
 	<footer id="Footer" class="fix cl">

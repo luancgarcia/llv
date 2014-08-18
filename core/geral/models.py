@@ -118,6 +118,11 @@ class Sazonal(Categoria):
             Categoria.objects.filter(publicada=True,sazonal=True).update(publicada=False)
         super(Categoria, self).save(*args, **kwargs)
 
+    @classmethod
+    def atual(cls):
+        atual = cls.objects.filter(sazonal=True,publicada=True)[:1]
+        return atual[0].to_dict() if atual else {}
+
 
 class Oferta(EditorialModel):
     OFERTA = 0
