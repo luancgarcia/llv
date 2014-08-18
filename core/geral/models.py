@@ -244,7 +244,7 @@ class Oferta(EditorialModel):
                      'imagem': imagem,
                      'compartilhamentos': self.total_visto,
                      'curtidas': self.total_curtido,
-                     'categoria': self.categoria.to_dict() if self.categoria else None,
+                     'categoria': [c.to_dict() for c in self.categoria.all()],
                      'expira': self.expira,
                      'expira_str': self.expira_str}
 
