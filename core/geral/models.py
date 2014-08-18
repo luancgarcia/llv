@@ -251,7 +251,8 @@ class Oferta(EditorialModel):
                      'curtidas': self.total_curtido,
                      'categoria': [c.to_dict() for c in self.categoria.all()],
                      'expira': self.expira,
-                     'expira_str': self.expira_str}
+                     'expira_str': self.expira_str,
+                     'titulo': self.nome}
 
         if not self.tipo == Oferta.EVENTO:
             contexto.update({'porcentagem': self.porcentagem_desconto(),
@@ -262,8 +263,7 @@ class Oferta(EditorialModel):
         if modal:
             imagens = [{'maior':img.img_376x376.url,
                         'menor':img.img_94x94.url} for img in self.imagens.all()]
-            contexto.update({'titulo': self.nome,
-                             'descricao': self.descricao,
+            contexto.update({'descricao': self.descricao,
                              'imagens': imagens})
         return contexto
 
