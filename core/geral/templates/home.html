@@ -21,7 +21,7 @@
 		static_url = "img/";
 	</script>
 
-	<script type="text/javascript" src="{% static 'js/comum.js' %}"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/comum.js?v={{ VERSAO_ESTATICOS }}"></script>
 	<script type="text/javascript">
 		(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
