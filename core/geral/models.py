@@ -383,13 +383,19 @@ class Mascara(EditorialModel):
         (NORMAL, u'Normal'),
         (SAZONAL, u'Sazonal')
     )
-    imagem = models.ImageField(u'Imagem', upload_to='mascaras',
+
+    def new_filename(instance, filename):
+        fname, dot, extension = filename.rpartition('.')
+        fname = slugify(fname)
+        return os.path.join('mascaras','%s.%s' % (fname, extension))
+
+    imagem = models.ImageField(u'Imagem', upload_to=new_filename,
                                null=True, blank=True)
     img_376x376 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(376, 376)],
                                  source='imagem', format='PNG',
                                  options={'quality': 90})
-    thumb = models.ImageField(u'Thumbnail', upload_to='mascaras',
+    thumb = models.ImageField(u'Thumbnail', upload_to=new_filename,
                                null=True, blank=True)
     thumb_98x98 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(98, 98)],
