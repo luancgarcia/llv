@@ -25,6 +25,8 @@ $(document).ready(function(){
                 }else{
                     $('#id_desconto').val('-');
                 }
+            }else{
+                $('#id_desconto').val('0');
             }
         })
     });
