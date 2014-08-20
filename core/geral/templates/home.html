@@ -129,7 +129,7 @@
 							<div class="submenu fix">
 								<ul>
 									{% for loja in lojas %}
-									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' loja.id %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
 									{% empty %}
 									<li>Sem loja com ofertas cadastradas</li>
 									{% endfor %}

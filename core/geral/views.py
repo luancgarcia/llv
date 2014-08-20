@@ -130,8 +130,8 @@ def home_por_genero(slug):
                                   genero=genero)
     return destaques_ofertas_eventos(items)
 
-def home_por_loja(id_loja):
-    loja = Loja.objects.filter(id=id_loja).get()
+def home_por_loja(slug):
+    loja = Loja.objects.filter(slug=slug,shopping_id=1).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja=loja)
     return destaques_ofertas_eventos(items)
