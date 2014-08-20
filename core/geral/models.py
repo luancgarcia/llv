@@ -220,7 +220,10 @@ class Oferta(EditorialModel):
     status_string.short_description = u'Status'
 
     def porcentagem_desconto(self):
-        return int(100-(100*int(self.preco_final)/int(self.preco_inicial)))
+        if self.preco_inicial and self.preco_final:
+            return int(100-(100*int(self.preco_final)/int(self.preco_inicial)))
+        else:
+            return None
 
     @classmethod
     def get_ofertas(cls):
