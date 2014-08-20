@@ -153,12 +153,14 @@ def home_por_preco(preco):
 
 def home_por_desconto(porcentagem):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO)
-    if porcentagem == '30':
-        items.filter(desconto__lte='30')
-    elif porcentagem == '50':
-        items.filter(desconto__gte='31',desconto__lte='50')
+
+    porcentagem = int(porcentagem)
+    if porcentagem == 30:
+        items = items.filter(desconto__lte=30)
+    elif porcentagem == 50:
+        items = items.filter(desconto__gte=31,desconto__lte=50)
     else:
-        items.filter(desconto__gte='51',desconto__lte='70')
+        items = items.filter(desconto__gte=51,desconto__lte=70)
 
     return destaques_ofertas_eventos(items)
 
