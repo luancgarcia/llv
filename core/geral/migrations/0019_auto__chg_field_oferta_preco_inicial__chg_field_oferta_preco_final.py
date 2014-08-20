@@ -1,44 +1,27 @@
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
-from decimal import Decimal
 
-class Migration(DataMigration):
+
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Don't use "from appname.models import ModelName".
-        # Use orm.ModelName to refer to models in this application,
-        # and orm['appname.ModelName'] for models in other applications.
-        for oferta in orm.Oferta.objects.all():
-            if oferta.preco_inicial == u'' or not oferta.preco_inicial:
-                oferta.preco_inicial = Decimal(0)
-            else:
-                preco_inicial = oferta.preco_inicial.replace('.','').replace(',','.')
-                oferta.preco_inicial = preco_inicial
 
-            if oferta.preco_final == u'' or not oferta.preco_final:
-                oferta.preco_final = Decimal(0)
-            else:
-                preco_final = oferta.preco_final.replace('.','').replace(',','.')
-                oferta.preco_final = preco_final
-            oferta.save()
+        # Changing field 'Oferta.preco_inicial'
+        db.alter_column(u'geral_oferta', 'preco_inicial', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=8, decimal_places=2))
+
+        # Changing field 'Oferta.preco_final'
+        db.alter_column(u'geral_oferta', 'preco_final', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=8, decimal_places=2))
 
     def backwards(self, orm):
-        "Write your backwards methods here."
-        for oferta in orm.Oferta.objects.all():
-            if oferta.preco_inicial == 0 or not oferta.preco_inicial:
-                oferta.preco_inicial = u''
-            else:
-                oferta.preco_inicial = str(oferta.preco_inicial).replace('.',',')
 
-            if oferta.preco_final == 0 or not oferta.preco_final:
-                oferta.preco_final = u''
-            else:
-                oferta.preco_final = str(oferta.preco_final).replace('.',',')
-            oferta.save()
+        # Changing field 'Oferta.preco_inicial'
+        db.alter_column(u'geral_oferta', 'preco_inicial', self.gf('django.db.models.fields.CharField')(max_length=70, null=True))
+
+        # Changing field 'Oferta.preco_final'
+        db.alter_column(u'geral_oferta', 'preco_final', self.gf('django.db.models.fields.CharField')(max_length=70, null=True))
 
     models = {
         u'auth.group': {
@@ -132,8 +115,8 @@ class Migration(DataMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'loja': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'ofertas'", 'null': 'True', 'to': u"orm['lojas.Loja']"}),
             'nome': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
-            'preco_final': ('django.db.models.fields.CharField', [], {'max_length': '70', 'null': 'True', 'blank': 'True'}),
-            'preco_inicial': ('django.db.models.fields.CharField', [], {'max_length': '70', 'null': 'True', 'blank': 'True'}),
+            'preco_final': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '8', 'decimal_places': '2', 'blank': 'True'}),
+            'preco_inicial': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '8', 'decimal_places': '2', 'blank': 'True'}),
             'publicada': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '250', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'status': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
@@ -176,4 +159,3 @@ class Migration(DataMigration):
     }
 
     complete_apps = ['geral']
-    symmetrical = True
