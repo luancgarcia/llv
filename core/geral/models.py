@@ -104,7 +104,7 @@ class Categoria(EditorialModel):
     @classmethod
     def publicadas_com_oferta(cls):
         shopping = Shopping.objects.get(id=1)
-        categorias = cls.objects.filter(shopping=shopping,publicada=True).order_by('nome')
+        categorias = cls.objects.filter(shopping=shopping,publicada=True,sazonal=False).order_by('nome')
         return [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
 
 
