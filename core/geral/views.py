@@ -294,3 +294,11 @@ def mesclar(request):
     Log.regitra_acao(item,Log.COMPARTILHADA)
 
     return jsonResponse(contexto)
+
+@csrf_exempt
+def solicitar_loja(request):
+    nome = request.POST.get('nome', None)
+    email = request.POST.get('email', None)
+    loja = request.POST.get('loja', None)
+    print nome, email, loja
+    return jsonResponse({})

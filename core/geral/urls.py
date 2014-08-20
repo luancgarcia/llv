@@ -47,6 +47,9 @@ urlpatterns = patterns('',
     url(r'^loja/(?P<loja>[\w-]+)/$', 'geral.views.home_com_filtro', name='home_loja'),
     url(r'^preco/(?P<preco>\d+)/$', 'geral.views.home_com_filtro', name='home_preco'),
     url(r'^desconto/(?P<desconto>\d+)/$', 'geral.views.home_com_filtro', name='home_desconto'),
+
+    url(r'^solicitar_loja/$', 'geral.views.solicitar_loja', name='solicitar_loja'),
+
     url(r'^$', 'geral.views.home', name='home'),
 )
 
