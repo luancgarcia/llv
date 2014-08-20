@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+import os
+
 from datetime import datetime, timedelta
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
@@ -309,9 +311,14 @@ class Evento(Oferta):
 
 
 class ImagemOferta(OrderedModel):
+    def new_filename(instance, filename):
+        fname, dot, extension = filename.rpartition('.')
+        fname = slugify(fname)
+        return os.path.join('ofertas','%s.%s' % (fname, extension))
+
     oferta = models.ForeignKey(Oferta, verbose_name=u'Oferta',
                                related_name='imagens')
-    imagem = models.ImageField(u'Imagem', upload_to='ofertas',
+    imagem = models.ImageField(u'Imagem', upload_to=new_filename,
                                null=True, blank=True)
     img_376x376 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(376, 376)],
