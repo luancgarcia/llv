@@ -31,6 +31,12 @@ MANAGERS = ADMINS = (
     ('Luan Garcia', 'contato@luangarcia.com'),
 )
 
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "jonatas.cd@gmail.com"
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
 SITE_URL = "https://jonatascd.pythonanywhere.com/"
 
