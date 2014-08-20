@@ -1,6 +1,8 @@
 <div class="grid2{% if last_div %} last{%endif%}{%if lastmob%} lastmob{%endif%}{%if lasttv%} lasttv{%endif%}">
 	<article class="item">
+		{% if destaque.desconto %}
 		<span class="desconto">{{ destaque.desconto }}</span>
+		{% endif %}
 		<figure>
 			<a href="javascript:;" title="{{destaque.loja.nome}}" data-href="{% url 'modal' 'destaque' destaque.id %}" rel="modal" data-param=786>
 				<img src="{{ destaque.imagem }}" alt="{{ destaque.loja.nome }} - {{ destaque.desconto }}% off">
@@ -11,10 +13,10 @@
 			{% if destaque.loja.logo %}
 			<span class="marca"><img src="{{ destaque.loja.logo }}" alt='{{ destaque.loja.nome }}'></span>
 			{% endif %}
-			<h2 class="titulo">{{ destaque.loja.nome }}</h2>
-			<p class="descricao">{{ destaque.chamada_promocional }}</p>
-			{% if destaque.texto_do_link %}
-				<p class="outro"><a href="">{{ destaque.texto_do_link }}</a></p>
+			<h2 class="titulo">{{ destaque.titulo }}</h2>
+			<p class="descricao">{{ destaque.descricao|truncatechars:75 }}</p>
+			{% if destaque.chamada_promocional %}
+				<p class="outro"><a href="">{{ destaque.chamada_promocional }}</a></p>
 			{% else %}
 				<p class="outro">
 					<span class="valor1">de: R$ {{ destaque.preco_inicial }} por</span>
