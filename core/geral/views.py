@@ -253,27 +253,36 @@ def mesclar(request):
     mascara_id = request.POST.get('mascara_id', None)
     id_item = request.POST.get('id_item', None)
 
-    if not all([imagem_id,mascara_id,id_item]):
+    if not imagem_id and not mascara_id:
         raise Http404
 
-    item = Oferta.objects.get(id=id_item)
-    imagem = ImagemOferta.objects.get(id=imagem_id)
-    mascara = Mascara.objects.get(id=mascara_id)
+    item = imagem = mascara= None
+    if id_item:
+        item = Oferta.objects.get(id=id_item)
+    if imagem_id:
+        imagem = ImagemOferta.objects.get(id=imagem_id)
+    if mascara_id:
+        mascara = Mascara.objects.get(id=mascara_id)
 
-    background_arquivo = '%s%s' % (settings.PROJECT_DIR, imagem.img_376x376.url)
-    background = Image.open(background_arquivo)
-    foreground_arquivo = '%s%s' % (settings.PROJECT_DIR, mascara.img_376x376.url)
-    foreground = Image.open(foreground_arquivo)
-    background.paste(foreground, (0, 0), foreground)
+    if not item or not imagem:
+        raise Http404
 
-    arquivo = '%s_%s_%s.png' % (id_item, imagem_id, mascara_id)
-    destino = os.path.join(settings.COMPARTILHADAS_PASTA, arquivo)
-    destino_url = '%s%s' % (settings.COMPARTILHADAS_URL, arquivo)
+    if imagem and mascara:
+        background_arquivo = '%s%s' % (settings.PROJECT_DIR, imagem.img_376x376.url)
+        background = Image.open(background_arquivo)
+        foreground_arquivo = '%s%s' % (settings.PROJECT_DIR, mascara.img_376x376.url)
+        foreground = Image.open(foreground_arquivo)
+        background.paste(foreground, (0, 0), foreground)
 
-    try:
-        background.save(destino)
-    except Exception, e:
-        raise e
+        arquivo = '%s_%s_%s.png' % (id_item, imagem_id, mascara_id)
+        destino = os.path.join(settings.COMPARTILHADAS_PASTA, arquivo)
+        destino_url = '%s%s' % (settings.COMPARTILHADAS_URL, arquivo)
+        try:
+            background.save(destino)
+        except Exception, e:
+            raise e
+    else:
+        destino_url = imagem.img_376x376.url
 
     item_dict = item.to_dict(modal=True)
     contexto = {'titulo': item_dict['titulo'],
