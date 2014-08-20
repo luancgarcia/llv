@@ -3,6 +3,7 @@
 from imagekit.admin import AdminThumbnail
 
 from django.contrib import admin
+from django.forms import ModelForm
 
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
                           Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador,
@@ -62,6 +63,11 @@ class ImagemNaoOfertaInline(admin.StackedInline):
         }),
     )
 
+
+class OfertaModelForm(ModelForm):
+    class Meta:
+        model = Oferta
+        localized_fields = ('__all__')
 
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
@@ -273,7 +279,7 @@ class MascaraAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Categoria, CategoriaAdmin)
-admin.site.register(Oferta, OfertaAdmin)
+admin.site.register(Oferta, OfertaAdmin, form=OfertaModelForm)
 admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)

@@ -167,10 +167,10 @@ class Oferta(EditorialModel):
     evento = models.TextField(u'Descrição do Evento', blank=True, null=True)
     texto_promocional = models.TextField(u'Chamada Promocional',
                                          blank=True, null=True)
-    preco_inicial = models.CharField(u'De R$', max_length=70, null=True,
-                                     blank=True)
-    preco_final = models.CharField(u'Por R$', max_length=70, null=True,
-                                   blank=True)
+    preco_inicial = models.DecimalField(u'De R$', max_digits=8, decimal_places=2,
+                                     null=True, blank=True)
+    preco_final = models.DecimalField(u'Por R$', max_digits=8, decimal_places=2,
+                                      null=True, blank=True)
     desconto = models.IntegerField(u'Desconto (em %)', null=True, blank=True)
     tipo = models.IntegerField(u'Tipo', choices=TIPOS, default=OFERTA)
     texto_link = models.CharField(u'Texto do link', max_length="140", null=True, blank=True)
