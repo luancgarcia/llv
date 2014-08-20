@@ -16,12 +16,14 @@ class Migration(DataMigration):
             if oferta.preco_inicial == u'' or not oferta.preco_inicial:
                 oferta.preco_inicial = Decimal(0)
             else:
-                oferta.preco_inicial = Decimal(oferta.preco_inicial.replace(',','.'))
+                preco_inicial = oferta.preco_inicial.replace('.','').replace(',','.')
+                oferta.preco_inicial = preco_inicial
 
             if oferta.preco_final == u'' or not oferta.preco_final:
                 oferta.preco_final = Decimal(0)
             else:
-                oferta.preco_final = Decimal(oferta.preco_final.replace(',','.'))
+                preco_final = oferta.preco_final.replace('.','').replace(',','.')
+                oferta.preco_final = preco_final
             oferta.save()
 
     def backwards(self, orm):
