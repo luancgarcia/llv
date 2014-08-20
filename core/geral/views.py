@@ -145,7 +145,7 @@ def home_por_preco(preco):
     elif preco == '100':
         items.filter(preco_final__lte='100',preco_final__gte='51')
     elif preco == '50':
-        item.filter(preco_final__lte='50',preco_final__gte='31')
+        items.filter(preco_final__lte='50',preco_final__gte='31')
     else:
         items.filter(preco_final__lte='30')
 
