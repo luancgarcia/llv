@@ -282,7 +282,7 @@ def mesclar(request):
         except Exception, e:
             raise e
     else:
-        destino_url = os.path.join(settings.MEDIA_ROOT, imagem.img_376x376.url)
+        destino_url = '%s%s' % (settings.SITE_URL, imagem.img_376x376.url)
 
     item_dict = item.to_dict(modal=True)
     contexto = {'titulo': item_dict['titulo'],
