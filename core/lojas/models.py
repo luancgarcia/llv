@@ -4,6 +4,7 @@ from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
 from django.db import models
+from django.utils.text import slugify
 
 from utils.models import EditorialModel, BaseManager
 
@@ -28,10 +29,15 @@ class Shopping(EditorialModel):
 
 
 class Loja(EditorialModel):
+    def new_filename(instance, filename):
+        fname, dot, extension = filename.rpartition('.')
+        fname = slugify(fname)
+        return os.path.join('lojas','%s.%s' % (fname, extension))
+
     shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping', related_name='lojas')
     nome = models.CharField(u'Nome', max_length=100, null=True, blank=False)
-    logo = models.CharField(u'Logo', max_length=100, null=True, blank=True)
-    logo = models.ImageField(u'Imagem', upload_to='lojas',
+    slug = models.CharField(u'Slug', max_length=150, null=True, blank=True)
+    logo = models.ImageField(u'Imagem', upload_to=new_filename,
                                null=True, blank=True)
     logo_120x50 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(120, 50)],
@@ -50,6 +56,7 @@ class Loja(EditorialModel):
     def to_dict(self):
         return {'id': self.id,
                 'nome': self.nome,
+                'slug': self.slug,
                 'logo': self.logo_120x50.url if self.logo else None,
                 'telefone': self.telefone,
                 'shopping': self.shopping.to_dict()}
