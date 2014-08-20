@@ -1,17 +1,3 @@
 <article class="item{% if last_div%} last{% endif %}">
-	<span class="desconto">{{ oferta.desconto }}</span>
-	<figure>
-		<a href="javascript:;" title="{{oferta.loja.nome}}" data-href="{% url 'modal' 'oferta' oferta.id %}" rel="modal" data-param=786>
-			<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
-		</a>
-	</figure>
-
-	<section class="content">
-		<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
-	</section>
-
-	<footer>
-		<a class="like fl" href="javascript:;" title="Curtir" data-id="{{ oferta.id}}">{{ oferta.curtidas }}</a>
-		<a class="share fr" href="javascript:;" rel="modal" data-href="{% url 'modal_share' oferta.id %}"  data-class="share_produto" data-param="786">Compartilhar</a>
-	</footer>
+	{% include "blocos/oferta_miolo.html" %}
 </article><!-- .item -->
