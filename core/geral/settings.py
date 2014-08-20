@@ -28,8 +28,12 @@ ALLOWED_HOSTS = []
 
 MANAGERS = ADMINS = (
     ('Jonatas C Damasceno', 'jonatas.cd@gmail.com'),
-    ('Luan Garcia', 'contato@luangarcia.com'),
+    ('Rachel Rubia', 'rachelrubia@gmail.com'),
+    ('Marcus Ribeiro', 'marcusribeirooo@gmail.com'),
 )
+
+FALE_CONOSCO = ['jonatas.cd@gmail.com','rachelrubia@gmail.com','marcusribeirooo@gmail.com']
+EMAIL_FROM = "jonatas.cd@gmail.com"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "jonatas.cd@gmail.com"

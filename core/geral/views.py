@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponse
 from django.conf import settings
 
 from utils.functions import jsonResponse
+from utils.custom_email import TemplatedEmail
 
 from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara, Sazonal
 from lojas.models import Loja
@@ -300,5 +301,50 @@ def solicitar_loja(request):
     nome = request.POST.get('nome', None)
     email = request.POST.get('email', None)
     loja = request.POST.get('loja', None)
-    print nome, email, loja
-    return jsonResponse({})
+
+    loja_solicitada = Loja.objects.filter(shopping_id=1,nome=loja)[:1]
+    if loja_solicitada:
+        loja_solicitada = loja_solicitada[0].to_dict()
+    else:
+        raise Http404
+
+    contexto = {'nome': nome,
+                'email': email,
+                'loja': loja_solicitada,
+                'assunto': u'LLV - Solicitação de loja %s' % loja_solicitada['nome'],
+                'sucesso': False}
+
+    try:
+        TemplatedEmail(settings.FALE_CONOSCO, contexto['assunto'],
+                       'email/solicitacao.html', contexto, send_now=True)
+        contexto['sucesso'] = True
+    except:
+        raise
+
+    return jsonResponse(contexto)
+
+@csrf_exempt
+def notifica(request, acao):
+    nome = request.POST.get('nome', None)
+    email = request.POST.get('email', None)
+    loja = request.POST.get('loja', None)
+
+    loja_solicitada = Loja.objects.filter(shopping_id=1,nome=loja)[:1]
+    if loja_solicitada:
+        loja_solicitada = loja_solicitada[0].to_dict()
+    else:
+        raise Http404
+    contexto = {'nome': nome,
+                'email': email,
+                'loja': loja_solicitada,
+                'assunto': u'LLV - Solicitação de loja: %s' % loja_solicitada['nome'] ,
+                'sucesso': False}
+
+    try:
+        TemplatedEmail(settings.FALE_CONOSCO, contexto['assunto'],
+                       'email/solicitacao.html', contexto, send_now=True)
+        contexto['sucesso'] = True
+    except:
+        raise
+
+    return jsonResponse(contexto)

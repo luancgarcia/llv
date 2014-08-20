@@ -464,25 +464,25 @@ $( document ).ready(function() {
         	var nome = $("[name=nome]").val();
         	var email = $("[name=email]").val();
         	var loja = $("[name=loja]").val();
-        	console.log(nome, email, loja);
+        	// console.log(nome, email, loja);
         	$.ajax({
 	            type: "POST",
 	            url: '/solicitar_loja/',
-	            dataType: "html",
+	            dataType: "json",
 	            data: {nome:nome,email:email,loja:loja},
 	            beforeSend: function(){
 	                // console.log("before send");
 	                $("#SplashForm :submit").val("Enviando...");
 	            },
 	            success: function(data) {
-	                $(".grid:last").after(data);
-	                $("#SplashForm :submit").val("Enviado. Obrigado");
+	                $("#SplashForm :submit").val("Enviado. Obrigado.");
+	                setTimeout(function() {$("#Splash").remove();}, 3000);
 	            },
 	            error: function(){
 	                console.log("erro enviar");
 	            }
-	            // return false;
-	       });
+	        });
+        	return false;
         }
 
 
