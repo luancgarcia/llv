@@ -5,24 +5,24 @@
 		<img src="{% static 'img/header-splash.png' %}" alt="">
 	</header>
 	<section class="content fix">
-		<form action="" class="fix" id="SplashForm">
+		<form action="{% url 'solicitar_loja' %}" class="fix" id="SplashForm" method="post">
 			<p class="txt">Solicite abaixo qual loja <br>
 			você gostaria de ver na <br>
 			Liquidação Lápis Vermelho</p>
 
 			<fieldset class="campo fix">
 				<label for="">Nome</label>
-				<input type="text" name="" id="" class="valida">
+				<input type="text" name="nome" id="nome" class="valida">
 			</fieldset>
 
 			<fieldset class="campo fix">
 				<label for="">Email</label>
-				<input type="text" name="" id="" class="valida_email">
+				<input type="text" name="email" id="email" class="valida_email">
 			</fieldset>
 
 			<fieldset class="campo fix">
 				<label for="">Lojas</label>
-				<select name="" id="">
+				<select name="loja" id="loja" class="valida">
 					<option value="">selecione a loja</option>
 					{% for loja in lojas_splash %}
 					<option value="{{ loja.nome }}">{{ loja.nome }}</option>

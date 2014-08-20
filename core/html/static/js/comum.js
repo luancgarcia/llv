@@ -113,7 +113,7 @@ $(function(){
 				setTimeout(function(){
 					$(".maskmenushp").remove();
 				},400);
-				
+
 				return false;
 
 			}
@@ -429,43 +429,64 @@ $( document ).ready(function() {
 		}
 	});
 
-	// $("form#SplashForm").submit(function(){
-	// 	var erro = false;
- //        var formulario = $(this);
- //        var email = $(".valida_email");
- //        var valida_campo = $(".valida");
+	$("form#SplashForm").submit(function(){
+		var erro = false;
+        var formulario = $(this);
+        var email = $(".valida_email");
+        var valida_campo = $(".valida");
 
-	// 	if(!validaCampo(valida_campo)){
-	// 		$(valida_campo).parents('.campo').children(".error").remove();
- //            $(valida_campo).parents('.campo').append("<span class='error>Campo obrigatório</span>");
+		if(!validaCampo(valida_campo)){
+			$(valida_campo).parents('.campo').children(".error").remove();
+            $(valida_campo).parents('.campo').append("<span class='error>Campo obrigatório</span>");
 
- //            erro = true;
- //        } else {
- //            $(valida_campo).parents('.campo').children(".error").remove();
- //        }
+            erro = true;
+        } else {
+            $(valida_campo).parents('.campo').children(".error").remove();
+        }
 
- //        if(!validaCampo(email)){
- //            $(email).parents('.campo').children(".error").remove();
- //            $(email).parents('.campo').append("<span class='error>Campo obrigatório</span>");
+        if(!validaCampo(email)){
+            $(email).parents('.campo').children(".error").remove();
+            $(email).parents('.campo').append("<span class='error>Campo obrigatório</span>");
 
- //            erro = true;
- //        }else if(!validaEmail(email.val())) {
- //            $(email).parents('.campo').children(".error").remove();
- //            $(email).parents('.campo').append("<span class='error>Insira um email válido.</span>");
+            erro = true;
+        }else if(!validaEmail(email.val())) {
+            $(email).parents('.campo').children(".error").remove();
+            $(email).parents('.campo').append("<span class='error>Insira um email válido.</span>");
 
- //            erro = true;
- //        }else {
- //            $(email).parents('.campo').children(".error").remove();
- //        }
+            erro = true;
+        }else {
+            $(email).parents('.campo').children(".error").remove();
+        }
 
- //        if(erro == true) {
- //            return false;
- //        } else {
+        if(erro == true) {
+            return false;
+        } else {
+        	var nome = $("[name=nome]").val();
+        	var email = $("[name=email]").val();
+        	var loja = $("[name=loja]").val();
+        	console.log(nome, email, loja);
+        	$.ajax({
+	            type: "POST",
+	            url: '/solicitar_loja/',
+	            dataType: "html",
+	            data: {nome:nome,email:email,loja:loja},
+	            beforeSend: function(){
+	                // console.log("before send");
+	                $("#SplashForm :submit").val("Enviando...");
+	            },
+	            success: function(data) {
+	                $(".grid:last").after(data);
+	                $("#SplashForm :submit").val("Enviado. Obrigado");
+	            },
+	            error: function(){
+	                console.log("erro enviar");
+	            }
+	            // return false;
+	       });
+        }
 
- //        }
 
-
-	// });
+	});
 });
 
 
