@@ -159,10 +159,11 @@ class OfertaAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         perfil = request.user.perfil.get()
-        obj.autor = perfil
-        obj.tipo = Oferta.OFERTA
+        if not obj.autor:
+            obj.autor = perfil
         if perfil.is_lojista:
             obj.status = Oferta.PENDENTE
+        obj.tipo = Oferta.OFERTA
         obj.save()
 
 
