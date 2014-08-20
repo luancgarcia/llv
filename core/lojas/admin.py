@@ -9,6 +9,7 @@ class LojaAdmin(admin.ModelAdmin):
 	list_filter = ['shopping','publicada']
 	list_editable = ['publicada']
 	search_fields= ['nome']
+	prepopulated_fields = {'slug': ('nome',), }
 
 class ShoppingAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada','id_multiplan']
