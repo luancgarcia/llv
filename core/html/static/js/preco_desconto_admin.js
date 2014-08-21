@@ -21,7 +21,7 @@ $(document).ready(function(){
                     var result_str = result+'';
                     // $('#id_desconto').val(result_str.substr(0,2)+'%');
                     // $('#id_desconto').val(result_str.substr(0,2));
-                    $('#id_desconto').val(result);
+                    $('#id_desconto').val(100-result);
                 }else{
                     $('#id_desconto').val('-');
                 }
