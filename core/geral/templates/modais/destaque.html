@@ -14,9 +14,13 @@
 			<h2 class="titulo">{{ destaque.titulo }}</h2>
 			<p class="descricao">{{ destaque.descricao }}</p>
 
-			<p class="preco_anterior">de R$ {{ destaque.preco_inicial }}</p>
+			{% if destaque.preco_inicial %}
+            <p class="preco_anterior">de R$ {{ destaque.preco_inicial }}</p>
+            {% endif %}
 			<p class="preco_atual">
-				<span class="por">por: </span>
+				{% if destaque.preco_inicial %}
+                <span class="por">por: </span>
+                {% endif %}
 				<span class="cifrao">R$ </span>
 				<span class="valor">{{ destaque.preco_final }}</span>
 			</p>
