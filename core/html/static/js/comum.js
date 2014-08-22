@@ -360,16 +360,15 @@ $(function(){
 	            },
 	            success: function(data) {
 	                FB.ui({
-                      app_id: "698128933600347",
-					  method: 'share',
-					  // link: "https://apps.facebook.com/llv-dev/",
-					  redirect_uri: "https://jonatascd.pythonanywhere.com/",
-					  link: "https://jonatascd.pythonanywhere.com/",
-					  caption: data.titulo,
-					  description: data.descricao,
-					  picture: data.imagem,
-					  image: data.imagem,
-                      display:'popup'
+                        app_id: "698128933600347",
+                        method: 'feed',
+                        // link: "https://apps.facebook.com/llv-dev/",
+                        link: "https://jonatascd.pythonanywhere.com/",
+                        caption: data.titulo,
+                        description: data.descricao,
+                        picture: data.imagem,
+                        image: data.imagem,
+                        display:'popup'
 					}, function(response){});
 					fechaModal();
 	                return false;
