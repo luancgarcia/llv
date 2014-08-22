@@ -78,8 +78,10 @@
 				<a href="{% url 'home' %}" class=""><img src="{% static 'img/header-banner.jpg' %}"></a>
 			</figure>
 			<div class="head-mob mob">
-				<a class="ico-brs fr" id="ico-brs"></a>
-				<img src="{% static 'img/text-head-mob.png' %}">
+				<a href="{% url 'home' %}" class="ico-brs fr" id="ico-brs"></a>
+				<a href="{% url 'home' %}" class="">
+					<img src="{% static 'img/text-head-mob.png' %}">
+				</a>
 			</div>
 			<aside class="chamada mob">
 				<a href="{% url 'home' %}">Produtos com até 70% de desconto</a>
