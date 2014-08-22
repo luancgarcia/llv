@@ -194,9 +194,9 @@ def mais_ofertas(request):
         if total_destaques or total_eventos:
             ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
-    mais_paginas = True
+    mais_paginas = False
     if not ofertas or len(ofertas) < 14:
-        mais_paginas = False
+        mais_paginas = True
 
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in ofertas],
