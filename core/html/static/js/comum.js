@@ -352,7 +352,7 @@ $(function(){
 
 			$.ajax({
 	            type: "POST",
-	            url: 'mesclar/',
+	            url: '/mesclar/',
 	            dataType: "json",
 	            data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
 	            beforeSend: function(){
