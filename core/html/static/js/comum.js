@@ -224,7 +224,7 @@ $(function(){
 			var id_item = link.attr("data-id");
 			$.ajax({
 	            type: "POST",
-	            url: 'curtir/',
+	            url: '/curtir/',
 	            dataType: "json",
 	            data: {id_item: id_item},
 	            beforeSend: function(){
@@ -247,7 +247,7 @@ $(function(){
 			var id_item = link.attr("data-id");
 			$.ajax({
 	            type: "POST",
-	            url: 'curtir/',
+	            url: '/curtir/',
 	            dataType: "json",
 	            data: {id_item: id_item},
 	            beforeSend: function(){
