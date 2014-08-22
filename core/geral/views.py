@@ -93,13 +93,13 @@ def destaques_ofertas_eventos(items):
     return destaques, ofertas, eventos
 
 def home_por_categoria(slug):
-    categoria = Categoria.objects.filter(slug=slug,shopping_id=1).get()
+    categoria = Categoria.objects.filter(slug=slug).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria)
     return destaques_ofertas_eventos(items)
 
 def categoria(request, categoria):
-    categoria = Categoria.objects.filter(slug=categoria,shopping_id=1).get()
+    categoria = Categoria.objects.filter(slug=categoria).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria)
     destaques, ofertas, eventos = destaques_ofertas_eventos(items)
