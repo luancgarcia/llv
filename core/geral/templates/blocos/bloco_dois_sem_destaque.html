@@ -28,7 +28,8 @@
 
 {% if not sem_destaque %}
 {% for oferta in ofertas|slice:"6:10" %}
-	<div class="grid{% if forloop.counter|divisibleby:2 %} lastmob{% endif %}{% if forloop.counter|divisibleby:4 %} last{% endif %}">
+	<div
+            class="grid{% if forloop.counter|divisibleby:2 %} last lastmob{% endif %}">
 		<article class="item">
 			{% include "blocos/oferta_miolo.html" %}
 		</article><!-- .item -->
@@ -36,7 +37,7 @@
 {% endfor %}
 {% else %}
 {% for oferta in ofertas|slice:"2:6" %}
-	<div class="grid{% if forloop.counter|divisibleby:2 %} lastmob{% endif %}{% if forloop.counter|divisibleby:4 %} last{% endif %}">
+	<div class="grid{% if forloop.counter|divisibleby:2 %} last lastmob{% endif %}">
 		<article class="item">
 			{% include "blocos/oferta_miolo.html" %}
 		</article><!-- .item -->
