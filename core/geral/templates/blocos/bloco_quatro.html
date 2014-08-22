@@ -28,21 +28,7 @@
 	{% for oferta in ofertas|slice:"18:" %}
 		<div class="grid {% cycle '' '' '' 'last lastmob' %}">
 			<article class="item">
-				<span class="desconto">{{ oferta.desconto }}</span>
-				<figure>
-					<a href="" title="">
-						<img src="{{ oferta.imagem }}" alt="{{ oferta.chamada_promocional }}">
-					</a>
-				</figure>
-
-				<section class="content">
-					<p class="descricao">{{ oferta.chamada_promocional|truncatechars:75 }}</p>
-				</section>
-
-				<footer>
-					<a class="like fl" href="" title="">189</a>
-					<a class="share fr" href="">Compartilhar</a>
-				</footer>
+				{% include "blocos/oferta_miolo.html" %}
 			</article><!-- .item -->
 		</div>
 	{% endfor %}
