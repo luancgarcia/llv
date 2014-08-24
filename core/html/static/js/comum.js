@@ -330,6 +330,33 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
+			var link = $(this);
+			var id_item = link.attr("data-id");
+            var texto = link.text();
+            var total_atual = parseInt(texto.split(" ")[0]);
+			$.ajax({
+	            type: "POST",
+	            url: '/descurtir/',
+	            dataType: "json",
+	            data: {id_item: id_item, total_atual: total_atual},
+	            beforeSend: function(){
+	                // console.log("before send");
+	            },
+	            success: function(data) {
+	                link.text(data.total+" pessoas curtiram essa oferta");
+	                link.parents("p.curtidas").removeClass('ativo');
+	                decresce_curtidas('minhas_curtidas', id_item);
+	            },
+	            error: function(){
+	                console.log("erro curtir");
+	            }
+	       });
+	       return false;
+		}
+	}, "p.curtidas.ativo span");
+
+	$(document.body).on({
+		click: function(){
 			var thumb = $(this);
 			var url_thumb = thumb.attr("data-img");
 			var img_gde = $("#fotoProduto img");
