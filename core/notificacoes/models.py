@@ -47,6 +47,17 @@ class Notificacao(BaseNotificacao):
             self.mensagem = u'Nova oferta para aprovacao - %s' % self.oferta
         super(Notificacao, self).save(*args, **kwargs)
 
+    def notifica_criacao(self):
+        contexto = self.to_dict()
+        if self.responsavel and self.responsavel.user.email:
+            try:
+                TemplatedEmail([self.responsavel.user.email], self.mensagem,
+                               'email/notificacao.html',contexto,send_now=True)
+                self.enviada_mkt = True
+                self.save()
+            except:
+                raise
+
     def to_dict(self):
         return {'id': self.id,
                 'mensagem': self.mensagem,
