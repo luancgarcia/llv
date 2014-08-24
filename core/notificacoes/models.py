@@ -47,7 +47,11 @@ class Notificacao(BaseNotificacao):
             self.mensagem = u'Nova oferta para aprovacao - %s' % self.oferta
         super(Notificacao, self).save(*args, **kwargs)
 
-
+    def to_dict(self):
+        return {'id': self.id,
+                'mensagem': self.mensagem,
+                'oferta': self.oferta.to_dict(),
+                'criador_oferta': self.solicitante}
 
 
 
