@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-
+import os
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
