@@ -77,6 +77,7 @@ INSTALLED_APPS = (
     'html',
     'lojas',
     'utils',
+    'notificacoes',
     'imagekit',
 
     'south',
