@@ -599,7 +599,7 @@ function setCookie(c_name,value) {
     }
 }
 
-function atualiza_cookie_curtidas(nome_cookie, id_item) {
+function acrescenta_curtidas(nome_cookie, id_item) {
     var cookieatual = getCookie(nome_cookie);
     var novo_valor = 'i'+id_item;
     if (cookieatual){
@@ -608,6 +608,20 @@ function atualiza_cookie_curtidas(nome_cookie, id_item) {
         var cookie = novo_valor
     }
     setCookie(nome_cookie,cookie);
+}
+
+function decresce_curtidas(nome_cookie, id_item) {
+    var cookieatual = getCookie(nome_cookie);
+    var novo_valor = 'i'+id_item;
+    if (cookieatual){
+        var curtidas_ids = cookieatual.split("i");
+        var posicao = jQuery.inArray(id_item, curtidas_ids);
+        if (posicao >= -1){
+            curtidas_ids.splice(posicao, 1);
+        }
+        var cookie = curtidas_ids.join('i');
+        setCookie(nome_cookie,cookie);
+    }
 }
 
 function marca_minhas_curtidas() {
