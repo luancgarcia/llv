@@ -43,7 +43,7 @@ EMAIL_USE_TLS = True
 
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
 # SITE_URL = "https://jonatascd.pythonanywhere.com/"
-SITE_URL = "http://llv.liquidacaolapisvermelho.com.br/"
+SITE_URL = "http://llv.liquidacaolapisvermelho.com.br"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 # STATIC_URL = '/static/'
