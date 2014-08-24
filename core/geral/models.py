@@ -367,7 +367,7 @@ class Log(BaseModel):
     class Meta:
         verbose_name=u'Log de Ação'
         verbose_name_plural=u'Logs das Ações'
-        ordering = ['data_criacao',]
+        ordering = ['-data_criacao',]
 
     def __unicode__(self):
         return u'%s - %s' % (self.oferta, self.ACOES[self.acao-1][1])

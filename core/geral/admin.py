@@ -258,7 +258,8 @@ class PerfilAdministradorAdmin(admin.ModelAdmin):
 
 
 class LogAdmin(admin.ModelAdmin):
-    list_filter = ['acao']
+    list_display = ['__unicode__','data_criacao']
+    list_filter = ['acao','oferta__tipo']
     exclude = ['tipo','shopping','loja']
 
 
