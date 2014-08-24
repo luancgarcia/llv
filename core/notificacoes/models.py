@@ -42,6 +42,13 @@ class Notificacao(BaseNotificacao):
     def __unicode__(self):
         return u'%s' % self.oferta
 
+    def save(self, *args, **kwargs):
+        if not self.mensagem:
+            self.mensagem = u'Nova oferta para aprovacao - %s' % self.oferta
+        super(Notificacao, self).save(*args, **kwargs)
+
+
+
 
 
 class Solicitacao(BaseNotificacao):
