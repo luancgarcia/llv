@@ -13,6 +13,7 @@ from utils.custom_email import TemplatedEmail
 
 from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara, Sazonal
 from lojas.models import Loja
+from notificacoes.models import Solicitacao
 
 
 def slice_oferta(total_destaques=0, total_eventos=0):
@@ -318,20 +319,22 @@ def solicitar_loja(request):
 
     loja_solicitada = Loja.objects.filter(shopping_id=1,nome=loja)[:1]
     if loja_solicitada:
-        loja_solicitada = loja_solicitada[0].to_dict()
+        loja_solicitada = loja_solicitada[0]
+        loja_dict = loja_solicitada.to_dict()
     else:
         raise Http404
 
     contexto = {'nome': nome,
                 'email': email,
-                'loja': loja_solicitada,
-                'assunto': u'LLV - Solicitação de loja %s' % loja_solicitada['nome'],
+                'loja': loja_dict,
+                'assunto': u'LLV - Solicitação de loja %s' % loja_dict['nome'],
                 'sucesso': False}
 
     try:
         TemplatedEmail(settings.FALE_CONOSCO, contexto['assunto'],
                        'email/solicitacao.html', contexto, send_now=True)
         contexto['sucesso'] = True
+        Solicitacao.objects.create(nome=nome,email=email,loja=loja_solicitada)
     except:
         raise
 
