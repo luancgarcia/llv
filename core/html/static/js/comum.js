@@ -613,7 +613,7 @@ function atualiza_cookie_curtidas(nome_cookie, id_item) {
 function marca_minhas_curtidas() {
     var minhas_curtidas = getCookie("minhas_curtidas");
     if(minhas_curtidas){
-        var meus_curtidas_ids = meus_avisos.split("i");
+        var meus_curtidas_ids = minhas_curtidas.split("i");
         for (item in meus_curtidas_ids ) {
             $('a.like[data-id="'+meus_curtidas_ids[item]+'"]').addClass('ativo');
             $('p.curtidas span[data-id="'+meus_curtidas_ids[item]+'"]').parents("p.curtidas").addClass("ativo");
