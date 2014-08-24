@@ -29,6 +29,10 @@ class Notificacao(BaseNotificacao):
     responsavel = models.ForeignKey(Perfil, verbose_name=u'Marketing responsável',
                                     null=True, blank=False,
                                     related_name='responsavel')
+    enviada_mkt = models.BooleanField(u'Enviada para o marketing?',
+                                      default=False)
+    enviada_lojista = models.BooleanField(u'Enviada para o lojista?',
+                                          default=False)
 
     class Meta:
         verbose_name = u'Notificação'

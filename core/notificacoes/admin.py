@@ -7,7 +7,7 @@ from notificacoes.models import Notificacao, Solicitacao
 
 class NotificacaoAdmin(admin.ModelAdmin):
     list_filter = ['lida','resolvida']
-    list_display = ['oferta','lida','resolvida']
+    list_display = ['oferta','lida','resolvida','enviada_mkt','enviada_lojista']
     list_editable = ['lida']
 
 
