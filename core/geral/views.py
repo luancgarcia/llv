@@ -237,6 +237,20 @@ def curtir(request):
     return jsonResponse({'total': item.total_curtido})
 
 @csrf_exempt
+def descurtir(request):
+    id_item = request.POST.get('id_item')
+    total = int(request.POST.get('total_atual'))
+    if not id_item and not request.is_ajax():
+        raise Http404
+
+    ultimo = Log.objects.filter(acao=Log.CURTIDA,oferta_id=id_item).latest('id')
+    if ultimo:
+        ultimo.delete()
+        total = total - 1
+
+    return jsonResponse({'total': total})
+
+@csrf_exempt
 def modal_share(request, id_item):
     if not request.is_ajax():
         raise Http404
