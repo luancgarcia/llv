@@ -595,6 +595,17 @@ function setCookie(c_name,value) {
     }
 }
 
+function atualiza_cookie_curtidas(nome_cookie, id_item) {
+    var cookieatual = getCookie(nome_cookie);
+    var novo_valor = 'i'+id_item;
+    if (cookieatual){
+        var cookie = cookieatual + novo_valor;
+    }else{
+        var cookie = novo_valor
+    }
+    setCookie(nome_cookie,cookie);
+}
+
 function marca_minhas_curtidas() {
     var minhas_curtidas = getCookie("minhas_curtidas");
     if(minhas_curtidas){
