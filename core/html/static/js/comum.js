@@ -266,6 +266,8 @@ $(function(){
 	            },
 	            success: function(data) {
 	                link.text(data.total);
+	                link.addClass('ativo');
+	                atualiza_cookie_curtidas('minhas_curtidas', id_item);
 	            },
 	            error: function(){
 	                console.log("erro curtir");
@@ -273,7 +275,7 @@ $(function(){
 	       });
 	       return false;
 		}
-	}, "a.like");
+	}, "a.like:not(.ativo)");
 
 	$(document.body).on({
 		click: function(){
@@ -289,6 +291,8 @@ $(function(){
 	            },
 	            success: function(data) {
 	                link.text(data.total+" pessoas curtiram essa oferta");
+	                link.parents("p.curtidas").addClass('ativo');
+	                atualiza_cookie_curtidas('minhas_curtidas', id_item);
 	            },
 	            error: function(){
 	                console.log("erro curtir");
@@ -296,7 +300,7 @@ $(function(){
 	       });
 	       return false;
 		}
-	}, "p.curtidas span");
+	}, "p.curtidas:not(.ativo) span");
 
 	$(document.body).on({
 		click: function(){
