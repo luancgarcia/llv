@@ -229,6 +229,14 @@ class Oferta(EditorialModel):
     def get_ofertas(cls):
         return cls.objects.filter(publicada=True,tipo=cls.OFERTA)
 
+    def marketing_responsavel(self):
+        marketing = Perfil.objects.filter(tipo=Perfil.MARKETING,
+                                          shopping=self.loja.shopping)[:1]
+        return marketing[0] if marketing else None
+    marketing_responsavel.short_description = u'Marketing responsável'
+    marketing_responsavel.property = True
+
+
     def to_dict(self, modal=False):
         imagem = None
         if self.tipo == Oferta.OFERTA:
