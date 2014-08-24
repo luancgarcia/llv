@@ -21,8 +21,10 @@
 				{% if destaque.preco_inicial %}
                 <span class="por">por: </span>
                 {% endif %}
+				{% if destaque.preco_final %}
 				<span class="cifrao">R$ </span>
 				<span class="valor">{{ destaque.preco_final }}</span>
+                {% endif %}
 			</p>
 
 			<section class="qualMarca fix">
