@@ -523,6 +523,7 @@ $( document ).ready(function() {
 
 
 	});
+    marca_minhas_curtidas();
 });
 
 
