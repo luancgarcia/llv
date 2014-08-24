@@ -42,13 +42,16 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
-SITE_URL = "https://jonatascd.pythonanywhere.com/"
+# SITE_URL = "https://jonatascd.pythonanywhere.com/"
+SITE_URL = "http://llv.liquidacaolapisvermelho.com.br/"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+STATIC_URL = '%s%s' % (SITE_URL, '/static/')
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+MEDIA_URL = '%s%s' % (SITE_URL, '/media/')
 
 STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, "static"),
