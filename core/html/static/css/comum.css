@@ -247,6 +247,10 @@
   height: 26px;
   line-height: 26px;
 }
+.item footer .ativo {
+  background: url(../img/ico-like-ativo.png) no-repeat 0 0;
+  color: #d11924;
+}
 .item footer .share {
   color: #3c599b;
   height: 26px;
