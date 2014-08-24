@@ -14,11 +14,11 @@ from lojas.models import Loja
 OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada','autor','texto_link')
 
 class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ['nome','publicada']
+    list_display = ['nome','shopping','publicada']
     prepopulated_fields = {'slug': ('nome',), }
     exclude = ['sazonal','imagem']
     list_editable = ['publicada']
-    list_filter = ['publicada']
+    list_filter = ['publicada','shopping']
 
     def queryset(self, request):
         qs = super(CategoriaAdmin, self).queryset(request)
@@ -26,11 +26,11 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 
 class SazonalAdmin(admin.ModelAdmin):
-    list_display = ['nome','publicada']
+    list_display = ['nome','shopping','publicada']
     prepopulated_fields = {'slug': ('nome',), }
     exclude = ['sazonal','imagem']
     list_editable = ['publicada']
-    list_filter = ['publicada']
+    list_filter = ['publicada','shopping']
     def queryset(self, request):
         qs = super(SazonalAdmin, self).queryset(request)
         return qs.filter(sazonal=True)
