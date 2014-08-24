@@ -3,7 +3,7 @@
 from django.db import models
 
 from utils.models import BaseModel, EditorialModel
-from geral.models import Perfil, Oferta
+from utils.custom_email import TemplatedEmail
 from lojas.models import Loja
 
 
@@ -21,13 +21,14 @@ class BaseNotificacao(EditorialModel):
 
 class Notificacao(BaseNotificacao):
     resolvida = models.BooleanField(u'Resolvida?', default=False)
-    oferta = models.ForeignKey(Oferta, verbose_name=u'Oferta', null=True,
+    oferta = models.ForeignKey('geral.Oferta', verbose_name=u'Oferta',
+                               null=True,
                                related_name='notificacoes', blank=True)
-    solicitante = models.ForeignKey(Perfil, verbose_name=u'Autor',
+    solicitante = models.ForeignKey('geral.Perfil', verbose_name=u'Autor',
                                     blank=True, null=True,
                                     related_name='solicitante')
-    responsavel = models.ForeignKey(Perfil, verbose_name=u'Marketing responsável',
-                                    null=True, blank=False,
+    responsavel = models.ForeignKey('geral.Perfil', null=True, blank=False,
+                                    verbose_name=u'Marketing responsável',
                                     related_name='responsavel')
     enviada_mkt = models.BooleanField(u'Enviada para o marketing?',
                                       default=False)
