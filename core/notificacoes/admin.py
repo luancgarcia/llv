@@ -5,5 +5,15 @@ from django.contrib import admin
 from notificacoes.models import Notificacao, Solicitacao
 
 
-admin.site.register(Notificacao)
-admin.site.register(Solicitacao)
+class NotificacaoAdmin(admin.ModelAdmin):
+    list_filter = ['lida','resolvida']
+    list_display = ['oferta','lida','resolvida']
+    list_editable = ['lida']
+
+
+class SolicitacaoAdmin(admin.ModelAdmin):
+    list_filter = ['loja__shopping']
+
+
+admin.site.register(Notificacao, NotificacaoAdmin)
+admin.site.register(Solicitacao, SolicitacaoAdmin)

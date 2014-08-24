@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 
 from django.db import models
-from django.utils.text import slugify
 
 from utils.models import BaseModel, EditorialModel
 from geral.models import Perfil, Oferta
@@ -53,7 +52,7 @@ class Solicitacao(BaseNotificacao):
         verbose_name_plural = u'Solicitações de Lojas'
 
     def __unicode__(self):
-        return u'%s' % self.oferta
+        return u'%s (%s) - %s' % (self.nome, self.email, self.loja)
 
     def save(self, *args, **kwargs):
         if not self.mensagem:
