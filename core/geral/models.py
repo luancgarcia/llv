@@ -12,6 +12,7 @@ from django.template.defaultfilters import date as _date
 
 from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
 from lojas.models import Loja, Shopping
+from notificacoes.models import Notificacao
 
 
 class Perfil(BaseModel):
@@ -200,6 +201,16 @@ class Oferta(EditorialModel):
     def save(self, *args, **kwargs):
         if self.status == Oferta.PUBLICADO:
             self.data_aprovacao = datetime.now()
+            # if self.notificacoes.all():
+            #     pass
+        elif self.status == Oferta.PENDENTE:
+            mkt = self.marketing_responsavel
+            n, created = Notificacao.objects.get_or_create(oferta=self,
+                                                           solicitante=self.autor,
+                                                           responsavel=mkt)
+            if n:
+                n.save()
+            # notifica criacao
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
