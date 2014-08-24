@@ -228,28 +228,29 @@ $(function(){
 	}, "[data-param='closemodal']");
 
 	// curtir
-	$("a.like").on({
-		click: function(){
-			var link = $(this);
-			var id_item = link.attr("data-id");
-			$.ajax({
-	            type: "POST",
-	            url: '/curtir/',
-	            dataType: "json",
-	            data: {id_item: id_item},
-	            beforeSend: function(){
-	                // console.log("before send");
-	            },
-	            success: function(data) {
-	                link.text(data.total);
-	            },
-	            error: function(){
-	                console.log("erro curtir");
-	            }
-	       });
-	       return false;
-		}
-	});
+//	$("a.like:not(.ativo)").on({
+//		click: function(){
+//			var link = $(this);
+//			var id_item = link.attr("data-id");
+//			$.ajax({
+//	            type: "POST",
+//	            url: '/curtir/',
+//	            dataType: "json",
+//	            data: {id_item: id_item},
+//	            beforeSend: function(){
+//	                // console.log("before send");
+//	            },
+//	            success: function(data) {
+//	                link.text(data.total);
+//                    link.addClass('ativo');
+//	            },
+//	            error: function(){
+//	                console.log("erro curtir");
+//	            }
+//	       });
+//	       return false;
+//		}
+//	});
 
     $(document.body).on({
 		click: function(){
@@ -571,4 +572,35 @@ function fechaModal() {
 		$(this).remove().hide();
 		$("body, html").removeAttr("style");
 	});
+}
+
+function getCookie(c_name) {
+    var i,x,y,ARRcookies=document.cookie.split(";");
+    for (i=0;i<ARRcookies.length;i++) {
+        x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+        y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+        x=x.replace(/^\s+|\s+$/g,"");
+        if (x==c_name) {
+            return unescape(y);
+        }
+    }
+    return undefined;
+}
+function setCookie(c_name,value) {
+    if (typeof(value) != "undefined") {
+        document.cookie=c_name + "=" + value + ";path=/";
+    } else {
+        document.cookie=c_name + "='';expires=01-Jan-1970 00:00:01 GMT;path=/";
+    }
+}
+
+function marca_minhas_curtidas() {
+    var minhas_curtidas = getCookie("minhas_curtidas");
+    if(minhas_curtidas){
+        var meus_curtidas_ids = meus_avisos.split("i");
+        for (item in meus_curtidas_ids ) {
+            $('a.like[data-id="'+meus_curtidas_ids[item]+'"]').addClass('ativo');
+            $('p.curtidas span[data-id="'+meus_curtidas_ids[item]+'"]').parents("p.curtidas").addClass("ativo");
+        }
+    }
 }
