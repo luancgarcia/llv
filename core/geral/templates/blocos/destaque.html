@@ -12,6 +12,8 @@
 		<section class="content">
 			{% if destaque.loja.logo %}
 			<span class="marca"><img src="{{ destaque.loja.logo }}" alt='{{ destaque.loja.nome }}'></span>
+			{% else %}
+			<span class="marca"><p class="center">{{ destaque.loja.nome }}</p></span>
 			{% endif %}
 			<h2 class="titulo">{{ destaque.titulo }}</h2>
 			<p class="descricao">{{ destaque.descricao|truncatechars:75 }}</p>
