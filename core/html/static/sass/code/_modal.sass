@@ -180,11 +180,24 @@
 		text-align: center
 		margin-bottom: 23px
 
+		&.ativo
+			color: $cor-17
+
+			span
+				background: url(#{$url-img}/ico-curtidas-ativo.png) no-repeat 0 0 !important
+				padding-left: 40px
+				display: inline-block
+				cursor: pointer
+
 		span
 			background: url(#{$url-img}/ico-curtidas.png) no-repeat 0 0
 			padding-left: 40px
 			display: inline-block
 			cursor: pointer
+
+			.ativo
+				background: url(#{$url-img}/ico-curtidas-ativo.png) no-repeat 0 0 !important
+				color: $cor-17 !important
 
 	.share
 		line-height: 25px

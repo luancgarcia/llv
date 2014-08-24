@@ -898,11 +898,24 @@
   text-align: center;
   margin-bottom: 23px;
 }
+.colunaDados .curtidas.ativo {
+  color: #d11924;
+}
+.colunaDados .curtidas.ativo span {
+  background: url(../img/ico-curtidas-ativo.png) no-repeat 0 0 !important;
+  padding-left: 40px;
+  display: inline-block;
+  cursor: pointer;
+}
 .colunaDados .curtidas span {
   background: url(../img/ico-curtidas.png) no-repeat 0 0;
   padding-left: 40px;
   display: inline-block;
   cursor: pointer;
+}
+.colunaDados .curtidas span .ativo {
+  background: url(../img/ico-curtidas-ativo.png) no-repeat 0 0 !important;
+  color: #d11924 !important;
 }
 .colunaDados .share {
   line-height: 25px;
