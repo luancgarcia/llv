@@ -38,7 +38,12 @@
 				{% if eventos.2 %}
 					{% include 'blocos/bloco_quatro_sem_destaque.html' with evento=eventos.2 %}
 				{% endif%}
-			{% endif%}
+			{% else %}
+				<br class="cl">
+				{% for oferta in ofertas|slice:"11:" %}
+					{% include 'blocos/oferta_item.html' %}
+				{% endfor %}
+			{% endif %}
 		{% endif%}
 	{% else %}
 		{% if destaques.1 %}
