@@ -44,7 +44,8 @@ $(function(){
 				})
 
 				ico.animate({
-					marginLeft: "0"
+					marginLeft: "0",
+					zIndex: "0"
 				})
 
 				menu.animate({
@@ -73,7 +74,8 @@ $(function(){
 			})
 
 			ico.animate({
-				marginLeft: "265px"
+				marginLeft: "275px",
+				zIndex: "9999"
 			})
 
 			menu.animate({

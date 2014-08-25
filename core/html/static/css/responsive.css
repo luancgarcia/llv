@@ -328,7 +328,7 @@
   }
   #Header .head-mob {
     background: url(../img/bg-head-mob.png) repeat-x 0 0;
-    height: 33px;
+    height: 40px;
     position: relative;
     min-width: 100%;
   }
@@ -338,8 +338,8 @@
   }
   #Header .head-mob .ico-brs {
     background: url(../img/ico-brs.png) no-repeat 0 0;
-    width: 43px;
-    height: 33px;
+    width: 45px;
+    height: 40px;
     position: absolute;
     right: 0;
     top: 0;
@@ -348,11 +348,12 @@
   #ico-menu {
     background: url(../img/ico-menu-mob.png) no-repeat 0 0;
     display: block;
-    width: 41px;
-    height: 33px;
+    width: 45px;
+    height: 40px;
     position: absolute;
     left: 0;
     top: 0;
+    z-index: 9999;
   }
 
   #Menu {
