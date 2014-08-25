@@ -34,9 +34,8 @@ def home(request):
     eventos = Oferta.prontos(tipo=Oferta.EVENTO)
 
     ofertas = Oferta.prontos()
-    ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
-
     mais_paginas = True if len(ofertas) > 14 else False
+    ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in destaques],
@@ -56,15 +55,15 @@ def home_com_filtro(request, *args, **kwargs):
     slug = kwargs.get(tipo)
 
     if tipo == 'categoria':
-        destaques, ofertas, eventos = home_por_categoria(slug)
+        destaques, ofertas, eventos, mais_paginas = home_por_categoria(slug)
     elif tipo == 'genero':
-        destaques, ofertas, eventos = home_por_genero(slug)
+        destaques, ofertas, eventos, mais_paginas = home_por_genero(slug)
     elif tipo == 'loja':
-        destaques, ofertas, eventos = home_por_loja(slug)
+        destaques, ofertas, eventos, mais_paginas = home_por_loja(slug)
     elif tipo == 'preco':
-        destaques, ofertas, eventos = home_por_preco(slug)
+        destaques, ofertas, eventos, mais_paginas = home_por_preco(slug)
     else:
-        destaques, ofertas, eventos = home_por_desconto(slug)
+        destaques, ofertas, eventos, mais_paginas = home_por_desconto(slug)
 
     mais_paginas = True if len(ofertas) > 14 else False
 
@@ -89,9 +88,10 @@ def destaques_ofertas_eventos(items):
 
     ofertas = items.filter(tipo=Oferta.OFERTA)
     ofertas = [o.to_dict() for o in ofertas]
+    mais_paginas = True if len(ofertas) > 14 else False
     ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
-    return destaques, ofertas, eventos
+    return destaques, ofertas, eventos, mais_paginas
 
 def home_por_categoria(slug):
     categoria = Categoria.objects.filter(slug=slug).get()
@@ -103,8 +103,7 @@ def categoria(request, categoria):
     categoria = Categoria.objects.filter(slug=categoria).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria)
-    destaques, ofertas, eventos = destaques_ofertas_eventos(items)
-    mais_paginas = True if len(ofertas) > 14 else False
+    destaques, ofertas, eventos, mais_paginas = destaques_ofertas_eventos(items)
 
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in destaques],
