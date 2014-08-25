@@ -206,7 +206,7 @@ def mais_ofertas(request):
                 'ofertas': ofertas,
                 'ultima_oferta_id': [int(o['id']) for o in ofertas],
                 'mais_paginas': mais_paginas,
-                'eh_pagincacao': True}
+                'eh_paginacao': True}
 
     return render(request, "home-part.html", contexto)
 
