@@ -206,9 +206,10 @@ class Oferta(EditorialModel):
         elif self.status == Oferta.PENDENTE:
             mkt = self.marketing_responsavel
             n, created = Notificacao.objects.get_or_create(oferta=self,
-                                                           solicitante=self.autor,
-                                                           responsavel=mkt)
+                                                           solicitante=self.autor)
             if n:
+                if self.marketing_responsavel:
+                    n.responsavel = self.marketing_responsavel
                 n.save()
             # notifica criacao
         super(Oferta, self).save(*args, **kwargs)
