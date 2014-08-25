@@ -179,12 +179,14 @@ def mais_ofertas(request):
         destaques = Oferta.objects.filter(tipo=Oferta.DESTAQUE,
                                           status=Oferta.PUBLICADO)\
                                   .exclude(id__in=ids_destaques)
+        destaques = [d.to_dict() for d in destaques]
         total_destaques = len(destaques)
     if ultimo_evento:
         ids_eventos = [int(i) for i in ultimo_evento.split(', ')]
         eventos = Oferta.objects.filter(tipo=Oferta.EVENTO,
                                         status=Oferta.PUBLICADO)\
                                 .exclude(id__in=ids_eventos)
+        eventos = [e.to_dict() for e in eventos]
         total_eventos = len(eventos)
     if ultima_oferta:
         ids_ofertas = [int(i) for i in ultima_oferta.split(', ')]
