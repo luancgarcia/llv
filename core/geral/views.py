@@ -65,8 +65,6 @@ def home_com_filtro(request, *args, **kwargs):
     else:
         destaques, ofertas, eventos, mais_paginas = home_por_desconto(slug)
 
-    mais_paginas = True if len(ofertas) > 14 else False
-
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in destaques],
                 'eventos': eventos,
