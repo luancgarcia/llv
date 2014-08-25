@@ -1,3 +1,6 @@
+{% if eh_paginacao %}
+<br class="cl">
+{% endif %}
 {% if destaques %}
 	{% include 'blocos/bloco_um.html' with destaque=destaques.0 %}
 	{% if eventos %}
