@@ -201,8 +201,10 @@ class Oferta(EditorialModel):
     def save(self, *args, **kwargs):
         if self.status == Oferta.PUBLICADO:
             self.data_aprovacao = datetime.now()
-            # if self.notificacoes.all():
-            #     pass
+            notificacoes = self.notificacoes.all()
+            if notificacoes:
+                for n in notificacoes:
+                    n.notifica_aprovacao()
         elif self.status == Oferta.PENDENTE:
             mkt = self.marketing_responsavel
             n, created = Notificacao.objects.get_or_create(oferta=self,
@@ -211,6 +213,7 @@ class Oferta(EditorialModel):
                 if self.marketing_responsavel:
                     n.responsavel = self.marketing_responsavel
                 n.save()
+                n.notifica_criacao()
             # notifica criacao
         super(Oferta, self).save(*args, **kwargs)
 
