@@ -34,7 +34,7 @@
 <!-- 3 s/ d -->
 <br class="cl">
 {% for oferta in ofertas|slice:"12:" %}
-	<div class="grid {% cycle '' '' '' 'last lastmob' %}">
+	<div class="grid {% cycle '' 'lastmob' '' 'last lastmob' %}">
 		<article class="item">
 			{% include "blocos/oferta_miolo.html" %}
 		</article><!-- .item -->

@@ -48,12 +48,26 @@ class Notificacao(BaseNotificacao):
         super(Notificacao, self).save(*args, **kwargs)
 
     def notifica_criacao(self):
-        contexto = self.to_dict()
         if self.responsavel and self.responsavel.user.email:
             try:
                 TemplatedEmail([self.responsavel.user.email], self.mensagem,
-                               'email/notificacao.html',contexto,send_now=True)
+                               'email/notificacao.html',self.to_dict(),send_now=True)
                 self.enviada_mkt = True
+                self.save()
+            except:
+                raise
+
+    def notifica_aprovacao(self):
+        autor = self.solicitante
+        if autor and autor.user.email:
+            assunto = u'Sua oferta foi aprovada e publicada'
+            try:
+                TemplatedEmail([autor.user.email], assunto,
+                               'email/aprovacao.html', self.to_dict(),
+                               send_now=True)
+                self.enviada_lojista = True
+                self.resolvida = True
+                self.lida = True
                 self.save()
             except:
                 raise
@@ -61,8 +75,8 @@ class Notificacao(BaseNotificacao):
     def to_dict(self):
         return {'id': self.id,
                 'mensagem': self.mensagem,
-                'oferta': self.oferta.to_dict(),
-                'criador_oferta': self.solicitante}
+                'oferta': self.oferta,
+                'lojista': self.solicitante}
 
 
 

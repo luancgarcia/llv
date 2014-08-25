@@ -201,16 +201,19 @@ class Oferta(EditorialModel):
     def save(self, *args, **kwargs):
         if self.status == Oferta.PUBLICADO:
             self.data_aprovacao = datetime.now()
-            # if self.notificacoes.all():
-            #     pass
+            notificacoes = self.notificacoes.all()
+            if notificacoes:
+                for n in notificacoes:
+                    n.notifica_aprovacao()
         elif self.status == Oferta.PENDENTE:
-            mkt = self.marketing_responsavel
             n, created = Notificacao.objects.get_or_create(oferta=self,
-                                                           solicitante=self.autor,
-                                                           responsavel=mkt)
+                                                           solicitante=self.autor)
             if n:
+                n.oferta = self
+                if self.marketing_responsavel:
+                    n.responsavel = self.marketing_responsavel
                 n.save()
-            # notifica criacao
+                n.notifica_criacao()
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
@@ -240,13 +243,13 @@ class Oferta(EditorialModel):
     def get_ofertas(cls):
         return cls.objects.filter(publicada=True,tipo=cls.OFERTA)
 
+    @property
     def marketing_responsavel(self):
+        if not self.loja or not self.status == Oferta.PUBLICADO:
+            return None
         marketing = Perfil.objects.filter(tipo=Perfil.MARKETING,
                                           shopping=self.loja.shopping)[:1]
         return marketing[0] if marketing else None
-    marketing_responsavel.short_description = u'Marketing responsável'
-    marketing_responsavel.property = True
-
 
     def to_dict(self, modal=False):
         imagem = None
