@@ -74,8 +74,8 @@ class Notificacao(BaseNotificacao):
     def to_dict(self):
         return {'id': self.id,
                 'mensagem': self.mensagem,
-                'oferta': self.oferta.to_dict(),
-                'criador_oferta': self.solicitante}
+                'oferta': self.oferta,
+                'lojista': self.solicitante}
 
 
 
