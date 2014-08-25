@@ -206,15 +206,14 @@ class Oferta(EditorialModel):
                 for n in notificacoes:
                     n.notifica_aprovacao()
         elif self.status == Oferta.PENDENTE:
-            mkt = self.marketing_responsavel
             n, created = Notificacao.objects.get_or_create(oferta=self,
                                                            solicitante=self.autor)
             if n:
+                n.oferta = self
                 if self.marketing_responsavel:
                     n.responsavel = self.marketing_responsavel
                 n.save()
                 n.notifica_criacao()
-            # notifica criacao
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
