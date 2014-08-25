@@ -74,7 +74,8 @@ def home_com_filtro(request, *args, **kwargs):
                 'categorias': Categoria.publicadas_com_oferta(),
                 'mais_paginas': mais_paginas,
                 'lojas': Loja.publicadas_com_oferta(),
-                'lojas_splash': Loja.publicadas_sem_oferta()}
+                'lojas_splash': Loja.publicadas_sem_oferta(),
+                'sazonal': Sazonal.atual()}
     return render(request, "home.html", contexto)
 
 def destaques_ofertas_eventos(items):
