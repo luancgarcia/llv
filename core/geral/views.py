@@ -138,15 +138,15 @@ def home_por_loja(slug):
 def home_por_preco(preco):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO)
     if preco == '301':
-        items.filter(preco_final__gte='301')
+        items = items.filter(preco_final__gte='301')
     elif preco == '300':
-        items.filter(preco_final__lte='300',preco_final__gte='101')
+        items = items.filter(preco_final__lte='300',preco_final__gte='101')
     elif preco == '100':
-        items.filter(preco_final__lte='100',preco_final__gte='51')
+        items = items.filter(preco_final__lte='100',preco_final__gte='51')
     elif preco == '50':
-        items.filter(preco_final__lte='50',preco_final__gte='31')
+        items = items.filter(preco_final__lte='50',preco_final__gte='31')
     else:
-        items.filter(preco_final__lte='30')
+        items = items.filter(preco_final__lte='30')
 
     return destaques_ofertas_eventos(items)
 
