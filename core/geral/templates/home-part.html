@@ -51,6 +51,11 @@
 					{% include 'blocos/oferta_item.html' %}
 				{% endfor %}
 			{% endif %}
+		{% else %}
+            <br class="cl">
+            {% for oferta in ofertas|slice:"5:" %}
+                {% include 'blocos/oferta_item.html' %}
+            {% endfor %}
 		{% endif %}
 	{% endif %}
 {% elif eventos %}
