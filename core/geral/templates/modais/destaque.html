@@ -29,6 +29,7 @@
                 {% endif %}
 			</p>
 
+			{% if destaque.loja %}
 			<section class="qualMarca fix">
 				<div class="box fix">
 					{% if destaque.loja.logo %}
@@ -45,6 +46,7 @@
 				</div>
 				<p class="foot">Essa oferta expira em {{ destaque.expira_str }} ou enquanto durarem os estoques.</p>
 			</section>
+			{% endif %}
 
 			<p class="curtidas"><span data-id="{{ destaque.id }}">{{ destaque.curtidas }} pessoas curtiram essa oferta</span></p>
 
