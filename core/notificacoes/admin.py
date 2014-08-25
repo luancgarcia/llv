@@ -6,12 +6,14 @@ from notificacoes.models import Notificacao, Solicitacao
 
 
 class NotificacaoAdmin(admin.ModelAdmin):
+    exclude = ['publicada']
     list_filter = ['lida','resolvida']
     list_display = ['oferta','lida','resolvida','enviada_mkt','enviada_lojista']
     list_editable = ['lida']
 
 
 class SolicitacaoAdmin(admin.ModelAdmin):
+    exclude = ['publicada']
     list_filter = ['loja__shopping']
 
 
