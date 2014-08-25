@@ -173,6 +173,7 @@ def mais_ofertas(request):
 
     destaques = eventos = ofertas = []
     total_destaques = total_eventos = 0
+    mais_paginas = False
     if ultimo_destaque:
         ids_destaques = [int(i) for i in ultimo_destaque.split(', ')]
         destaques = Oferta.objects.filter(tipo=Oferta.DESTAQUE,
@@ -191,12 +192,10 @@ def mais_ofertas(request):
                                         status=Oferta.PUBLICADO)\
                                 .exclude(id__in=ids_ofertas)
         ofertas = [o.to_dict() for o in ofertas]
+        if len(ofertas) > 14:
+            mais_paginas = True
         if total_destaques or total_eventos:
             ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
-
-    mais_paginas = False
-    if not ofertas or len(ofertas) > 14:
-        mais_paginas = True
 
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': [int(d['id']) for d in ofertas],
