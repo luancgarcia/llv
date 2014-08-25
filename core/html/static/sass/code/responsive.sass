@@ -33,18 +33,33 @@
 
 		&.dois-itens-v
 			+span-columns(2 omega, $coluna_responsive)
+
 			.item
 				figure
 					a
-						display: block
+						
 						overflow: hidden
-						max-height: 250px
+						
 				.content
 					height: auto
 					padding-bottom: 10px
 
+			
 
 
+	.dois-itens-v
+
+		.item
+			+span-columns(1, $coluna_responsive)
+
+			&.last
+				+span-columns(1 omega, $coluna_responsive)
+
+		&.lasttv
+			
+
+			.item
+				+span-columns(2 omega, $coluna_responsive)
 
 	.grid2, .grid4, .grid2.last 
 		+span-columns(2 omega, $coluna_responsive)
@@ -58,12 +73,19 @@
 				.marca
 					display: none
 
+	.grid2 
+		.item 
+			.content 
+				.marca
+					display: block !important
+
+				.descricao
+					padding-right: 140px
+					width: auto !important
+
 	.fechar_modal
-		background-image: url(#{$url-img}/fechar-modal-mobile.png) 
-		width: 9px
-		height: 8px
-		top: 4px
-		right: 5px
+		top: 3px
+		right: 1px
 
 	#ligbtox_content
 
@@ -224,8 +246,7 @@
 				display: none
 	.grid
 		.item
-			.content
-			
+			.content		
 
 				.descricao
 					font-size: 1.1em

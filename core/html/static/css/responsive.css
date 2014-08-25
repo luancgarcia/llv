@@ -85,13 +85,27 @@
     margin-right: 0;
   }
   .grid.dois-itens-v .item figure a, .grid.last.dois-itens-v .item figure a {
-    display: block;
     overflow: hidden;
-    max-height: 250px;
   }
   .grid.dois-itens-v .item .content, .grid.last.dois-itens-v .item .content {
     height: auto;
     padding-bottom: 10px;
+  }
+
+  .dois-itens-v .item {
+    width: 49.2228%;
+    float: left;
+    margin-right: 1.5544%;
+  }
+  .dois-itens-v .item.last {
+    width: 49.2228%;
+    float: left;
+    margin-right: 0;
+  }
+  .dois-itens-v.lasttv .item {
+    width: 100%;
+    float: left;
+    margin-right: 0;
   }
 
   .grid2, .grid4, .grid2.last {
@@ -106,12 +120,17 @@
     display: none;
   }
 
+  .grid2 .item .content .marca {
+    display: block !important;
+  }
+  .grid2 .item .content .descricao {
+    padding-right: 140px;
+    width: auto !important;
+  }
+
   .fechar_modal {
-    background-image: url(../img/fechar-modal-mobile.png);
-    width: 9px;
-    height: 8px;
-    top: 4px;
-    right: 5px;
+    top: 3px;
+    right: 1px;
   }
 
   #ligbtox_content .content {
