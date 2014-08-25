@@ -196,7 +196,7 @@ def mais_ofertas(request):
             ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
     mais_paginas = False
-    if not ofertas or len(ofertas) < 14:
+    if not ofertas or len(ofertas) > 14:
         mais_paginas = True
 
     contexto = {'destaques': destaques,
