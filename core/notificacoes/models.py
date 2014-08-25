@@ -67,6 +67,7 @@ class Notificacao(BaseNotificacao):
                                send_now=True)
                 self.enviada_lojista = True
                 self.resolvida = True
+                self.lida = True
                 self.save()
             except:
                 raise
