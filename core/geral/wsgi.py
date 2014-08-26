@@ -22,6 +22,7 @@ sys.path.insert(0, '/home/liquidacaolapisv/public_html/llv/core')
 sys.path.insert(0, '/home/liquidacaolapisv/public_html/llv/core/geral')
 sys.path.insert(0, '/home/liquidacaolapisv/public_html/.virtualenvs/llv/lib/python2.7/site-packages')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "geral.settings")
+os.environ['HTTPS'] = "on"
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

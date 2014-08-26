@@ -43,7 +43,7 @@ EMAIL_USE_TLS = True
 
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
 # SITE_URL = "https://jonatascd.pythonanywhere.com/"
-SITE_URL = "http://llv.liquidacaolapisvermelho.com.br"
+SITE_URL = "https://llv.liquidacaolapisvermelho.com.br"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 # STATIC_URL = '/static/'
@@ -174,6 +174,16 @@ WSDL_URL = 'http://wiseit.multiplan.com.br:8080/WebService2/services/wiseitws?ws
 COMPARTILHADAS_PASTA = os.path.join(MEDIA_ROOT, 'compartilhar')
 COMPARTILHADAS_URL = SITE_URL+'media/compartilhar/'
 
+# secure proxy SSL header and secure cookies
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# session expire at browser close
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# wsgi scheme
+os.environ['wsgi.url_scheme'] = 'https'
 
 try:
     from custom_settings import *
