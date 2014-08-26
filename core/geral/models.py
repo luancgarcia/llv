@@ -440,8 +440,12 @@ class Mascara(EditorialModel):
         return u'%s' % self.imagem
 
     @classmethod
-    def serializado(cls):
-        return [{'id': i.id,
-                 'imagem': i.img_376x376.url,
-                 'thumb': i.thumb_98x98.url} for i in cls.get_publicadas() if
-                i.categoria == cls.NORMAL]
+    def normais_serializadas(cls):
+        return [i.to_dict() for i in cls.objects.filter(tipo=cls.NORMAL,
+                                                        publicada=True)]
+
+    def to_dict(self):
+        return {'id': self.id,
+                'imagem': self.img_376x376.url,
+                'thumb': self.thumb_98x98.url}
+
