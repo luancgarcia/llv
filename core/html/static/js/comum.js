@@ -589,6 +589,13 @@ $( document ).ready(function() {
 
 	});
     marca_minhas_curtidas();
+
+    var verifica_splash = getCookie('nosplash');
+    if (verifica_splash && verifica_splash != 'undefined'){
+        $("#Splash").hide();
+    }
+    // define cookie para ocultar splash
+    document.cookie = "nosplash=1; ; max-age=" + 60 * 10;
 });
 
 
