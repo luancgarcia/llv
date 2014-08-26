@@ -259,7 +259,7 @@ def modal_share(request, id_item):
     item = Oferta.objects.get(id=id_item)
     imagem = item.imagens.all()[:1].get()
     sazonal = Sazonal.atual(serializado=False)
-    imagens_sazonal = [s.to_dict() for s in sazonal.mascaras.all()]
+    imagens_sazonal = [m.serializado() for m in sazonal.mascaras.all()]
     contexto = {'item': item.to_dict(modal=True),
                 'imagem_url': imagem.img_376x376.url,
                 'imagem_id': imagem.id,
