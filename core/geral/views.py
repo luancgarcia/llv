@@ -184,37 +184,26 @@ def mais_ofertas(request):
     destaques = eventos = ofertas = []
     total_destaques = total_eventos = 0
     mais_paginas = False
+    ids_destaques = ids_eventos = ids_ofertas = None
     if ultimo_destaque:
-        ids_destaques = [int(i) for i in ultimo_destaque.split(', ')]
-        destaques = Oferta.objects.filter(tipo=Oferta.DESTAQUE,
-                                          status=Oferta.PUBLICADO)\
-                                  .exclude(id__in=ids_destaques)
-        destaques = [d.to_dict() for d in destaques]
+        ids_destaques, destaques = mais_items(ultimo_destaque, Oferta.DESTAQUE)
         total_destaques = len(destaques)
     if ultimo_evento:
-        ids_eventos = [int(i) for i in ultimo_evento.split(', ')]
-        eventos = Oferta.objects.filter(tipo=Oferta.EVENTO,
-                                        status=Oferta.PUBLICADO)\
-                                .exclude(id__in=ids_eventos)
-        eventos = [e.to_dict() for e in eventos]
+        ids_eventos, eventos = mais_items(ultimo_evento, Oferta.EVENTO)
         total_eventos = len(eventos)
     if ultima_oferta:
-        ids_ofertas = [int(i) for i in ultima_oferta.split(', ')]
-        ofertas = Oferta.objects.filter(tipo=Oferta.OFERTA,
-                                        status=Oferta.PUBLICADO)\
-                                .exclude(id__in=ids_ofertas)
-        ofertas = [o.to_dict() for o in ofertas]
+        ids_ofertas, ofertas = mais_items(ultima_oferta, Oferta.OFERTA)
         if len(ofertas) > 14:
             mais_paginas = True
         if total_destaques or total_eventos:
             ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
     contexto = {'destaques': destaques,
-                'ultimo_destaque_id': [int(d['id']) for d in ofertas],
+                'ultimo_destaque_id': ids_destaques,
                 'eventos': eventos,
-                'ultimo_evento_id': [int(e['id']) for e in eventos],
+                'ultimo_evento_id': ids_eventos,
                 'ofertas': ofertas,
-                'ultima_oferta_id': [int(o['id']) for o in ofertas],
+                'ultima_oferta_id': ids_ofertas,
                 'mais_paginas': mais_paginas,
                 'eh_paginacao': True}
 
