@@ -37,6 +37,9 @@
 			<nav class="abas">
 				<ul>
 					<li class="fl ativo"><a href="javascript;;" data-aba="aba-1">DIA-A-DIA</a></li>
+					{% if sazonal %}
+					<li class="fl"><a href="javascript;;" data-aba="aba-2">{{ sazonal.nome }}</a></li>
+					{% endif %}
 				</ul>
 			</nav>
 			<section class="fix content-opcoes">
@@ -45,6 +48,13 @@
 					<li class="fl"><a href="javascript:;" data-src="{{ mascara.imagem }}" data-mask="{{mascara.id}}"><img src="{{ mascara.thumb }}" alt=""></a></li>
 				{% endfor %}
 				</ul>
+				{% if sazonal and imagens_sazonal %}
+				<ul data-box="aba-2" class="off">
+				{% for mascara in imagens_sazonal %}
+					<li class="fl"><a href="javascript:;" data-src="{{ mascara.imagem }}" data-mask="{{mascara.id}}"><img src="{{ mascara.thumb }}" alt=""></a></li>
+				{% endfor %}
+				</ul>
+				{% endif %}
 			</section>
 		</div>
 	</section>
