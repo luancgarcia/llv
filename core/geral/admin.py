@@ -265,11 +265,14 @@ class LogAdmin(admin.ModelAdmin):
 
 class MascaraAdmin(admin.ModelAdmin):
     miniatura = AdminThumbnail(image_field='thumb_98x98')
-    list_display = ['__unicode__','miniatura','categoria']
-    list_filter = ['categoria']
+    list_display = ['__unicode__','miniatura','tipo','categoria']
+    list_filter = ['categoria','tipo']
     fieldsets = (
         ('', {
-            'fields': ('categoria', 'publicada',)
+            'fields': ('tipo', 'publicada',)
+        }),
+        ('', {
+            'fields': ('categoria',)
         }),
         ('Imagem', {
             'fields': ('imagem',)
