@@ -164,6 +164,17 @@ def home_por_desconto(porcentagem):
 
     return destaques_ofertas_eventos(items)
 
+def mais_items(valores, tipo):
+    ids_para_filtrar = [int(i) for i in valores.split(', ')]
+    items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
+                          .exclude(id__in=ids_para_filtrar)
+    items_final = []
+    for i in items:
+        ids_para_filtrar.append(i.id)
+        items_final.append(i.to_dict())
+
+    return ids_para_filtrar, items_final
+
 @csrf_exempt
 def mais_ofertas(request):
     ultimo_destaque = request.POST.get('ultimo_destaque', None)
