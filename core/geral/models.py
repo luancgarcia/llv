@@ -424,8 +424,11 @@ class Mascara(EditorialModel):
                                  resize.ResizeToFill(98, 98)],
                                  source='thumb', format='PNG',
                                  options={'quality': 90})
-    categoria = models.IntegerField(u'Tipo de categoria', choices=CATEGORIAS,
-                                    null=True, blank=True, default=NORMAL)
+    tipo = models.IntegerField(u'Tipo de categoria', choices=CATEGORIAS,
+                               null=True, blank=True, default=NORMAL)
+    categoria = models.ForeignKey(Categoria, null=True, blank=False,
+                                  verbose_name=u'Categoria',
+                                  related_name='mascaras')
 
     class Meta:
         verbose_name = u'Imagem para compartilhar'
