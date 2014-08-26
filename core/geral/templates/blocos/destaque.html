@@ -20,10 +20,12 @@
 			{% if destaque.chamada_promocional %}
 				<p class="outro"><a href="">{{ destaque.chamada_promocional }}</a></p>
 			{% else %}
+				{% if destaque.preco_inicial or destaque.preco_final %}
 				<p class="outro">
-					<span class="valor1">de: R$ {{ destaque.preco_inicial }} por</span>
-					<span class="valor2"><span>R$</span> <strong>{{ destaque.preco_final }}</strong></span>
+					{%if destaque.preco_inicial%}<span class="valor1">de: R$ {{ destaque.preco_inicial }} por</span>{% endif %}
+					{% if destaque.preco_final %}<span class="valor2"><span>R$</span><strong>{{ destaque.preco_final }}</strong></span>{% endif %}
 				</p>
+				{% endif %}
 			{% endif %}
 		</section>
 
