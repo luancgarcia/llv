@@ -5,11 +5,17 @@ from django.contrib import admin
 from lojas.models import Loja, Shopping
 
 class LojaAdmin(admin.ModelAdmin):
-	list_display = ['nome','shopping','telefone','publicada']
-	list_filter = ['shopping','publicada']
-	list_editable = ['publicada']
-	search_fields= ['nome']
-	prepopulated_fields = {'slug': ('nome',), }
+    class Media:
+        js = [
+            'js/jquery.mask.min.js',
+            'js/mascara_telefone.js',
+        ]
+
+    list_display = ['nome','shopping','telefone','publicada']
+    list_filter = ['shopping','publicada']
+    list_editable = ['publicada']
+    search_fields= ['nome']
+    prepopulated_fields = {'slug': ('nome',), }
 
 class ShoppingAdmin(admin.ModelAdmin):
     list_display = ['nome','publicada','id_multiplan']
