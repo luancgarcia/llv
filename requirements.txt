@@ -9,6 +9,5 @@ django-imagekit==3.2.1
 pilkit==1.1.9
 six==1.7.3
 wsgiref==0.1.2
-lxml==3.3.5
 suds==0.4
 simplejson==3.6.0
