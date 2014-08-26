@@ -425,8 +425,8 @@ class Mascara(EditorialModel):
                                  source='thumb', format='PNG',
                                  options={'quality': 90})
     tipo = models.IntegerField(u'Tipo de categoria', choices=CATEGORIAS,
-                               null=True, blank=True, default=NORMAL)
-    categoria = models.ForeignKey(Categoria, null=True, blank=False,
+                               null=True, blank=False, default=NORMAL)
+    categoria = models.ForeignKey(Categoria, null=True, blank=True,
                                   verbose_name=u'Categoria',
                                   related_name='mascaras')
 
