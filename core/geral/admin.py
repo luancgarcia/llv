@@ -180,6 +180,17 @@ class DestaqueAdmin(admin.ModelAdmin):
             'js/jquery.maskMoney.min.js',
         ]
 
+    fieldsets = (
+        ('Informações', {
+            'fields': (
+                'status', 'loja', 'nome', 'slug', 'categoria', 'genero',
+                'descricao', 'texto_promocional',)
+        }),
+        ('Digite os valores do produto', {
+            'fields': (('preco_inicial', 'preco_final'), 'desconto')
+        }),
+    )
+
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
         return qs.filter(tipo=Oferta.DESTAQUE)
@@ -285,8 +296,8 @@ class MascaraAdmin(admin.ModelAdmin):
 
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin, form=OfertaModelForm)
-admin.site.register(Destaque, DestaqueAdmin)
-admin.site.register(Evento, EventoAdmin)
+admin.site.register(Destaque, DestaqueAdmin, form=OfertaModelForm)
+admin.site.register(Evento, EventoAdmin, form=OfertaModelForm)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log, LogAdmin)
 admin.site.register(PerfilMarketing, PerfilMktAdmin)
