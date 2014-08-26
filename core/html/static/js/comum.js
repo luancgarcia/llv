@@ -44,8 +44,8 @@ $(function(){
 				})
 
 				ico.animate({
-					marginLeft: "0",
-					zIndex: "0"
+					// zIndex: "0",
+					marginLeft: "0"					
 				})
 
 				menu.animate({
@@ -61,8 +61,6 @@ $(function(){
 			}
 
 			ico.addClass("ativo");
-
-
 
 			html_body.css({
 				"overflow":"hidden",
@@ -105,6 +103,10 @@ $(function(){
 					marginLeft: "0"
 				});
 
+				ico.animate({
+					right: "0"
+				})
+
 				ico_menu.animate({
 					marginLeft: "0"
 				});
@@ -126,6 +128,10 @@ $(function(){
 				"overflow":"hidden",
 				"height": altura_window+"px"
 			});
+
+			ico.animate({
+				right: "276px"
+			})
 
 			banner.animate({
 				marginLeft: "-266px"
