@@ -473,7 +473,7 @@
     margin-left: 0px;
   }
 }
-@media (min-width: 801px) and (max-width: 9999999px) {
+@media (min-width: 820px) and (max-width: 9999999px) {
   br.cl {
     display: none;
   }
