@@ -474,6 +474,10 @@
   }
 }
 @media (min-width: 820px) and (max-width: 9999999px) {
+  #Header {
+    margin-right: 0.2599%;
+  }
+
   br.cl {
     display: none;
   }
