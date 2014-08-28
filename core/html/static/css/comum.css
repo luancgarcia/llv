@@ -158,7 +158,7 @@
   margin-bottom: 5px;
 }
 .dois-itens-v .item.vertical figure {
-  padding-bottom: 7px;
+  padding-bottom: 4px;
 }
 .dois-itens-v .item.last {
   margin-bottom: 0;
@@ -196,6 +196,7 @@
 .item .content {
   margin: 0 12px 5px;
   position: relative;
+  min-height: 99px;
 }
 .item .content .marca {
   position: absolute;
@@ -264,6 +265,7 @@
 .grid .content {
   margin: 0 5px 0;
   height: 42px;
+  min-height: 10px;
 }
 .grid .content .descricao {
   font-size: 1.3em;
