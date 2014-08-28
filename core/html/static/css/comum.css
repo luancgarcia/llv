@@ -270,6 +270,9 @@
 .grid .content .descricao {
   font-size: 1.3em;
 }
+.grid.dois-itens-v.lasttv {
+  margin-bottom: 0px;
+}
 
 .grid2 .item figure {
   margin-bottom: 6px;
