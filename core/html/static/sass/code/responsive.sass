@@ -263,17 +263,24 @@
 +at-breakpoint($contexto-tv)
 	$coluna_responsive: 8
 
+
 	br.cl
 		display: none
 
 	.container
 		max-width: 100%
 
+	.item
+		.content
+			min-height: 10px
+
 	.grid , .grid.last, .grid2 , .grid2.last
 		+span-columns(2, $coluna_responsive)
+		margin-right: 0.2599%
 
 		&.lasttv
-			+span-columns(2 omega, $coluna_responsive)
+			+span-columns(2, $coluna_responsive)
+			margin-right: 0.2599%
 
 		&.dois-itens-v
 			display: none
@@ -285,6 +292,7 @@
 			.content
 				height: 42px
 				margin: 0 5px
+				min-height: auto !important
 				.titulo, .marca, .outro
 					display: none
 

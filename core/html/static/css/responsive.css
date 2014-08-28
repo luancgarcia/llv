@@ -482,15 +482,21 @@
     max-width: 100%;
   }
 
+  .item .content {
+    min-height: 10px;
+  }
+
   .grid, .grid.last, .grid2, .grid2.last {
     width: 24.71191%;
     float: left;
     margin-right: 0.38412%;
+    margin-right: 0.2599%;
   }
   .grid.lasttv, .grid.last.lasttv, .grid2.lasttv, .grid2.last.lasttv {
     width: 24.71191%;
     float: left;
-    margin-right: 0;
+    margin-right: 0.38412%;
+    margin-right: 0.2599%;
   }
   .grid.dois-itens-v, .grid.last.dois-itens-v, .grid2.dois-itens-v, .grid2.last.dois-itens-v {
     display: none;
@@ -501,6 +507,7 @@
   .grid .item .content, .grid.last .item .content, .grid2 .item .content, .grid2.last .item .content {
     height: 42px;
     margin: 0 5px;
+    min-height: auto !important;
   }
   .grid .item .content .titulo, .grid .item .content .marca, .grid .item .content .outro, .grid.last .item .content .titulo, .grid.last .item .content .marca, .grid.last .item .content .outro, .grid2 .item .content .titulo, .grid2 .item .content .marca, .grid2 .item .content .outro, .grid2.last .item .content .titulo, .grid2.last .item .content .marca, .grid2.last .item .content .outro {
     display: none;
