@@ -5,7 +5,7 @@ from PIL import Image
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from django.conf import settings
 
 from utils.functions import jsonResponse
@@ -48,11 +48,10 @@ def home(request, *args, **kwargs):
                 'ultima_oferta_id': [int(o['id']) for o in ofertas],
                 'categorias': Categoria.publicadas_com_oferta(shopping),
                 'mais_paginas': mais_paginas,
-                'lojas': Loja.publicadas_com_oferta(shopping),
-                'lojas_splash': Loja.publicadas_sem_oferta(shopping),
+                'lojas': Loja.publicadas_com_oferta(shopping=shopping),
+                'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping),
                 'sazonal': Sazonal.atual(shopping=shopping)}
 
-    response = HttpResponse()
     response = render(request, "home.html", contexto)
     response.set_cookie(key='shp_id', value=shopping)
 
