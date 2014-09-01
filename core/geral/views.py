@@ -46,11 +46,11 @@ def home(request, *args, **kwargs):
                 'ultimo_evento_id': [int(e['id']) for e in eventos],
                 'ofertas': ofertas,
                 'ultima_oferta_id': [int(o['id']) for o in ofertas],
-                'categorias': Categoria.publicadas_com_oferta(),
+                'categorias': Categoria.publicadas_com_oferta(shopping),
                 'mais_paginas': mais_paginas,
-                'lojas': Loja.publicadas_com_oferta(),
-                'lojas_splash': Loja.publicadas_sem_oferta(),
-                'sazonal': Sazonal.atual()}
+                'lojas': Loja.publicadas_com_oferta(shopping),
+                'lojas_splash': Loja.publicadas_sem_oferta(shopping),
+                'sazonal': Sazonal.atual(shopping=shopping)}
 
     response = HttpResponse()
     response = render(request, "home.html", contexto)
