@@ -12,6 +12,7 @@ from utils.functions import jsonResponse
 from utils.custom_email import TemplatedEmail
 
 from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara, Sazonal
+from .decorators import indica_shopping
 from lojas.models import Loja
 from notificacoes.models import Solicitacao
 
@@ -28,12 +29,14 @@ def ultimo_id(lista):
             ultimo_id = int(i['id'])
     return ultimo_id if ultimo_id > 0 else ''
 
-def home(request):
-    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE)
+@indica_shopping
+def home(request, *args, **kwargs):
+    shopping = kwargs['shp_id']
+    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE, shopping=shopping)
 
-    eventos = Oferta.prontos(tipo=Oferta.EVENTO)
+    eventos = Oferta.prontos(tipo=Oferta.EVENTO, shopping=shopping)
 
-    ofertas = Oferta.prontos()
+    ofertas = Oferta.prontos(shopping=shopping)
     mais_paginas = True if len(ofertas) > 14 else False
     ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
@@ -48,7 +51,12 @@ def home(request):
                 'lojas': Loja.publicadas_com_oferta(),
                 'lojas_splash': Loja.publicadas_sem_oferta(),
                 'sazonal': Sazonal.atual()}
-    return render(request, "home.html", contexto)
+
+    response = HttpResponse()
+    response = render(request, "home.html", contexto)
+    response.set_cookie(key='shp_id', value=shopping)
+
+    return response
 
 def home_com_filtro(request, *args, **kwargs):
     tipo = kwargs.keys()[0]
