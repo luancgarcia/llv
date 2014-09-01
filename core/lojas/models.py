@@ -62,11 +62,15 @@ class Loja(EditorialModel):
                 'shopping': self.shopping.to_dict()}
 
     @classmethod
-    def publicadas_com_oferta(cls):
-        lojas = cls.objects.filter(shopping=1,publicada=True).order_by('nome')
+    def publicadas_com_oferta(cls, shopping):
+        lojas = cls.objects.filter(shopping=1,
+                                   publicada=True,
+                                   shopping_id=shopping).order_by('nome')
         return [l.to_dict() for l in lojas if l.ofertas.filter(status=1)]
 
     @classmethod
-    def publicadas_sem_oferta(cls):
-        lojas = cls.objects.filter(shopping=1,publicada=True).order_by('nome')
+    def publicadas_sem_oferta(cls, shopping):
+        lojas = cls.objects.filter(shopping=1,
+                                   publicada=True,
+                                   shopping_id=shopping).order_by('nome')
         return [l.to_dict() for l in lojas if not l.ofertas.filter(status=1)]
