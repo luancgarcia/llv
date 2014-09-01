@@ -300,9 +300,10 @@ class Oferta(EditorialModel):
         return contexto
 
     @classmethod
-    def prontos(cls, tipo=OFERTA, from_id=None):
+    def prontos(cls, tipo=OFERTA, from_id=None, shopping=1):
         items = cls.objects.filter(tipo=tipo,
-                                   status=cls.PUBLICADO)\
+                                   status=cls.PUBLICADO,
+                                   loja__shopping_id=shopping)\
                            .order_by('-data_aprovacao')
         if from_id:
             items = items.filter(id__gt=from_id)
