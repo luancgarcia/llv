@@ -29,6 +29,19 @@ def ultimo_id(lista):
             ultimo_id = int(i['id'])
     return ultimo_id if ultimo_id > 0 else ''
 
+def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
+    return {'destaques': destaques,
+            'ultimo_destaque_id': [int(d['id']) for d in destaques],
+            'eventos': eventos,
+            'ultimo_evento_id': [int(e['id']) for e in eventos],
+            'ofertas': ofertas,
+            'ultima_oferta_id': [int(o['id']) for o in ofertas],
+            'categorias': Categoria.publicadas_com_oferta(shopping),
+            'mais_paginas': mais_paginas,
+            'lojas': Loja.publicadas_com_oferta(shopping=shopping),
+            'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping),
+            'sazonal': Sazonal.atual(shopping=shopping)}
+
 @indica_shopping
 def home(request, *args, **kwargs):
     shopping = kwargs['shp_id']
@@ -40,50 +53,43 @@ def home(request, *args, **kwargs):
     mais_paginas = True if len(ofertas) > 14 else False
     ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
-    contexto = {'destaques': destaques,
-                'ultimo_destaque_id': [int(d['id']) for d in destaques],
-                'eventos': eventos,
-                'ultimo_evento_id': [int(e['id']) for e in eventos],
-                'ofertas': ofertas,
-                'ultima_oferta_id': [int(o['id']) for o in ofertas],
-                'categorias': Categoria.publicadas_com_oferta(shopping),
-                'mais_paginas': mais_paginas,
-                'lojas': Loja.publicadas_com_oferta(shopping=shopping),
-                'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping),
-                'sazonal': Sazonal.atual(shopping=shopping)}
+    contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping)
 
     response = render(request, "home.html", contexto)
     response.set_cookie(key='shp_id', value=shopping)
 
     return response
 
+@indica_shopping
 def home_com_filtro(request, *args, **kwargs):
-    tipo = kwargs.keys()[0]
-    slug = kwargs.get(tipo)
-
-    if tipo == 'categoria':
-        destaques, ofertas, eventos, mais_paginas = home_por_categoria(slug)
-    elif tipo == 'genero':
-        destaques, ofertas, eventos, mais_paginas = home_por_genero(slug)
-    elif tipo == 'loja':
-        destaques, ofertas, eventos, mais_paginas = home_por_loja(slug)
-    elif tipo == 'preco':
-        destaques, ofertas, eventos, mais_paginas = home_por_preco(slug)
+    shopping = kwargs['shp_id']
+    if kwargs.get('categoria'):
+        slug = kwargs.get('categoria')
+        destaques, ofertas, eventos, mais_paginas = home_por_categoria(slug,
+                                                                       shopping)
+    elif kwargs.get('genero'):
+        slug = kwargs.get('genero')
+        destaques, ofertas, eventos, mais_paginas = home_por_genero(slug,
+                                                                    shopping)
+    elif kwargs.get('loja'):
+        slug = kwargs.get('loja')
+        destaques, ofertas, eventos, mais_paginas = home_por_loja(slug,
+                                                                  shopping)
+    elif kwargs.get('preco'):
+        slug = kwargs.get('preco')
+        destaques, ofertas, eventos, mais_paginas = home_por_preco(slug,
+                                                                   shopping)
     else:
-        destaques, ofertas, eventos, mais_paginas = home_por_desconto(slug)
+        slug = kwargs.get('desconto')
+        destaques, ofertas, eventos, mais_paginas = home_por_desconto(slug,
+                                                                      shopping)
 
-    contexto = {'destaques': destaques,
-                'ultimo_destaque_id': [int(d['id']) for d in destaques],
-                'eventos': eventos,
-                'ultimo_evento_id': [int(e['id']) for e in eventos],
-                'ofertas': ofertas,
-                'ultima_oferta_id': [int(o['id']) for o in ofertas],
-                'categorias': Categoria.publicadas_com_oferta(),
-                'mais_paginas': mais_paginas,
-                'lojas': Loja.publicadas_com_oferta(),
-                'lojas_splash': Loja.publicadas_sem_oferta(),
-                'sazonal': Sazonal.atual()}
-    return render(request, "home.html", contexto)
+    contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping)
+
+    response = render(request, "home.html", contexto)
+    response.set_cookie(key='shp_id', value=shopping)
+
+    return response
 
 def destaques_ofertas_eventos(items):
     destaques = items.filter(tipo=Oferta.DESTAQUE)
@@ -99,10 +105,11 @@ def destaques_ofertas_eventos(items):
 
     return destaques, ofertas, eventos, mais_paginas
 
-def home_por_categoria(slug):
+def home_por_categoria(slug, shopping):
     categoria = Categoria.objects.filter(slug=slug).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
-                                  categoria=categoria)
+                                  categoria=categoria,
+                                  loja__shopping_id=shopping)
     return destaques_ofertas_eventos(items)
 
 def categoria(request, categoria):
@@ -123,7 +130,7 @@ def categoria(request, categoria):
                 'lojas_splash': Loja.publicadas_sem_oferta()}
     return render(request, "home.html", contexto)
 
-def home_por_genero(slug):
+def home_por_genero(slug, shopping):
     if slug == 'masculino':
         genero = 0
     elif slug == 'feminino':
@@ -134,17 +141,20 @@ def home_por_genero(slug):
         genero = 3
 
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
-                                  genero=genero)
+                                  genero=genero,
+                                  loja__shopping_id=shopping)
     return destaques_ofertas_eventos(items)
 
-def home_por_loja(slug):
-    loja = Loja.objects.filter(slug=slug,shopping_id=1).get()
+def home_por_loja(slug, shopping):
+    print shopping
+    loja = Loja.objects.filter(slug=slug,shopping_id=shopping).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja=loja)
     return destaques_ofertas_eventos(items)
 
-def home_por_preco(preco):
-    items = Oferta.objects.filter(status=Oferta.PUBLICADO)
+def home_por_preco(preco, shopping):
+    items = Oferta.objects.filter(status=Oferta.PUBLICADO,
+                                  loja__shopping_id=shopping)
     if preco == '301':
         items = items.filter(preco_final__gte='301')
     elif preco == '300':
@@ -158,8 +168,9 @@ def home_por_preco(preco):
 
     return destaques_ofertas_eventos(items)
 
-def home_por_desconto(porcentagem):
-    items = Oferta.objects.filter(status=Oferta.PUBLICADO)
+def home_por_desconto(porcentagem, shopping):
+    items = Oferta.objects.filter(status=Oferta.PUBLICADO,
+                                  loja__shopping_id=shopping)
 
     porcentagem = int(porcentagem)
     if porcentagem == 30:
