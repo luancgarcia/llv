@@ -6,25 +6,50 @@
 {% include 'blocos/evento.html' with lasttv=True %}
 
 {% if ultimo %}
+    {% if ofertas.8 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.8 %}
+    {% endif %}
 
+    {% if ofertas.9 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.9 lastmob=True %}
+    {% endif %}
 
+    {% if ofertas.10 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.10 last_div=True %}
+    {% endif %}
 
+    {% if ofertas.11 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.11 lastmob=True %}
+    {% endif %}
 
+    {% if ofertas.12 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.12 %}
+    {% endif %}
 
+    {% if ofertas.13 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.13 last_div=True lastmob=True %}
+    {% endif %}
 {% elif sem_destaque %}
+    {% if ofertas.12 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.12 %}
+    {% endif %}
+    {% if ofertas.13 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.13 lastmob=True %}
+    {% endif %}
+    {% if ofertas.13 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.14 last_div=True %}
+    {% endif %}
+    {% if ofertas.15 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.15 lastmob=True %}
+    {% endif %}
+    {% if ofertas.16 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.16 %}
+    {% endif %}
+    {% if ofertas.17 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.17 last_div=True lastmob=True %}
+    {% endif %}
 	<br class="cl">
+    {% if ofertas.18 %}
 	{% for oferta in ofertas|slice:"18:" %}
 		<div class="grid {% cycle '' 'lastmob' 'lasttv' 'last lastmob' %}">
 			<article class="item">
@@ -32,17 +57,30 @@
 			</article><!-- .item -->
 		</div>
 	{% endfor %}
+    {% endif %}
 {% else %}
+    {% if ofertas.15 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.15 %}
+    {% endif %}
 
+    {% if ofertas.16 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.16 lastmob=True %}
+    {% endif %}
 
+    {% if ofertas.17 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.17 last_div=True %}
+    {% endif %}
 
+    {% if ofertas.18 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.18 lastmob=True %}
+    {% endif %}
 
+    {% if ofertas.19 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.19 %}
+    {% endif %}
 
+    {% if ofertas.20 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.20 last_div=True lastmob=True %}
+    {% endif %}
 {% endif %}
 

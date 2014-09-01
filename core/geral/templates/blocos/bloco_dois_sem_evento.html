@@ -5,16 +5,24 @@
 
 <!-- coluna com dois itens verticais -->
 <div class="grid dois-itens-v">
+    {% if ofertas.4 %}
 	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.4 %}
+    {% endif %}
 
-	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.6 last_div=True %}
+	{% if ofertas.6 %}
+    {% include 'blocos/oferta_vertical.html' with oferta=ofertas.6 last_div=True %}
+    {% endif %}
 </div>
 
 <!-- coluna com dois itens verticais -->
 <div class="grid dois-itens-v">
+    {% if ofertas.5 %}
 	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.5 %}
+    {% endif %}
 
-	{% include 'blocos/oferta_vertical.html' with oferta=ofertas.7 last_div=True %}
+	{% if ofertas.7 %}
+    {% include 'blocos/oferta_vertical.html' with oferta=ofertas.7 last_div=True %}
+    {% endif %}
 </div>
 
 {% include 'blocos/destaque.html' with last_div=True lastmob=True lasttv=True %}

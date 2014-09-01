@@ -27,6 +27,7 @@
 {% include 'blocos/evento.html' with lasttv=True %}
 
 {% if not sem_destaque %}
+{% if ofertas.14 %}
 {% for oferta in ofertas|slice:"14:18" %}
 	<div class="grid {% cycle '' 'last lastmob' 'lasttv' 'last lastmob' %}">
 		<article class="item">
@@ -34,7 +35,9 @@
 		</article><!-- .item -->
 	</div>
 {% endfor %}
+{% endif %}
 {% else %}
+{% if ofertas.2 %}
 {% for oferta in ofertas|slice:"2:6" %}
 	<div class="grid {% cycle '' 'last lastmob' 'lasttv' 'last lastmob' %}">
 		<article class="item">
@@ -42,5 +45,6 @@
 		</article><!-- .item -->
 	</div>
 {% endfor %}
+{% endif %}
 {% endif %}
 

@@ -33,6 +33,7 @@
 {% if not sem_destaque %}
 <!-- 3 s/ d -->
 <br class="cl">
+{% if ofertas.12 %}
 {% for oferta in ofertas|slice:"12:" %}
 	<div class="grid {% cycle '' 'lastmob' '' 'last lastmob' %}">
 		<article class="item">
@@ -40,4 +41,5 @@
 		</article><!-- .item -->
 	</div>
 {% endfor %}
+{% endif %}
 {% endif %}

@@ -5,19 +5,35 @@
 {% include 'blocos/destaque.html' %}
 
 {% if antes %}
+    {% if ofertas.6 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.6 %}
+    {% endif %}
 
+    {% if ofertas.7 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.7 last_div=True lastmob=True %}
+    {% endif %}
 
+    {% if ofertas.8 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.8 lasttv=True %}
+    {% endif %}
 
+    {% if ofertas.9 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.9 last_div=True lastmob=True %}
+    {% endif %}
 {% else %}
+    {% if ofertas.8 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.8 %}
+    {% endif %}
 
+    {% if ofertas.9 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.9 last_div=True lastmob=True %}
+    {% endif %}
 
+    {% if ofertas.10 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.10 lasttv=True %}
+    {% endif %}
 
+    {% if ofertas.11 %}
 	{% include 'blocos/oferta.html' with oferta=ofertas.11 last_div=True lastmob=True %}
+    {% endif %}
 {% endif %}
