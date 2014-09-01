@@ -104,9 +104,10 @@ class Categoria(EditorialModel):
         return contexto
 
     @classmethod
-    def publicadas_com_oferta(cls):
-        shopping = Shopping.objects.get(id=1)
-        categorias = cls.objects.filter(shopping=shopping,publicada=True,sazonal=False).order_by('nome')
+    def publicadas_com_oferta(cls, shopping=1):
+        categorias = cls.objects.filter(shopping_id=shopping,
+                                        publicada=True,
+                                        sazonal=False).order_by('nome')
         return [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
 
 
@@ -123,8 +124,10 @@ class Sazonal(Categoria):
         super(Categoria, self).save(*args, **kwargs)
 
     @classmethod
-    def atual(cls, serializado=False):
-        atual = cls.objects.filter(sazonal=True,publicada=True)[:1]
+    def atual(cls, serializado=False, shopping=1):
+        atual = cls.objects.filter(sazonal=True,
+                                   publicada=True,
+                                   shopping_id=shopping)[:1]
         if serializado:
             return atual[0].to_dict() if atual else {}
         return atual[0] if atual else None
