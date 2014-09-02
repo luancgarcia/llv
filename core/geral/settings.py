@@ -172,7 +172,7 @@ FACEBOOK_APP_SECRET = "af6ed6874f6e259644ad69b62b8ffc4f"
 WSDL_URL = 'http://wiseit.multiplan.com.br:8080/WebService2/services/wiseitws?wsdl'
 
 COMPARTILHADAS_PASTA = os.path.join(MEDIA_ROOT, 'compartilhar')
-COMPARTILHADAS_URL = SITE_URL+'media/compartilhar/'
+COMPARTILHADAS_URL = SITE_URL+'/media/compartilhar/'
 
 # secure proxy SSL header and secure cookies
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
