@@ -459,10 +459,10 @@ $(function(){
 	            },
 	            success: function(data) {
 	                FB.ui({
-                        app_id: "698128933600347",
+//                        app_id: "698128933600347",
+                        app_id: "705413109545842",
                         method: 'feed',
-                        // link: "https://apps.facebook.com/llv-dev/",
-                        link: "https://jonatascd.pythonanywhere.com/",
+                        link: "https://llv.liquidacaolapisvermelho.com.br/",
                         caption: data.titulo,
                         description: data.descricao,
                         picture: data.imagem,
