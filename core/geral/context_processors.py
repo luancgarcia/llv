@@ -7,4 +7,4 @@ def context(request):
     '''
     return {'SITE_URL': settings.SITE_URL,
             'STATIC_URL': settings.STATIC_URL,
-            'VERSAO_ESTATICOS': 8}
+            'VERSAO_ESTATICOS': 9}
