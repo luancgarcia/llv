@@ -88,6 +88,8 @@ class OfertaAdmin(admin.ModelAdmin):
         perfil = request.user.perfil.get()
         if perfil.is_lojista:
             qs = qs.filter(loja=perfil.loja)
+        if perfil.is_marketing and perfil.shopping:
+            qs = qs.filter(loja__shopping=perfil.shopping)
         return qs.filter(tipo=Oferta.OFERTA)
 
     def changelist_view(self, request, extra_context=None):
