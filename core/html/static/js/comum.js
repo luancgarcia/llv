@@ -490,6 +490,12 @@ $( document ).ready(function() {
 			var ultimo_destaque = container.attr('data-destaque');
 			var ultimo_evento = container.attr('data-evento');
 			var ultima_oferta = container.attr('data-oferta');
+			var filtro = container.attr('data-filtro');
+			if (filtro){
+				var url = '?mais_ofertas=sim';
+			}else{
+				var url = '/mais_ofertas';
+			}
 
 			// depois de guardar os valores em variaveis,
 			// remove elemento para ajustar paginacao
@@ -499,7 +505,7 @@ $( document ).ready(function() {
 			}
 			$.ajax({
 	            type: "POST",
-	            url: '/mais_ofertas/',
+	            url: url,
 	            dataType: "html",
 	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta},
 	            beforeSend: function(){
