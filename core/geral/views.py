@@ -68,30 +68,60 @@ def split_ids(valores):
 @indica_shopping
 def home_com_filtro(request, *args, **kwargs):
     shopping = kwargs['shp_id']
+    template = "home.html"
+    ids_filtrar = []
+    destaque_ids = evento_ids = oferta_ids = []
+    if request.GET.get('mais_ofertas'):
+        destaque_ids = split_ids(request.POST.get('ultimo_destaque', None))
+        evento_ids = split_ids(request.POST.get('ultimo_evento', None))
+        oferta_ids = split_ids(request.POST.get('ultima_oferta', None))
+        ids_filtrar = destaque_ids+evento_ids+oferta_ids
+        template = "home-part.html"
+
+
     if kwargs.get('categoria'):
         slug = kwargs.get('categoria')
         destaques, ofertas, eventos, mais_paginas = home_por_categoria(slug,
-                                                                       shopping)
+                                                                       shopping,
+                                                                       ids_filtrar)
     elif kwargs.get('genero'):
         slug = kwargs.get('genero')
         destaques, ofertas, eventos, mais_paginas = home_por_genero(slug,
-                                                                    shopping)
+                                                                    shopping,
+                                                                    ids_filtrar)
     elif kwargs.get('loja'):
         slug = kwargs.get('loja')
         destaques, ofertas, eventos, mais_paginas = home_por_loja(slug,
-                                                                  shopping)
+                                                                  shopping,
+                                                                  ids_filtrar)
     elif kwargs.get('preco'):
         slug = kwargs.get('preco')
         destaques, ofertas, eventos, mais_paginas = home_por_preco(slug,
-                                                                   shopping)
+                                                                   shopping,
+                                                                   ids_filtrar)
     else:
         slug = kwargs.get('desconto')
         destaques, ofertas, eventos, mais_paginas = home_por_desconto(slug,
-                                                                      shopping)
+                                                                      shopping,
+                                                                      ids_filtrar)
 
-    contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping)
+    if request.GET.get('mais_ofertas'):
+        ids_destaques = destaque_ids+[d['id'] for d in destaques]
+        ids_eventos = evento_ids+[e['id'] for e in eventos]
+        ids_ofertas = oferta_ids+[o['id'] for o in ofertas]
+        contexto = {'destaques': destaques,
+                    'ultimo_destaque_id': ids_destaques,
+                    'eventos': eventos,
+                    'ultimo_evento_id': ids_eventos,
+                    'ofertas': ofertas,
+                    'ultima_oferta_id': ids_ofertas,
+                    'mais_paginas': mais_paginas,
+                    'eh_paginacao': True}
+    else:
+        contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping)
+    contexto.update({'data_filtro': 1})
 
-    response = render(request, "home.html", contexto)
+    response = render(request, template, contexto)
     response.set_cookie(key='shp_id', value=shopping)
 
     return response
@@ -110,11 +140,12 @@ def destaques_ofertas_eventos(items):
 
     return destaques, ofertas, eventos, mais_paginas
 
-def home_por_categoria(slug, shopping):
+def home_por_categoria(slug, shopping, ids_filtrar):
     categoria = Categoria.objects.filter(slug=slug).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria,
-                                  loja__shopping_id=shopping)
+                                  loja__shopping_id=shopping) \
+                          .exclude(id__in=ids_filtrar)
     return destaques_ofertas_eventos(items)
 
 def categoria(request, categoria):
@@ -135,7 +166,7 @@ def categoria(request, categoria):
                 'lojas_splash': Loja.publicadas_sem_oferta()}
     return render(request, "home.html", contexto)
 
-def home_por_genero(slug, shopping):
+def home_por_genero(slug, shopping, ids_filtrar):
     if slug == 'masculino':
         genero = 0
     elif slug == 'feminino':
@@ -147,17 +178,18 @@ def home_por_genero(slug, shopping):
 
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   genero=genero,
-                                  loja__shopping_id=shopping)
+                                  loja__shopping_id=shopping) \
+                          .exclude(id__in=ids_filtrar)
     return destaques_ofertas_eventos(items)
 
-def home_por_loja(slug, shopping):
-    print shopping
+def home_por_loja(slug, shopping, ids_filtrar):
     loja = Loja.objects.filter(slug=slug,shopping_id=shopping).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
-                                  loja=loja)
+                                  loja=loja).exclude(id__in=ids_filtrar)
+
     return destaques_ofertas_eventos(items)
 
-def home_por_preco(preco, shopping):
+def home_por_preco(preco, shopping, ids_filtrar):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja__shopping_id=shopping)
     if preco == '301':
@@ -171,9 +203,12 @@ def home_por_preco(preco, shopping):
     else:
         items = items.filter(preco_final__lte='30')
 
+    if ids_filtrar:
+        items = items.exclude(id__in=ids_filtrar)
+
     return destaques_ofertas_eventos(items)
 
-def home_por_desconto(porcentagem, shopping):
+def home_por_desconto(porcentagem, shopping, ids_filtrar):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja__shopping_id=shopping)
 
@@ -184,6 +219,9 @@ def home_por_desconto(porcentagem, shopping):
         items = items.filter(desconto__gte=31,desconto__lte=50)
     else:
         items = items.filter(desconto__gte=51,desconto__lte=70)
+
+    if ids_filtrar:
+        items = items.exclude(id__in=ids_filtrar)
 
     return destaques_ofertas_eventos(items)
 
