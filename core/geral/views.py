@@ -60,6 +60,11 @@ def home(request, *args, **kwargs):
 
     return response
 
+def split_ids(valores):
+    if valores:
+        return [int(i) for i in valores.split(', ')]
+    return []
+
 @indica_shopping
 def home_com_filtro(request, *args, **kwargs):
     shopping = kwargs['shp_id']
