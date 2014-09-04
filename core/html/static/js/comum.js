@@ -458,17 +458,32 @@ $(function(){
 	                // console.log("before send");
 	            },
 	            success: function(data) {
-	                FB.ui({
-//                        app_id: "698128933600347",
-                        app_id: "705413109545842",
-                        method: 'feed',
-                        link: "https://llv.liquidacaolapisvermelho.com.br/",
-                        caption: data.titulo,
-                        description: data.descricao,
-                        picture: data.imagem,
-                        image: data.imagem,
-                        display:'popup'
-					}, function(response){});
+//	                FB.ui({
+////                        app_id: "698128933600347",
+//                        app_id: "705413109545842",
+//                        method: 'feed',
+//                        link: "https://llv.liquidacaolapisvermelho.com.br/",
+//                        caption: data.titulo,
+//                        description: data.descricao,
+//                        picture: data.imagem,
+//                        image: data.imagem,
+//                        display:'popup'
+//					}, function(response){});
+                    console.log('sucesso');
+                    FB.api(
+                        "/me/photos",
+                        "POST",
+                        {
+                            "url": data.imagem,
+//                            "message": data.descricao+" "+"https://llv.liquidacaolapisvermelho.com.br/"
+                        },
+                        function (response) {
+                          if (response && !response.error) {
+                            console.log(response);
+                          }
+                          console.log(response.error);
+                        }
+                    );
 					fechaModal();
 	                return false;
 	            },
