@@ -23,11 +23,36 @@
 
 	<script type="text/javascript" src="{{ STATIC_URL }}js/comum.js?v={{ VERSAO_ESTATICOS }}"></script>
 	<script type="text/javascript">
+        window.fbAsyncInit = function() {
+            // init the FB JS SDK
+            FB.init({
+              appId      : '{{ FACEBOOK_APP_ID }}',
+              status     : true,
+              xfbml      : true,
+              version    : 'v2.0'
+            });
+
+            FB.login(function(response) {
+                debugger;
+                if (response.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    FB.api('/me', function(response) {
+                        console.log('Good to see you, ' + response.name + '.');
+                    });
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            }, {
+                scope: 'publish_actions',
+                return_scopes: true
+            });
+          };
 		(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) return;
 		  js = d.createElement(s); js.id = id;
-		  js.src ="//connect.facebook.net/pt_BR/sdk.js#xfbml=1&appId={{ FACEBOOK_APP_ID }}&version=v2.0";
+//		  js.src ="//connect.facebook.net/pt_BR/sdk.js#xfbml=1&appId={{ FACEBOOK_APP_ID }}&version=v2.0";
+		  js.src ="//connect.facebook.net/pt_BR/sdk.js";
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 		// alert($(window).width());
