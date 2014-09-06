@@ -33,7 +33,6 @@
             });
 
             FB.login(function(response) {
-                debugger;
                 if (response.authResponse) {
                     console.log('Welcome!  Fetching your information.... ');
                     FB.api('/me', function(response) {
@@ -224,4 +223,9 @@
         <a href="http://www.kinda.com.br" target="_blank"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
     </footer>
 </body>
+<script>
+$( document ).ready(function() {
+    $("#Splash").hide();
+});
+</script>
 </html>

@@ -538,7 +538,6 @@ $( document ).ready(function() {
 	});
 
 	// abre splash
-
 	$(".splash-menu a").on({
 		click: function(){
 			$("#Splash").show();
@@ -614,6 +613,8 @@ $( document ).ready(function() {
     var verifica_splash = getCookie('nosplash');
     if (verifica_splash && verifica_splash != 'undefined'){
         $("#Splash").hide();
+    }else{
+        window.setTimeout('$("#Splash").show()', 120000);
     }
     // define cookie para ocultar splash
     document.cookie = "nosplash=1; ; max-age=" + 60 * 10;
