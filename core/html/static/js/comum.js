@@ -469,7 +469,6 @@ $(function(){
 //                        image: data.imagem,
 //                        display:'popup'
 //					}, function(response){});
-                    console.log('sucesso');
                     FB.api(
                         "/me/photos",
                         "POST",
@@ -479,9 +478,9 @@ $(function(){
                         },
                         function (response) {
                           if (response && !response.error) {
-                            console.log(response);
+//                            console.log(response);
                           }
-                          console.log(response.error);
+//                          console.log(response.error);
                         }
                     );
 					fechaModal();
