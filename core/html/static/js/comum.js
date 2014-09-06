@@ -474,7 +474,7 @@ $(function(){
                         "POST",
                         {
                             "url": data.imagem,
-//                            "message": data.descricao+" "+"https://llv.liquidacaolapisvermelho.com.br/"
+                            "message": data.titulo+'\r\n\r\n\r\n\r\n'+data.descricao+'\r\n\r\n\r\n\r\n'+'https://llv.liquidacaolapisvermelho.com.br/'
                         },
                         function (response) {
                           if (response && !response.error) {
