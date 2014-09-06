@@ -4,6 +4,7 @@ from imagekit.admin import AdminThumbnail
 
 from django.contrib import admin
 from django.forms import ModelForm
+from django.core.exceptions import ValidationError
 
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
                           Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador,
@@ -64,10 +65,17 @@ class ImagemNaoOfertaInline(admin.StackedInline):
     )
 
 
-class OfertaModelForm(ModelForm):
+class ItemModelForm(ModelForm):
     class Meta:
         model = Oferta
         localized_fields = ('__all__')
+
+
+class OfertaModelForm(ItemModelForm):
+    def clean(self):
+        if not self.loja:
+            raise ValidationError({'loja': ["Selecione uma loja", ]})
+
 
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
@@ -298,8 +306,8 @@ class MascaraAdmin(admin.ModelAdmin):
 
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin, form=OfertaModelForm)
-admin.site.register(Destaque, DestaqueAdmin, form=OfertaModelForm)
-admin.site.register(Evento, EventoAdmin, form=OfertaModelForm)
+admin.site.register(Destaque, DestaqueAdmin, form=ItemModelForm)
+admin.site.register(Evento, EventoAdmin, form=ItemModelForm)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log, LogAdmin)
 admin.site.register(PerfilMarketing, PerfilMktAdmin)

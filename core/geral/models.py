@@ -9,7 +9,6 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.template.defaultfilters import date as _date
-from django.core.exceptions import ValidationError
 
 from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
 from lojas.models import Loja, Shopping
@@ -221,10 +220,6 @@ class Oferta(EditorialModel):
                 n.save()
                 n.notifica_criacao()
         super(Oferta, self).save(*args, **kwargs)
-
-    def clean(self):
-        if self.tipo == Oferta.OFERTA and not self.loja:
-            raise ValidationError({'loja': ["Selecione uma loja", ]})
 
     def desconto_value(self):
         return u'%s%%' % self.desconto if self.desconto else ''
