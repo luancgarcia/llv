@@ -368,9 +368,11 @@ def mesclar(request):
         destino_url = '%s' % imagem.img_376x376.url
 
     item_dict = item.to_dict(modal=True)
+    hash_url = '%s?%s' % (item_dict['tipo'].lower(), item_dict['id'])
     contexto = {'titulo': item_dict['titulo'],
                 'descricao': item_dict['chamada_promocional'],
-                'imagem': destino_url}
+                'imagem': destino_url,
+                'url_item': '%s#%s' % (settings.SITE_URL, hash_url)}
 
     Log.regitra_acao(item,Log.COMPARTILHADA)
 
