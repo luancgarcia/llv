@@ -282,7 +282,8 @@ class Oferta(EditorialModel):
                      'categoria': [c.to_dict() for c in self.categoria.all()],
                      'expira': self.expira,
                      'expira_str': self.expira_str,
-                     'titulo': self.nome}
+                     'titulo': self.nome,
+                     'tipo': Oferta.TIPOS[self.tipo][1]}
 
         if not self.tipo == Oferta.EVENTO:
             contexto.update({'porcentagem': self.porcentagem_desconto(),
