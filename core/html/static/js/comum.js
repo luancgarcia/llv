@@ -1,3 +1,6 @@
+var url_hash = window.location.hash;
+url_slug = url_hash.replace('#', '');
+
 function validaEmail(email) {
     if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
         return false;
@@ -458,23 +461,12 @@ $(function(){
 	                // console.log("before send");
 	            },
 	            success: function(data) {
-//	                FB.ui({
-////                        app_id: "698128933600347",
-//                        app_id: "705413109545842",
-//                        method: 'feed',
-//                        link: "https://llv.liquidacaolapisvermelho.com.br/",
-//                        caption: data.titulo,
-//                        description: data.descricao,
-//                        picture: data.imagem,
-//                        image: data.imagem,
-//                        display:'popup'
-//					}, function(response){});
                     FB.api(
                         "/me/photos",
                         "POST",
                         {
                             "url": data.imagem,
-                            "message": data.titulo+'\r\n\r\n\r\n\r\n'+data.descricao+'\r\n\r\n\r\n\r\n'+'https://llv.liquidacaolapisvermelho.com.br/'
+                            "message": data.titulo+'\r\n\r\n\r\n\r\n'+data.descricao+'\r\n\r\n\r\n\r\n'+data.url_item
                         },
                         function (response) {
                           if (response && !response.error) {
@@ -498,6 +490,15 @@ $(function(){
 });
 
 $( document ).ready(function() {
+    if (url_slug){
+        if (url_slug.split('?')[0] === 'evento'){
+            var largura = '560';
+        }else{
+            var largura = '786';
+        }
+        var url_item = '/modais/'+url_slug.replace('?', '/')+'/';
+        disparaModalRequest(url_item,largura,"");
+    }
 	$(window).scroll(function() {
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
 			var container = $('.cl.final');
