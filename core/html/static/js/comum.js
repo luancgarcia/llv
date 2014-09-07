@@ -508,7 +508,7 @@ $( document ).ready(function() {
 			if (filtro){
 				var url = '?mais_ofertas=sim';
 			}else{
-				var url = '/mais_ofertas';
+				var url = '/mais_ofertas/';
 			}
 
 			// depois de guardar os valores em variaveis,
