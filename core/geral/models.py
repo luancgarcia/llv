@@ -9,6 +9,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.template.defaultfilters import date as _date
+from django.db.models import Q
 
 from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
 from lojas.models import Loja, Shopping
@@ -303,8 +304,9 @@ class Oferta(EditorialModel):
     @classmethod
     def prontos(cls, tipo=OFERTA, from_id=None, shopping=1):
         items = cls.objects.filter(tipo=tipo,
-                                   status=cls.PUBLICADO,
-                                   loja__shopping_id=shopping)\
+                                   status=cls.PUBLICADO) \
+                           .filter(Q(loja__shopping_id=shopping) |
+                                   Q(shopping_id=shopping)) \
                            .order_by('-data_aprovacao')
         if from_id:
             items = items.filter(id__gt=from_id)
