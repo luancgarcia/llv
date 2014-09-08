@@ -79,7 +79,7 @@ class OfertaModelForm(ItemModelForm):
 
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
-    exclude = OCULTA_NO_ADMIN
+    exclude = OCULTA_NO_ADMIN + ('shopping',)
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja', 'status','genero']
     readonly_fields = ('total_compartilhado', 'total_visto', 'total_curtido',
@@ -193,8 +193,8 @@ class DestaqueAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Informações', {
             'fields': (
-                'status', 'loja', 'nome', 'slug', 'categoria', 'genero',
-                'descricao', 'texto_promocional',)
+                'status', 'loja', 'shopping', 'nome', 'slug', 'categoria',
+                'genero', 'descricao', 'texto_promocional',)
         }),
         ('Digite os valores do produto', {
             'fields': (('preco_inicial', 'preco_final'), 'desconto')

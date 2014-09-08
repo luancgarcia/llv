@@ -165,6 +165,8 @@ class Oferta(EditorialModel):
 
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
                              null=True, blank=True)
+    shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping', null=True,
+                                 blank=True)
     categoria = models.ManyToManyField(Categoria, verbose_name=u'Categoria',null=True,
                                        blank=True, related_name='ofertas')
     nome = models.CharField(u'Título', max_length=200, null=True, blank=False)
