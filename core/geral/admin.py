@@ -72,8 +72,9 @@ class ItemModelForm(ModelForm):
 
 
 class OfertaModelForm(ItemModelForm):
-    def clean(self):
-        if not self.loja:
+    def clean_loja(self):
+        loja = self.cleaned_data['loja']
+        if not loja:
             raise ValidationError({'loja': ["Selecione uma loja", ]})
 
 
