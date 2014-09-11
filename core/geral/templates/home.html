@@ -34,12 +34,14 @@
 
             FB.login(function(response) {
                 if (response.authResponse) {
-                    console.log('Welcome!  Fetching your information.... ');
+//                    console.log('Welcome!  Fetching your information.... ');
                     FB.api('/me', function(response) {
-                        console.log('Good to see you, ' + response.name + '.');
+//                        console.log('Good to see you, ' + response.name + '.');
+                        $('p.user span').text(response.name);
+                        $('p.user img').attr('src','http://graph.facebook.com/'+response.id+'/picture?type=small');
                     });
                 } else {
-                    console.log('User cancelled login or did not fully authorize.');
+//                    console.log('User cancelled login or did not fully authorize.');
                 }
             }, {
                 scope: 'publish_actions',
@@ -127,7 +129,7 @@
 					<header class="fix">
 						<p class="user fl">
 							<img src="{% static 'img/user.jpg' %}">
-							Nome Usuário
+							<span>Nome Usuário</span>
 						</p>
 						<a href="" class="sair fr">sair</a>
 					</header>
