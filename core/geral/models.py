@@ -76,7 +76,8 @@ class Categoria(EditorialModel):
     shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping',
                                  related_name='categorias', null=True, blank=True)
     nome = models.CharField(u'Nome', max_length=100, blank=False, null=True)
-    slug = models.SlugField(max_length=150, blank=False, null=False, unique=True)
+    slug = models.SlugField(max_length=150, blank=False, null=False,
+                            unique=False)
     sazonal = models.BooleanField(u'Categoria sazonal?', default=False)
     imagem = models.ImageField(u'Imagem', upload_to='categorias',
                                null=True, blank=True)
@@ -89,6 +90,7 @@ class Categoria(EditorialModel):
         verbose_name=u'Categoria'
         verbose_name_plural=u'Categorias'
         ordering = ['nome']
+        unique_together = ('shopping','slug')
 
     def __unicode__(self):
         shopping = ' (%s)' % self.shopping.nome if self.shopping else ''

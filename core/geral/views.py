@@ -141,7 +141,7 @@ def destaques_ofertas_eventos(items):
     return destaques, ofertas, eventos, mais_paginas
 
 def home_por_categoria(slug, shopping, ids_filtrar):
-    categoria = Categoria.objects.filter(slug=slug).get()
+    categoria = Categoria.objects.filter(slug=slug,shopping_id=shopping).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria,
                                   loja__shopping_id=shopping) \
