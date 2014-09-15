@@ -5,6 +5,7 @@ from imagekit.admin import AdminThumbnail
 from django.contrib import admin
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
+from django.db.models import Q
 
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
                           Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador,
@@ -98,7 +99,8 @@ class OfertaAdmin(admin.ModelAdmin):
         if perfil.is_lojista:
             qs = qs.filter(loja=perfil.loja)
         if perfil.is_marketing and perfil.shopping:
-            qs = qs.filter(loja__shopping=perfil.shopping)
+            qs = qs.filter(Q(loja__shopping=perfil.shopping)|
+                           Q(autor__shopping=perfil.shopping))
         return qs.filter(tipo=Oferta.OFERTA)
 
     def changelist_view(self, request, extra_context=None):
