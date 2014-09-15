@@ -119,7 +119,7 @@ class OfertaAdmin(admin.ModelAdmin):
         if db_field.name == "loja":
             if perfil.is_lojista:
                 kwargs["queryset"] = Loja.objects.filter(id=perfil.loja.id)
-            elif perfil.is_marketing:
+            elif perfil.is_marketing and perfil.shopping:
                 kwargs["queryset"] = Loja.objects.filter(shopping=perfil.shopping)
             else:
                 kwargs["queryset"] = Loja.objects.all()
