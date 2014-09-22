@@ -77,6 +77,7 @@ class OfertaModelForm(ItemModelForm):
         loja = self.cleaned_data['loja']
         if not loja:
             raise ValidationError({'loja': ["Selecione uma loja", ]})
+        return loja
 
 
 class OfertaAdmin(admin.ModelAdmin):
