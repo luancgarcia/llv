@@ -378,10 +378,29 @@ def mesclar(request):
 
     item_dict = item.to_dict(modal=True)
     hash_url = '%s?%s' % (item_dict['tipo'].lower(), item_dict['id'])
+    nome_shopping = item.loja.shopping.nome if item.loja else item.shopping.nome
+    nome_loja = item.loja.nome if item.loja else ""
+    nome_loja = nome_loja.replace(" ","")
+    nome_shopping = nome_shopping.replace(" ","")
+    shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
+    url_item = '%s?%s#%s' % (settings.SITE_URL, shopping, hash_url)
+    quebra_linha = '\r\n\r\n\r\n\r\n'
+    if nome_loja:
+        hashtags = '#lapisvermelho #%s #%s' % (nome_shopping, nome_loja)
+    else:
+        hashtags = '#lapisvermelho #%s #%s' % nome_shopping
+    mensagem = '%s%s%s%s%s%s%s' % (item_dict['titulo'],
+                                    quebra_linha,
+                                    item_dict['chamada_promocional'],
+                                    quebra_linha,
+                                    hashtags,
+                                    quebra_linha,
+                                    url_item)
+
     contexto = {'titulo': item_dict['titulo'],
                 'descricao': item_dict['chamada_promocional'],
                 'imagem': destino_url,
-                'url_item': '%s#%s' % (settings.SITE_URL, hash_url)}
+                'mensagem': mensagem}
 
     Log.regitra_acao(item,Log.COMPARTILHADA)
 

@@ -466,7 +466,7 @@ $(function(){
                         "POST",
                         {
                             "url": data.imagem,
-                            "message": data.titulo+'\r\n\r\n\r\n\r\n'+data.descricao+'\r\n\r\n\r\n\r\n'+data.url_item
+                            "message": data.mensagem
                         },
                         function (response) {
                           if (response && !response.error) {
