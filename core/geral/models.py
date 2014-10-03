@@ -304,7 +304,7 @@ class Oferta(EditorialModel):
         return contexto
 
     @classmethod
-    def prontos(cls, tipo=OFERTA, from_id=None, shopping=1):
+    def prontos(cls, tipo=0, from_id=None, shopping=1):
         items = cls.objects.filter(tipo=tipo,
                                    status=cls.PUBLICADO) \
                            .filter(Q(loja__shopping_id=shopping) |
