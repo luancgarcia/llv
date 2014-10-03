@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
 from django.conf import settings
+from django.db.models import Q
 
 from utils.functions import jsonResponse
 from utils.custom_email import TemplatedEmail
@@ -225,9 +226,12 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
 
     return destaques_ofertas_eventos(items)
 
-def mais_items(valores, tipo):
+def mais_items(valores, tipo, id_shopping):
     ids_para_filtrar = [int(i) for i in valores.split(', ')]
+
     items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
+                          .filter(Q(loja__shopping_id=id_shopping) |
+                                  Q(shopping_id=id_shopping)) \
                           .exclude(id__in=ids_para_filtrar)
     items_final = []
     for i in items:
@@ -241,19 +245,22 @@ def mais_ofertas(request):
     ultimo_destaque = request.POST.get('ultimo_destaque', None)
     ultimo_evento = request.POST.get('ultimo_evento', None)
     ultima_oferta = request.POST.get('ultima_oferta', None)
+    id_shopping = request.COOKIES.get('shp_id', None)
 
     destaques = eventos = ofertas = []
     total_destaques = total_eventos = 0
     mais_paginas = False
     ids_destaques = ids_eventos = ids_ofertas = None
     if ultimo_destaque:
-        ids_destaques, destaques = mais_items(ultimo_destaque, Oferta.DESTAQUE)
+        ids_destaques, destaques = mais_items(ultimo_destaque,
+                                              Oferta.DESTAQUE,
+                                              id_shopping)
         total_destaques = len(destaques)
     if ultimo_evento:
-        ids_eventos, eventos = mais_items(ultimo_evento, Oferta.EVENTO)
+        ids_eventos, eventos = mais_items(ultimo_evento, Oferta.EVENTO, id_shopping)
         total_eventos = len(eventos)
     if ultima_oferta:
-        ids_ofertas, ofertas = mais_items(ultima_oferta, Oferta.OFERTA)
+        ids_ofertas, ofertas = mais_items(ultima_oferta, Oferta.OFERTA, id_shopping)
         if len(ofertas) > 14:
             mais_paginas = True
         if total_destaques or total_eventos:
