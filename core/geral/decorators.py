@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from .models import Shopping
+from lojas.models import Shopping
 
 def indica_shopping(funcao):
     def _wrap(*args, **kwargs):
