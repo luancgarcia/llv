@@ -23,7 +23,7 @@ largura_window = $(window).width();
 $(function(){
 	var isiDevice = /ipad|iphone|ipod|android/i.test(navigator.userAgent.toLowerCase());
 
-	if(isiDevice) {
+	if(isiDevice || largura_window > 900) {
 		$("body").attr("id","TabletSmart");
 
 	}

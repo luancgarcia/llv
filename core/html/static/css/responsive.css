@@ -129,8 +129,8 @@
   }
 
   .fechar_modal {
-    top: 3px;
-    right: 1px;
+    top: -10px;
+    right: -6px;
   }
 
   #ligbtox_content .content {
@@ -335,9 +335,11 @@
   #Header .head-mob img {
     display: block;
     margin: 0 auto;
+    max-width: 216px;
   }
   #Header .head-mob .ico-brs {
     background: url(../img/ico-brs.png) no-repeat 0 0;
+    background-size: 100% 100% !important;
     width: 45px;
     height: 40px;
     position: absolute;
@@ -348,6 +350,7 @@
 
   #ico-menu {
     background: url(../img/ico-menu-mob.png) no-repeat 0 0;
+    background-size: 100% 100% !important;
     display: block;
     width: 45px;
     height: 40px;
@@ -476,6 +479,9 @@
 @media (min-width: 820px) and (max-width: 9999999px) {
   #Header {
     margin-right: 0.2599%;
+  }
+  #Header .head-mob img {
+    max-width: 100%;
   }
 
   br.cl {

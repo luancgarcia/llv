@@ -40,7 +40,7 @@
 					{% if destaque.loja.telefone %}
 					<p class="center">
 						<span class="txt">Ligue para a loja </span><br />
-						<span class="tel">{{ destaque.loja.telefone }}</span>
+						<a class="tel" href="tel:{{ destaque.loja.telefone }}">{{ destaque.loja.telefone }}</a>
 					</p>
 					{% endif %}
 				</div>

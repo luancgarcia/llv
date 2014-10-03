@@ -894,6 +894,7 @@
   font-size: 11px;
 }
 .colunaDados .qualMarca .box p .tel {
+  color: black;
   font-size: 14px;
 }
 .colunaDados .curtidas {
@@ -907,8 +908,8 @@
   color: #d11924;
 }
 .colunaDados .curtidas.ativo span {
-  background: url(../img/ico-curtidas-ativo.png) no-repeat 0 0 !important;
-  padding-left: 40px;
+  background-image: url(../img/ico-curtidas-ativo.png) !important;
+  padding-left: 0;
   display: inline-block;
   cursor: pointer;
 }
