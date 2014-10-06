@@ -41,6 +41,20 @@
     <div class="row-fluid dashboard-tools">
         <div class="span0 hidden-phone" id="blank">&nbsp;</div>
         <div class="span9 app-list">
+            {% if user.get_profile.possui_notificacoes %}
+            <div>
+                <h2>Aviso</h2>
+            </div>
+            <table class="table table-striped table-bordered table-condensed">
+                <tbody>
+                <tr>
+                    <td>
+                        Você possui {{ user.get_profile.numero_notificacoes}} notificações. <a href="notificacoes/notificacao/">Acesse</a>.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            {% endif %}
             {% if app_list %}
                 <h2>{% trans 'Apps' %}</h2>
                 {% for app in app_list %}
