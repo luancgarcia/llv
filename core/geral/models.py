@@ -255,7 +255,7 @@ class Oferta(EditorialModel):
 
     @property
     def marketing_responsavel(self):
-        if not self.loja or not self.status == Oferta.PUBLICADO:
+        if not self.loja or self.status == Oferta.PUBLICADO:
             return None
         marketing = Perfil.objects.filter(tipo=Perfil.MARKETING,
                                           shopping=self.loja.shopping)[:1]
