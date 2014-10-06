@@ -51,6 +51,18 @@ class Perfil(BaseModel):
     def is_adm(self):
         return True if self.tipo == Perfil.ADMINISTRADOR else None
 
+    @property
+    def possui_notificacoes(self):
+        return True if self.responsavel.all() else False
+
+    @property
+    def numero_notificacoes(self):
+        return u'%s' % self.responsavel.all().count()
+
+    @property
+    def numero_notificacoes_naolidas(self):
+        return u'%s' % self.responsavel.filter(lida=False).count()
+
 
 class PerfilMarketing(Perfil):
     class Meta:
