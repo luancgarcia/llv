@@ -386,9 +386,9 @@ def mesclar(request):
     url_item = '%s?%s#%s' % (settings.SITE_URL, shopping, hash_url)
     quebra_linha = '\r\n\r\n\r\n\r\n'
     if nome_loja:
-        hashtags = '#lapisvermelho #%s #%s' % (nome_shopping, nome_loja)
+        hashtags = '#LápisVermelho #%s #%s' % (nome_shopping, nome_loja)
     else:
-        hashtags = '#lapisvermelho #%s #%s' % nome_shopping
+        hashtags = '#LápisVermelho #%s #%s' % nome_shopping
     mensagem = '%s%s%s%s%s%s%s' % (item_dict['titulo'],
                                     quebra_linha,
                                     item_dict['chamada_promocional'],
