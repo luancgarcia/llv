@@ -10,10 +10,11 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.template.defaultfilters import date as _date
 from django.db.models import Q
+from django.db.models.signals import post_save
 
-from utils.models import BaseModel, EditorialModel, BaseManager, OrderedModel
+from utils.models import BaseModel, EditorialModel, OrderedModel
 from lojas.models import Loja, Shopping
-from notificacoes.models import Notificacao
+from geral.signals import cria_envia_notificacao
 
 
 class Perfil(BaseModel):
@@ -215,15 +216,6 @@ class Oferta(EditorialModel):
             if notificacoes:
                 for n in notificacoes:
                     n.notifica_aprovacao()
-        elif self.status == Oferta.PENDENTE:
-            n, created = Notificacao.objects.get_or_create(oferta=self,
-                                                           solicitante=self.autor)
-            if n:
-                n.oferta = self
-                if self.marketing_responsavel:
-                    n.responsavel = self.marketing_responsavel
-                n.save()
-                n.notifica_criacao()
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
@@ -460,3 +452,4 @@ class Mascara(EditorialModel):
                 'imagem': self.img_376x376.url,
                 'thumb': self.thumb_98x98.url}
 
+post_save.connect(cria_envia_notificacao, sender=Oferta)
