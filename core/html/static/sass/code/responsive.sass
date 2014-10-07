@@ -143,6 +143,10 @@
 			text-align: center
 			padding: 0 2%
 
+			&.ativo
+				span
+					padding-left: 0 !important 
+
 			span
 				display: block
 				background-position: top center
@@ -262,11 +266,28 @@
 
 +at-breakpoint($contexto-tv)
 	$coluna_responsive: 8
+
+	#TabletSmart 
+		.container
+			padding-top: 120px !important
+
+		#ico-menu
+			width: 90px !important
+			height: 80px !important
+			background-size: 100% 100% !important
+
+		#Header 
+			.head-mob 
+				.ico-brs
+					width: 90px !important
+					height: 80px !important
 	
 	#Header
 		margin-right: 0.2599%
 		
 		.head-mob
+			background-repeat: repeat !important
+			height: 80px !important
 
 			img
 				max-width: 100%

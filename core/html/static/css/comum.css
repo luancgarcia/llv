@@ -467,20 +467,22 @@
 }
 #TabletSmart #Header .head-mob .ico-brs {
   background: url(../img/ico-brs.png) no-repeat 0 0;
-  width: 43px;
-  height: 33px;
+  background-size: 100% 100% !important;
+  width: 45px;
+  height: 40px;
   position: absolute;
   right: 0;
-  top: 0;
+  top: -3px;
 }
 #TabletSmart #ico-menu {
   background: url(../img/ico-menu-mob.png) no-repeat 0 0;
+  background-size: 100% 100%;
   display: block;
-  width: 41px;
-  height: 33px;
+  width: 45px;
+  height: 40px;
   position: absolute;
   left: 0;
-  top: 0;
+  top: -3px;
 }
 #TabletSmart #Menu {
   background: #cb1d24;
@@ -909,7 +911,6 @@
 }
 .colunaDados .curtidas.ativo span {
   background-image: url(../img/ico-curtidas-ativo.png) !important;
-  padding-left: 0;
   display: inline-block;
   cursor: pointer;
 }

@@ -189,6 +189,9 @@
     text-align: center;
     padding: 0 2%;
   }
+  .colunaDados .curtidas.ativo span {
+    padding-left: 0 !important;
+  }
   .colunaDados .curtidas span {
     display: block;
     background-position: top center;
@@ -477,8 +480,25 @@
   }
 }
 @media (min-width: 820px) and (max-width: 9999999px) {
+  #TabletSmart .container {
+    padding-top: 120px !important;
+  }
+  #TabletSmart #ico-menu {
+    width: 90px !important;
+    height: 80px !important;
+    background-size: 100% 100% !important;
+  }
+  #TabletSmart #Header .head-mob .ico-brs {
+    width: 90px !important;
+    height: 80px !important;
+  }
+
   #Header {
     margin-right: 0.2599%;
+  }
+  #Header .head-mob {
+    background-repeat: repeat !important;
+    height: 80px !important;
   }
   #Header .head-mob img {
     max-width: 100%;
