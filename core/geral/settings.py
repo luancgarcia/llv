@@ -33,17 +33,19 @@ MANAGERS = ADMINS = (
 )
 
 FALE_CONOSCO = ['jonatas.cd@gmail.com','rachelrubia@gmail.com','marcusribeirooo@gmail.com']
-EMAIL_FROM = "jonatas.cd@gmail.com"
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "jonatas.cd@gmail.com"
-EMAIL_HOST_PASSWORD = 'yourpassword'
-EMAIL_PORT = 587
+EMAIL_FROM = "noreply@liquidacaolapisvermelho.com.br"
+
+EMAIL_HOST = "llv.weblocal.com.br"
+EMAIL_HOST_USER = "noreply@liquidacaolapisvermelho.com.br"
+EMAIL_HOST_PASSWORD = 'llv2014'
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
 # SITE_URL = "https://jonatascd.pythonanywhere.com/"
 SITE_URL = "https://llv.liquidacaolapisvermelho.com.br"
+# SITE_URL = "http://localhost:8989"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 # STATIC_URL = '/static/'
