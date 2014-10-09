@@ -203,6 +203,10 @@ class Oferta(EditorialModel):
     genero = models.IntegerField(u'Gênero', choices=GENEROS, default=UNISSEX,
                                  null=True, blank=False)
     autor = models.ForeignKey(Perfil, verbose_name=u'Autor', null=True, blank=False)
+    inicio = models.DateField(u'Data de publicação', null=True, blank=False,
+                              help_text=u'Informe a data para ficar online')
+    fim = models.DateField(u'Data de expiração', null=True, blank=False,
+                           help_text=u'Informe a data para ficar offline ')
 
     class Meta:
         verbose_name=u'Oferta'
