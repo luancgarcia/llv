@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 import os
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
@@ -313,10 +313,13 @@ class Oferta(EditorialModel):
 
     @classmethod
     def prontos(cls, tipo=0, from_id=None, shopping=1):
+        hoje = date.today()
         items = cls.objects.filter(tipo=tipo,
                                    status=cls.PUBLICADO) \
                            .filter(Q(loja__shopping_id=shopping) |
                                    Q(shopping_id=shopping)) \
+                           .filter(Q(inicio__lte=hoje) |
+                                   Q(fim__gte=hoje)) \
                            .order_by('-data_aprovacao')
         if from_id:
             items = items.filter(id__gt=from_id)
