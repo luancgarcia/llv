@@ -228,6 +228,8 @@ class Oferta(EditorialModel):
             if notificacoes:
                 for n in notificacoes:
                     n.notifica_aprovacao()
+        if self.slug:
+            self.slug = slug = '%s_%s' % (self.slug, self.id)
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
