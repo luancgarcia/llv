@@ -141,6 +141,9 @@ class OfertaAdmin(admin.ModelAdmin):
                 ('Dados', {
                     'fields': ('total_visto','total_curtido', 'total_compartilhado','autor')
                 }),
+                ('Datas', {
+                    'fields': ('inicio','fim')
+                }),
                 ('Informações', {
                     'fields': ('status','loja','nome','slug','categoria','genero',
                                'descricao', 'texto_promocional',)
@@ -151,6 +154,9 @@ class OfertaAdmin(admin.ModelAdmin):
             )
         elif not perfil.is_lojista:
             fieldsets = (
+                ('Datas', {
+                    'fields': ('inicio', 'fim')
+                }),
                 ('Informações', {
                     'fields': ('status','loja','nome','slug','categoria','genero',
                                'descricao', 'texto_promocional',)
@@ -161,6 +167,9 @@ class OfertaAdmin(admin.ModelAdmin):
             )
         else:
             fieldsets = (
+                ('Datas', {
+                    'fields': ('inicio', 'fim')
+                }),
                 ('Informações', {
                         'fields': ('loja', 'nome', 'slug', 'categoria', 'genero',
                                    'descricao', 'texto_promocional',)
@@ -195,6 +204,9 @@ class DestaqueAdmin(admin.ModelAdmin):
         ]
 
     fieldsets = (
+        ('Datas', {
+            'fields': ('inicio', 'fim')
+        }),
         ('Informações', {
             'fields': (
                 'status', 'loja', 'shopping', 'nome', 'slug', 'categoria',
