@@ -14,7 +14,7 @@ from django.db.models.signals import post_save
 
 from utils.models import BaseModel, EditorialModel, OrderedModel
 from lojas.models import Loja, Shopping
-from geral.signals import cria_envia_notificacao
+from geral.signals import cria_envia_notificacao, completa_slug
 
 
 class Perfil(BaseModel):
@@ -228,8 +228,6 @@ class Oferta(EditorialModel):
             if notificacoes:
                 for n in notificacoes:
                     n.notifica_aprovacao()
-        if self.slug:
-            self.slug = slug = '%s_%s' % (self.slug, self.id)
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
@@ -467,3 +465,4 @@ class Mascara(EditorialModel):
                 'thumb': self.thumb_98x98.url}
 
 post_save.connect(cria_envia_notificacao, sender=Oferta)
+post_save.connect(completa_slug, sender=Oferta)
