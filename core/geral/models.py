@@ -318,8 +318,7 @@ class Oferta(EditorialModel):
                                    status=cls.PUBLICADO) \
                            .filter(Q(loja__shopping_id=shopping) |
                                    Q(shopping_id=shopping)) \
-                           .filter(Q(inicio__lte=hoje) |
-                                   Q(fim__gte=hoje)) \
+                           .filter(inicio__lte=hoje,fim__gte=hoje) \
                            .order_by('-data_aprovacao')
         if from_id:
             items = items.filter(id__gt=from_id)

@@ -148,7 +148,7 @@ def home_por_categoria(slug, shopping, ids_filtrar):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria,
                                   loja__shopping_id=shopping) \
-                          .filter(Q(inicio__lte=hoje) | Q(fim__gte=hoje)) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_filtrar)
     return destaques_ofertas_eventos(items)
 
@@ -156,7 +156,7 @@ def categoria(request, categoria):
     categoria = Categoria.objects.filter(slug=categoria).get()
     hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO, categoria=categoria)\
-                          .filter(Q(inicio__lte=hoje) | Q(fim__gte=hoje))
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
     destaques, ofertas, eventos, mais_paginas = destaques_ofertas_eventos(items)
 
     contexto = {'destaques': destaques,
@@ -184,7 +184,7 @@ def home_por_genero(slug, shopping, ids_filtrar):
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   genero=genero,
                                   loja__shopping_id=shopping) \
-                          .filter(Q(inicio__lte=hoje) | Q(fim__gte=hoje)) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_filtrar)
     return destaques_ofertas_eventos(items)
 
@@ -193,7 +193,7 @@ def home_por_loja(slug, shopping, ids_filtrar):
     loja = Loja.objects.filter(slug=slug,shopping_id=shopping).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja=loja).exclude(id__in=ids_filtrar) \
-                          .filter(Q(inicio__lte=hoje) | Q(fim__gte=hoje))
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
 
     return destaques_ofertas_eventos(items)
 
@@ -201,7 +201,7 @@ def home_por_preco(preco, shopping, ids_filtrar):
     hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja__shopping_id=shopping) \
-                          .filter(Q(inicio__lte=hoje) | Q(fim__gte=hoje))
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
     if preco == '301':
         items = items.filter(preco_final__gte='301')
     elif preco == '300':
@@ -222,7 +222,7 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
     hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja__shopping_id=shopping) \
-                          .filter(Q(inicio__lte=hoje) | Q(fim__gte=hoje))
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
 
     porcentagem = int(porcentagem)
     if porcentagem == 30:
@@ -243,8 +243,7 @@ def mais_items(valores, tipo, id_shopping):
     items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
                           .filter(Q(loja__shopping_id=id_shopping) |
                                   Q(shopping_id=id_shopping)) \
-                          .filter(Q(inicio__lte=hoje) |
-                                  Q(fim__gte=hoje)) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_para_filtrar)
     items_final = []
     for i in items:
