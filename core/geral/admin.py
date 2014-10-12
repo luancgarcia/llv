@@ -129,7 +129,9 @@ class OfertaAdmin(admin.ModelAdmin):
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         perfil = request.user.perfil.get()
-        loja_shopping = perfil.loja.shopping
+        loja_shopping = None
+        if perfil.loja:
+            loja_shopping = perfil.loja.shopping
         if db_field.name == "categoria" and (perfil.shopping or loja_shopping):
             kwargs["queryset"] = Categoria.objects.filter(
                                                    Q(shopping=perfil.shopping) |
