@@ -91,6 +91,7 @@ class OfertaAdmin(admin.ModelAdmin):
     class Media:
         js = [
             'js/preco_desconto_admin.js',
+            'js/comum_admin.js',
             'js/jquery.maskMoney.min.js',
         ]
 
