@@ -36,6 +36,7 @@ FALE_CONOSCO = ['jonatas.cd@gmail.com','rachelrubia@gmail.com','marcusribeirooo@
 
 EMAIL_FROM = "noreply@liquidacaolapisvermelho.com.br"
 
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST = "llv.weblocal.com.br"
 EMAIL_HOST_USER = "noreply@liquidacaolapisvermelho.com.br"
 EMAIL_HOST_PASSWORD = 'llv2014'
