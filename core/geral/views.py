@@ -13,7 +13,8 @@ from django.db.models import Q
 from utils.functions import jsonResponse
 from utils.custom_email import TemplatedEmail
 
-from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara, Sazonal
+from geral.models import (Categoria, ImagemOferta, Oferta, Log, Mascara,
+                          Sazonal, Perfil)
 from .decorators import indica_shopping
 from lojas.models import Loja
 from notificacoes.models import Solicitacao
@@ -419,15 +420,22 @@ def mesclar(request):
     return jsonResponse(contexto)
 
 @csrf_exempt
-def solicitar_loja(request):
+@indica_shopping
+def solicitar_loja(request, **kwargs):
+    shopping = kwargs['shp_id']
     nome = request.POST.get('nome', None)
     email = request.POST.get('email', None)
     loja = request.POST.get('loja', None)
 
-    loja_solicitada = Loja.objects.filter(shopping_id=1,nome=loja)[:1]
+    loja_solicitada = Loja.objects.filter(shopping_id=shopping,nome=loja)[:1]
     if loja_solicitada:
         loja_solicitada = loja_solicitada[0]
         loja_dict = loja_solicitada.to_dict()
+        mkt_lojistas = Perfil.objects.filter(shopping_id=shopping)
+        mkts = mkt_lojistas.filter(tipo=Perfil.MARKETING)
+        mkt_mails = [m.user.email for m in mkts]
+        lojistas = mkt_lojistas.filter(tipo=Perfil.LOJISTA)
+        lojistas_mails = [l.user.email for l in lojistas]
     else:
         raise Http404
 
@@ -438,7 +446,8 @@ def solicitar_loja(request):
                 'sucesso': False}
 
     try:
-        TemplatedEmail(settings.FALE_CONOSCO, contexto['assunto'],
+        para = settings.NOTIFICACAO + mkt_mails + lojistas_mails
+        TemplatedEmail(para, contexto['assunto'],
                        'email/solicitacao.html', contexto, send_now=True)
         contexto['sucesso'] = True
         Solicitacao.objects.create(nome=nome,email=email,loja=loja_solicitada)
