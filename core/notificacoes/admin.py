@@ -16,7 +16,7 @@ class NotificacaoAdmin(admin.ModelAdmin):
     def queryset(self, request):
         qs = super(NotificacaoAdmin, self).queryset(request)
         perfil = request.user.perfil.get()
-        print perfil, perfil.id
+        # print perfil, perfil.id
         if perfil and not perfil.is_adm:
             qs = qs.filter(Q(solicitante=perfil) | Q(responsavel=perfil))
         return qs
@@ -25,6 +25,13 @@ class NotificacaoAdmin(admin.ModelAdmin):
 class SolicitacaoAdmin(admin.ModelAdmin):
     exclude = ['publicada']
     list_filter = ['loja__shopping']
+
+    def queryset(self, request):
+        qs = super(SolicitacaoAdmin, self).queryset(request)
+        perfil = request.user.perfil.get()
+        if not perfil.is_adm:
+            qs = qs.filter(loja=perfil.loja)
+        return qs
 
 
 admin.site.register(Notificacao, NotificacaoAdmin)

@@ -41,7 +41,6 @@ class SazonalAdmin(admin.ModelAdmin):
             qs = qs.filter(
                 Q(shopping=perfil.shopping) | Q(shopping=loja_shopping)
             )
-            pass
         return qs.filter(sazonal=True)
 
 
