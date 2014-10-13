@@ -35,6 +35,13 @@ class SazonalAdmin(admin.ModelAdmin):
     list_filter = ['publicada','shopping']
     def queryset(self, request):
         qs = super(SazonalAdmin, self).queryset(request)
+        perfil = request.user.perfil.get()
+        if not perfil.is_adm:
+            loja_shopping = perfil.loja.shopping
+            qs = qs.filter(
+                Q(shopping=perfil.shopping) | Q(shopping=loja_shopping)
+            )
+            pass
         return qs.filter(sazonal=True)
 
 
