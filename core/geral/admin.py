@@ -24,6 +24,12 @@ class CategoriaAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(CategoriaAdmin, self).queryset(request)
+        perfil = request.user.perfil.get()
+        if not perfil.is_adm:
+            loja_shopping = perfil.loja.shopping
+            qs = qs.filter(
+                Q(shopping=perfil.shopping) | Q(shopping=loja_shopping)
+            )
         return qs.filter(sazonal=False)
 
 
