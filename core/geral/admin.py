@@ -54,11 +54,21 @@ class SazonalAdmin(admin.ModelAdmin):
         qs = super(SazonalAdmin, self).queryset(request)
         perfil = request.user.perfil.get()
         if not perfil.is_adm:
-            loja_shopping = perfil.loja.shopping
+            loja_shopping = None
+            if perfil.loja:
+                loja_shopping = perfil.loja.shopping
             qs = qs.filter(
                 Q(shopping=perfil.shopping) | Q(shopping=loja_shopping)
             )
         return qs.filter(sazonal=True)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "shopping":
+            kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping_id)
+        return super(SazonalAdmin, self).formfield_for_foreignkey(db_field,
+                                                                  request,
+                                                                  **kwargs)
 
 
 class ImagemInline(admin.StackedInline):
