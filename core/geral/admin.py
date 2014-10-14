@@ -10,7 +10,7 @@ from django.db.models import Q
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
                           Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador,
                           Sazonal)
-from lojas.models import Loja
+from lojas.models import Loja, Shopping
 
 
 OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada','autor','texto_link')
@@ -33,6 +33,15 @@ class CategoriaAdmin(admin.ModelAdmin):
                 Q(shopping=perfil.shopping) | Q(shopping=loja_shopping)
             )
         return qs.filter(sazonal=False)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "shopping":
+            kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping_id)
+
+        return super(CategoriaAdmin, self).formfield_for_foreignkey(db_field,
+                                                                    request,
+                                                                    **kwargs)
 
 
 class SazonalAdmin(admin.ModelAdmin):
