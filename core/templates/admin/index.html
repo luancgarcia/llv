@@ -73,7 +73,7 @@
 
                         <tbody>
                             {% for model in app.models %}
-                                {% if model.name == 'Imagens das ofertas' and user.get_profile.is_lojista %}
+                                {% if model.name == 'Imagens das ofertas' and user.get_profile.is_lojista or model.name == 'Imagens das ofertas' and user.get_profile.is_marketing %}
                                 {% else %}
                                 <tr>
                                 {% if model.admin_url %}
