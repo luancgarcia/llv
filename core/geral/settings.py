@@ -32,7 +32,9 @@ MANAGERS = ADMINS = (
     ('Marcus Ribeiro', 'marcusribeirooo@gmail.com'),
 )
 
-FALE_CONOSCO = ['jonatas.cd@gmail.com','rachelrubia@gmail.com','marcusribeirooo@gmail.com']
+FALE_CONOSCO = ['jonatas.cd@gmail.com', 'rachelrubia@gmail.com',
+                'marcusribeirooo@gmail.com']
+NOTIFICACAO = ['jonatas.cd@gmail.com', 'llv@kinda.com.br']
 
 EMAIL_FROM = "noreply@liquidacaolapisvermelho.com.br"
 
