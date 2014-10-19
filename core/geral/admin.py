@@ -259,7 +259,14 @@ class DestaqueAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
-        return qs.filter(tipo=Oferta.DESTAQUE)
+        qs = qs.filter(tipo=Oferta.DESTAQUE)
+        perfil = request.user.perfil.get()
+        if perfil.is_lojista:
+            qs = qs.filter(loja=perfil.loja)
+        if perfil.is_marketing and perfil.shopping:
+            qs = qs.filter(Q(loja__shopping=perfil.shopping) |
+                           Q(autor__shopping=perfil.shopping))
+        return qs
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.DESTAQUE
@@ -282,6 +289,12 @@ class EventoAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(EventoAdmin, self).queryset(request)
+        perfil = request.user.perfil.get()
+        if perfil.is_lojista:
+            qs = qs.filter(loja=perfil.loja)
+        if perfil.is_marketing and perfil.shopping:
+            qs = qs.filter(Q(loja__shopping=perfil.shopping) |
+                           Q(autor__shopping=perfil.shopping))
         return qs.filter(tipo=Oferta.EVENTO)
 
     def save_model(self, request, obj, form, change):
