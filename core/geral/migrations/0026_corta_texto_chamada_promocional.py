@@ -14,7 +14,7 @@ class Migration(DataMigration):
         Oferta = orm['geral.Oferta']
         ofertas = Oferta.objects.all()
         for oferta in ofertas:
-            oferta = oferta[:25]
+            oferta.texto_promocional = oferta.texto_promocional[:25]
             oferta.save()
 
     def backwards(self, orm):
