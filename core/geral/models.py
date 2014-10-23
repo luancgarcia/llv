@@ -189,8 +189,8 @@ class Oferta(EditorialModel):
     slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
     evento = models.TextField(u'Descrição do Evento', blank=True, null=True)
-    texto_promocional = models.TextField(u'Chamada Promocional',
-                                         blank=True, null=True)
+    texto_promocional = models.CharField(u'Chamada Promocional', blank=True,
+                                         null=True, max_length=25)
     preco_inicial = models.DecimalField(u'De R$', max_digits=8, decimal_places=2,
                                      null=True, blank=True)
     preco_final = models.DecimalField(u'Por R$', max_digits=8, decimal_places=2,
