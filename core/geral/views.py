@@ -16,7 +16,7 @@ from utils.custom_email import TemplatedEmail
 from geral.models import (Categoria, ImagemOferta, Oferta, Log, Mascara,
                           Sazonal, Perfil)
 from .decorators import indica_shopping
-from lojas.models import Loja
+from lojas.models import Loja, Shopping
 from notificacoes.models import Solicitacao
 
 
@@ -39,27 +39,28 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             'ultimo_evento_id': [int(e['id']) for e in eventos],
             'ofertas': ofertas,
             'ultima_oferta_id': [int(o['id']) for o in ofertas],
-            'categorias': Categoria.publicadas_com_oferta(shopping),
+            'categorias': Categoria.publicadas_com_oferta(shopping.id),
             'mais_paginas': mais_paginas,
-            'lojas': Loja.publicadas_com_oferta(shopping=shopping),
-            'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping),
-            'sazonal': Sazonal.atual(shopping=shopping)}
+            'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
+            'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
+            'sazonal': Sazonal.atual(shopping=shopping.id),
+            'shopping_slug': shopping.slug}
 
 @indica_shopping
-def home(request, *args, **kwargs):
-    shopping = kwargs['shp_id']
-    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE, shopping=shopping)
+def home(request, **kwargs):
+    shopping = Shopping.objects.get(slug=kwargs['slug'])
+    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE, shopping=shopping.id)
 
-    eventos = Oferta.prontos(tipo=Oferta.EVENTO, shopping=shopping)
+    eventos = Oferta.prontos(tipo=Oferta.EVENTO, shopping=shopping.id)
 
-    ofertas = Oferta.prontos(shopping=shopping)
+    ofertas = Oferta.prontos(shopping=shopping.id)
     mais_paginas = True if len(ofertas) > 14 else False
     ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
     contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping)
 
     response = render(request, "home.html", contexto)
-    response.set_cookie(key='shp_id', value=shopping)
+    response.set_cookie(key='shp_id', value=shopping.id)
 
     return response
 
@@ -69,8 +70,8 @@ def split_ids(valores):
     return []
 
 @indica_shopping
-def home_com_filtro(request, *args, **kwargs):
-    shopping = kwargs['shp_id']
+def home_com_filtro(request, **kwargs):
+    shopping = Shopping.objects.get(slug=kwargs['slug'])
     template = "home.html"
     ids_filtrar = []
     destaque_ids = evento_ids = oferta_ids = []
@@ -85,27 +86,27 @@ def home_com_filtro(request, *args, **kwargs):
     if kwargs.get('categoria'):
         slug = kwargs.get('categoria')
         destaques, ofertas, eventos, mais_paginas = home_por_categoria(slug,
-                                                                       shopping,
+                                                                       shopping.id,
                                                                        ids_filtrar)
     elif kwargs.get('genero'):
         slug = kwargs.get('genero')
         destaques, ofertas, eventos, mais_paginas = home_por_genero(slug,
-                                                                    shopping,
+                                                                    shopping.id,
                                                                     ids_filtrar)
     elif kwargs.get('loja'):
         slug = kwargs.get('loja')
         destaques, ofertas, eventos, mais_paginas = home_por_loja(slug,
-                                                                  shopping,
+                                                                  shopping.id,
                                                                   ids_filtrar)
     elif kwargs.get('preco'):
         slug = kwargs.get('preco')
         destaques, ofertas, eventos, mais_paginas = home_por_preco(slug,
-                                                                   shopping,
+                                                                   shopping.id,
                                                                    ids_filtrar)
     else:
         slug = kwargs.get('desconto')
         destaques, ofertas, eventos, mais_paginas = home_por_desconto(slug,
-                                                                      shopping,
+                                                                      shopping.id,
                                                                       ids_filtrar)
 
     if request.GET.get('mais_ofertas'):
@@ -125,7 +126,7 @@ def home_com_filtro(request, *args, **kwargs):
     contexto.update({'data_filtro': 1})
 
     response = render(request, template, contexto)
-    response.set_cookie(key='shp_id', value=shopping)
+    response.set_cookie(key='shp_id', value=shopping.id)
 
     return response
 

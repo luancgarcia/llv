@@ -43,15 +43,21 @@ urlpatterns = patterns('',
 
     url(r'^mais_ofertas/$', 'geral.views.mais_ofertas', name='mais_ofertas'),
 
-    url(r'^categoria/(?P<categoria>[\w-]+)/$', 'geral.views.home_com_filtro', name='home_categoria'),
-    url(r'^genero/(?P<genero>[\w]+)/$', 'geral.views.home_com_filtro', name='home_genero'),
-    url(r'^loja/(?P<loja>[\w-]+)/$', 'geral.views.home_com_filtro', name='home_loja'),
-    url(r'^preco/(?P<preco>\d+)/$', 'geral.views.home_com_filtro', name='home_preco'),
-    url(r'^desconto/(?P<desconto>\d+)/$', 'geral.views.home_com_filtro', name='home_desconto'),
+    url(r'^(?P<slug>[\w-]+)/categoria/(?P<categoria>[\w-]+)/$',
+        'geral.views.home_com_filtro', name='home_categoria'),
+    url(r'^(?P<slug>[\w-]+)/genero/(?P<genero>[\w]+)/$',
+        'geral.views.home_com_filtro', name='home_genero'),
+    url(r'^(?P<slug>[\w-]+)/loja/(?P<loja>[\w-]+)/$',
+        'geral.views.home_com_filtro', name='home_loja'),
+    url(r'^(?P<slug>[\w-]+)/preco/(?P<preco>\d+)/$',
+        'geral.views.home_com_filtro', name='home_preco'),
+    url(r'^(?P<slug>[\w-]+)/desconto/(?P<desconto>\d+)/$',
+        'geral.views.home_com_filtro', name='home_desconto'),
 
-    url(r'^solicitar_loja/$', 'geral.views.solicitar_loja', name='solicitar_loja'),
+    url(r'^(?P<slug>[\w-]+)/solicitar_loja/$',
+        'geral.views.solicitar_loja', name='solicitar_loja'),
 
-    url(r'^$', 'geral.views.home', name='home'),
+    url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
 )
 
 if settings.DEBUG:

@@ -111,16 +111,17 @@
 		</div>
 		<header id="Header" class="clearfix">
 			<figure class="grid4 last notmob">
-				<a href="{% url 'home' %}" class=""><img src="{% static 'img/header-banner.png' %}"></a>
+				<a href="{% url 'home' shopping_slug %}" class="">
+                    <img src="{% static 'img/header-banner.png' %}"></a>
 			</figure>
 			<div class="head-mob mob">
 				<a href="javascript:;" class="ico-brs fr" id="ico-brs"></a>
-				<a href="{% url 'home' %}" class="">
+				<a href="{% url 'home' shopping_slug %}" class="">
 					<img src="{% static 'img/text-head-mob.png' %}">
 				</a>
 			</div>
 			<aside class="chamada mob">
-				<a href="{% url 'home' %}">Produtos com até 70% de desconto</a>
+				<a href="{% url 'home' shopping_slug %}">Produtos com até 70% de desconto</a>
 			</aside>
 			<span id="ico-menu"></span>
 			<section id="Menu" class="cl">
@@ -141,7 +142,7 @@
 							<div class="submenu fix">
 								<ul>
 									{% for categoria in categorias %}
-									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_categoria' categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
 									{% empty %}
 									<li>Sem categoria com ofertas cadastradas</li>
 									{% endfor %}
@@ -154,10 +155,10 @@
 							<a class="lnk" href="javascript:;">Gênero</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="{% url 'home_genero' 'masculino' %}">Masculino</a></li>
-									<li class="cl"><a href="{% url 'home_genero' 'feminino' %}">Feminino</a></li>
-									<li class="cl"><a href="{% url 'home_genero' 'infantil' %}">Infantil</a></li>
-									<li class="cl"><a href="{% url 'home_genero' 'unissex' %}">Unissex</a></li>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='masculino' %}">Masculino</a></li>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='feminino' %}">Feminino</a></li>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='infantil' %}">Infantil</a></li>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='unissex' %}">Unissex</a></li>
 								</ul>
 							</div>
 						</li>
@@ -167,7 +168,7 @@
 							<div class="submenu fix">
 								<ul>
 									{% for loja in lojas %}
-									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' slug=shopping_slug loja=loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
 									{% empty %}
 									<li>Sem loja com ofertas cadastradas</li>
 									{% endfor %}
@@ -179,11 +180,11 @@
 							<a class="lnk" href="javascript:;">Faixa de Preço</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="{% url 'home_preco' 30 %}">abaixo de R$ 30</a></li>
-									<li class="cl"><a href="{% url 'home_preco' 50 %}">de R$ 31 a R$ 50</a></li>
-									<li class="cl"><a href="{% url 'home_preco' 100 %}">de R$ 51 a R$ 100</a></li>
-									<li class="cl"><a href="{% url 'home_preco' 300 %}">de R$101 a R$300</a></li>
-									<li class="cl"><a href="{% url 'home_preco' 301 %}">acima de R$301</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=30 %}">abaixo de R$ 30</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=50 %}">de R$ 31 a R$ 50</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=100 %}">de R$ 51 a R$ 100</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=300 %}">de R$101 a R$300</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=301 %}">acima de R$301</a></li>
 								</ul>
 							</div>
 						</li>
@@ -192,9 +193,9 @@
 							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="{% url 'home_desconto' 30 %}">até 30%</a></li>
-									<li class="cl"><a href="{% url 'home_desconto' 50 %}">de 31% a 50%</a></li>
-									<li class="cl"><a href="{% url 'home_desconto' 70 %}">de 51% a 70%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=30 %}">até 30%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=50 %}">de 31% a 50%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=70 %}">de 51% a 70%</a></li>
 								</ul>
 							</div>
 						</li>
@@ -205,7 +206,7 @@
 
 						{% if sazonal %}
 						<li class="item-menu dia-namorados">
-							<a href="{% url 'home_categoria' sazonal.slug %}" class="ui-link">{{ sazonal.nome}}</a>
+							<a href="{% url 'home_categoria' slug=shopping_slug categoria=sazonal.slug %}" class="ui-link">{{ sazonal.nome}}</a>
 						</li>
 						{% endif %}
 					</ul>

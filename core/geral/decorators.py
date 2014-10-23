@@ -6,7 +6,7 @@ def indica_shopping(funcao):
     def _wrap(*args, **kwargs):
         request = args[0]
         cookie_shopping = request.COOKIES.get('shp_id', None)
-        slug = request.GET.get('shopping', None)
+        slug = kwargs['slug']
         if slug:
             shopping = Shopping.objects.filter(slug=slug)[:1]
             if shopping:
