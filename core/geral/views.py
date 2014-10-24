@@ -397,7 +397,7 @@ def mesclar(request):
     nome_loja = nome_loja.replace(" ","")
     nome_shopping = nome_shopping.replace(" ","")
     shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
-    url_item = '%s?%s#%s' % (settings.SITE_URL, shopping, hash_url)
+    url_item = '%s/%s/#%s' % (settings.SITE_URL, shopping, hash_url)
     quebra_linha = '\r\n\r\n\r\n\r\n'
     if nome_loja:
         hashtags = '#LapisVermelho #%s #%s' % (nome_shopping, nome_loja)
