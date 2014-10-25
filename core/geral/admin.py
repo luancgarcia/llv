@@ -112,6 +112,24 @@ class OfertaModelForm(ItemModelForm):
             raise ValidationError({'loja': ["Selecione uma loja", ]})
         return loja
 
+    def clean_genero(self):
+        genero = self.cleaned_data['genero']
+        if not genero:
+            raise ValidationError({'genero': [u'Informe o gênero']})
+        return genero
+
+    def clean_categoria(self):
+        categoria = self.cleaned_data['categoria']
+        if not categoria:
+            raise ValidationError({'categoria': [u'Informe ao menos uma categoria']})
+        return categoria
+
+    def clean_descricao(self):
+        descricao = self.cleaned_data['descricao']
+        if not descricao:
+            raise ValidationError({'descricao': [u'Informe a descrição']})
+        return descricao
+
 
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
