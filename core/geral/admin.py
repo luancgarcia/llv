@@ -255,6 +255,7 @@ class DestaqueAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',), }
     list_display = ['__unicode__','status']
     list_editable = ['status']
+    search_fields = ['nome']
 
     class Media:
         js = [
@@ -299,6 +300,7 @@ class EventoAdmin(admin.ModelAdmin):
     list_display = ['nome','genero','status']
     list_editable = ['status']
     list_display_links = ['nome','genero']
+    search_fields = ['nome']
 
     class Media:
         js = [
