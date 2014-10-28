@@ -5,7 +5,8 @@
 		<img src="{% static 'img/header-splash.png' %}" alt="">
 	</header>
 	<section class="content fix">
-		<form action="{% url 'solicitar_loja' %}" class="fix" id="SplashForm" method="post">
+		<form action="{% url 'solicitar_loja' shopping_slug %}" class="fix"
+              id="SplashForm" method="post">
 			<p class="txt">Solicite abaixo qual loja <br>
 			você gostaria de ver na <br>
 			Liquidação Lápis Vermelho</p>

@@ -2,6 +2,7 @@
 
 import os
 from PIL import Image
+from datetime import date
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -12,9 +13,10 @@ from django.db.models import Q
 from utils.functions import jsonResponse
 from utils.custom_email import TemplatedEmail
 
-from geral.models import Categoria, ImagemOferta, Oferta, Log, Mascara, Sazonal
+from geral.models import (Categoria, ImagemOferta, Oferta, Log, Mascara,
+                          Sazonal, Perfil)
 from .decorators import indica_shopping
-from lojas.models import Loja
+from lojas.models import Loja, Shopping
 from notificacoes.models import Solicitacao
 
 
@@ -37,27 +39,28 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             'ultimo_evento_id': [int(e['id']) for e in eventos],
             'ofertas': ofertas,
             'ultima_oferta_id': [int(o['id']) for o in ofertas],
-            'categorias': Categoria.publicadas_com_oferta(shopping),
+            'categorias': Categoria.publicadas_com_oferta(shopping.id),
             'mais_paginas': mais_paginas,
-            'lojas': Loja.publicadas_com_oferta(shopping=shopping),
-            'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping),
-            'sazonal': Sazonal.atual(shopping=shopping)}
+            'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
+            'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
+            'sazonal': Sazonal.atual(shopping=shopping.id),
+            'shopping_slug': shopping.slug}
 
 @indica_shopping
-def home(request, *args, **kwargs):
-    shopping = kwargs['shp_id']
-    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE, shopping=shopping)
+def home(request, **kwargs):
+    shopping = Shopping.objects.get(slug=kwargs['slug'])
+    destaques = Oferta.prontos(tipo=Oferta.DESTAQUE, shopping=shopping.id)
 
-    eventos = Oferta.prontos(tipo=Oferta.EVENTO, shopping=shopping)
+    eventos = Oferta.prontos(tipo=Oferta.EVENTO, shopping=shopping.id)
 
-    ofertas = Oferta.prontos(shopping=shopping)
+    ofertas = Oferta.prontos(shopping=shopping.id)
     mais_paginas = True if len(ofertas) > 14 else False
     ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
     contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping)
 
     response = render(request, "home.html", contexto)
-    response.set_cookie(key='shp_id', value=shopping)
+    response.set_cookie(key='shp_id', value=shopping.id)
 
     return response
 
@@ -67,8 +70,8 @@ def split_ids(valores):
     return []
 
 @indica_shopping
-def home_com_filtro(request, *args, **kwargs):
-    shopping = kwargs['shp_id']
+def home_com_filtro(request, **kwargs):
+    shopping = Shopping.objects.get(slug=kwargs['slug'])
     template = "home.html"
     ids_filtrar = []
     destaque_ids = evento_ids = oferta_ids = []
@@ -83,27 +86,27 @@ def home_com_filtro(request, *args, **kwargs):
     if kwargs.get('categoria'):
         slug = kwargs.get('categoria')
         destaques, ofertas, eventos, mais_paginas = home_por_categoria(slug,
-                                                                       shopping,
+                                                                       shopping.id,
                                                                        ids_filtrar)
     elif kwargs.get('genero'):
         slug = kwargs.get('genero')
         destaques, ofertas, eventos, mais_paginas = home_por_genero(slug,
-                                                                    shopping,
+                                                                    shopping.id,
                                                                     ids_filtrar)
     elif kwargs.get('loja'):
         slug = kwargs.get('loja')
         destaques, ofertas, eventos, mais_paginas = home_por_loja(slug,
-                                                                  shopping,
+                                                                  shopping.id,
                                                                   ids_filtrar)
     elif kwargs.get('preco'):
         slug = kwargs.get('preco')
         destaques, ofertas, eventos, mais_paginas = home_por_preco(slug,
-                                                                   shopping,
+                                                                   shopping.id,
                                                                    ids_filtrar)
     else:
         slug = kwargs.get('desconto')
         destaques, ofertas, eventos, mais_paginas = home_por_desconto(slug,
-                                                                      shopping,
+                                                                      shopping.id,
                                                                       ids_filtrar)
 
     if request.GET.get('mais_ofertas'):
@@ -123,7 +126,7 @@ def home_com_filtro(request, *args, **kwargs):
     contexto.update({'data_filtro': 1})
 
     response = render(request, template, contexto)
-    response.set_cookie(key='shp_id', value=shopping)
+    response.set_cookie(key='shp_id', value=shopping.id)
 
     return response
 
@@ -143,16 +146,19 @@ def destaques_ofertas_eventos(items):
 
 def home_por_categoria(slug, shopping, ids_filtrar):
     categoria = Categoria.objects.filter(slug=slug,shopping_id=shopping).get()
+    hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   categoria=categoria,
                                   loja__shopping_id=shopping) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_filtrar)
     return destaques_ofertas_eventos(items)
 
 def categoria(request, categoria):
     categoria = Categoria.objects.filter(slug=categoria).get()
-    items = Oferta.objects.filter(status=Oferta.PUBLICADO,
-                                  categoria=categoria)
+    hoje = date.today()
+    items = Oferta.objects.filter(status=Oferta.PUBLICADO, categoria=categoria)\
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
     destaques, ofertas, eventos, mais_paginas = destaques_ofertas_eventos(items)
 
     contexto = {'destaques': destaques,
@@ -176,23 +182,28 @@ def home_por_genero(slug, shopping, ids_filtrar):
         genero = 2
     else:
         genero = 3
-
+    hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   genero=genero,
                                   loja__shopping_id=shopping) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_filtrar)
     return destaques_ofertas_eventos(items)
 
 def home_por_loja(slug, shopping, ids_filtrar):
+    hoje = date.today()
     loja = Loja.objects.filter(slug=slug,shopping_id=shopping).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
-                                  loja=loja).exclude(id__in=ids_filtrar)
+                                  loja=loja).exclude(id__in=ids_filtrar) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
 
     return destaques_ofertas_eventos(items)
 
 def home_por_preco(preco, shopping, ids_filtrar):
+    hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
-                                  loja__shopping_id=shopping)
+                                  loja__shopping_id=shopping) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
     if preco == '301':
         items = items.filter(preco_final__gte='301')
     elif preco == '300':
@@ -210,8 +221,10 @@ def home_por_preco(preco, shopping, ids_filtrar):
     return destaques_ofertas_eventos(items)
 
 def home_por_desconto(porcentagem, shopping, ids_filtrar):
+    hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
-                                  loja__shopping_id=shopping)
+                                  loja__shopping_id=shopping) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje)
 
     porcentagem = int(porcentagem)
     if porcentagem == 30:
@@ -228,10 +241,11 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
 
 def mais_items(valores, tipo, id_shopping):
     ids_para_filtrar = [int(i) for i in valores.split(', ')]
-
+    hoje = date.today()
     items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
                           .filter(Q(loja__shopping_id=id_shopping) |
                                   Q(shopping_id=id_shopping)) \
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_para_filtrar)
     items_final = []
     for i in items:
@@ -383,12 +397,12 @@ def mesclar(request):
     nome_loja = nome_loja.replace(" ","")
     nome_shopping = nome_shopping.replace(" ","")
     shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
-    url_item = '%s?%s#%s' % (settings.SITE_URL, shopping, hash_url)
+    url_item = '%s/%s/#%s' % (settings.SITE_URL, shopping, hash_url)
     quebra_linha = '\r\n\r\n\r\n\r\n'
     if nome_loja:
-        hashtags = '#LápisVermelho #%s #%s' % (nome_shopping, nome_loja)
+        hashtags = '#LapisVermelho #%s #%s' % (nome_shopping, nome_loja)
     else:
-        hashtags = '#LápisVermelho #%s #%s' % nome_shopping
+        hashtags = '#LapisVermelho #%s #%s' % nome_shopping
     mensagem = '%s%s%s%s%s%s%s' % (item_dict['titulo'],
                                     quebra_linha,
                                     item_dict['chamada_promocional'],
@@ -407,15 +421,22 @@ def mesclar(request):
     return jsonResponse(contexto)
 
 @csrf_exempt
-def solicitar_loja(request):
+@indica_shopping
+def solicitar_loja(request, **kwargs):
+    shopping = kwargs['shp_id']
     nome = request.POST.get('nome', None)
     email = request.POST.get('email', None)
     loja = request.POST.get('loja', None)
 
-    loja_solicitada = Loja.objects.filter(shopping_id=1,nome=loja)[:1]
+    loja_solicitada = Loja.objects.filter(shopping_id=shopping,nome=loja)[:1]
     if loja_solicitada:
         loja_solicitada = loja_solicitada[0]
         loja_dict = loja_solicitada.to_dict()
+        mkt_lojistas = Perfil.objects.filter(shopping_id=shopping)
+        mkts = mkt_lojistas.filter(tipo=Perfil.MARKETING)
+        mkt_mails = [m.user.email for m in mkts]
+        lojistas = mkt_lojistas.filter(tipo=Perfil.LOJISTA)
+        lojistas_mails = [l.user.email for l in lojistas]
     else:
         raise Http404
 
@@ -426,7 +447,8 @@ def solicitar_loja(request):
                 'sucesso': False}
 
     try:
-        TemplatedEmail(settings.FALE_CONOSCO, contexto['assunto'],
+        para = settings.NOTIFICACAO + mkt_mails + lojistas_mails
+        TemplatedEmail(para, contexto['assunto'],
                        'email/solicitacao.html', contexto, send_now=True)
         contexto['sucesso'] = True
         Solicitacao.objects.create(nome=nome,email=email,loja=loja_solicitada)

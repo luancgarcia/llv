@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from django.db import models
+from django.conf import settings
 
 from utils.models import BaseModel, EditorialModel
 from utils.custom_email import TemplatedEmail
@@ -50,8 +51,9 @@ class Notificacao(BaseNotificacao):
     def notifica_criacao(self):
         if self.responsavel and self.responsavel.user.email:
             try:
-                TemplatedEmail([self.responsavel.user.email], self.mensagem,
-                               'email/notificacao.html',self.to_dict(),send_now=True)
+                para = settings.NOTIFICACAO + [self.responsavel.user.email]
+                TemplatedEmail(para, self.mensagem, 'email/notificacao.html',
+                               self.to_dict(), send_now=True)
                 self.enviada_mkt = True
                 self.save()
             except:
@@ -62,9 +64,9 @@ class Notificacao(BaseNotificacao):
         if autor and autor.user.email:
             assunto = u'Sua oferta foi aprovada e publicada'
             try:
-                TemplatedEmail([autor.user.email], assunto,
-                               'email/aprovacao.html', self.to_dict(),
-                               send_now=True)
+                para = settings.NOTIFICACAO + [autor.user.email]
+                TemplatedEmail(para, assunto, 'email/aprovacao.html',
+                               self.to_dict(), send_now=True)
                 self.enviada_lojista = True
                 self.resolvida = True
                 self.lida = True
@@ -75,7 +77,7 @@ class Notificacao(BaseNotificacao):
     def to_dict(self):
         return {'id': self.id,
                 'mensagem': self.mensagem,
-                'oferta': self.oferta,
+                'oferta': self.oferta.to_dict(),
                 'lojista': self.solicitante}
 
 

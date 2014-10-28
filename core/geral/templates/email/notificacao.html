@@ -33,7 +33,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td height="30" valign="middle"><span style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#999999;" > Oferta: <span style="color:#29256a"> {{oferta}}</span>
+                                            <td height="30" valign="middle"><span style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#999999;" > Oferta: <span style="color:#29256a"> {{oferta.unicode}}</span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -41,9 +41,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td height="30"
-                                                valign="middle"><span
-                                                    style="color:#29256a">http://llv.liquidacaolapisvermelho.com.br/admin/geral/oferta/{{id}}/</span>
+                                            <td height="30" valign="middle"><span style="color:#29256a"><a href="https://llv.liquidacaolapisvermelho.com.br/admin/geral/oferta/{{oferta.id}}/">https://llv.liquidacaolapisvermelho.com.br/admin/geral/oferta/{{oferta.id}}/</a></span>
                                             </td>
                                         </tr>
                                     </table>

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 import os
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
@@ -14,7 +14,7 @@ from django.db.models.signals import post_save
 
 from utils.models import BaseModel, EditorialModel, OrderedModel
 from lojas.models import Loja, Shopping
-from geral.signals import cria_envia_notificacao
+from geral.signals import cria_envia_notificacao, completa_slug
 
 
 class Perfil(BaseModel):
@@ -189,8 +189,9 @@ class Oferta(EditorialModel):
     slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
     evento = models.TextField(u'Descrição do Evento', blank=True, null=True)
-    texto_promocional = models.TextField(u'Chamada Promocional',
-                                         blank=True, null=True)
+    texto_promocional = models.CharField(u'Chamada Promocional', blank=True,
+                                         null=True, max_length=25,
+                                         help_text=u'Limite 25 caracteres')
     preco_inicial = models.DecimalField(u'De R$', max_digits=8, decimal_places=2,
                                      null=True, blank=True)
     preco_final = models.DecimalField(u'Por R$', max_digits=8, decimal_places=2,
@@ -203,6 +204,10 @@ class Oferta(EditorialModel):
     genero = models.IntegerField(u'Gênero', choices=GENEROS, default=UNISSEX,
                                  null=True, blank=False)
     autor = models.ForeignKey(Perfil, verbose_name=u'Autor', null=True, blank=False)
+    inicio = models.DateField(u'Data de publicação', null=True, blank=False,
+                              help_text=u'Informe a data para ficar online')
+    fim = models.DateField(u'Data de expiração', null=True, blank=False,
+                           help_text=u'Informe a data para ficar offline ')
 
     class Meta:
         verbose_name=u'Oferta'
@@ -281,6 +286,7 @@ class Oferta(EditorialModel):
                 imagem = imagens[0].img_376x376.url
 
         contexto =  {'id': self.id,
+                     'unicode': self,
                      'loja': self.loja.to_dict() if self.loja else None,
                      'descricao': self.descricao,
                      'texto_do_link': self.texto_link,
@@ -292,7 +298,9 @@ class Oferta(EditorialModel):
                      'expira': self.expira,
                      'expira_str': self.expira_str,
                      'titulo': self.nome,
-                     'tipo': Oferta.TIPOS[self.tipo][1]}
+                     'tipo': Oferta.TIPOS[self.tipo][1],
+                     'inicio': _date(self.inicio, 'd/m/Y'),
+                     'fim': _date(self.fim, 'd/m/Y')}
 
         if not self.tipo == Oferta.EVENTO:
             contexto.update({'porcentagem': self.porcentagem_desconto(),
@@ -309,10 +317,12 @@ class Oferta(EditorialModel):
 
     @classmethod
     def prontos(cls, tipo=0, from_id=None, shopping=1):
+        hoje = date.today()
         items = cls.objects.filter(tipo=tipo,
                                    status=cls.PUBLICADO) \
                            .filter(Q(loja__shopping_id=shopping) |
                                    Q(shopping_id=shopping)) \
+                           .filter(inicio__lte=hoje,fim__gte=hoje) \
                            .order_by('-data_aprovacao')
         if from_id:
             items = items.filter(id__gt=from_id)
@@ -465,3 +475,4 @@ class Mascara(EditorialModel):
                 'thumb': self.thumb_98x98.url}
 
 post_save.connect(cria_envia_notificacao, sender=Oferta)
+post_save.connect(completa_slug, sender=Oferta)

@@ -17,3 +17,9 @@ def cria_envia_notificacao(sender, instance, created, **kwargs):
             n.save()
             n.notifica_criacao()
         pass
+
+def completa_slug(sender, instance, created, **kwargs):
+    item = instance
+    if item and item.slug and not item.slug.endswith('%s'%item.id):
+        item.slug = '%s-%s' % (item.slug, item.id)
+        item.save()

@@ -71,4 +71,4 @@ class Loja(EditorialModel):
     def publicadas_sem_oferta(cls, shopping):
         lojas = cls.objects.filter(publicada=True,
                                    shopping_id=shopping).order_by('nome')
-        return [l.to_dict() for l in lojas if not l.ofertas.exclude(status=1)]
+        return [l.to_dict() for l in lojas if not l.ofertas.filter(status=1)]

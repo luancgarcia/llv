@@ -10,7 +10,7 @@ from django.db.models import Q
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
                           Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador,
                           Sazonal)
-from lojas.models import Loja
+from lojas.models import Loja, Shopping
 
 
 OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada','autor','texto_link')
@@ -24,7 +24,24 @@ class CategoriaAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(CategoriaAdmin, self).queryset(request)
+        perfil = request.user.perfil.get()
+        if not perfil.is_adm:
+            loja_shopping = None
+            if perfil.loja:
+                loja_shopping = perfil.loja.shopping
+            qs = qs.filter(
+                Q(shopping=perfil.shopping) | Q(shopping=loja_shopping)
+            )
         return qs.filter(sazonal=False)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "shopping":
+            kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping_id)
+
+        return super(CategoriaAdmin, self).formfield_for_foreignkey(db_field,
+                                                                    request,
+                                                                    **kwargs)
 
 
 class SazonalAdmin(admin.ModelAdmin):
@@ -35,7 +52,23 @@ class SazonalAdmin(admin.ModelAdmin):
     list_filter = ['publicada','shopping']
     def queryset(self, request):
         qs = super(SazonalAdmin, self).queryset(request)
+        perfil = request.user.perfil.get()
+        if not perfil.is_adm:
+            loja_shopping = None
+            if perfil.loja:
+                loja_shopping = perfil.loja.shopping
+            qs = qs.filter(
+                Q(shopping=perfil.shopping) | Q(shopping=loja_shopping)
+            )
         return qs.filter(sazonal=True)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "shopping":
+            kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping_id)
+        return super(SazonalAdmin, self).formfield_for_foreignkey(db_field,
+                                                                  request,
+                                                                  **kwargs)
 
 
 class ImagemInline(admin.StackedInline):
@@ -79,6 +112,24 @@ class OfertaModelForm(ItemModelForm):
             raise ValidationError({'loja': ["Selecione uma loja", ]})
         return loja
 
+    def clean_genero(self):
+        genero = self.cleaned_data['genero']
+        if not genero:
+            raise ValidationError({'genero': [u'Informe o gênero']})
+        return genero
+
+    def clean_categoria(self):
+        categoria = self.cleaned_data['categoria']
+        if not categoria:
+            raise ValidationError({'categoria': [u'Informe ao menos uma categoria']})
+        return categoria
+
+    def clean_descricao(self):
+        descricao = self.cleaned_data['descricao']
+        if not descricao:
+            raise ValidationError({'descricao': [u'Informe a descrição']})
+        return descricao
+
 
 class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
@@ -87,10 +138,12 @@ class OfertaAdmin(admin.ModelAdmin):
     list_filter = ['loja', 'status','genero']
     readonly_fields = ('total_compartilhado', 'total_visto', 'total_curtido',
                        'desconto_value', 'autor')
+    search_fields = ['nome']
 
     class Media:
         js = [
             'js/preco_desconto_admin.js',
+            'js/comum_admin.js',
             'js/jquery.maskMoney.min.js',
         ]
 
@@ -128,8 +181,14 @@ class OfertaAdmin(admin.ModelAdmin):
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         perfil = request.user.perfil.get()
-        if db_field.name == "categoria" and perfil.shopping:
-            kwargs["queryset"] = Categoria.objects.filter(shopping=perfil.shopping)
+        loja_shopping = None
+        if perfil.loja:
+            loja_shopping = perfil.loja.shopping
+        if db_field.name == "categoria" and (perfil.shopping or loja_shopping):
+            kwargs["queryset"] = Categoria.objects.filter(
+                                                   Q(shopping=perfil.shopping) |
+                                                   Q(shopping=loja_shopping)
+                                                   )
         return super(OfertaAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
     def get_fieldsets(self, request, obj=None):
@@ -141,6 +200,9 @@ class OfertaAdmin(admin.ModelAdmin):
                 ('Dados', {
                     'fields': ('total_visto','total_curtido', 'total_compartilhado','autor')
                 }),
+                ('Datas', {
+                    'fields': ('inicio','fim')
+                }),
                 ('Informações', {
                     'fields': ('status','loja','nome','slug','categoria','genero',
                                'descricao', 'texto_promocional',)
@@ -151,6 +213,9 @@ class OfertaAdmin(admin.ModelAdmin):
             )
         elif not perfil.is_lojista:
             fieldsets = (
+                ('Datas', {
+                    'fields': ('inicio', 'fim')
+                }),
                 ('Informações', {
                     'fields': ('status','loja','nome','slug','categoria','genero',
                                'descricao', 'texto_promocional',)
@@ -161,6 +226,9 @@ class OfertaAdmin(admin.ModelAdmin):
             )
         else:
             fieldsets = (
+                ('Datas', {
+                    'fields': ('inicio', 'fim')
+                }),
                 ('Informações', {
                         'fields': ('loja', 'nome', 'slug', 'categoria', 'genero',
                                    'descricao', 'texto_promocional',)
@@ -187,6 +255,7 @@ class DestaqueAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',), }
     list_display = ['__unicode__','status']
     list_editable = ['status']
+    search_fields = ['nome']
 
     class Media:
         js = [
@@ -195,6 +264,9 @@ class DestaqueAdmin(admin.ModelAdmin):
         ]
 
     fieldsets = (
+        ('Datas', {
+            'fields': ('inicio', 'fim')
+        }),
         ('Informações', {
             'fields': (
                 'status', 'loja', 'shopping', 'nome', 'slug', 'categoria',
@@ -207,7 +279,14 @@ class DestaqueAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
-        return qs.filter(tipo=Oferta.DESTAQUE)
+        qs = qs.filter(tipo=Oferta.DESTAQUE)
+        perfil = request.user.perfil.get()
+        if perfil.is_lojista:
+            qs = qs.filter(loja=perfil.loja)
+        if perfil.is_marketing and perfil.shopping:
+            qs = qs.filter(Q(loja__shopping=perfil.shopping) |
+                           Q(autor__shopping=perfil.shopping))
+        return qs
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.DESTAQUE
@@ -221,6 +300,7 @@ class EventoAdmin(admin.ModelAdmin):
     list_display = ['nome','genero','status']
     list_editable = ['status']
     list_display_links = ['nome','genero']
+    search_fields = ['nome']
 
     class Media:
         js = [
@@ -230,6 +310,12 @@ class EventoAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         qs = super(EventoAdmin, self).queryset(request)
+        perfil = request.user.perfil.get()
+        if perfil.is_lojista:
+            qs = qs.filter(loja=perfil.loja)
+        if perfil.is_marketing and perfil.shopping:
+            qs = qs.filter(Q(loja__shopping=perfil.shopping) |
+                           Q(autor__shopping=perfil.shopping))
         return qs.filter(tipo=Oferta.EVENTO)
 
     def save_model(self, request, obj, form, change):

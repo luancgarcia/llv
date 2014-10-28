@@ -73,13 +73,14 @@
 
                         <tbody>
                             {% for model in app.models %}
+                                {% if model.name == 'Imagens das ofertas' and user.get_profile.is_lojista or model.name == 'Imagens das ofertas' and user.get_profile.is_marketing %}
+                                {% else %}
                                 <tr>
                                 {% if model.admin_url %}
                                     <td class="model-name"><a href="{{ model.admin_url }}">{{ model.name }}</a></td>
                                 {% else %}
                                     <td class="model-name">{{ model.name }}</td>
                                 {% endif %}
-
                                 <td class="search-in-this-model hidden-phone">{% if model.perms.change %}
                                     <form class="form-search" method="get" action="{{ model.admin_url }}">
                                       <div class="input-append">
@@ -96,6 +97,7 @@
                                         <a href="{{ model.admin_url }}" class="btn btn-info pull-right">{% trans 'Change' %}</a>
                                     {% endif %}</td>
                                 </tr>
+                                {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
