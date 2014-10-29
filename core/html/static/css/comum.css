@@ -108,7 +108,7 @@
   left: 0;
   bottom: 0;
   top: 0;
-  background-color: black;
+  background-color: #000000;
   opacity: 0.6;
   -moz-opacity: 0.6;
   filter: alpha(opacity=60);
@@ -138,7 +138,7 @@
   background: #cb1d24 url(../img/ico-brs-branco.png) no-repeat 0 0;
   height: 33px;
   line-height: 29px;
-  color: white;
+  color: #ffffff;
   font-size: 1.4em;
   padding-left: 38px;
 }
@@ -151,7 +151,7 @@
 }
 #menu-shoppings .content-mn li a {
   line-height: 33px;
-  color: white;
+  color: #ffffff;
 }
 
 .dois-itens-v .item {
@@ -167,7 +167,7 @@
 .item {
   -webkit-box-shadow: 1px 1px 1px 0 #c2c2c2;
   box-shadow: 1px 1px 1px 0 #c2c2c2;
-  background-color: white;
+  background-color: #ffffff;
   position: relative;
   padding-bottom: 1px;
 }
@@ -180,7 +180,7 @@
   width: 56px;
   height: 49px;
   line-height: 49px;
-  color: white;
+  color: #ffffff;
   padding-left: 10px;
   font-size: 2.2em;
   top: 12px;
@@ -303,7 +303,7 @@
 #ShareProduto .head .titulo {
   font-family: "Roboto";
   font-size: 1.5em;
-  color: white;
+  color: #ffffff;
   line-height: 39px;
   padding-left: 12px;
 }
@@ -337,7 +337,7 @@
 }
 #ShareProduto .content-share .col-produto .bt-share {
   background-image: url(../img/bg-share.png);
-  color: white;
+  color: #ffffff;
   margin-right: 8px;
   border-color: #284689;
   padding: 0 8px;
@@ -408,7 +408,7 @@
   position: relative;
   width: 376px;
   height: 376px;
-  border: 1px solid whitesmoke;
+  border: 1px solid #f5f5f5;
   padding: 6px 5px;
   margin-bottom: 13px;
 }
@@ -451,7 +451,7 @@
 #TabletSmart #Header .chamada a {
   font-size: 1.3em;
   font-family: "Roboto";
-  color: white;
+  color: #ffffff;
   display: block;
   line-height: 27px;
 }
@@ -512,7 +512,7 @@
   margin-left: 9px;
   padding-left: 27px;
   position: relative;
-  color: white;
+  color: #ffffff;
 }
 #TabletSmart #Menu .navegacao header .user img {
   position: absolute;
@@ -575,12 +575,12 @@
   width: 100% !important;
 }
 #TabletSmart #Menu .navegacao .item-menu .submenu li a {
-  color: white;
+  color: #ffffff;
   line-height: 20px;
   padding-left: 10px;
 }
 #TabletSmart #Menu .navegacao .item-menu .submenu li a:hover {
-  color: white;
+  color: #ffffff;
 }
 #TabletSmart #Menu .navegacao .item-menu:hover .lnk {
   background-color: #bb1f26;
@@ -634,7 +634,7 @@
   background: url(../img/seta-menu.png) no-repeat right top;
   line-height: 27px;
   height: 27px;
-  color: white;
+  color: #ffffff;
   padding-right: 28px;
   padding-left: 10px;
   font-family: "Roboto";
@@ -649,7 +649,7 @@
   display: block;
   line-height: 27px;
   height: 27px;
-  color: white;
+  color: #ffffff;
   font-family: "Roboto";
   font-size: 1.4em;
   padding: 0 20px;
@@ -659,7 +659,7 @@
   position: absolute;
   top: 100%;
   left: -1px;
-  background-color: white;
+  background-color: #ffffff;
   width: 360px;
   z-index: 10;
   -webkit-box-shadow: 1px 1px 2px 0 #c2c2c2;
@@ -702,7 +702,7 @@
 }
 #Menu .navegacao .item-menu:hover .lnk {
   background-position: right -27px;
-  background-color: white;
+  background-color: #ffffff;
   color: #016e55;
   margin: -1px -1px 0px;
   -webkit-border-top-left-radius: 3px;
@@ -721,7 +721,7 @@
 }
 
 .mask, .maskmenushp, .maskmenu {
-  background-color: black;
+  background-color: #000000;
   position: fixed;
   z-index: 100;
   top: 0px;
@@ -785,10 +785,10 @@
 }
 
 #ligbtox_content {
-  background-color: white;
+  background-color: #ffffff;
 }
 #ligbtox_content .content {
-  background-color: white;
+  background-color: #ffffff;
   margin: 2px;
   padding: 25px 13px;
 }
@@ -798,7 +798,7 @@
   font-size: 1.6em;
   color: #999999;
   border: 1px solid #f7f7f7;
-  background-color: black;
+  background-color: #000000;
   height: 24px;
   line-height: 24px;
   float: left;
@@ -887,7 +887,7 @@
   margin-right: 19px;
 }
 .colunaDados .qualMarca .box p {
-  color: black;
+  color: #000000;
   text-align: center;
   width: 100px;
   padding-top: 8px;
@@ -896,7 +896,7 @@
   font-size: 11px;
 }
 .colunaDados .qualMarca .box p .tel {
-  color: black;
+  color: #000000;
   font-size: 14px;
 }
 .colunaDados .curtidas {
@@ -938,7 +938,7 @@
 
 #fotoProduto {
   border: 1px solid #f4f4f4;
-  background-color: white;
+  background-color: #ffffff;
   padding: 5px;
   position: relative;
   margin-bottom: 15px;
@@ -952,7 +952,7 @@
   width: 56px;
   height: 49px;
   line-height: 49px;
-  color: white;
+  color: #ffffff;
   padding-left: 10px;
   font-size: 2.2em;
   top: 12px;
@@ -1001,7 +1001,7 @@
 }
 #Splash .content .txt {
   text-align: center;
-  color: white;
+  color: #ffffff;
   font-size: 1.3em;
   font-family: "Tahoma";
   margin-bottom: 9px;
@@ -1035,7 +1035,7 @@
   border: none;
   background: none transparent;
   font-size: 1.4em;
-  color: white;
+  color: #ffffff;
 }
 
 #select-6-button > span {

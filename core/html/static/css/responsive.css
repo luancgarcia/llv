@@ -2,9 +2,12 @@
   background-color: #f3f3f3;
   *zoom: 1;
   max-width: 778px;
+  max-width: 48.625rem;
   _width: 778px;
   padding-left: 10px;
+  padding-left: 0.625rem;
   padding-right: 10px;
+  padding-right: 0.625rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -325,7 +328,7 @@
   #Header .chamada a {
     font-size: 1.3em;
     font-family: "Roboto";
-    color: white;
+    color: #ffffff;
     display: block;
     line-height: 27px;
   }
@@ -391,7 +394,7 @@
     margin-left: 9px;
     padding-left: 27px;
     position: relative;
-    color: white;
+    color: #ffffff;
   }
   #Menu .navegacao header .user img {
     position: absolute;
@@ -454,12 +457,12 @@
     width: 100% !important;
   }
   #Menu .navegacao .item-menu .submenu li a {
-    color: white;
+    color: #ffffff;
     line-height: 20px;
     padding-left: 10px;
   }
   #Menu .navegacao .item-menu .submenu li a:hover {
-    color: white;
+    color: #ffffff;
   }
   #Menu .navegacao .item-menu:hover .lnk {
     background-color: #bb1f26;
