@@ -316,8 +316,8 @@ def curtir(request):
 
     item = Oferta.objects.get(id=id_item)
     Log.objects.create(acao=Log.CURTIDA,oferta=item)
-
-    hash_url = '%s?%s' % (item.tipo.lower(), item.id)
+    tipo = Oferta.TIPOS[item.tipo][1]
+    hash_url = '%s?%s' % (tipo.lower(), item.id)
     shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
     url_item = '%s/%s/#%s' % (settings.SITE_URL, shopping, hash_url)
 
