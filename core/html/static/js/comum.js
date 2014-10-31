@@ -304,6 +304,19 @@ $(function(){
 	                link.text(data.total);
 	                link.addClass('ativo');
 	                acrescenta_curtidas('minhas_curtidas', id_item);
+                    FB.api(
+                        "/me/og.likes",
+                        "POST",
+                        {
+                            "object": data.url_item
+                        },
+                        function (response) {
+                          if (response && !response.error) {
+                              console.log(response);
+                              console.log(response.error);
+                          }
+                        }
+                    );
 	            },
 	            error: function(){
 	                console.log("erro curtir");

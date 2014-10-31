@@ -317,7 +317,12 @@ def curtir(request):
     item = Oferta.objects.get(id=id_item)
     Log.objects.create(acao=Log.CURTIDA,oferta=item)
 
-    return jsonResponse({'total': item.total_curtido})
+    hash_url = '%s?%s' % (item.tipo.lower(), item.id)
+    shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
+    url_item = '%s/%s/#%s' % (settings.SITE_URL, shopping, hash_url)
+
+    return jsonResponse({'total': item.total_curtido,
+                         'url_item': url_item})
 
 @csrf_exempt
 def descurtir(request):
