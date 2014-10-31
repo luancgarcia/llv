@@ -557,13 +557,13 @@
     padding-top: 120px !important;
   }
   #TabletSmart #ico-menu {
-    width: 90px !important;
-    height: 80px !important;
+    width: 104px !important;
+    height: 70px !important;
     background-size: 100% 100% !important;
   }
   #TabletSmart #Header .head-mob .ico-brs {
-    width: 90px !important;
-    height: 80px !important;
+    width: 104px !important;
+    height: 70px !important;
   }
 
   #Header {
@@ -571,7 +571,7 @@
   }
   #Header .head-mob {
     background-repeat: repeat !important;
-    height: 80px !important;
+    height: 110px !important;
   }
   #Header .head-mob img {
     max-width: 100%;
