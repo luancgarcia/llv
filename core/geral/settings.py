@@ -190,6 +190,9 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # wsgi scheme
 os.environ['wsgi.url_scheme'] = 'https'
 
+FONTE_FOLDER = os.path.join(STATIC_ROOT, 'fonts')
+FONTE_SHARE = '%s/%s' % (FONTE_FOLDER, 'Arial.ttf')
+
 try:
     from custom_settings import *
 except ImportError:
