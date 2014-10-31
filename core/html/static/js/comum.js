@@ -16,6 +16,9 @@ function validaCampo(campo){
         return true;
     }
 }
+function fecharTutorial() {
+	$("#TutorialMob").remove();
+}
 
 
 largura_window = $(window).width();
@@ -28,6 +31,24 @@ $(function(){
 
 	}
 
+	if(largura_window < 481) {
+		$("#EscolherShoppingMob .escolher-shopping").change(function(){
+			var url = $('option:selected', this).val();
+
+			if(url == "") {
+				return false;
+			}
+			window.location.href = url;
+		});
+
+		$("#TutorialMob a").on({
+			click: function(){
+				fecharTutorial();
+			}
+		});
+
+	}
+
 	$("#ico-menu").on({
 		click: function(){
 			var ico = $(this);
@@ -37,6 +58,8 @@ $(function(){
 			var menu = $("#Menu");
 
 			var altura_window = $(window).height();
+
+			fecharTutorial();
 
 			if(ico.hasClass("ativo")) {
 				ico.removeClass("ativo");
@@ -95,6 +118,8 @@ $(function(){
 			var header = $("#Header");
 			var banner = $("#Header .head-mob");
 			var menu_shp = $("#menu-shoppings");
+
+			fecharTutorial();
 
 			var altura_window = $(window).height();
 

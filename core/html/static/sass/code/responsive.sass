@@ -5,6 +5,75 @@
 +at-breakpoint($contexto-smartphone)
 	$coluna_responsive: 2
 
+	#TutorialMob
+		display: block
+		position: fixed
+		z-index: 9998
+		background-color: rgba(0, 0, 0, 0.8)
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		
+		span
+			padding:
+				top: 10px
+
+		a
+			position: fixed
+			left: 50%
+			margin-left: -50px
+			top: 160px
+
+
+	#EscolherShoppingMob
+		display: block
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		z-index: 99999
+		background: url(#{$url-img}/bg-escolher-shopping.png) repeat
+		background-size: 50% auto
+		
+		.campo
+			background: url(#{$url-img}/seta-select-escolher-shopping.png) no-repeat 0 0 $cor-57
+			display: block
+			width: 286px
+			height: 30px
+			margin: 0 auto
+			overflow: hidden
+
+		.escolher-shopping
+			background: transparent
+			border: none
+			width: 310px
+			height: 30px
+			font-size: 1.4em
+			color: $cor-10
+			text-align: center
+			display: block
+			padding-left: 20px
+			
+
+		figure
+			margin-bottom: 20px
+			img
+				max-width: 90%
+				display: block
+				margin: 0 auto
+
+		.foot
+			position: fixed
+			bottom: 0
+			left: 0
+			right: 0
+			height: 0
+			text-align: center
+			height: 27px
+			background-color: $cor-10
+
 	.container
 		padding:
 			left: 5px

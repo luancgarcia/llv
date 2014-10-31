@@ -67,6 +67,7 @@
       ga('create', 'UA-53876575-1', 'auto');
       ga('send', 'pageview');
 
+
     </script>
     <!--[if lte IE 9]>
        <script type="text/javascript" src="static/js/cria-elemento.js"></script>
@@ -83,6 +84,41 @@
 
 		a cada 4 itens, para tv, adicionar a class lasttv
 	-->
+	
+
+	<!-- 
+		#EscolherShoppingMob deve aparecer sempre na tela inicial
+	 -->
+	<div id="EscolherShoppingMob" class="fix">
+		<figure><img src="{% static 'img/text-head-mob.png' %}"></figure>
+		
+		<div class="campo">
+			<select name="" id="" class="escolher-shopping fix">
+				<option value="">ESCOLHA SEU SHOPPING</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/barra-shopping/">Barra Shopping / New York City Center</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/barrashopping-sul/">BarraShopping Sul</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/bh-shopping/">BH Shopping</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/diamondmall-shopping/">Diamond Mall</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/jundiai-shopping/">Jundiaí Shopping</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/morumbi-shopping/">Morumbi Shopping</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/parkshopping/">ParkShopping</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/parkshopping-barigui/">ParkShopping Barigui</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/parkshopping-campo-grande/">ParkShopping Campo Grande</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/parkshopping-sao-caetano/">ParkShopping São Caetano</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/patio-savassi/">Pátio Savassi</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/ribeirao-preto-shopping/">Ribeirão Preto Shopping</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/shopping-analia-franco/">Shopping Anália Franco</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/shopping-santa-ursula/">Shopping Santa Úrsula</option>
+				<option value="https://llv.liquidacaolapisvermelho.com.br/shopping-vila-olimpia/">Shopping Vila Olímpia</option>
+			</select>
+		</div>
+
+		<footer class="foot">
+			<img src="{% static 'img/multiplan-foot.png' %}" alt="">
+		</footer>
+	</div>
+	
+	
 
 	<div class="container">
 		<div id="menu-shoppings">
@@ -125,6 +161,16 @@
 				<a href="{% url 'home' shopping_slug %}">Produtos com até 70% de desconto</a>
 			</aside>
 			<span id="ico-menu"></span>
+			
+			<!-- 
+				Tutorial qeu aparece apenas 1 vez.
+			 -->
+			<div id="TutorialMob" class="fix">
+				<span class="tut-loja fl"><img src="{% static 'img/tutorial-loja.png' %}" alt=""></span>
+				<span class="tut-shop fr"><img src="{% static 'img/tutorial-shopping.png' %}" alt=""></span>
+				<a href="javascript:;"><img src="{% static 'img/fechar-tutorial.png' %}" alt=""></a>
+			</div>
+
 			<section id="Menu" class="cl">
 
 				<nav class="navegacao">
@@ -224,7 +270,8 @@
 	{% include 'modais/splash.html' %}
 
 	<footer id="Footer" class="fix cl">
-        <a href="http://www.kinda.com.br" target="_blank"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
+        <a href="http://www.kinda.com.br" target="_blank" class="fl"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
+        <a href="http://www.kinda.com.br" target="_blank" class="fr"><img src="{% static 'img/multiplan-footer.png' %}" alt="Kinda"></a>
     </footer>
 </body>
 <script>

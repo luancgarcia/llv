@@ -431,7 +431,7 @@
   display: none;
 }
 #TabletSmart .container {
-  padding-top: 70px;
+  padding-top: 90px;
 }
 #TabletSmart #Header {
   position: fixed;
@@ -444,7 +444,7 @@
 }
 #TabletSmart #Header .chamada {
   background-color: #d51924;
-  height: 27px;
+  height: 34px;
   clear: both;
   text-align: center;
 }
@@ -453,36 +453,37 @@
   font-family: "Roboto";
   color: #ffffff;
   display: block;
-  line-height: 27px;
+  line-height: 34px;
 }
 #TabletSmart #Header .head-mob {
   background: url(../img/bg-head-mob.png) repeat-x 0 0;
-  height: 33px;
+  height: 60px;
   position: relative;
   min-width: 100%;
 }
 #TabletSmart #Header .head-mob img {
   display: block;
   margin: 0 auto;
+  max-width: 65%;
 }
 #TabletSmart #Header .head-mob .ico-brs {
   background: url(../img/ico-brs.png) no-repeat 0 0;
   background-size: 100% 100% !important;
-  width: 45px;
-  height: 40px;
+  width: 52px;
+  height: 35px;
   position: absolute;
   right: 0;
-  top: -3px;
+  top: 11px;
 }
 #TabletSmart #ico-menu {
   background: url(../img/ico-menu-mob.png) no-repeat 0 0;
   background-size: 100% 100%;
   display: block;
-  width: 45px;
-  height: 40px;
+  width: 52px;
+  height: 35px;
   position: absolute;
   left: 0;
-  top: -3px;
+  top: 11px;
 }
 #TabletSmart #Menu {
   background: #cb1d24;
@@ -1052,7 +1053,10 @@ body {
 }
 
 #Footer {
-  background-color: #faf9f9;
+  background-color: #ffffff;
   height: 25px;
-  text-align: right;
+}
+
+#EscolherShoppingMob, #TutorialMob {
+  display: none;
 }
