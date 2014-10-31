@@ -554,7 +554,7 @@
 }
 @media (min-width: 820px) and (max-width: 9999999px) {
   #TabletSmart .container {
-    padding-top: 120px !important;
+    padding-top: 150px !important;
   }
   #TabletSmart #ico-menu {
     width: 104px !important;
