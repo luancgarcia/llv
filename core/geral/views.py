@@ -339,7 +339,7 @@ def curtir(request):
         if item.texto_promocional:
             descricao = item.texto_promocional[:40]
         else:
-            descricao = item.descricao[:30]
+            descricao = item.descricao[:40]
         draw = draw.text((130,35), descricao, font=fonte_chamada,
                          fill=(128, 128, 128))
         draw = ImageDraw.Draw(base)
