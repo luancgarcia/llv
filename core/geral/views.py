@@ -333,14 +333,14 @@ def curtir(request):
         fonte = ImageFont.truetype(settings.FONTE_SHARE, 15)
         fonte_chamada = ImageFont.truetype(settings.FONTE_SHARE, 12)
         draw = ImageDraw.Draw(base)
-        draw = draw.text((130,10), item.__unicode__(), font=fonte,
+        draw = draw.text((130,10), item.nome[:40], font=fonte,
                          fill=(45, 78, 157))
         draw = ImageDraw.Draw(base)
         if item.texto_promocional:
-            descricao = item.texto_promocional[:30]
+            descricao = item.texto_promocional[:40]
         else:
             descricao = item.descricao[:30]
-        draw = draw.text((130,40), descricao, font=fonte_chamada,
+        draw = draw.text((130,35), descricao, font=fonte_chamada,
                          fill=(128, 128, 128))
         draw = ImageDraw.Draw(base)
 
