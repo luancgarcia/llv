@@ -312,9 +312,9 @@ $(function(){
                             "message": data.mensagem
                         },
                         function (response) {
-                          console.log(response);
+//                          console.log(response);
                           if (response && !response.error) {
-                          console.log(response.error);
+//                            console.log(response.error);
                           }
                         }
                     );
