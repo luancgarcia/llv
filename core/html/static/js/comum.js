@@ -32,6 +32,19 @@ $(function(){
 	}
 
 	if(largura_window < 481) {
+        var pickmall = getCookie('pickmall');
+        if (pickmall && pickmall != 'undefined'){
+            $("#EscolherShoppingMob").remove();
+            var gettutorial = getCookie('gettutorial');
+            if (gettutorial && gettutorial != 'undefined'){
+                fecharTutorial();
+            }else{
+                document.cookie = "gettutorial=1;";
+            }
+        }else{
+            document.cookie = "pickmall=1;";
+        }
+        // define cookie para ocultar splash
 		// $("#EscolherShoppingMob .escolher-shopping").change(function(){
 		// 	var url = $('option:selected', this).val();
 
