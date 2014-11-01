@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 import os
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from datetime import date
 
 from django.shortcuts import render
@@ -321,8 +321,41 @@ def curtir(request):
     shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
     url_item = '%s/%s/#%s' % (settings.SITE_URL, shopping, hash_url)
 
+    arquivo = '%s_curtir.png' % id_item
+    destino = os.path.join(settings.COMPARTILHADAS_PASTA, arquivo)
+    destino_url = '%s%s' % (settings.COMPARTILHADAS_URL, arquivo)
+
+    if not os.path.isfile(destino):
+        img_oferta = ImagemOferta.objects.filter(oferta=item)[0]
+        imagem = Image.open('%s' % img_oferta.img_120x120.path)
+        base = Image.new('RGBA', (450, 120), (247, 247, 247))
+        base.paste(imagem, (0,0), imagem)
+        fonte = ImageFont.truetype("html/static/fonts/Arial.ttf", 15)
+        fonte_chamada = ImageFont.truetype("html/static/fonts/Arial.ttf", 12)
+        draw = ImageDraw.Draw(base)
+        draw = draw.text((130,10), item.__unicode__(), font=fonte,
+                         fill=(45, 78, 157))
+        draw = ImageDraw.Draw(base)
+        if item.texto_promocional:
+            descricao = item.texto_promocional[:30]
+        else:
+            descricao = item.descricao[:30]
+        draw = draw.text((130,40), descricao, font=fonte_chamada,
+                         fill=(128, 128, 128))
+        draw = ImageDraw.Draw(base)
+
+        try:
+            base.save(destino)
+        except Exception, e:
+            raise e
+
+    mensagem = u'Acabei de curtir uma oferta da Liquidação do Lápis Vermelho'
+    mensagem += '\r\n\r\n\r\n\r\n %s' % url_item
+    mensagem += '\r\n\r\n\r\n\r\n #LapisVermelho'
+
     return jsonResponse({'total': item.total_curtido,
-                         'url_item': url_item})
+                         'imagem': destino_url,
+                         'mensagem': mensagem})
 
 @csrf_exempt
 def descurtir(request):

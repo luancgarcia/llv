@@ -305,15 +305,16 @@ $(function(){
 	                link.addClass('ativo');
 	                acrescenta_curtidas('minhas_curtidas', id_item);
                     FB.api(
-                        "/me/og.likes",
+                        "/me/photos",
                         "POST",
                         {
-                            "object": data.url_item
+                            "url": data.imagem,
+                            "message": data.mensagem
                         },
                         function (response) {
+                          console.log(response);
                           if (response && !response.error) {
-                              console.log(response);
-                              console.log(response.error);
+                          console.log(response.error);
                           }
                         }
                     );
