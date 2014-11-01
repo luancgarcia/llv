@@ -38,7 +38,7 @@
                     FB.api('/me', function(response) {
 //                        console.log('Good to see you, ' + response.name + '.');
                         $('p.user span').text(response.name);
-                        $('p.user img').attr('src','http://graph.facebook.com/'+response.id+'/picture?type=small');
+                        $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
                     });
                 } else {
 //                    console.log('User cancelled login or did not fully authorize.');
