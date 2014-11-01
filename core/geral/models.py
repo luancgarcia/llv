@@ -378,6 +378,10 @@ class ImagemOferta(OrderedModel):
                                  resize.ResizeToFill(172, 172)],
                                  source='imagem', format='PNG',
                                  options={'quality': 90})
+    img_120x120 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
+                                  resize.ResizeToFill(120, 120)],
+                                 source='imagem', format='PNG',
+                                 options={'quality': 90})
     img_94x94 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(94, 94)],
                                  source='imagem', format='PNG',
