@@ -14,4 +14,8 @@ $(document).ready(function(){
         }
     });
 
+    if($("#id_shopping").length == 1){
+        $('select[name="shopping"] option:eq(1)').attr('selected', 'selected');
+    }
+
 });

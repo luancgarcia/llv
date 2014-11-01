@@ -261,6 +261,7 @@ class DestaqueAdmin(admin.ModelAdmin):
         js = [
             'js/preco_desconto_admin.js',
             'js/jquery.maskMoney.min.js',
+            'js/comum_admin.js',
         ]
 
     fieldsets = (
@@ -276,6 +277,23 @@ class DestaqueAdmin(admin.ModelAdmin):
             'fields': (('preco_inicial', 'preco_final'), 'desconto')
         }),
     )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "loja":
+            if perfil.is_marketing and perfil.shopping:
+                kwargs["queryset"] = Loja.objects.filter(
+                    shopping=perfil.shopping)
+            else:
+                kwargs["queryset"] = Loja.objects.all()
+        if db_field.name == "shopping":
+            if perfil.is_marketing and perfil.shopping:
+                kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping.id)
+            else:
+                kwargs["queryset"] = Shopping.objects.all()
+        return super(DestaqueAdmin, self).formfield_for_foreignkey(db_field,
+                                                                   request,
+                                                                   **kwargs)
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
@@ -306,6 +324,7 @@ class EventoAdmin(admin.ModelAdmin):
         js = [
             'js/preco_desconto_admin.js',
             'js/jquery.maskMoney.min.js',
+            'js/comum_admin.js',
         ]
 
     def queryset(self, request):
@@ -317,6 +336,24 @@ class EventoAdmin(admin.ModelAdmin):
             qs = qs.filter(Q(loja__shopping=perfil.shopping) |
                            Q(autor__shopping=perfil.shopping))
         return qs.filter(tipo=Oferta.EVENTO)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "loja":
+            if perfil.is_marketing and perfil.shopping:
+                kwargs["queryset"] = Loja.objects.filter(
+                    shopping=perfil.shopping)
+            else:
+                kwargs["queryset"] = Loja.objects.all()
+        if db_field.name == "shopping":
+            if perfil.is_marketing and perfil.shopping:
+                kwargs["queryset"] = Shopping.objects.filter(
+                    id=perfil.shopping.id)
+            else:
+                kwargs["queryset"] = Shopping.objects.all()
+        return super(EventoAdmin, self).formfield_for_foreignkey(db_field,
+                                                                 request,
+                                                                 **kwargs)
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.EVENTO
