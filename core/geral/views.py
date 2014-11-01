@@ -330,8 +330,8 @@ def curtir(request):
         imagem = Image.open('%s' % img_oferta.img_120x120.path)
         base = Image.new('RGBA', (450, 120), (247, 247, 247))
         base.paste(imagem, (0,0), imagem)
-        fonte = ImageFont.truetype("html/static/fonts/Arial.ttf", 15)
-        fonte_chamada = ImageFont.truetype("html/static/fonts/Arial.ttf", 12)
+        fonte = ImageFont.truetype(settings.FONTE_SHARE, 15)
+        fonte_chamada = ImageFont.truetype(settings.FONTE_SHARE, 12)
         draw = ImageDraw.Draw(base)
         draw = draw.text((130,10), item.__unicode__(), font=fonte,
                          fill=(45, 78, 157))
