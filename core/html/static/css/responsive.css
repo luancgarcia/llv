@@ -78,25 +78,57 @@
     z-index: 99999;
     background: url(../img/bg-escolher-shopping.png) repeat;
     background-size: 50% auto;
+    overflow: auto;
+    padding-bottom: 50px;
+  }
+  #EscolherShoppingMob .head-escolhershopping {
+    background: url(../img/ico-brs-escolher-shopping.png) no-repeat 0 0, url(../img/ico-brs-escolher-shopping.png) no-repeat right 0;
+    background-color: #d35044;
+    height: 40px;
+    text-align: center;
+    font-size: 1.4em;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 40px;
   }
   #EscolherShoppingMob .campo {
-    background: url(../img/seta-select-escolher-shopping.png) no-repeat 0 0 #e23436;
+    background: #e23436;
     display: block;
     width: 286px;
-    height: 30px;
     margin: 0 auto;
     overflow: hidden;
+    text-align: center;
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    padding-bottom: 10px;
+  }
+  #EscolherShoppingMob .campo .tit-campo {
+    background: url(../img/ico-tit-escolher-shopping.png) no-repeat 0 0;
+    width: 170px;
+    margin: 0 auto;
+    height: 45px;
+    box-sizing: border-box;
+    padding-left: 64px;
+    font-size: 1.5em;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   #EscolherShoppingMob .escolher-shopping {
     background: transparent;
     border: none;
     width: 310px;
-    height: 30px;
     font-size: 1.4em;
     color: #ffffff;
     text-align: center;
     display: block;
-    padding-left: 20px;
+  }
+  #EscolherShoppingMob .escolher-shopping li {
+    line-height: 30px;
+  }
+  #EscolherShoppingMob .escolher-shopping a {
+    color: #ffffff;
   }
   #EscolherShoppingMob figure {
     margin-bottom: 20px;

@@ -32,14 +32,14 @@ $(function(){
 	}
 
 	if(largura_window < 481) {
-		$("#EscolherShoppingMob .escolher-shopping").change(function(){
-			var url = $('option:selected', this).val();
+		// $("#EscolherShoppingMob .escolher-shopping").change(function(){
+		// 	var url = $('option:selected', this).val();
 
-			if(url == "") {
-				return false;
-			}
-			window.location.href = url;
-		});
+		// 	if(url == "") {
+		// 		return false;
+		// 	}
+		// 	window.location.href = url;
+		// });
 
 		$("#TutorialMob a").on({
 			click: function(){
