@@ -370,6 +370,17 @@ class EventoAdmin(admin.ModelAdmin):
     search_fields = ['nome']
     form = EventoModelForm
 
+    fieldsets = (
+        ('Datas', {
+            'fields': ('inicio', 'fim')
+        }),
+        ('Informações', {
+            'fields': (
+                'status', 'loja', 'shopping', 'nome', 'slug', 'categoria',
+                'genero', 'descricao', 'texto_promocional',)
+        }),
+    )
+
     class Media:
         js = [
             'js/preco_desconto_admin.js',
