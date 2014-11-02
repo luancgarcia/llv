@@ -274,7 +274,8 @@ class Oferta(EditorialModel):
         imagem = None
         if self.tipo == Oferta.OFERTA:
             imagens = self.imagens.filter(oferta__tipo=Oferta.OFERTA)
-            if imagens:
+            if imagens and imagens[0].imagem:
+                import ipdb;ipdb.set_trace()
                 imagem = imagens[0].img_172x172.url
         elif self.tipo == Oferta.EVENTO:
             imagens = self.imagens.filter(oferta__tipo=Oferta.EVENTO)
