@@ -22,9 +22,8 @@ def cria_envia_notificacao(sender, instance, created, **kwargs):
 def completa_slug(sender, instance, created, **kwargs):
     item = instance
     if item and not item.slug.endswith('%s'%item.id):
-        if not item.slug:
-            slug_item = slugify(item.nome)
-        else:
+        slug_item = slugify(item.nome)
+        if item.slug and item.slug == slugify(item.nome):
             slug_item = item.slug
         item.slug = '%s-%s' % (slug_item, item.id)
         item.save()
