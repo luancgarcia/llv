@@ -15,6 +15,7 @@ from django.db.models.signals import post_save
 from utils.models import BaseModel, EditorialModel, OrderedModel
 from lojas.models import Loja, Shopping
 from geral.signals import cria_envia_notificacao, completa_slug
+from notificacoes.models import Solicitacao
 
 
 class Perfil(BaseModel):
@@ -235,6 +236,9 @@ class Oferta(EditorialModel):
             if notificacoes:
                 for n in notificacoes:
                     n.notifica_aprovacao()
+
+            for s in Solicitacao.objects.filter(loja=self.loja):
+                s.responde_solicitacao()
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
