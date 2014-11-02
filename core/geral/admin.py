@@ -4,6 +4,7 @@ from imagekit.admin import AdminThumbnail
 
 from django.contrib import admin
 from django.forms import ModelForm
+from django.forms.models import BaseInlineFormSet
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 
@@ -71,12 +72,22 @@ class SazonalAdmin(admin.ModelAdmin):
                                                                   **kwargs)
 
 
-# class ImagemInlineFormSet(admin.BaseInlineFormSet):
-#     def save_new(self, form, commit=True):
-#         return super(ImagemInlineFormSet, self).save_new(form, commit=commit)
-#
-#     def save_existing(self, form, instance, commit=True):
-#         return form.save(commit=commit)
+class ImagemInlineFormSet(BaseInlineFormSet):
+    def clean(self):
+        total_forms = self.total_form_count()
+        imgs_instancia = self.instance.imagens.all().count()
+        mensagem = u'Deve haver, no mínimo, 1 imagem para validar'
+        if not self.instance.status == 3:
+            if not total_forms:
+                raise ValidationError({'status': [mensagem]})
+            elif not self.files and not imgs_instancia >= 1:
+                raise ValidationError({'status': [mensagem]})
+            elif total_forms == 1:
+                if self.data.get('imagens-0-imagem-clear') == 'on' or\
+                   self.cleaned_data[0]['DELETE']:
+                    raise ValidationError({'status': [mensagem]})
+
+        super(ImagemInlineFormSet, self).clean()
 
 
 class ImagemInline(admin.StackedInline):
@@ -91,6 +102,7 @@ class ImagemInline(admin.StackedInline):
             'fields': (('imagem','ordem'),)
         }),
     )
+    formset = ImagemInlineFormSet
 
 
 class ImagemNaoOfertaInline(admin.StackedInline):
@@ -105,7 +117,7 @@ class ImagemNaoOfertaInline(admin.StackedInline):
             'fields': (('imagem','ordem'),)
         }),
     )
-    # formset = ImagemInlineFormSet
+    formset = ImagemInlineFormSet
 
 
 class ItemModelForm(ModelForm):
