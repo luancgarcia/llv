@@ -148,6 +148,7 @@ class OfertaAdmin(admin.ModelAdmin):
     readonly_fields = ('total_compartilhado', 'total_visto', 'total_curtido',
                        'desconto_value', 'autor')
     search_fields = ['nome']
+    form = OfertaModelForm
 
     class Media:
         js = [
@@ -258,15 +259,19 @@ class OfertaAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class DestaqueModelForm(ModelForm):
+    class Meta:
+        model = Destaque
+        localized_fields = ('__all__')
+
 class DestaqueAdmin(admin.ModelAdmin):
     inlines = [ImagemNaoOfertaInline,]
     exclude = OCULTA_NO_ADMIN
-    prepopulated_fields = {'slug': ('nome',), }
+    # prepopulated_fields = {'slug': ('nome',), }
     list_display = ['__unicode__','status']
     list_editable = ['status']
     search_fields = ['nome']
-
-    form = ItemModelForm
+    form = DestaqueModelForm
 
     class Media:
         js = [
@@ -337,6 +342,12 @@ class DestaqueAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class EventoModelForm(ModelForm):
+    class Meta:
+        model = Destaque
+        localized_fields = ('__all__')
+
+
 class EventoAdmin(admin.ModelAdmin):
     inlines = [ImagemNaoOfertaInline,]
     exclude = OCULTA_NO_ADMIN + ('preco_inicial','preco_final','desconto')
@@ -345,8 +356,7 @@ class EventoAdmin(admin.ModelAdmin):
     list_editable = ['status']
     list_display_links = ['nome','genero']
     search_fields = ['nome']
-
-    form = ItemModelForm
+    form = EventoModelForm
 
     class Media:
         js = [
@@ -475,7 +485,7 @@ class MascaraAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Categoria, CategoriaAdmin)
-admin.site.register(Oferta, OfertaAdmin, form=OfertaModelForm)
+admin.site.register(Oferta, OfertaAdmin)
 admin.site.register(Destaque, DestaqueAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
