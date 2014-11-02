@@ -101,3 +101,18 @@ class Solicitacao(BaseNotificacao):
         if not self.mensagem:
             self.mensagem = self.MENSAGEM_DEFAULT
         super(Solicitacao, self).save(*args, **kwargs)
+
+    def responde_solicitacao(self):
+        loja = self.loja
+        assunto = u'Novidades da %s' % loja.nome
+        contexto = {'nome': self.nome,
+                    'loja': loja.nome,
+                    'shopping_slug': loja.shopping.slug}
+        try:
+            para = self.email
+            TemplatedEmail(para, assunto, 'email/resposta_solicitacao.html',
+                           contexto, send_now=True)
+            self.lida = True
+            self.save()
+        except:
+            raise
