@@ -257,6 +257,8 @@ class DestaqueAdmin(admin.ModelAdmin):
     list_editable = ['status']
     search_fields = ['nome']
 
+    form = ItemModelForm
+
     class Media:
         js = [
             'js/preco_desconto_admin.js',
@@ -306,6 +308,20 @@ class DestaqueAdmin(admin.ModelAdmin):
                            Q(autor__shopping=perfil.shopping))
         return qs
 
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        loja_shopping = None
+        if perfil.loja:
+            loja_shopping = perfil.loja.shopping
+        if db_field.name == "categoria" and (perfil.shopping or loja_shopping):
+            kwargs["queryset"] = Categoria.objects.filter(
+                Q(shopping=perfil.shopping) |
+                Q(shopping=loja_shopping)
+            )
+        return super(DestaqueAdmin, self).formfield_for_manytomany(db_field,
+                                                                 request,
+                                                                 **kwargs)
+
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.DESTAQUE
         obj.save()
@@ -319,6 +335,8 @@ class EventoAdmin(admin.ModelAdmin):
     list_editable = ['status']
     list_display_links = ['nome','genero']
     search_fields = ['nome']
+
+    form = ItemModelForm
 
     class Media:
         js = [
@@ -354,6 +372,20 @@ class EventoAdmin(admin.ModelAdmin):
         return super(EventoAdmin, self).formfield_for_foreignkey(db_field,
                                                                  request,
                                                                  **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        loja_shopping = None
+        if perfil.loja:
+            loja_shopping = perfil.loja.shopping
+        if db_field.name == "categoria" and (perfil.shopping or loja_shopping):
+            kwargs["queryset"] = Categoria.objects.filter(
+                Q(shopping=perfil.shopping) |
+                Q(shopping=loja_shopping)
+            )
+        return super(EventoAdmin, self).formfield_for_manytomany(db_field,
+                                                                   request,
+                                                                   **kwargs)
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.EVENTO
@@ -433,8 +465,8 @@ class MascaraAdmin(admin.ModelAdmin):
 
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin, form=OfertaModelForm)
-admin.site.register(Destaque, DestaqueAdmin, form=ItemModelForm)
-admin.site.register(Evento, EventoAdmin, form=ItemModelForm)
+admin.site.register(Destaque, DestaqueAdmin)
+admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log, LogAdmin)
 admin.site.register(PerfilMarketing, PerfilMktAdmin)
