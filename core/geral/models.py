@@ -262,7 +262,7 @@ class Oferta(EditorialModel):
         if self.preco_inicial and self.preco_final:
             return int(100-(100*int(self.preco_final)/int(self.preco_inicial)))
         else:
-            return None
+            return 0
 
     @classmethod
     def get_ofertas(cls):

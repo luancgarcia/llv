@@ -1,5 +1,5 @@
-{% if oferta.desconto or oferta.desconto != 0 %}
-<span class="desconto">{{ oferta.desconto }}</span>
+{% if oferta.porcentagem or oferta.porcentagem != 0 %}
+<span class="desconto">{{ oferta.porcentagem }}</span>
 {% endif %}
 <figure>
 	<a href="javascript:;" title="{{oferta.loja.nome}}" data-href="{% url 'modal' 'oferta' oferta.id %}" rel="modal" data-param=786>
