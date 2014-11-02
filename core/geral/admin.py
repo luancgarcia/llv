@@ -351,7 +351,7 @@ class EventoModelForm(ModelForm):
 class EventoAdmin(admin.ModelAdmin):
     inlines = [ImagemNaoOfertaInline,]
     exclude = OCULTA_NO_ADMIN + ('preco_inicial','preco_final','desconto')
-    prepopulated_fields = {'slug': ('nome',), }
+    # prepopulated_fields = {'slug': ('nome',), }
     list_display = ['nome','genero','status']
     list_editable = ['status']
     list_display_links = ['nome','genero']
