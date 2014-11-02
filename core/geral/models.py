@@ -162,10 +162,12 @@ class Oferta(EditorialModel):
     PENDENTE = 0
     PUBLICADO = 1
     EXPIRADO = 2
+    RASCUNHO = 3
     STATUSES = (
         (PENDENTE, u'Pendente'),
         (PUBLICADO, u'Publicado'),
         (EXPIRADO, u'Expirado'),
+        (RASCUNHO, u'Rascunho'),
     )
 
     MASCULINO =0
