@@ -480,3 +480,5 @@ class Mascara(EditorialModel):
 
 post_save.connect(cria_envia_notificacao, sender=Oferta)
 post_save.connect(completa_slug, sender=Oferta)
+post_save.connect(completa_slug, sender=Destaque)
+post_save.connect(completa_slug, sender=Evento)
