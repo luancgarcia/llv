@@ -71,6 +71,14 @@ class SazonalAdmin(admin.ModelAdmin):
                                                                   **kwargs)
 
 
+# class ImagemInlineFormSet(admin.BaseInlineFormSet):
+#     def save_new(self, form, commit=True):
+#         return super(ImagemInlineFormSet, self).save_new(form, commit=commit)
+#
+#     def save_existing(self, form, instance, commit=True):
+#         return form.save(commit=commit)
+
+
 class ImagemInline(admin.StackedInline):
     classes = ('grp-collapse grp-open',)
     inline_classes = ('grp-collapse grp-open',)
@@ -97,6 +105,7 @@ class ImagemNaoOfertaInline(admin.StackedInline):
             'fields': (('imagem','ordem'),)
         }),
     )
+    # formset = ImagemInlineFormSet
 
 
 class ItemModelForm(ModelForm):
@@ -304,7 +313,8 @@ class DestaqueAdmin(admin.ModelAdmin):
         if perfil.is_lojista:
             qs = qs.filter(loja=perfil.loja)
         if perfil.is_marketing and perfil.shopping:
-            qs = qs.filter(Q(loja__shopping=perfil.shopping) |
+            qs = qs.filter(Q(shopping=perfil.shopping) |
+                           Q(loja__shopping=perfil.shopping) |
                            Q(autor__shopping=perfil.shopping))
         return qs
 
@@ -351,7 +361,8 @@ class EventoAdmin(admin.ModelAdmin):
         if perfil.is_lojista:
             qs = qs.filter(loja=perfil.loja)
         if perfil.is_marketing and perfil.shopping:
-            qs = qs.filter(Q(loja__shopping=perfil.shopping) |
+            qs = qs.filter(Q(shopping=perfil.shopping) |
+                           Q(loja__shopping=perfil.shopping) |
                            Q(autor__shopping=perfil.shopping))
         return qs.filter(tipo=Oferta.EVENTO)
 
