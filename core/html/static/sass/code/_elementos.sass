@@ -308,6 +308,106 @@
 		z-index: 10
 
 #TabletSmart
+	#TutorialMob
+		display: block
+		position: fixed
+		z-index: 9998
+		background-color: rgba(0, 0, 0, 0.8)
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		
+		span
+			padding:
+				top: 10px
+
+		a
+			position: fixed
+			left: 50%
+			margin-left: -50px
+			top: 160px
+
+
+	#EscolherShoppingMob
+		display: block
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		z-index: 99999
+		background: url(#{$url-img}/bg-escolher-shopping.png) repeat
+		background-size: 50% auto
+		overflow: auto
+		padding-bottom: 50px
+
+		.head-escolhershopping
+			background: url(#{$url-img}/ico-brs-escolher-shopping.png) no-repeat 0 0, url(#{$url-img}/ico-brs-escolher-shopping.png) no-repeat right 0
+			background-color: $cor-58
+			height: 40px
+			text-align: center
+			font-size: 1.4em
+			color: $cor-10
+			text-transform: uppercase
+			font-weight: bold
+			line-height: 40px
+		
+		.campo
+			background: $cor-57
+			display: block
+			width: 286px
+			margin: 0 auto
+			overflow: hidden
+			text-align: center
+			@include box-shadow(1px, 1px, 3px, 1px, rgba(0,0,0,0.3))
+			padding-bottom: 10px
+
+			.tit-campo
+				background: url(#{$url-img}/ico-tit-escolher-shopping.png) no-repeat 0 0
+				width: 200px
+				margin: 0 auto
+				height: 45px
+				box-sizing: border-box
+				padding-left: 64px
+				font-size: 1.5em
+				color: $cor-10
+				margin-top: 10px
+				margin-bottom: 10px
+
+		.escolher-shopping
+			background: transparent
+			border: none
+			width: 310px
+			font-size: 1.4em
+			color: $cor-10
+			text-align: center
+			display: block
+
+			li
+				line-height: 30px
+
+			a
+				color: $cor-10
+
+		figure
+			margin-bottom: 20px
+			img
+				max-width: 90%
+				display: block
+				margin: 0 auto
+
+		.foot
+			position: fixed
+			bottom: 0
+			left: 0
+			right: 0
+			height: 0
+			text-align: center
+			height: 27px
+			background-color: $cor-10
+
+
 	#Splash
 		display: none
 
@@ -356,6 +456,7 @@
 				position: absolute
 				right: 0
 				top: 11px
+				z-index: 9999
 
 	#ico-menu
 		background: url(#{$url-img}/ico-menu-mob.png) no-repeat 0 0
@@ -366,6 +467,7 @@
 		position: absolute
 		left: 0
 		top: 11px
+		z-index: 9999
 
 	#Menu
 		background: $cor-27

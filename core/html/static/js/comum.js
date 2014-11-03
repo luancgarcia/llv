@@ -29,9 +29,7 @@ $(function(){
 	if(isiDevice || largura_window > 900) {
 		$("body").attr("id","TabletSmart");
 
-	}
 
-	if(largura_window < 481) {
         var pickmall = getCookie('pickmall');
         if (pickmall && pickmall != 'undefined'){
             $("#EscolherShoppingMob").remove();

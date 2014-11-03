@@ -427,6 +427,105 @@
   z-index: 10;
 }
 
+#TabletSmart #TutorialMob {
+  display: block;
+  position: fixed;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#TabletSmart #TutorialMob span {
+  padding-top: 10px;
+}
+#TabletSmart #TutorialMob a {
+  position: fixed;
+  left: 50%;
+  margin-left: -50px;
+  top: 160px;
+}
+#TabletSmart #EscolherShoppingMob {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: url(../img/bg-escolher-shopping.png) repeat;
+  background-size: 50% auto;
+  overflow: auto;
+  padding-bottom: 50px;
+}
+#TabletSmart #EscolherShoppingMob .head-escolhershopping {
+  background: url(../img/ico-brs-escolher-shopping.png) no-repeat 0 0, url(../img/ico-brs-escolher-shopping.png) no-repeat right 0;
+  background-color: #d35044;
+  height: 40px;
+  text-align: center;
+  font-size: 1.4em;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 40px;
+}
+#TabletSmart #EscolherShoppingMob .campo {
+  background: #e23436;
+  display: block;
+  width: 286px;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  padding-bottom: 10px;
+}
+#TabletSmart #EscolherShoppingMob .campo .tit-campo {
+  background: url(../img/ico-tit-escolher-shopping.png) no-repeat 0 0;
+  width: 200px;
+  margin: 0 auto;
+  height: 45px;
+  box-sizing: border-box;
+  padding-left: 64px;
+  font-size: 1.5em;
+  color: #ffffff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#TabletSmart #EscolherShoppingMob .escolher-shopping {
+  background: transparent;
+  border: none;
+  width: 310px;
+  font-size: 1.4em;
+  color: #ffffff;
+  text-align: center;
+  display: block;
+}
+#TabletSmart #EscolherShoppingMob .escolher-shopping li {
+  line-height: 30px;
+}
+#TabletSmart #EscolherShoppingMob .escolher-shopping a {
+  color: #ffffff;
+}
+#TabletSmart #EscolherShoppingMob figure {
+  margin-bottom: 20px;
+}
+#TabletSmart #EscolherShoppingMob figure img {
+  max-width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+#TabletSmart #EscolherShoppingMob .foot {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  text-align: center;
+  height: 27px;
+  background-color: #ffffff;
+}
 #TabletSmart #Splash {
   display: none;
 }
@@ -474,6 +573,7 @@
   position: absolute;
   right: 0;
   top: 11px;
+  z-index: 9999;
 }
 #TabletSmart #ico-menu {
   background: url(../img/ico-menu-mob.png) no-repeat 0 0;
@@ -484,6 +584,7 @@
   position: absolute;
   left: 0;
   top: 11px;
+  z-index: 9999;
 }
 #TabletSmart #Menu {
   background: #cb1d24;

@@ -60,6 +60,7 @@
   }
   #TutorialMob span {
     padding-top: 10px;
+    margin: 0px !important;
   }
   #TutorialMob a {
     position: fixed;
@@ -583,8 +584,22 @@
     left: 0;
     margin-left: 0px;
   }
+
+  #TutorialMob span.fl {
+    margin-left: 60px;
+  }
+  #TutorialMob span.fr {
+    margin-right: 60px;
+  }
 }
 @media (min-width: 820px) and (max-width: 9999999px) {
+  #TutorialMob span.fl {
+    margin-left: 60px;
+  }
+  #TutorialMob span.fr {
+    margin-right: 60px;
+  }
+
   #TabletSmart .container {
     padding-top: 150px !important;
   }

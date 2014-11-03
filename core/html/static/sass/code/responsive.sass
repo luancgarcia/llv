@@ -18,6 +18,7 @@
 		span
 			padding:
 				top: 10px
+			margin: 0px !important
 
 		a
 			position: fixed
@@ -360,11 +361,27 @@
 +at-breakpoint($contexto-max-tablet-vert)
 	+menu_responsivo
 
+	#TutorialMob
+		span
+			&.fl
+				margin-left: 60px
+
+			&.fr
+				margin-right: 60px
+
 +at-breakpoint($contexto-facebook)
 	
 
 +at-breakpoint($contexto-tv)
 	$coluna_responsive: 8
+
+	#TutorialMob
+		span
+			&.fl
+				margin-left: 60px
+
+			&.fr
+				margin-right: 60px
 
 	#TabletSmart 
 		.container
