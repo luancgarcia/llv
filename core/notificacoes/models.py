@@ -89,6 +89,8 @@ class Solicitacao(BaseNotificacao):
     email = models.CharField(u'E-mail', null=True, blank=False, max_length=250)
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', null=True,
                              blank=True, related_name='solicitacoes')
+    enviada = models.BooleanField(u'Enviada?', default=False)
+    respondida = models.BooleanField(u'Respondida?', default=False)
 
     class Meta:
         verbose_name = u'Solicitação de Loja'
@@ -113,6 +115,7 @@ class Solicitacao(BaseNotificacao):
             TemplatedEmail(para, assunto, 'email/resposta_solicitacao.html',
                            contexto, send_now=True)
             self.lida = True
+            self.respondida = True
             self.save()
         except:
             raise
