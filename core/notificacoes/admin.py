@@ -24,7 +24,8 @@ class NotificacaoAdmin(admin.ModelAdmin):
 
 class SolicitacaoAdmin(admin.ModelAdmin):
     exclude = ['publicada']
-    list_filter = ['loja__shopping']
+    list_filter = ['loja__shopping', 'enviada', 'respondida']
+    list_display = ['nome', 'email', 'loja', 'enviada', 'respondida']
 
     def queryset(self, request):
         qs = super(SolicitacaoAdmin, self).queryset(request)
