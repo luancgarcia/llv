@@ -4,7 +4,7 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 from datetime import date
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
 from django.conf import settings
@@ -21,6 +21,11 @@ from notificacoes.models import Solicitacao
 
 
 def index(request):
+    shp_id = request.COOKIES.get('shp_id', None)
+    if shp_id:
+        response = redirect('home', slug=Shopping.objects.get(id=shp_id).slug)
+        response.set_cookie(key='shp_id', value=shp_id)
+        return response
     return render(request, "home.html", {'shopping_slug': 'barra-shopping'})
 
 def slice_oferta(total_destaques=0, total_eventos=0):
