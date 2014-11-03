@@ -58,6 +58,7 @@ urlpatterns = patterns('',
         'geral.views.solicitar_loja', name='solicitar_loja'),
 
     url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
+    url(r'^$', 'geral.views.index', name='index'),
 )
 
 if settings.DEBUG:
