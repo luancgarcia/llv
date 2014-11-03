@@ -487,7 +487,9 @@ def solicitar_loja(request):
 
     solicitacao = Solicitacao.objects.create(nome=nome, email=email,
                                              loja=loja_solicitada)
-    solicitacao.dispara_solicitacao(contexto, mkt_mails, lojistas_mails)
+    envia = solicitacao.dispara_solicitacao(contexto, mkt_mails, lojistas_mails)
+    if envia:
+        contexto['sucesso'] = True
 
     return jsonResponse(contexto)
 
