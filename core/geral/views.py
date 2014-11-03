@@ -26,7 +26,7 @@ def index(request):
         response = redirect('home', slug=Shopping.objects.get(id=shp_id).slug)
         response.set_cookie(key='shp_id', value=shp_id)
         return response
-    return render(request, "home.html", {'shopping_slug': 'barra-shopping'})
+    return render(request, "index.html", {'shopping_slug': 'barra-shopping'})
 
 def slice_oferta(total_destaques=0, total_eventos=0):
     total_destaques = total_destaques * 4

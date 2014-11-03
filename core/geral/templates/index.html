@@ -1,0 +1,262 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>Liquidação do Lápis Vermelho - Multiplan</title>
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/comum.css?v={{ VERSAO_ESTATICOS }}">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/responsive.css?v={{ VERSAO_ESTATICOS }}">
+
+
+	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.mobile.custom.min.js' %}"></script>
+
+	<script>
+		static_url = "img/";
+	</script>
+
+	<script type="text/javascript" src="{{ STATIC_URL }}js/comum.js?v={{ VERSAO_ESTATICOS }}"></script>
+	<script type="text/javascript">
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+//		  js.src ="//connect.facebook.net/pt_BR/sdk.js#xfbml=1&appId={{ FACEBOOK_APP_ID }}&version=v2.0";
+		  js.src ="//connect.facebook.net/pt_BR/sdk.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		// alert($(window).width());
+	</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-53876575-1', 'auto');
+      ga('send', 'pageview');
+
+
+    </script>
+    <!--[if lte IE 9]>
+       <script type="text/javascript" src="static/js/cria-elemento.js"></script>
+       <link rel="stylesheet" type="text/css" href="static/css/ie.css" >
+    <![endif]-->
+
+    <!--[if IE 8]>
+       <link rel="stylesheet" type="text/css" href="static/css/ie8.css">
+    <![endif]-->
+</head>
+<body>
+	<!--
+		a cada dois .grid, no segundo adicionar classe lastmob
+
+		a cada 4 itens, para tv, adicionar a class lasttv
+	-->
+	
+
+	<!-- 
+		#EscolherShoppingMob deve aparecer sempre na tela inicial
+	 -->
+	<div id="EscolherShoppingMob" class="fix">
+		<figure><img src="{% static 'img/text-head-mob.png' %}"></figure>
+		
+		<div class="campo">
+			<h2 class="tit-campo">Aproveite as ofertas<br>da semana!</h2>
+			<div class="head-escolhershopping fix">
+				escolha O SHOPPING
+			</div>
+
+			<ul class="escolher-shopping fix">
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/barra-shopping/">BarraShopping</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/parkshopping/">ParkShoppingCampoGrande</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/jundiai-shopping/">Jundiaí Shopping</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/morumbi-shopping/">MorumbiShopping</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/parkshopping-sao-caetano/">ParkShoppingSãoCaetano</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/ribeirao-preto-shopping/">RibeirãoShopping</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/shopping-analia-franco/">ShoppingAnáliaFranco</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/shopping-santa-ursula/">ShoppingSantaÚrsula</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/shopping-vila-olimpia/">ShoppingVilaOlímpia</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/bh-shopping/">BH Shopping</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/diamondmall-shopping/">DiamondMall</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/patio-savassi/">Pátio Savassi</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/barrashopping-sul/">BarraShoppingSul</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/parkshopping-barigui/">ParkShoppingBarigüi</a></li>
+				<li><a href="https://llv.liquidacaolapisvermelho.com.br/parkshopping-campo-grande/">ParkShopping</a></li>
+			</a>
+		</div>
+
+		<footer class="foot">
+			<a href="http://www.kinda.com.br" target="_blank" class="fl"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
+        	<a href="http://www.kinda.com.br" target="_blank" class="fr"><img src="{% static 'img/multiplan-footer.png' %}" alt="Kinda"></a>
+		</footer>
+	</div>
+	
+	
+
+	<div class="container">
+		<div id="menu-shoppings">
+			<header>
+				Selecione o shopping
+			</header>
+			<div class="content-mn fix">
+				<ul>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/barra-shopping/">Barra Shopping / New York City Center</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/barrashopping-sul/">BarraShopping Sul</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/bh-shopping/">BH Shopping</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/diamondmall-shopping/">Diamond Mall</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/jundiai-shopping/">Jundiaí Shopping</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/morumbi-shopping/">Morumbi Shopping</a></li>
+					<li><a
+                            href="https://llv.liquidacaolapisvermelho.com.br/parkshopping/">ParkShopping</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/parkshopping-barigui/">ParkShopping Barigui</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/parkshopping-campo-grande/">ParkShopping Campo Grande</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/parkshopping-sao-caetano/">ParkShopping São Caetano</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/patio-savassi/">Pátio Savassi</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/ribeirao-preto-shopping/">Ribeirão Preto Shopping</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/shopping-analia-franco/">Shopping Anália Franco</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/shopping-santa-ursula/">Shopping Santa Úrsula</a></li>
+					<li><a href="https://llv.liquidacaolapisvermelho.com.br/shopping-vila-olimpia/">Shopping Vila Olímpia</a></li>
+				</ul>
+			</div>
+		</div>
+		<header id="Header" class="clearfix">
+			<figure class="grid4 last notmob">
+				<a href="{% url 'home' shopping_slug %}" class="">
+                    <img src="{% static 'img/header-banner.png' %}"></a>
+			</figure>
+			<div class="head-mob mob">
+				<a href="javascript:;" class="ico-brs fr" id="ico-brs"></a>
+				<a href="{% url 'home' shopping_slug %}" class="">
+					<img src="{% static 'img/text-head-mob.png' %}">
+				</a>
+			</div>
+			<aside class="chamada mob">
+				<a href="{% url 'home' shopping_slug %}">Aproveite as ofertas da semana</a>
+			</aside>
+			<span id="ico-menu"></span>
+			
+			<!-- 
+				Tutorial qeu aparece apenas 1 vez.
+			 -->
+			<div id="TutorialMob" class="fix">
+				<span class="tut-loja fl"><img src="{% static 'img/tutorial-loja.png' %}" alt=""></span>
+				<span class="tut-shop fr"><img src="{% static 'img/tutorial-shopping.png' %}" alt=""></span>
+				<a href="javascript:;"><img src="{% static 'img/fechar-tutorial.png' %}" alt=""></a>
+			</div>
+
+			<section id="Menu" class="cl">
+
+				<nav class="navegacao">
+					<header class="fix">
+						<p class="user fl">
+							<img src="{% static 'img/user.jpg' %}">
+							<span>Nome Usuário</span>
+						</p>
+						<a href="" class="sair fr">sair</a>
+					</header>
+
+					<ul>
+						<li class="item-menu">
+
+							<a class="lnk" href="javascript:;">Categorias</a>
+							<div class="submenu fix">
+								<ul>
+									{% for categoria in categorias %}
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									{% empty %}
+									<li>Sem categoria com ofertas cadastradas</li>
+									{% endfor %}
+
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu">
+							<a class="lnk" href="javascript:;">Gênero</a>
+							<div class="submenu auto fix">
+								<ul>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='masculino' %}">Masculino</a></li>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='feminino' %}">Feminino</a></li>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='infantil' %}">Infantil</a></li>
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='unissex' %}">Unissex</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu">
+							<a class="lnk" href="javascript:;">Lojas</a>
+							<div class="submenu fix">
+								<ul>
+									{% for loja in lojas %}
+									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' slug=shopping_slug loja=loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+									{% empty %}
+									<li>Sem loja com ofertas cadastradas</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu">
+							<a class="lnk" href="javascript:;">Faixa de Preço</a>
+							<div class="submenu auto fix">
+								<ul>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=30 %}">abaixo de R$ 30</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=50 %}">de R$ 31 a R$ 50</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=100 %}">de R$ 51 a R$ 100</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=300 %}">de R$101 a R$300</a></li>
+									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=301 %}">acima de R$301</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="item-menu last">
+							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
+							<div class="submenu auto fix">
+								<ul>
+									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=30 %}">até 30%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=50 %}">de 31% a 50%</a></li>
+									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=70 %}">de 51% a 70%</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="fl splash-menu">
+							<a href="javascript:;" class="rpl">sacola-splasy.png</a>
+						</li>
+
+						{% if sazonal %}
+						<li class="item-menu dia-namorados">
+							<a href="{% url 'home_categoria' slug=shopping_slug categoria=sazonal.slug %}" class="ui-link">{{ sazonal.nome}}</a>
+						</li>
+						{% endif %}
+					</ul>
+
+				</nav>
+
+			</section>
+		</header><!-- #Header -->
+
+		{% include 'home-part.html' %}
+
+	</div>
+
+	{% include 'modais/splash.html' %}
+
+	<footer id="Footer" class="fix cl">
+        <a href="http://www.kinda.com.br" target="_blank" class="fl"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
+        <a href="http://www.kinda.com.br" target="_blank" class="fr"><img src="{% static 'img/multiplan-footer.png' %}" alt="Kinda"></a>
+    </footer>
+</body>
+<script>
+$( document ).ready(function() {
+    $("#Splash").hide();
+});
+</script>
+</html>
