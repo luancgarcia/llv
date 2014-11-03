@@ -89,7 +89,7 @@ class Solicitacao(BaseNotificacao):
     email = models.CharField(u'E-mail', null=True, blank=False, max_length=250)
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', null=True,
                              blank=True, related_name='solicitacoes')
-    enviada = models.BooleanField(u'Enviada?', default=False)
+    enviada = models.BooleanField(u'Enviada?', default=True)
     respondida = models.BooleanField(u'Respondida?', default=False)
 
     class Meta:
@@ -125,10 +125,10 @@ class Solicitacao(BaseNotificacao):
             para = settings.NOTIFICACAO + mkt_mails + lojistas_mails
             TemplatedEmail(para, contexto['assunto'],
                            'email/solicitacao.html', contexto, send_now=True)
-            self.enviada = True
             return True
         except:
-            raise
+            self.enviada = False
+            return False
 
     def processa_nao_enviados(self):
         from geral.models import Perfil
