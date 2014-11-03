@@ -2,8 +2,8 @@
 <div class="content fix">
 	<div class="colunaProduto fl">
 		<figure id="fotoProduto" class="fix">
-		{% if destaque.desconto and destaque.desconto != 0 and destaque.preco_final %}
-			<span class="desconto">{{ destaque.desconto }}</span>
+		{% if destaque.porcentagem and destaque.porcentagem != 0 and destaque.preco_final %}
+			<span class="desconto">{{ destaque.porcentagem }}</span>
 		{% endif %}
 			<img src="{{ destaque.imagem }}" alt="{{ destaque.loja.nome }}" width="" height="" class="fl">
 		</figure>
@@ -21,12 +21,12 @@
             {% endif %}
 			<p class="preco_atual">
 				{% if destaque.preco_inicial %}
-                <span class="por">por: </span>
-                {% endif %}
+				<span class="por">por: </span>
+				{% endif %}
 				{% if destaque.preco_final %}
 				<span class="cifrao">R$ </span>
 				<span class="valor">{{ destaque.preco_final }}</span>
-                {% endif %}
+				{% endif %}
 			</p>
 
 			{% if destaque.loja %}

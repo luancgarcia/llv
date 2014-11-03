@@ -17,8 +17,8 @@
 		{% for imagem in oferta.imagens %}
 			{% if forloop.first %}
 			<figure id="fotoProduto" class="fix">
-			{% if oferta.desconto or oferta.desconto != 0 %}
-				<span class="desconto">{{ oferta.desconto }}</span>
+			{% if oferta.porcentagem or oferta.porcentagem != 0 %}
+				<span class="desconto">{{ oferta.porcentagem }}</span>
 			{% endif %}
 				<img src="{{ imagem.maior }}" alt="" width="" height="" class="fl">
 			</figure>
@@ -49,8 +49,10 @@
                 {% if oferta.preco_inicial %}
 				<span class="por">por: </span>
                 {% endif %}
+				{% if oferta.preco_final %}
 				<span class="cifrao">R$ </span>
 				<span class="valor">{{ oferta.preco_final}}</span>
+                {% endif %}
 			</p>
 
 			<section class="qualMarca fix">
