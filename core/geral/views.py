@@ -484,12 +484,14 @@ def solicitar_loja(request, **kwargs):
                 'assunto': u'LLV - Solicitação de loja %s' % loja_dict['nome'],
                 'sucesso': False}
 
+    solicitacao = Solicitacao.objects.create(nome=nome, email=email,
+                                             loja=loja_solicitada)
     try:
         para = settings.NOTIFICACAO + mkt_mails + lojistas_mails
         TemplatedEmail(para, contexto['assunto'],
                        'email/solicitacao.html', contexto, send_now=True)
         contexto['sucesso'] = True
-        Solicitacao.objects.create(nome=nome,email=email,loja=loja_solicitada)
+        solicitacao.enviada = True
     except:
         raise
 
