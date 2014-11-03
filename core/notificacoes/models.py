@@ -119,3 +119,31 @@ class Solicitacao(BaseNotificacao):
             self.save()
         except:
             raise
+
+    def dispara_solicitacao(self, contexto, mkt_mails, lojistas_mails):
+        try:
+            para = settings.NOTIFICACAO + mkt_mails + lojistas_mails
+            TemplatedEmail(para, contexto['assunto'],
+                           'email/solicitacao.html', contexto, send_now=True)
+            self.enviada = True
+            return True
+        except:
+            raise
+
+    def processa_nao_enviados(self):
+        from geral.models import Perfil
+        loja = self.loja
+        loja_dict = loja.to_dict()
+        mkt_lojistas = Perfil.objects.filter(shopping=loja.shopping)
+        mkts = mkt_lojistas.filter(tipo=Perfil.MARKETING)
+        mkt_mails = [m.user.email for m in mkts]
+        lojistas = mkt_lojistas.filter(tipo=Perfil.LOJISTA)
+        lojistas_mails = [l.user.email for l in lojistas]
+
+        contexto = {'nome': self.nome,
+                    'email': self.email,
+                    'loja': loja_dict,
+                    'assunto': u'LLV - Solicitação de loja %s' % loja_dict['nome'],
+                    'sucesso': False}
+
+        self.dispara_solicitacao(contexto, mkt_mails, lojistas_mails)
