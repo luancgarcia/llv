@@ -459,9 +459,10 @@ def mesclar(request):
     return jsonResponse(contexto)
 
 @csrf_exempt
-@indica_shopping
-def solicitar_loja(request, **kwargs):
-    shopping = kwargs['shp_id']
+def solicitar_loja(request):
+    shopping = request.COOKIES.get('shp_id', None)
+    if not shopping:
+        raise Http404
     nome = request.POST.get('nome', None)
     email = request.POST.get('email', None)
     loja = request.POST.get('loja', None)
@@ -486,14 +487,7 @@ def solicitar_loja(request, **kwargs):
 
     solicitacao = Solicitacao.objects.create(nome=nome, email=email,
                                              loja=loja_solicitada)
-    try:
-        para = settings.NOTIFICACAO + mkt_mails + lojistas_mails
-        TemplatedEmail(para, contexto['assunto'],
-                       'email/solicitacao.html', contexto, send_now=True)
-        contexto['sucesso'] = True
-        solicitacao.enviada = True
-    except:
-        raise
+    solicitacao.dispara_solicitacao(contexto, mkt_mails, lojistas_mails)
 
     return jsonResponse(contexto)
 
