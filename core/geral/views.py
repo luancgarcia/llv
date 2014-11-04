@@ -28,6 +28,9 @@ def index(request):
         return response
     return render(request, "index.html", {'shopping_slug': 'barra-shopping'})
 
+def modal_fb_login(request):
+    return render(request, "modais/modal_fb_login.html", {})
+
 def slice_oferta(total_destaques=0, total_eventos=0):
     total_destaques = total_destaques * 4
     total_eventos = total_eventos * 2
