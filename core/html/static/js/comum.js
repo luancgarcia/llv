@@ -377,7 +377,11 @@ $(function(){
 	                // console.log("before send");
 	            },
 	            success: function(data) {
-	                link.text(data.total+" pessoas curtiram essa oferta");
+                    if (data.total == '1'){
+                        link.text(data.total + " pessoa curtiu essa oferta");
+                    }else {
+                        link.text(data.total + " pessoas curtiram essa oferta");
+                    }
 	                link.parents("p.curtidas").addClass('ativo');
 	                acrescenta_curtidas('minhas_curtidas', id_item);
 	            },
