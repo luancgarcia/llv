@@ -75,8 +75,11 @@
 			</section>
 
 			<p class="curtidas"><span data-id="{{ oferta.id }}">
-				{{ oferta.curtidas }}{% if oferta.curtidas == 1 %} pessoa
-				curtiu{% else %} pessoas curtiram{% endif %} essa oferta
+				{% if oferta.curtidas == 1 %}
+                    {{ oferta.curtidas }} pessoa curtiu essa oferta
+                {% else %}
+                    {{ oferta.curtidas }} pessoas curtiram essa oferta
+                {% endif %}
 			</span></p>
 
 			<p class="share"><a class="share-modal" href="javascript:;" data-href="{% url 'modal_share' oferta.id %}" data-param=786>Compartilhe com seus amigos</a></p>
