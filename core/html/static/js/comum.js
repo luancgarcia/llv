@@ -377,6 +377,8 @@ $(function(){
 	                // console.log("before send");
 	            },
 	            success: function(data) {
+                    var seletor = "*[data-id="+id_item+"]";
+                    $(seletor).text(data.total);
                     if (data.total == '1'){
                         link.text(data.total + " pessoa curtiu essa oferta");
                     }else {
