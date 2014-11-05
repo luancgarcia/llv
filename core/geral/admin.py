@@ -135,7 +135,7 @@ class OfertaModelForm(ItemModelForm):
 
     def clean_genero(self):
         genero = self.cleaned_data['genero']
-        if not genero:
+        if genero == None:
             raise ValidationError({'genero': [u'Informe o gênero']})
         return genero
 
