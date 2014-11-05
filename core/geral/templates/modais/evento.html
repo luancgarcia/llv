@@ -16,7 +16,7 @@
 			<p class="descricao">{{ evento.descricao }}</p>
 
 			<p class="curtidas"><span data-id="{{ evento.id }}">
-                {% if evento.curtidas == 1 %}
+                {% if evento.curtidas == '1' %}
                     {{ evento.curtidas }} pessoa curtiu essa oferta
                 {% else %}
                     {{ evento.curtidas }} pessoas curtiram essa oferta
