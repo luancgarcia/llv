@@ -205,7 +205,7 @@ class Oferta(EditorialModel):
     status = models.IntegerField(u'Status', choices=STATUSES, default=PENDENTE)
     data_aprovacao = models.DateTimeField(u"Data de aprovação", null=True)
     genero = models.IntegerField(u'Gênero', choices=GENEROS, default=UNISSEX,
-                                 null=True, blank=False)
+                                 null=True, blank=True)
     autor = models.ForeignKey(Perfil, verbose_name=u'Autor', null=True, blank=False)
     inicio = models.DateField(u'Data de publicação', null=True, blank=False,
                               help_text=u'Informe a data para ficar online')
