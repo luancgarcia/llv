@@ -379,6 +379,7 @@ $(function(){
 	            success: function(data) {
                     var seletor = "*[data-id="+id_item+"]";
                     $(seletor).text(data.total);
+                    $(seletor).addClass("ativo");
                     if (data.total == '1'){
                         link.text(data.total + " pessoa curtiu essa oferta");
                     }else {
