@@ -454,13 +454,11 @@ def mesclar(request):
         destino_url = '%s' % imagem.img_376x376.url
 
     item_dict = item.to_dict(modal=True)
-    hash_url = '%s?%s' % (item_dict['tipo'].lower(), item_dict['id'])
     nome_shopping = item.loja.shopping.nome if item.loja else item.shopping.nome
     nome_loja = item.loja.nome if item.loja else ""
     nome_loja = nome_loja.replace(" ","")
     nome_shopping = nome_shopping.replace(" ","")
-    shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
-    url_item = '%s/%s/#%s' % (settings.SITE_URL, shopping, hash_url)
+
     quebra_linha = '\r\n\r\n\r\n\r\n'
     if nome_loja:
         hashtags = '#LapisVermelho #%s #%s' % (nome_shopping, nome_loja)
@@ -472,7 +470,7 @@ def mesclar(request):
                                     quebra_linha,
                                     hashtags,
                                     quebra_linha,
-                                    url_item)
+                                    item.url)
 
     contexto = {'titulo': item_dict['titulo'],
                 'descricao': item_dict['chamada_promocional'],
