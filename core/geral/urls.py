@@ -19,6 +19,9 @@ urlpatterns = patterns('',
         'geral.views.modal',
         name='modal'),
 
+    url(r'^modal/(?P<tipo>[\w-]+)/(?P<slug_item>[\w-]+)/$',
+        'geral.views.modal_slug', name='modal_slug'),
+
     url(r'^compartilhar/(?P<id_item>\d+)/$',
         'geral.views.modal_share',
         name='modal_share'),

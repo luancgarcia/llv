@@ -553,7 +553,7 @@ $( document ).ready(function() {
         }else{
             var largura = '786';
         }
-        var url_item = '/modais/'+url_slug.replace('?', '/')+'/';
+        var url_item = '/modal/'+url_slug.replace('?', '/')+'/';
         disparaModalRequest(url_item,largura,"");
     }
 	$(window).scroll(function() {

@@ -319,6 +319,24 @@ def modal(request, tipo, id_item):
 
     return render(request, nome_template, contexto)
 
+def modal_slug(request, tipo, slug_item):
+    contexto = {}
+    print tipo, slug_item
+    if not tipo in ['oferta','destaque','evento']:
+        raise Http404
+
+    nome_template = "modais/%s.html" % tipo
+
+    item = Oferta.objects.get_or_none(slug=slug_item)
+    if item:
+        Log.regitra_acao(item, Log.CLIQUE)
+        contexto[tipo] = item.to_dict(modal=True)
+
+    if not contexto:
+        raise Http404
+
+    return render(request, nome_template, contexto)
+
 @csrf_exempt
 def curtir(request):
     id_item = request.POST.get('id_item')
@@ -327,10 +345,6 @@ def curtir(request):
 
     item = Oferta.objects.get(id=id_item)
     Log.objects.create(acao=Log.CURTIDA,oferta=item)
-    tipo = Oferta.TIPOS[item.tipo][1]
-    hash_url = '%s?%s' % (tipo.lower(), item.id)
-    shopping = item.loja.shopping.slug if item.loja else item.shopping.slug
-    url_item = '%s/%s/#%s' % (settings.SITE_URL, shopping, hash_url)
 
     arquivo = '%s_curtir.png' % id_item
     destino = os.path.join(settings.COMPARTILHADAS_PASTA, arquivo)
@@ -361,7 +375,7 @@ def curtir(request):
             raise e
 
     mensagem = u'Acabei de curtir uma oferta da Liquidação do Lápis Vermelho'
-    mensagem += '\r\n\r\n\r\n\r\n %s' % url_item
+    mensagem += '\r\n\r\n\r\n\r\n %s' % item.url
     mensagem += '\r\n\r\n\r\n\r\n #LapisVermelho'
 
     return jsonResponse({'total': item.total_curtido,
