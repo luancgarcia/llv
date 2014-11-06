@@ -438,9 +438,9 @@ def mesclar(request):
         raise Http404
 
     if imagem and mascara:
-        background_arquivo = '%s' % imagem.img_376x376.path
+        background_arquivo = '%s' % imagem.img_250x250.path
         background = Image.open(background_arquivo)
-        foreground_arquivo = '%s' % mascara.img_376x376.path
+        foreground_arquivo = '%s' % mascara.img_250x250.path
         foreground = Image.open(foreground_arquivo)
         background.paste(foreground, (0, 0), foreground)
 

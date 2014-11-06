@@ -392,6 +392,10 @@ class ImagemOferta(OrderedModel):
                                  resize.ResizeToFill(376, 376)],
                                  source='imagem', format='PNG',
                                  options={'quality': 90})
+    img_250x250 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
+                                  resize.ResizeToFill(250, 250)],
+                                 source='imagem', format='PNG',
+                                 options={'quality': 90})
     img_172x172 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(172, 172)],
                                  source='imagem', format='PNG',
@@ -463,6 +467,10 @@ class Mascara(EditorialModel):
 
     imagem = models.ImageField(u'Imagem', upload_to=new_filename,
                                null=True, blank=True)
+    img_250x250 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
+                                  resize.ResizeToFill(250, 250)],
+                                 source='imagem', format='PNG',
+                                 options={'quality': 90})
     img_376x376 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(376, 376)],
                                  source='imagem', format='PNG',
