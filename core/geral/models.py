@@ -317,7 +317,7 @@ class Oferta(EditorialModel):
                              'preco_inicial': self.preco_inicial,})
 
         if modal:
-            imagens = [{'maior':img.img_376x376.url,
+            imagens = [{'maior':img.img_600x600.url,
                         'menor':img.img_94x94.url} for img in self.imagens.all()]
             contexto.update({'descricao': self.descricao,
                              'imagens': imagens})
@@ -384,6 +384,10 @@ class ImagemOferta(OrderedModel):
                                related_name='imagens')
     imagem = models.ImageField(u'Imagem', upload_to=new_filename,
                                null=True, blank=True)
+    img_600x600 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
+                                  resize.ResizeToFill(600, 600)],
+                                 source='imagem', format='PNG',
+                                 options={'quality': 90})
     img_376x376 = ImageSpecField([Adjust(contrast=1.1, sharpness=1.1),
                                  resize.ResizeToFill(376, 376)],
                                  source='imagem', format='PNG',
