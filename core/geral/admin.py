@@ -186,8 +186,10 @@ class OfertaAdmin(admin.ModelAdmin):
             self.list_display = self.list_display + ('status_string',)
             self.list_editable = None
         else:
-            self.list_display = self.list_display + ('status','autor')
+            self.list_display = self.list_display + ('status', 'autor',)
             self.list_editable = ('status',)
+
+        self.list_display = self.list_display + ('url',)
         return super(OfertaAdmin, self).changelist_view(request, extra_context)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
