@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import date as _date
 from django.db.models import Q
 from django.db.models.signals import post_save
+from django.conf import settings
 
 from utils.models import BaseModel, EditorialModel, OrderedModel
 from lojas.models import Loja, Shopping
@@ -347,6 +348,12 @@ class Oferta(EditorialModel):
     @property
     def total_curtido(self):
         return u'%s' % self.logs.filter(acao=Log.CURTIDA).count()
+
+    @property
+    def url(self):
+        shopping = self.loja.shopping.slug if self.loja else self.shopping.slug
+        tipo = Oferta.TIPOS[self.tipo][1].lower()
+        return '%s/%s/#%s?%s' % (settings.SITE_URL, shopping, tipo, self.slug)
 
 
 class Destaque(Oferta):
