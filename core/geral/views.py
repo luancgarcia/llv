@@ -350,38 +350,37 @@ def curtir(request):
     destino = os.path.join(settings.COMPARTILHADAS_PASTA, arquivo)
     destino_url = '%s%s' % (settings.COMPARTILHADAS_URL, arquivo)
 
-    # if not os.path.isfile(destino):
-    #     img_oferta = ImagemOferta.objects.filter(oferta=item)[0]
-    #     imagem = Image.open('%s' % img_oferta.img_120x120.path)
-    #     base = Image.new('RGBA', (450, 120), (247, 247, 247))
-    #     base.paste(imagem, (0,0), imagem)
-    #     fonte = ImageFont.truetype(settings.FONTE_SHARE, 15)
-    #     fonte_chamada = ImageFont.truetype(settings.FONTE_SHARE, 12)
-    #     draw = ImageDraw.Draw(base)
-    #     draw = draw.text((130,10), item.nome[:40], font=fonte,
-    #                      fill=(45, 78, 157))
-    #     draw = ImageDraw.Draw(base)
-    #     if item.texto_promocional:
-    #         descricao = item.texto_promocional[:40]
-    #     else:
-    #         descricao = item.descricao[:40]
-    #     draw = draw.text((130,35), descricao, font=fonte_chamada,
-    #                      fill=(128, 128, 128))
-    #     draw = ImageDraw.Draw(base)
-    #
-    #     try:
-    #         base.save(destino)
-    #     except Exception, e:
-    #         raise e
-    #
-    # mensagem = u'Acabei de curtir uma oferta da Liquidação do Lápis Vermelho'
-    # mensagem += '\r\n\r\n\r\n\r\n %s' % item.url
-    # mensagem += '\r\n\r\n\r\n\r\n #LapisVermelho'
+    if not os.path.isfile(destino):
+        img_oferta = ImagemOferta.objects.filter(oferta=item)[0]
+        imagem = Image.open('%s' % img_oferta.img_120x120.path)
+        base = Image.new('RGBA', (450, 120), (247, 247, 247))
+        base.paste(imagem, (0,0), imagem)
+        fonte = ImageFont.truetype(settings.FONTE_SHARE, 15)
+        fonte_chamada = ImageFont.truetype(settings.FONTE_SHARE, 12)
+        draw = ImageDraw.Draw(base)
+        draw = draw.text((130,10), item.nome[:40], font=fonte,
+                         fill=(45, 78, 157))
+        draw = ImageDraw.Draw(base)
+        if item.texto_promocional:
+            descricao = item.texto_promocional[:40]
+        else:
+            descricao = item.descricao[:40]
+        draw = draw.text((130,35), descricao, font=fonte_chamada,
+                         fill=(128, 128, 128))
+        draw = ImageDraw.Draw(base)
+
+        try:
+            base.save(destino)
+        except Exception, e:
+            raise e
+
+    mensagem = u'Acabei de curtir uma oferta da Liquidação do Lápis Vermelho'
+    mensagem += '\r\n\r\n\r\n\r\n %s' % item.url
+    mensagem += '\r\n\r\n\r\n\r\n #LapisVermelho'
 
     return jsonResponse({'total': item.total_curtido,
-                         'imagem': destino_url})
-        # ,
-        #                  'mensagem': mensagem})
+                         'imagem': destino_url,
+                         'mensagem': mensagem})
 
 @csrf_exempt
 def descurtir(request):
