@@ -20,6 +20,43 @@ function fecharTutorial() {
 	$("#TutorialMob").remove();
 }
 
+function logadoFacebook(){
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        // the user is logged in and has authenticated your
+        // app, and response.authResponse supplies
+        // the user's ID, a valid access token, a signed
+        // request, and the time the access token
+        // and signed request each expire
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;
+        disparaModalRequest("modal_fb_login","300","share_produto");
+        console.log('siiiimmmmmmm');
+//      } else if (response.status === 'not_authorized') {
+        // the user is logged in to Facebook,
+//          console.log('naaaaaooooooo');
+        // but has not authenticated your app
+      } else {
+          FB.login(function(response) {
+            if (response.authResponse) {
+            // console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me', function(response) {
+//             console.log('Good to see you, ' + response.name + '.');
+                    $('p.user span').text(response.name);
+                    $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
+                });
+            } else {
+            // console.log('User cancelled login or did not fully authorize.');
+            }
+            }, {
+            scope: 'publish_actions',
+            return_scopes: true
+          });
+          console.log('nao');
+        // the user isn't logged in to Facebook.
+      }
+    });
+}
 
 largura_window = $(window).width();
 
@@ -309,7 +346,8 @@ $(function(){
 	            dataType: "json",
 	            data: {id_item: id_item},
 	            beforeSend: function(){
-	                // console.log("before send");
+	                console.log("before send");
+                    logadoFacebook();
 	            },
 	            success: function(data) {
 	                link.text(data.total);
@@ -515,7 +553,8 @@ $(function(){
 	            dataType: "json",
 	            data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
 	            beforeSend: function(){
-	                // console.log("before send");
+	                console.log("before send");
+                    logadoFacebook();
 	            },
 	            success: function(data) {
                     FB.api(
