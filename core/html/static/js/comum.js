@@ -30,28 +30,13 @@ function logadoFacebook(){
         // and signed request each expire
         var uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
-        disparaModalRequest("modal_fb_login","300","share_produto");
         console.log('siiiimmmmmmm');
 //      } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook,
 //          console.log('naaaaaooooooo');
         // but has not authenticated your app
       } else {
-          FB.login(function(response) {
-            if (response.authResponse) {
-            // console.log('Welcome!  Fetching your information.... ');
-                FB.api('/me', function(response) {
-//             console.log('Good to see you, ' + response.name + '.');
-                    $('p.user span').text(response.name);
-                    $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-                });
-            } else {
-            // console.log('User cancelled login or did not fully authorize.');
-            }
-            }, {
-            scope: 'publish_actions',
-            return_scopes: true
-          });
+          disparaModalRequest("/modal_fb_login","300","share_produto");
           console.log('nao');
         // the user isn't logged in to Facebook.
       }
@@ -538,6 +523,12 @@ $(function(){
 		}
 
 	}, '#ShareProduto .bt-reset');
+
+    $(document.body).on({
+        click: function(){
+            acionaloginFacebook();
+        }
+    }, '.conectar_fb');
 
 	// Compartilhar
 	$(document.body).on({
