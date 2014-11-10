@@ -20,6 +20,24 @@ function fecharTutorial() {
 	$("#TutorialMob").remove();
 }
 
+function acionaloginFacebook(){
+    FB.login(function(response) {
+        if (response.authResponse) {
+        // console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+    //             console.log('Good to see you, ' + response.name + '.');
+                $('p.user span').text(response.name);
+                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
+            });
+        } else {
+            return false;
+        // console.log('User cancelled login or did not fully authorize.');
+        }
+        }, {
+        scope: 'publish_actions',
+        return_scopes: true
+      });
+}
 function logadoFacebook(){
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
