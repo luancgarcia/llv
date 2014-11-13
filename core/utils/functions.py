@@ -152,3 +152,15 @@ def envia_email_smtp(contexto, s):
 
 def slug_upload(value):
    value.name = '/'.join(['.'.join([slugify(j) for j in i.split('.')]) for i in value.name.split('/')])
+
+def separa_tres_colunas(lista):
+    num = len(lista) / 3
+    um = lista[:num]
+    dois = lista[num:num * 2]
+    tres = lista[num * 2:]
+    colunas = zip(um, dois, tres)
+    retorno = []
+    for coluna in colunas:
+        for c in coluna:
+            retorno.append(c)
+    return retorno

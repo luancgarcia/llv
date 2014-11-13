@@ -14,6 +14,7 @@ from django.db.models.signals import post_save
 from django.conf import settings
 
 from utils.models import BaseModel, EditorialModel, OrderedModel
+from utils.functions import separa_tres_colunas
 from lojas.models import Loja, Shopping
 from geral.signals import cria_envia_notificacao, completa_slug
 from notificacoes.models import Solicitacao
@@ -126,16 +127,7 @@ class Categoria(EditorialModel):
                                         publicada=True,
                                         sazonal=False).order_by('nome')
         filtrado = [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
-        num = len(filtrado)/3
-        um = filtrado[:num]
-        dois = filtrado[num:num*2]
-        tres = filtrado[num*2:]
-        colunas = zip(um, dois, tres)
-        retorno = []
-        for coluna in colunas:
-            for c in coluna:
-                retorno.append(c)
-        return retorno
+        return separa_tres_colunas(filtrado)
 
 
 class Sazonal(Categoria):

@@ -6,7 +6,8 @@ from pilkit.processors import Adjust, resize
 from django.db import models
 from django.utils.text import slugify
 
-from utils.models import EditorialModel, BaseManager
+from utils.models import EditorialModel
+from utils.functions import separa_tres_colunas
 
 
 class Shopping(EditorialModel):
@@ -65,7 +66,8 @@ class Loja(EditorialModel):
     def publicadas_com_oferta(cls, shopping):
         lojas = cls.objects.filter(publicada=True,
                                    shopping_id=shopping).order_by('nome')
-        return [l.to_dict() for l in lojas if l.ofertas.filter(status=1)]
+        filtrado = [l.to_dict() for l in lojas if l.ofertas.filter(status=1)]
+        return separa_tres_colunas(filtrado)
 
     @classmethod
     def publicadas_sem_oferta(cls, shopping):
