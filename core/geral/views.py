@@ -375,7 +375,7 @@ def curtir(request):
         except Exception, e:
             raise e
 
-    mensagem = u'Acabei de curtir uma oferta da Liquidação do Lápis Vermelho'
+    mensagem = u'Acabei de curtir uma oferta do Lápis Vermelho'
     mensagem += '\r\n\r\n\r\n\r\n %s' % item.url
     mensagem += '\r\n\r\n\r\n\r\n #LapisVermelho'
 
