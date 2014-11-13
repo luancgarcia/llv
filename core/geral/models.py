@@ -123,11 +123,17 @@ class Categoria(EditorialModel):
 
     @classmethod
     def publicadas_com_oferta(cls, shopping=1):
-        categorias = cls.objects.filter(shopping_id=shopping,
-                                        publicada=True,
-                                        sazonal=False).order_by('nome')
-        filtrado = [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
-        return separa_tres_colunas(filtrado)
+        ofertas = Oferta.objects.filter(status=Oferta.PUBLICADO,shopping_id=shopping).order_by('nome')
+        categorias = []
+        for oferta in ofertas:
+            for categoria in oferta.categoria.all():
+                if not categoria.sazonal and categoria.publicada:
+                    categorias.append(categoria.to_dict())
+        # categorias = cls.objects.filter(shopping_id=shopping,
+        #                                 publicada=True,
+        #                                 sazonal=False).order_by('nome')
+        # filtrado = [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
+        return separa_tres_colunas(categorias)
 
 
 class Sazonal(Categoria):
