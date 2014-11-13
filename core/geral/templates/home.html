@@ -113,7 +113,7 @@
 		<figure><img src="{% static 'img/text-head-mob.png' %}"></figure>
 		
 		<div class="campo">
-			<h2 class="tit-campo">Aproveite as ofertas<br>da semana!</h2>
+			<h2 class="tit-campo">{{ shopping_nome }} - Aproveite as ofertas<br>da semana!</h2>
 			<div class="head-escolhershopping fix">
 				escolha O SHOPPING
 			</div>
@@ -150,7 +150,7 @@
 				</a>
 			</div>
 			<aside class="chamada mob">
-				<a href="{% url 'home' shopping_slug %}">Aproveite as ofertas da semana</a>
+				<a href="{% url 'home' shopping_slug %}">{{ shopping_nome }} - Aproveite as ofertas da semana</a>
 			</aside>
 			<span id="ico-menu"></span>
 			

@@ -44,6 +44,7 @@ def ultimo_id(lista):
     return ultimo_id if ultimo_id > 0 else ''
 
 def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
+    # um, dois, tres = Categoria.publicadas_com_oferta(shopping.id)
     return {'destaques': destaques,
             'ultimo_destaque_id': [int(d['id']) for d in destaques],
             'eventos': eventos,
@@ -51,11 +52,15 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             'ofertas': ofertas,
             'ultima_oferta_id': [int(o['id']) for o in ofertas],
             'categorias': Categoria.publicadas_com_oferta(shopping.id),
+            # 'um': um,
+            # 'dois': dois,
+            # 'tres': tres,
             'mais_paginas': mais_paginas,
             'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
             'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
             'sazonal': Sazonal.atual(shopping=shopping.id),
-            'shopping_slug': shopping.slug}
+            'shopping_slug': shopping.slug,
+            'shopping_nome': shopping.nome}
 
 @indica_shopping
 def home(request, **kwargs):
