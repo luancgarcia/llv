@@ -125,7 +125,17 @@ class Categoria(EditorialModel):
         categorias = cls.objects.filter(shopping_id=shopping,
                                         publicada=True,
                                         sazonal=False).order_by('nome')
-        return [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
+        filtrado = [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
+        num = len(filtrado)/3
+        um = filtrado[:num]
+        dois = filtrado[num:num*2]
+        tres = filtrado[num*2:]
+        colunas = zip(um, dois, tres)
+        retorno = []
+        for coluna in colunas:
+            for c in coluna:
+                retorno.append(c)
+        return retorno
 
 
 class Sazonal(Categoria):
@@ -352,9 +362,13 @@ class Oferta(EditorialModel):
 
     @property
     def url(self):
-        shopping = self.loja.shopping.slug if self.loja else self.shopping.slug
+        # shopping = self.loja.shopping.slug if self.loja else self.shopping.slug
         tipo = Oferta.TIPOS[self.tipo][1].lower()
-        return '%s/%s/#%s?%s' % (settings.SITE_URL, shopping, tipo, self.slug)
+        if self.shopping.slug:
+            shopping = self.shopping.slug
+            return '%s/%s/#%s?%s' % (settings.SITE_URL, shopping, tipo, self.slug)
+        else:
+            return 'Sem url ainda'
 
 
 class Destaque(Oferta):
