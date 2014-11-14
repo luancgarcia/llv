@@ -15,7 +15,6 @@ function getCookie(c_name) {
 }
 
 function setCookie(c_name,value) {
-    console.log(site_url);
     if (typeof(value) != "undefined") {
         document.cookie=c_name + "=" + value + ";domain="+site_url+";path=/";
     } else {
@@ -86,8 +85,6 @@ function logadoFacebook(){
 function verificacookies(){
     var pickmall = getCookie('pickmall');
     var gettutorial = getCookie('gettutorial');
-    console.log(pickmall);
-    console.log(gettutorial);
     if (pickmall && pickmall != 'undefined'){
         $("#EscolherShoppingMob").remove();
         if (gettutorial && gettutorial != 'undefined'){
