@@ -93,10 +93,10 @@ function verificacookies(){
         if (gettutorial && gettutorial != 'undefined'){
             fecharTutorial();
         }else{
-            document.cookie = "gettutorial=1;";
+            setCookie("gettutorial","1");
         }
     }else{
-        document.cookie = "pickmall=1;";
+        setCookie("pickmall","1");
     }
 
     $("#TutorialMob a").on({
