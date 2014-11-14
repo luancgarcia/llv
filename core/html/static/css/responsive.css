@@ -71,16 +71,10 @@
 
   #EscolherShoppingMob {
     display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99999;
     background: url(../img/bg-escolher-shopping.png) repeat;
     background-size: 50% auto;
-    overflow: auto;
-    padding-bottom: 27px;
+    padding-bottom: 40px;
+
   }
   #EscolherShoppingMob .head-escolhershopping {
     background: url(../img/ico-brs-escolher-shopping.png) no-repeat 0 0, url(../img/ico-brs-escolher-shopping.png) no-repeat right 0;
@@ -97,7 +91,7 @@
     background: #e23436;
     display: block;
     width: 286px;
-    margin: 0 auto 40px;
+    margin: 0 auto;
     overflow: hidden;
     text-align: center;
     -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
