@@ -61,9 +61,7 @@ function logadoFacebook(){
     });
 }
 
-largura_window = $(window).width();
-
-$(function(){
+function verificacookies(){
     var pickmall = getCookie('pickmall');
     var gettutorial = getCookie('gettutorial');
     console.log(pickmall);
@@ -79,29 +77,35 @@ $(function(){
         document.cookie = "pickmall=1;";
     }
 
-	var isiDevice = /ipad|iphone|ipod|android/i.test(navigator.userAgent.toLowerCase());
+    $("#TutorialMob a").on({
+        click: function(){
+            fecharTutorial();
+        }
+    });
+}
 
-	if(isiDevice || largura_window > 900) {
-		$("body").attr("id","TabletSmart");
+largura_window = $(window).width();
 
+$(function(){
+    verificacookies();
+
+    var isiDevice = /ipad|iphone|ipod|android/i.test(navigator.userAgent.toLowerCase());
+
+    if(isiDevice || largura_window > 900) {
+$       ("body").attr("id","TabletSmart");
+
+        verificacookies();
 
         // define cookie para ocultar splash
-		// $("#EscolherShoppingMob .escolher-shopping").change(function(){
-		// 	var url = $('option:selected', this).val();
+        // $("#EscolherShoppingMob .escolher-shopping").change(function(){
+        // 	var url = $('option:selected', this).val();
 
-		// 	if(url == "") {
-		// 		return false;
-		// 	}
-		// 	window.location.href = url;
-		// });
-
-		$("#TutorialMob a").on({
-			click: function(){
-				fecharTutorial();
-			}
-		});
-
-	}
+        // 	if(url == "") {
+        // 		return false;
+        // 	}
+        // 	window.location.href = url;
+        // });
+    }
 
 	$("#ico-menu").on({
 		click: function(){
