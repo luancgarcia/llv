@@ -452,6 +452,7 @@ $(function(){
 	            dataType: "json",
 	            data: {id_item: id_item},
 	            beforeSend: function(){
+                    logadoFacebook();
 	                // console.log("before send");
 	            },
 	            success: function(data) {
