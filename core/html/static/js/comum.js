@@ -75,7 +75,7 @@ function logadoFacebook(){
 //          console.log('naaaaaooooooo');
         // but has not authenticated your app
       } else {
-          disparaModalRequest("/modal_fb_login","300","share_produto");
+          disparaModalRequest("/modal_fb_login","300","");
           console.log('nao');
         // the user isn't logged in to Facebook.
       }
