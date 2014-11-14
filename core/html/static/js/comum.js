@@ -15,8 +15,9 @@ function getCookie(c_name) {
 }
 
 function setCookie(c_name,value) {
+    console.log(site_url);
     if (typeof(value) != "undefined") {
-        document.cookie=c_name + "=" + value + ";path=/";
+        document.cookie=c_name + "=" + value + "domain="+site_url+";path=/";
     } else {
         document.cookie=c_name + "='';expires=01-Jan-1970 00:00:01 GMT;path=/";
     }
