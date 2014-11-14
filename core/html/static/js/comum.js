@@ -72,14 +72,14 @@ function logadoFacebook(){
         // and signed request each expire
         var uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
-        console.log('siiiimmmmmmm');
+//        console.log('siiiimmmmmmm');
 //      } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook,
 //          console.log('naaaaaooooooo');
         // but has not authenticated your app
       } else {
           disparaModalRequest("/modal_fb_login","300","");
-          console.log('nao');
+//          console.log('nao');
         // the user isn't logged in to Facebook.
       }
     });
@@ -386,7 +386,7 @@ $(function(){
 	            dataType: "json",
 	            data: {id_item: id_item},
 	            beforeSend: function(){
-	                console.log("before send");
+//	                console.log("before send");
                     logadoFacebook();
 	            },
 	            success: function(data) {
