@@ -1,6 +1,27 @@
 var url_hash = window.location.hash;
 url_slug = url_hash.replace('#', '');
 
+function getCookie(c_name) {
+    var i,x,y,ARRcookies=document.cookie.split(";");
+    for (i=0;i<ARRcookies.length;i++) {
+        x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+        y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+        x=x.replace(/^\s+|\s+$/g,"");
+        if (x==c_name) {
+            return unescape(y);
+        }
+    }
+    return undefined;
+}
+
+function setCookie(c_name,value) {
+    if (typeof(value) != "undefined") {
+        document.cookie=c_name + "=" + value + ";path=/";
+    } else {
+        document.cookie=c_name + "='';expires=01-Jan-1970 00:00:01 GMT;path=/";
+    }
+}
+
 function validaEmail(email) {
     if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
         return false;
@@ -779,26 +800,6 @@ function fechaModal() {
 		$(this).remove().hide();
 		$("body, html").removeAttr("style");
 	});
-}
-
-function getCookie(c_name) {
-    var i,x,y,ARRcookies=document.cookie.split(";");
-    for (i=0;i<ARRcookies.length;i++) {
-        x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-        y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-        x=x.replace(/^\s+|\s+$/g,"");
-        if (x==c_name) {
-            return unescape(y);
-        }
-    }
-    return undefined;
-}
-function setCookie(c_name,value) {
-    if (typeof(value) != "undefined") {
-        document.cookie=c_name + "=" + value + ";path=/";
-    } else {
-        document.cookie=c_name + "='';expires=01-Jan-1970 00:00:01 GMT;path=/";
-    }
 }
 
 function acrescenta_curtidas(nome_cookie, id_item) {
