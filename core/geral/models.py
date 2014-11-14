@@ -362,11 +362,15 @@ class Oferta(EditorialModel):
     def url(self):
         # shopping = self.loja.shopping.slug if self.loja else self.shopping.slug
         tipo = Oferta.TIPOS[self.tipo][1].lower()
-        if self.shopping.slug:
+        if self.shopping:
             shopping = self.shopping.slug
-            return '%s/%s/#%s?%s' % (settings.SITE_URL, shopping, tipo, self.slug)
         else:
+            shopping = self.loja.shopping.slug
+
+        if not shopping:
             return 'Sem url ainda'
+        else:
+            return '%s/%s/#%s?%s' % (settings.SITE_URL, shopping, tipo, self.slug)
 
 
 class Destaque(Oferta):
