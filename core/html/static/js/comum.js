@@ -109,14 +109,22 @@ function verificacookies(){
 largura_window = $(window).width();
 
 $(function(){
-    verificacookies();
+    $("#TutorialMob a").on({
+        click: function(){
+            fecharTutorial();
+        }
+    });
+    var gettutorial = getCookie('gettutorial');
+    if (gettutorial && gettutorial != 'undefined'){
+        fecharTutorial();
+    }else{
+        setCookie("gettutorial","1");
+    }
 
     var isiDevice = /ipad|iphone|ipod|android/i.test(navigator.userAgent.toLowerCase());
 
     if(isiDevice || largura_window > 900) {
-$       ("body").attr("id","TabletSmart");
-
-        verificacookies();
+        $("body").attr("id","TabletSmart");
 
         // define cookie para ocultar splash
         // $("#EscolherShoppingMob .escolher-shopping").change(function(){

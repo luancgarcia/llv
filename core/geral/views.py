@@ -21,12 +21,7 @@ from notificacoes.models import Solicitacao
 
 
 def index(request):
-    shp_id = request.COOKIES.get('shp_id', None)
-    if shp_id:
-        response = redirect('home', slug=Shopping.objects.get(id=shp_id).slug)
-        response.set_cookie(key='shp_id', value=shp_id)
-        return response
-    return render(request, "index.html", {'shopping_slug': 'barra-shopping'})
+    return render(request, "index.html", {})
 
 def modal_fb_login(request):
     return render(request, "modais/modal_fb_login.html", {})
