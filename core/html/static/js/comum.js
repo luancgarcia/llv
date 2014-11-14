@@ -16,7 +16,8 @@ function getCookie(c_name) {
 
 function setCookie(c_name,value) {
     if (typeof(value) != "undefined") {
-        document.cookie=c_name + "=" + value + ";domain="+site_url+";path=/";
+//        document.cookie=c_name + "=" + value + ";domain="+site_url+";path=/";
+        document.cookie=c_name + "=" + value + ";path=/";
     } else {
         document.cookie=c_name + "='';expires=01-Jan-1970 00:00:01 GMT;path=/";
     }
@@ -37,7 +38,9 @@ function validaCampo(campo){
         return true;
     }
 }
+
 function fecharTutorial() {
+    setCookie("gettutorial","1");
 	$("#TutorialMob").remove();
 }
 
