@@ -71,7 +71,7 @@ class Loja(EditorialModel):
         lojas = []
         for o in ofertas:
             if o.loja and o.loja not in lojas:
-                lojas.append(o.lojga.to_dict())
+                lojas.append(o.loja.to_dict())
         # lojas = cls.objects.filter(publicada=True,
         #                            shopping_id=shopping).order_by('nome')
         # filtrado = [l.to_dict() for l in lojas if l.ofertas.filter(status=1)]
