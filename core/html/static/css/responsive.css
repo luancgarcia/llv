@@ -417,7 +417,7 @@
   }
   #Header .chamada {
     background-color: #d51924;
-    height: 34px;
+    min-height: 34px;
     clear: both;
     text-align: center;
   }
