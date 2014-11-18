@@ -127,7 +127,8 @@ class Categoria(EditorialModel):
         categorias = []
         for oferta in ofertas:
             for categoria in oferta.categoria.all():
-                if not categoria.sazonal and categoria.publicada:
+                if not categoria.sazonal and categoria.publicada and \
+                        categoria not in categorias:
                     categorias.append(categoria.to_dict())
         # categorias = cls.objects.filter(shopping_id=shopping,
         #                                 publicada=True,

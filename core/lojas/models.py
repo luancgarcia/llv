@@ -68,7 +68,10 @@ class Loja(EditorialModel):
         ofertas =Oferta.itens_por_shopping(shopping)
         # ofertas = Oferta.objects.filter(status=Oferta.PUBLICADO,
         #                                 shopping_id=shopping).order_by('nome')
-        lojas = [o.loja.to_dict() for o in ofertas if o.loja]
+        lojas = []
+        for o in ofertas:
+            if o.loja and o.loja not in lojas:
+                lojas.append(o.lojga.to_dict())
         # lojas = cls.objects.filter(publicada=True,
         #                            shopping_id=shopping).order_by('nome')
         # filtrado = [l.to_dict() for l in lojas if l.ofertas.filter(status=1)]
