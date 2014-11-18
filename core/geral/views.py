@@ -462,7 +462,7 @@ def mesclar(request):
         hashtags = '#LapisVermelho #%s #%s' % nome_shopping
     mensagem = '%s%s%s%s%s%s%s' % (item_dict['titulo'],
                                     quebra_linha,
-                                    item_dict['chamada_promocional'],
+                                    item_dict['descricao'],
                                     quebra_linha,
                                     hashtags,
                                     quebra_linha,
