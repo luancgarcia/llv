@@ -129,12 +129,12 @@ class Categoria(EditorialModel):
             for categoria in oferta.categoria.all():
                 if not categoria.sazonal and categoria.publicada and \
                         categoria not in categorias:
-                    categorias.append(categoria.to_dict())
+                    categorias.append(categoria)
         # categorias = cls.objects.filter(shopping_id=shopping,
         #                                 publicada=True,
         #                                 sazonal=False).order_by('nome')
         # filtrado = [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
-        return separa_tres_colunas(categorias)
+        return separa_tres_colunas([c.to_dict() for c in categorias])
 
 
 class Sazonal(Categoria):
