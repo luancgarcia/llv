@@ -7,5 +7,5 @@ def context(request):
     '''
     return {'SITE_URL': settings.SITE_URL,
             'STATIC_URL': settings.STATIC_URL,
-            'VERSAO_ESTATICOS': 11,
+            'VERSAO_ESTATICOS': 12,
             'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID}
