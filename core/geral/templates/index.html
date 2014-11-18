@@ -13,13 +13,7 @@
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/comum.css?v={{ VERSAO_ESTATICOS }}">
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/responsive.css?v={{ VERSAO_ESTATICOS }}">
 
-    <!-- Inicio Facebook -->
-    <meta property="og:title content="Lápis Vermelho - Multiplan" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:description" content="Aproveite as ofertas da Semana" />
-    <meta property="og:image" content="{{ STATIC_URL }}img/profile-llv.jpg"/>
-    <meta property="og:url" content="https://llv.liquidacaolapisvermelho.com.br/"/>
-    <!-- Fim Facebook -->
+    {% include 'meta_facebook.html' %}
 
 	<script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/jquery.mobile.custom.min.js' %}"></script>
