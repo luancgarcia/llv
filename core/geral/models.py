@@ -123,7 +123,7 @@ class Categoria(EditorialModel):
 
     @classmethod
     def publicadas_com_oferta(cls, shopping=1):
-        ofertas = Oferta.objects.filter(status=Oferta.PUBLICADO,shopping_id=shopping).order_by('nome')
+        ofertas = Oferta.itens_por_shopping(shopping)
         categorias = []
         for oferta in ofertas:
             for categoria in oferta.categoria.all():
