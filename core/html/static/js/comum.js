@@ -68,31 +68,36 @@ function _acionaloginFacebook(){
       });
 }
 
-function _logadoFacebook(){
-    FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-          var uid = response.authResponse.userID;
-          var accessToken = response.authResponse.accessToken;
-//        console.log('siiiimmmmmmm');
-          logado_fb = true;
-          return true;
-      } else if (response.status === 'not_authorized') {
-          negado_fb = true;
-          logado_fb = true;
-          console.log('User logged in, but not autorized');
-          return false;
-      } else {
-          return false;
-//          disparaModalRequest("/modal_fb_login","300","");
-//          console.log('nao');
-      }
-    });
+function logadoFacebook(){
+    console.log(navigator.userAgent);
+    if (navigator.userAgent.match('CriOS')){
+        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
+    }else{
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+              var uid = response.authResponse.userID;
+              var accessToken = response.authResponse.accessToken;
+    //        console.log('siiiimmmmmmm');
+              logado_fb = true;
+              return true;
+          } else if (response.status === 'not_authorized') {
+              negado_fb = true;
+              logado_fb = true;
+              console.log('User logged in, but not autorized');
+              return false;
+          } else {
+              return false;
+    //          disparaModalRequest("/modal_fb_login","300","");
+    //          console.log('nao');
+          }
+        });
+    }
 }
 
 function acionaloginFacebook(){
     document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
 }
-function logadoFacebook(){
+function _logadoFacebook(){
     var fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
     $.ajax({
         type:"POST",
