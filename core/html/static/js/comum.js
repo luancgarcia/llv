@@ -1,5 +1,10 @@
+largura_window = $(window).width();
+
 var url_hash = window.location.hash;
 url_slug = url_hash.replace('#', '');
+
+logado_fb = false;
+negado_fb = false;
 
 function getCookie(c_name) {
     var i,x,y,ARRcookies=document.cookie.split(";");
@@ -44,7 +49,7 @@ function fecharTutorial() {
 	$("#TutorialMob").remove();
 }
 
-function acionaloginFacebook(){
+function _acionaloginFacebook(){
     FB.login(function(response) {
         if (response.authResponse) {
         // console.log('Welcome!  Fetching your information.... ');
@@ -62,26 +67,53 @@ function acionaloginFacebook(){
         return_scopes: true
       });
 }
-function logadoFacebook(){
+
+function _logadoFacebook(){
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        // the user is logged in and has authenticated your
-        // app, and response.authResponse supplies
-        // the user's ID, a valid access token, a signed
-        // request, and the time the access token
-        // and signed request each expire
-        var uid = response.authResponse.userID;
-        var accessToken = response.authResponse.accessToken;
+          var uid = response.authResponse.userID;
+          var accessToken = response.authResponse.accessToken;
 //        console.log('siiiimmmmmmm');
-//      } else if (response.status === 'not_authorized') {
-        // the user is logged in to Facebook,
-//          console.log('naaaaaooooooo');
-        // but has not authenticated your app
+          logado_fb = true;
+          return true;
+      } else if (response.status === 'not_authorized') {
+          negado_fb = true;
+          logado_fb = true;
+          console.log('User logged in, but not autorized');
+          return false;
       } else {
-          disparaModalRequest("/modal_fb_login","300","");
+          return false;
+//          disparaModalRequest("/modal_fb_login","300","");
 //          console.log('nao');
-        // the user isn't logged in to Facebook.
       }
+    });
+}
+
+function acionaloginFacebook(){
+    document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
+}
+function logadoFacebook(){
+    var fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
+    $.ajax({
+        type:"POST",
+        dataType:"jsonp",
+        url:fb_url,
+        beforeSend: function(){
+            console.log("before send fb oauth");
+        },
+        success: function(response){
+            console.log("xablau");
+            console.log(response);
+            logado_fb = true;
+            if (response.status === 'not_authorized') {
+                negado_fb = true;
+            }
+            return true;
+        },
+        error: function(response){
+            console.log(response);
+            return false;
+        }
     });
 }
 
@@ -105,8 +137,6 @@ function verificacookies(){
         }
     });
 }
-
-largura_window = $(window).width();
 
 $(function(){
     $("#TutorialMob a").on({
@@ -136,6 +166,17 @@ $(function(){
         // 	window.location.href = url;
         // });
     }
+
+    $(document.body).on({
+        click: function(){
+            if (logadoFacebook()){
+                return true;
+            }else{
+                disparaModalRequest("/modal_fb_login","300","");
+                return false;
+            }
+        }
+    }, ".checkfb");
 
 	$("#ico-menu").on({
 		click: function(){
@@ -378,21 +419,21 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-			var link = $(this);
-			var id_item = link.attr("data-id");
-			$.ajax({
-	            type: "POST",
-	            url: '/curtir/',
-	            dataType: "json",
-	            data: {id_item: id_item},
-	            beforeSend: function(){
+            var link = $(this);
+            var id_item = link.attr("data-id");
+            $.ajax({
+                type: "POST",
+                url: '/curtir/',
+                dataType: "json",
+                data: {id_item: id_item},
+                beforeSend: function(){
 //	                console.log("before send");
-                    logadoFacebook();
-	            },
-	            success: function(data) {
-	                link.text(data.total);
-	                link.addClass('ativo');
-	                acrescenta_curtidas('minhas_curtidas', id_item);
+//                        logadoFacebook();
+                },
+                success: function(data) {
+                    link.text(data.total);
+                    link.addClass('ativo');
+                    acrescenta_curtidas('minhas_curtidas', id_item);
                     FB.api(
                         "/me/photos",
                         "POST",
@@ -407,12 +448,12 @@ $(function(){
                           }
                         }
                     );
-	            },
-	            error: function(){
-	                console.log("erro curtir");
-	            }
-	       });
-	       return false;
+                },
+                error: function(){
+                    console.log("erro curtir");
+                }
+           });
+           return false;
 		}
 	}, "a.like:not(.ativo)");
 
@@ -444,34 +485,38 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
-			var link = $(this);
-			var id_item = link.attr("data-id");
-			$.ajax({
-	            type: "POST",
-	            url: '/curtir/',
-	            dataType: "json",
-	            data: {id_item: id_item},
-	            beforeSend: function(){
-                    logadoFacebook();
-	                // console.log("before send");
-	            },
-	            success: function(data) {
-                    var seletor = "*[data-id="+id_item+"]";
-                    $(seletor).text(data.total);
-                    $(seletor).addClass("ativo");
-                    if (data.total == '1'){
-                        link.text(data.total + " pessoa curtiu essa oferta");
-                    }else {
-                        link.text(data.total + " pessoas curtiram essa oferta");
+            if (logadoFacebook()){
+                var link = $(this);
+                var id_item = link.attr("data-id");
+                $.ajax({
+                    type: "POST",
+                    url: '/curtir/',
+                    dataType: "json",
+                    data: {id_item: id_item},
+                    beforeSend: function(){
+                        logadoFacebook();
+                        // console.log("before send");
+                    },
+                    success: function(data) {
+                        var seletor = "*[data-id="+id_item+"]";
+                        $(seletor).text(data.total);
+                        $(seletor).addClass("ativo");
+                        if (data.total == '1'){
+                            link.text(data.total + " pessoa curtiu essa oferta");
+                        }else {
+                            link.text(data.total + " pessoas curtiram essa oferta");
+                        }
+                        link.parents("p.curtidas").addClass('ativo');
+                        acrescenta_curtidas('minhas_curtidas', id_item);
+                    },
+                    error: function(){
+                        console.log("erro curtir");
                     }
-	                link.parents("p.curtidas").addClass('ativo');
-	                acrescenta_curtidas('minhas_curtidas', id_item);
-	            },
-	            error: function(){
-	                console.log("erro curtir");
-	            }
-	       });
-	       return false;
+               });
+               return false;
+		    }else{
+                disparaModalRequest("/modal_fb_login","300","");
+            }
 		}
 	}, "p.curtidas:not(.ativo) span");
 
@@ -513,7 +558,6 @@ $(function(){
 			return false;
 		}
 	}, ".thumbs-list  a[data-img]");
-
 
 	//muda as abas do share
 	$(document.body).on({
@@ -589,21 +633,21 @@ $(function(){
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-			var botao_share = $('#ShareProduto .bt-share');
-			var imagem_id = botao_share.attr("data-base");
-			var mascara_id = botao_share.attr("data-mask");
-			var id_item = botao_share.attr("data-id");
+            var botao_share = $('#ShareProduto .bt-share');
+            var imagem_id = botao_share.attr("data-base");
+            var mascara_id = botao_share.attr("data-mask");
+            var id_item = botao_share.attr("data-id");
 
-			$.ajax({
-	            type: "POST",
-	            url: '/mesclar/',
-	            dataType: "json",
-	            data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
-	            beforeSend: function(){
-	                console.log("before send");
+            $.ajax({
+                type: "POST",
+                url: '/mesclar/',
+                dataType: "json",
+                data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
+                beforeSend: function(){
+                    console.log("before send");
                     logadoFacebook();
-	            },
-	            success: function(data) {
+                },
+                success: function(data) {
                     FB.api(
                         "/me/photos",
                         "POST",
@@ -618,14 +662,14 @@ $(function(){
 //                          console.log(response.error);
                         }
                     );
-					fechaModal();
-	                return false;
-	            },
-	            error: function(){
-	                console.log("erro mesclar");
-	            }
-	       });
-	       return false;
+                    fechaModal();
+                    return false;
+                },
+                error: function(){
+                    console.log("erro mesclar");
+                }
+           });
+           return false;
 		}
 
 	}, '#ShareProduto .bt-share');
