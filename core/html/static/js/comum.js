@@ -68,26 +68,40 @@ function _acionaloginFacebook(){
       });
 }
 
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
+console.log(getQueryVariable('code'));
+
 function logadoFacebook(){
     console.log(navigator.userAgent);
     if (navigator.userAgent.match('CriOS')){
-        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
+//        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
+        disparaModalRequest("/modal_fb_login_chrome_ios","300","");
     }else{
         FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
               var uid = response.authResponse.userID;
               var accessToken = response.authResponse.accessToken;
-    //        console.log('siiiimmmmmmm');
+//            console.log('siiiimmmmmmm');
               logado_fb = true;
               return true;
           } else if (response.status === 'not_authorized') {
               negado_fb = true;
               logado_fb = true;
-              console.log('User logged in, but not autorized');
+//              console.log('User logged in, but not autorized');
               return false;
           } else {
               return false;
-    //          disparaModalRequest("/modal_fb_login","300","");
+              disparaModalRequest("/modal_fb_login","300","");
     //          console.log('nao');
           }
         });
@@ -371,15 +385,11 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            if (logadoFacebook()){
-                var tamanho = $(this).attr('data-param');
-                var qualclasse = $(this).attr("data-class");
-                var url = $(this).attr('data-href');
-                // disparaModalRequest($(this).attr("href"), tamanho, qualclasse);
-                disparaModalRequest(url, tamanho, qualclasse);
-            }else{
-                disparaModalRequest("/modal_fb_login","300","");
-            }
+            var tamanho = $(this).attr('data-param');
+            var qualclasse = $(this).attr("data-class");
+            var url = $(this).attr('data-href');
+            // disparaModalRequest($(this).attr("href"), tamanho, qualclasse);
+            disparaModalRequest(url, tamanho, qualclasse);
 		}
 	}, "[rel='modal']");
 
@@ -428,7 +438,7 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            if (logadoFacebook()){
+            if (getQueryVariable('code') || logadoFacebook()){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -498,7 +508,7 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
-            if (logadoFacebook()){
+            if (getQueryVariable('code') || logadoFacebook()){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -646,7 +656,7 @@ $(function(){
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-            if (logadoFacebook()){
+            if (getQueryVariable('code') || logadoFacebook()){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
@@ -658,8 +668,8 @@ $(function(){
                     dataType: "json",
                     data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
                     beforeSend: function(){
-                        console.log("before send");
-                        logadoFacebook();
+//                        console.log("before send");
+//                        logadoFacebook();
                     },
                     success: function(data) {
                         FB.api(
@@ -694,7 +704,7 @@ $(function(){
 });
 
 $( document ).ready(function() {
-    if (url_slug){
+    if (url_slug && url_slug != "_=_"){
         if (url_slug.split('?')[0] === 'evento'){
             var largura = '560';
         }else{
