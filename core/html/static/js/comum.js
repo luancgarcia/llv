@@ -366,11 +366,15 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-			var tamanho = $(this).attr('data-param');
-			var qualclasse = $(this).attr("data-class");
-			var url = $(this).attr('data-href')
-			// disparaModalRequest($(this).attr("href"), tamanho, qualclasse);
-			disparaModalRequest(url, tamanho, qualclasse);
+            if (logadoFacebook()){
+                var tamanho = $(this).attr('data-param');
+                var qualclasse = $(this).attr("data-class");
+                var url = $(this).attr('data-href');
+                // disparaModalRequest($(this).attr("href"), tamanho, qualclasse);
+                disparaModalRequest(url, tamanho, qualclasse);
+            }else{
+                disparaModalRequest("/modal_fb_login","300","");
+            }
 		}
 	}, "[rel='modal']");
 
