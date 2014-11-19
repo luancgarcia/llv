@@ -61,6 +61,8 @@ urlpatterns = patterns('',
         'geral.views.solicitar_loja', name='solicitar_loja'),
     url(r'^modal_fb_login/$', 'geral.views.modal_fb_login',
         name='modal_fb_login'),
+    url(r'^modal_fb_login_chrome_ios/$', 'geral.views.modal_fb_login_chrome_ios',
+        name='modal_fb_login_chrome_ios'),
 
     url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
     url(r'^$', 'geral.views.index', name='index'),

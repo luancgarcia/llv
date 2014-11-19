@@ -1,9 +1,3 @@
-<script>
-    $(document).ready(function() {
-        fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
-        $('.conectar_fb_raw').attr(href, fb_url);
-    });
-</script>
 <div style="background-color: #b61904; color:#faf9f9; padding:10px 10px;">
     <p style="font-size: 20px; text-align: center;">Falta pouco</p>
     <br />
@@ -12,7 +6,6 @@
         aplicativo, conecte-se com sua conta do Facebook.
         <br /><br />
         <!--<a href="javascript:;" class="conectar_fb" style="">OK?</a>-->
-        <!--<a href="javascript:;" class="conectar_fb" style=""><img src="{{ STATIC_URL }}img/facebook-connect-large.png" /></a>-->
-        <a href="" class="conectar_fb_raw" style=""><img src="{{ STATIC_URL }}img/facebook-connect-large.png" /></a>
+        <a href="javascript:;" class="conectar_fb" style=""><img src="{{ STATIC_URL }}img/facebook-connect-large.png" /></a>
     </p>
 </div>

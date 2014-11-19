@@ -26,6 +26,9 @@ def index(request):
 def modal_fb_login(request):
     return render(request, "modais/modal_fb_login.html", {})
 
+def modal_fb_login_chrome_ios(request):
+    return render(request, "modais/modal_fb_login_crhome_ios.html", {})
+
 def slice_oferta(total_destaques=0, total_eventos=0):
     total_destaques = total_destaques * 4
     total_eventos = total_eventos * 2
