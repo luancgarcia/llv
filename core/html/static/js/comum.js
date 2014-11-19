@@ -167,16 +167,16 @@ $(function(){
         // });
     }
 
-    $(document.body).on({
-        click: function(){
-            if (logadoFacebook()){
-                return true;
-            }else{
-                disparaModalRequest("/modal_fb_login","300","");
-                return false;
-            }
-        }
-    }, ".checkfb");
+//    $(document.body).on({
+//        click: function(){
+//            if (logadoFacebook()){
+//                return true;
+//            }else{
+//                disparaModalRequest("/modal_fb_login","300","");
+//                return false;
+//            }
+//        }
+//    }, ".checkfb");
 
 	$("#ico-menu").on({
 		click: function(){
@@ -419,41 +419,45 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            var link = $(this);
-            var id_item = link.attr("data-id");
-            $.ajax({
-                type: "POST",
-                url: '/curtir/',
-                dataType: "json",
-                data: {id_item: id_item},
-                beforeSend: function(){
-//	                console.log("before send");
-//                        logadoFacebook();
-                },
-                success: function(data) {
-                    link.text(data.total);
-                    link.addClass('ativo');
-                    acrescenta_curtidas('minhas_curtidas', id_item);
-                    FB.api(
-                        "/me/photos",
-                        "POST",
-                        {
-                            "url": data.imagem,
-                            "message": data.mensagem
-                        },
-                        function (response) {
-//                          console.log(response);
-                          if (response && !response.error) {
-//                            console.log(response.error);
-                          }
-                        }
-                    );
-                },
-                error: function(){
-                    console.log("erro curtir");
-                }
-           });
-           return false;
+            if (logadoFacebook()){
+                var link = $(this);
+                var id_item = link.attr("data-id");
+                $.ajax({
+                    type: "POST",
+                    url: '/curtir/',
+                    dataType: "json",
+                    data: {id_item: id_item},
+                    beforeSend: function(){
+    //	                console.log("before send");
+    //                        logadoFacebook();
+                    },
+                    success: function(data) {
+                        link.text(data.total);
+                        link.addClass('ativo');
+                        acrescenta_curtidas('minhas_curtidas', id_item);
+                        FB.api(
+                            "/me/photos",
+                            "POST",
+                            {
+                                "url": data.imagem,
+                                "message": data.mensagem
+                            },
+                            function (response) {
+    //                          console.log(response);
+                              if (response && !response.error) {
+    //                            console.log(response.error);
+                              }
+                            }
+                        );
+                    },
+                    error: function(){
+                        console.log("erro curtir");
+                    }
+               });
+               return false;
+            }else{
+                disparaModalRequest("/modal_fb_login","300","");
+            }
 		}
 	}, "a.like:not(.ativo)");
 
@@ -633,43 +637,47 @@ $(function(){
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-            var botao_share = $('#ShareProduto .bt-share');
-            var imagem_id = botao_share.attr("data-base");
-            var mascara_id = botao_share.attr("data-mask");
-            var id_item = botao_share.attr("data-id");
+            if (logadoFacebook()){
+                var botao_share = $('#ShareProduto .bt-share');
+                var imagem_id = botao_share.attr("data-base");
+                var mascara_id = botao_share.attr("data-mask");
+                var id_item = botao_share.attr("data-id");
 
-            $.ajax({
-                type: "POST",
-                url: '/mesclar/',
-                dataType: "json",
-                data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
-                beforeSend: function(){
-                    console.log("before send");
-                    logadoFacebook();
-                },
-                success: function(data) {
-                    FB.api(
-                        "/me/photos",
-                        "POST",
-                        {
-                            "url": data.imagem,
-                            "message": data.mensagem
-                        },
-                        function (response) {
-                          if (response && !response.error) {
-//                            console.log(response);
-                          }
-//                          console.log(response.error);
-                        }
-                    );
-                    fechaModal();
-                    return false;
-                },
-                error: function(){
-                    console.log("erro mesclar");
-                }
-           });
-           return false;
+                $.ajax({
+                    type: "POST",
+                    url: '/mesclar/',
+                    dataType: "json",
+                    data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
+                    beforeSend: function(){
+                        console.log("before send");
+                        logadoFacebook();
+                    },
+                    success: function(data) {
+                        FB.api(
+                            "/me/photos",
+                            "POST",
+                            {
+                                "url": data.imagem,
+                                "message": data.mensagem
+                            },
+                            function (response) {
+                              if (response && !response.error) {
+    //                            console.log(response);
+                              }
+    //                          console.log(response.error);
+                            }
+                        );
+                        fechaModal();
+                        return false;
+                    },
+                    error: function(){
+                        console.log("erro mesclar");
+                    }
+               });
+               return false;
+            }else{
+                disparaModalRequest("/modal_fb_login","300","");
+            }
 		}
 
 	}, '#ShareProduto .bt-share');
