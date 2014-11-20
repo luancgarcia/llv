@@ -83,24 +83,54 @@ function getQueryVariable(variable) {
 
 function logadoFacebook(){
 //    console.log(navigator.userAgent);
-    if (window.name.indexOf('app_runner_fb') != -1){
-        FB.login(function(response) {
-            if (response.authResponse) {
-                console.log('Welcome!  Fetching your information.... ');
-                FB.api('/me', function(response) {
+    if (window.name.indexOf('app_runner_fb') >= 0){
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            console.log('siiiimmmmmmm');
+            return true;
+          } else if (response.status === 'not_authorized') {
+            console.log('User logged in, but not autorized');
+            return false;
+          } else {
+              FB.login(function(response) {
+                    if (response.authResponse) {
+                        console.log('Welcome!  Fetching your information.... ');
+                        FB.api('/me', function(response) {
+        //                    console.log('Good to see you, ' + response.name + '.');
+            //                $('p.user span').text(response.name);
+            //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
+                        });
+                        return true;
+                    } else {
+                        console.log('User cancelled login or did not fully authorize.');
+                        return false;
+                    }
+                    }, {
+                    scope: 'publish_actions',
+                    return_scopes: true
+              });
+//              return false;
+//              disparaModalRequest("/modal_fb_login","300","");
+              console.log('nao');
+          }
+        });
+//        FB.login(function(response) {
+//            if (response.authResponse) {
+//                console.log('Welcome!  Fetching your information.... ');
+//                FB.api('/me', function(response) {
 //                    console.log('Good to see you, ' + response.name + '.');
     //                $('p.user span').text(response.name);
     //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-                });
-                return true;
-            } else {
-                console.log('User cancelled login or did not fully authorize.');
-                return false;
-            }
-            }, {
-            scope: 'publish_actions',
-            return_scopes: true
-        });
+//                });
+//                return true;
+//            } else {
+//                console.log('User cancelled login or did not fully authorize.');
+//                return false;
+//            }
+//            }, {
+//            scope: 'publish_actions',
+//            return_scopes: true
+//        });
     }else{
         if (navigator.userAgent.match('CriOS')){
     //        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
@@ -130,30 +160,6 @@ function logadoFacebook(){
 
 function acionaloginFacebook(){
     document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
-}
-function _logadoFacebook(){
-    var fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
-    $.ajax({
-        type:"POST",
-        dataType:"jsonp",
-        url:fb_url,
-        beforeSend: function(){
-            console.log("before send fb oauth");
-        },
-        success: function(response){
-            console.log("xablau");
-            console.log(response);
-            logado_fb = true;
-            if (response.status === 'not_authorized') {
-                negado_fb = true;
-            }
-            return true;
-        },
-        error: function(response){
-            console.log(response);
-            return false;
-        }
-    });
 }
 
 function verificacookies(){
