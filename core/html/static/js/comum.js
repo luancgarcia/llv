@@ -113,7 +113,7 @@ function logadoFacebook(){
           }
         });
     }else{
-        if (navigator.userAgent.match('CriOS')){
+        if (navigator.userAgent.match('CriOS') || /windows phone|lumia/i.test(navigator.userAgent.toLowerCase())){
     //        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
             disparaModalRequest("/modal_fb_login_chrome_ios","300","");
         }else{
