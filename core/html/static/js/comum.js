@@ -87,10 +87,9 @@ function logadoFacebook(){
         FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
             console.log('siiiimmmmmmm');
-            return true;
+            logado_fb = true;
           } else if (response.status === 'not_authorized') {
-            console.log('User logged in, but not autorized');
-            return false;
+//            console.log('User logged in, but not autorized');
           } else {
               FB.login(function(response) {
                     if (response.authResponse) {
@@ -100,10 +99,9 @@ function logadoFacebook(){
             //                $('p.user span').text(response.name);
             //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
                         });
-                        return true;
+                        logado_fb = true;
                     } else {
-                        console.log('User cancelled login or did not fully authorize.');
-                        return false;
+//                        console.log('User cancelled login or did not fully authorize.');
                     }
                     }, {
                     scope: 'publish_actions',
@@ -111,26 +109,9 @@ function logadoFacebook(){
               });
 //              return false;
 //              disparaModalRequest("/modal_fb_login","300","");
-              console.log('nao');
+//              console.log('nao');
           }
         });
-//        FB.login(function(response) {
-//            if (response.authResponse) {
-//                console.log('Welcome!  Fetching your information.... ');
-//                FB.api('/me', function(response) {
-//                    console.log('Good to see you, ' + response.name + '.');
-    //                $('p.user span').text(response.name);
-    //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-//                });
-//                return true;
-//            } else {
-//                console.log('User cancelled login or did not fully authorize.');
-//                return false;
-//            }
-//            }, {
-//            scope: 'publish_actions',
-//            return_scopes: true
-//        });
     }else{
         if (navigator.userAgent.match('CriOS')){
     //        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
@@ -464,7 +445,8 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            if (window.location.search.indexOf('code') >= 0 || logadoFacebook()){
+            logadoFacebook();
+            if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -533,7 +515,8 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
-            if (window.location.search.indexOf('code') >= 0 || logadoFacebook()){
+            logadoFacebook();
+            if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -680,7 +663,8 @@ $(function(){
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-            if (window.location.search.indexOf('code') >= 0 || logadoFacebook()){
+            logadoFacebook();
+            if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
