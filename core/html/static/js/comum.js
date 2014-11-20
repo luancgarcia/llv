@@ -79,7 +79,7 @@ function getQueryVariable(variable) {
     }
     console.log('Query variable %s not found', variable);
 }
-console.log(getQueryVariable('code'));
+//console.log(getQueryVariable('code'));
 
 function logadoFacebook(){
 //    console.log(navigator.userAgent);
@@ -88,12 +88,14 @@ function logadoFacebook(){
             if (response.authResponse) {
                 console.log('Welcome!  Fetching your information.... ');
                 FB.api('/me', function(response) {
-                    console.log('Good to see you, ' + response.name + '.');
+//                    console.log('Good to see you, ' + response.name + '.');
     //                $('p.user span').text(response.name);
     //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
                 });
+                return true;
             } else {
                 console.log('User cancelled login or did not fully authorize.');
+                return false;
             }
             }, {
             scope: 'publish_actions',
@@ -456,7 +458,7 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            if (getQueryVariable('code') || logadoFacebook()){
+            if (window.location.search.indexOf('code') >= 0 || logadoFacebook()){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -466,7 +468,6 @@ $(function(){
                     data: {id_item: id_item},
                     beforeSend: function(){
     //	                console.log("before send");
-    //                        logadoFacebook();
                     },
                     success: function(data) {
                         link.text(data.total);
@@ -526,7 +527,7 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
-            if (getQueryVariable('code') || logadoFacebook()){
+            if (window.location.search.indexOf('code') >= 0 || logadoFacebook()){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -535,7 +536,6 @@ $(function(){
                     dataType: "json",
                     data: {id_item: id_item},
                     beforeSend: function(){
-                        logadoFacebook();
                         // console.log("before send");
                     },
                     success: function(data) {
@@ -674,7 +674,7 @@ $(function(){
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-            if (getQueryVariable('code') || logadoFacebook()){
+            if (window.location.search.indexOf('code') >= 0 || logadoFacebook()){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
@@ -687,7 +687,6 @@ $(function(){
                     data: {id_item: id_item, imagem_id: imagem_id, mascara_id: mascara_id},
                     beforeSend: function(){
 //                        console.log("before send");
-//                        logadoFacebook();
                     },
                     success: function(data) {
                         FB.api(
