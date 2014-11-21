@@ -120,7 +120,7 @@
 						<li class="item-menu">
 
 							<a class="lnk" href="javascript:;">Categorias</a>
-							<div class="submenu fix">
+							<div class ="submenu {% if categorias|length <= 10%}auto {% endif %}fix">
 								<ul>
 									{% if categorias|length > 10%}
 									{% for categoria in categorias %}
@@ -152,13 +152,19 @@
 
 						<li class="item-menu">
 							<a class="lnk" href="javascript:;">Lojas</a>
-							<div class="submenu fix">
+							<div class="submenu {% if lojas|length <= 10%}auto {% endif %}fix">
 								<ul>
+									{% if lojas|length > 10%}
 									{% for loja in lojas %}
 									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' slug=shopping_slug loja=loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+									{% endfor %}
+									{% else %}
+									{% for loja in lojas %}
+									<li class="cl"><a href="{% url 'home_loja' slug=shopping_slug loja=loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
 									{% empty %}
 									<li>Sem loja com ofertas cadastradas</li>
 									{% endfor %}
+									{% endif %}
 								</ul>
 							</div>
 						</li>
