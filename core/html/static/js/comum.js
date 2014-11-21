@@ -83,58 +83,60 @@ function getQueryVariable(variable) {
 
 function logadoFacebook(){
 //    console.log(navigator.userAgent);
-    if (window.name.indexOf('app_runner_fb') >= 0){
-        FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-            console.log('siiiimmmmmmm');
-            logado_fb = true;
-          } else if (response.status === 'not_authorized') {
+    if (!logado_fb) {
+        if (window.name.indexOf('app_runner_fb') >= 0) {
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    console.log('siiiimmmmmmm');
+                    logado_fb = true;
+                } else if (response.status === 'not_authorized') {
 //            console.log('User logged in, but not autorized');
-          } else {
-              FB.login(function(response) {
-                    if (response.authResponse) {
-                        console.log('Welcome!  Fetching your information.... ');
-                        FB.api('/me', function(response) {
-        //                    console.log('Good to see you, ' + response.name + '.');
-            //                $('p.user span').text(response.name);
-            //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-                        });
-                        logado_fb = true;
-                    } else {
+                } else {
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            console.log('Welcome!  Fetching your information.... ');
+                            FB.api('/me', function (response) {
+                                //                    console.log('Good to see you, ' + response.name + '.');
+                                //                $('p.user span').text(response.name);
+                                //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
+                            });
+                            logado_fb = true;
+                        } else {
 //                        console.log('User cancelled login or did not fully authorize.');
-                    }
+                        }
                     }, {
-                    scope: 'publish_actions',
-                    return_scopes: true
-              });
+                        scope: 'publish_actions',
+                        return_scopes: true
+                    });
 //              return false;
 //              disparaModalRequest("/modal_fb_login","300","");
 //              console.log('nao');
-          }
-        });
-    }else{
-        if (navigator.userAgent.match('CriOS') || /windows phone|lumia/i.test(navigator.userAgent.toLowerCase())){
-    //        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
-            disparaModalRequest("/modal_fb_login_chrome_ios","300","");
-        }else{
-            FB.getLoginStatus(function(response) {
-              if (response.status === 'connected') {
-                  var uid = response.authResponse.userID;
-                  var accessToken = response.authResponse.accessToken;
-    //            console.log('siiiimmmmmmm');
-                  logado_fb = true;
-                  return true;
-              } else if (response.status === 'not_authorized') {
-                  negado_fb = true;
-                  logado_fb = true;
-    //              console.log('User logged in, but not autorized');
-                  return false;
-              } else {
-                  return false;
-                  disparaModalRequest("/modal_fb_login","300","");
-        //          console.log('nao');
-              }
+                }
             });
+        } else {
+            if (navigator.userAgent.match('CriOS') || /windows phone|lumia/i.test(navigator.userAgent.toLowerCase())) {
+                //        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
+                disparaModalRequest("/modal_fb_login_chrome_ios", "300", "");
+            } else {
+                FB.getLoginStatus(function (response) {
+                    if (response.status === 'connected') {
+                        //var uid = response.authResponse.userID;
+                        //var accessToken = response.authResponse.accessToken;
+                        console.log('siiiimmmmmmm');
+                        logado_fb = true;
+                        return true;
+                    } else if (response.status === 'not_authorized') {
+                        negado_fb = true;
+                        logado_fb = true;
+                        //              console.log('User logged in, but not autorized');
+                        return false;
+                    } else {
+                        return false;
+                        disparaModalRequest("/modal_fb_login", "300", "");
+                        //          console.log('nao');
+                    }
+                });
+            }
         }
     }
 }
