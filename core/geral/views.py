@@ -42,6 +42,11 @@ def ultimo_id(lista):
     return ultimo_id if ultimo_id > 0 else ''
 
 def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
+    generos = porcentagens = precos = []
+    for i in destaques+eventos+ofertas:
+        if i['genero'].lower() not in generos:
+            generos.append(i['genero'])
+
     return {'destaques': destaques,
             'ultimo_destaque_id': [int(d['id']) for d in destaques],
             'eventos': eventos,
@@ -54,7 +59,8 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
             'sazonal': Sazonal.atual(shopping=shopping.id),
             'shopping_slug': shopping.slug,
-            'shopping_nome': shopping.nome}
+            'shopping_nome': shopping.nome,
+            'generos': set(generos)}
 
 @indica_shopping
 def home(request, **kwargs):

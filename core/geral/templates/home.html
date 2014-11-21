@@ -142,10 +142,9 @@
 							<a class="lnk" href="javascript:;">Gênero</a>
 							<div class="submenu auto fix">
 								<ul>
-									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='masculino' %}">Masculino</a></li>
-									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='feminino' %}">Feminino</a></li>
-									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='infantil' %}">Infantil</a></li>
-									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero='unissex' %}">Unissex</a></li>
+									{% for genero in generos %}
+									<li class="cl"><a href="{% url 'home_genero' slug=shopping_slug genero=genero|lower %}">{{ genero }}</a></li>
+									{% endfor %}
 								</ul>
 							</div>
 						</li>

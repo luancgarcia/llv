@@ -317,7 +317,8 @@ class Oferta(EditorialModel):
                      'tipo': Oferta.TIPOS[self.tipo][1],
                      'inicio': _date(self.inicio, 'd/m/Y'),
                      'fim': _date(self.fim, 'd/m/Y'),
-                     'fim_curto': _date(self.fim, 'd/m')}
+                     'fim_curto': _date(self.fim, 'd/m'),
+                     'genero': self.GENEROS[self.genero][1]}
 
         if not self.tipo == Oferta.EVENTO:
             contexto.update({'porcentagem': self.porcentagem_desconto(),
