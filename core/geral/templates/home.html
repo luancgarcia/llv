@@ -125,6 +125,7 @@
 									{% if categorias|length > 10%}
 									{% for categoria in categorias %}
 									<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
+									{% endfor %}
 									{% else %}
 									{% for categoria in categorias %}
 									<li class="cl"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
