@@ -185,9 +185,15 @@
 							<a class="lnk" href="javascript:;">Faixa de Desconto</a>
 							<div class="submenu auto fix">
 								<ul>
+									{% if trinta %}
 									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=30 %}">até 30%</a></li>
+									{% endif %}
+									{% if cinquenta %}
 									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=50 %}">de 31% a 50%</a></li>
+									{% endif %}
+									{% if setenta %}
 									<li class="cl"><a href="{% url 'home_desconto' slug=shopping_slug desconto=70 %}">de 51% a 70%</a></li>
+									{% endif %}
 								</ul>
 							</div>
 						</li>

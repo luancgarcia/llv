@@ -42,10 +42,22 @@ def ultimo_id(lista):
     return ultimo_id if ultimo_id > 0 else ''
 
 def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
-    generos = porcentagens = precos = []
+    trinta = tem_trinta = tem_cinq = cinquenta = tem_setenta = setenta = False
+    generos = []
     for i in destaques+eventos+ofertas:
         if i['genero'].lower() not in generos:
             generos.append(i['genero'])
+        desconto = int(i['desconto'])
+        if desconto:
+            if not tem_trinta and desconto <= 30:
+                trinta = True
+                tem_trinta = True
+            if not tem_cinq and desconto > 30 and desconto <= 50:
+                cinquenta = True
+                tem_cinq = True
+            if not tem_setenta and desconto > 50:
+                setenta = True
+                tem_setenta = True
 
     return {'destaques': destaques,
             'ultimo_destaque_id': [int(d['id']) for d in destaques],
@@ -60,7 +72,10 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             'sazonal': Sazonal.atual(shopping=shopping.id),
             'shopping_slug': shopping.slug,
             'shopping_nome': shopping.nome,
-            'generos': set(generos)}
+            'generos': set(generos),
+            'trinta': trinta,
+            'cinquenta': cinquenta,
+            'setenta': setenta}
 
 @indica_shopping
 def home(request, **kwargs):
