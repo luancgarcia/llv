@@ -172,11 +172,21 @@
 							<a class="lnk" href="javascript:;">Faixa de Preço</a>
 							<div class="submenu auto fix">
 								<ul>
+									{% if preco1 %}
 									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=30 %}">abaixo de R$ 30</a></li>
+									{% endif%}
+									{% if preco2 %}
 									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=50 %}">de R$ 31 a R$ 50</a></li>
+									{% endif%}
+									{% if preco3 %}
 									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=100 %}">de R$ 51 a R$ 100</a></li>
+									{% endif%}
+									{% if preco4 %}
 									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=300 %}">de R$101 a R$300</a></li>
+									{% endif%}
+									{% if preco5 %}
 									<li class="cl"><a href="{% url 'home_preco' slug=shopping_slug preco=301 %}">acima de R$301</a></li>
+									{% endif%}
 								</ul>
 							</div>
 						</li>

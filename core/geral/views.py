@@ -42,7 +42,9 @@ def ultimo_id(lista):
     return ultimo_id if ultimo_id > 0 else ''
 
 def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
-    trinta = tem_trinta = tem_cinq = cinquenta = tem_setenta = setenta = False
+    trinta = tem_trinta = tem_cinq = cinquenta = tem_setenta = setenta \
+    = preco1 = tem_preco1 = preco2 = tem_preco2 = preco3 = tem_preco3 = preco4 \
+        = tem_preco4 = preco5 = tem_preco5 = False
     generos = []
     for i in destaques+eventos+ofertas:
         if i['genero'].lower() not in generos:
@@ -50,14 +52,24 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
         desconto = int(i['desconto'])
         if desconto:
             if not tem_trinta and desconto <= 30:
-                trinta = True
-                tem_trinta = True
+                trinta = tem_trinta = True
             if not tem_cinq and desconto > 30 and desconto <= 50:
-                cinquenta = True
-                tem_cinq = True
+                cinquenta = tem_cinq = True
             if not tem_setenta and desconto > 50:
-                setenta = True
-                tem_setenta = True
+                setenta = tem_setenta = True
+
+        preco = int(i['preco_final'])
+        if preco:
+            if not tem_preco1 and preco <= 30:
+                preco1 = tem_preco1 = True
+            if not tem_preco2 and preco > 30 and preco <= 50:
+                preco2 = tem_preco2 = True
+            if not tem_preco3 and preco > 50 and preco <= 100:
+                preco3 = tem_preco3 = True
+            if not tem_preco4 and preco > 100 and preco <= 300:
+                preco4 = tem_preco4 = True
+            if not tem_preco5 and preco > 300:
+                preco5 = tem_preco5 = True
 
     return {'destaques': destaques,
             'ultimo_destaque_id': [int(d['id']) for d in destaques],
@@ -75,7 +87,12 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             'generos': set(generos),
             'trinta': trinta,
             'cinquenta': cinquenta,
-            'setenta': setenta}
+            'setenta': setenta,
+            'preco1': preco1,
+            'preco2': preco2,
+            'preco3': preco3,
+            'preco4': preco4,
+            'preco5': preco5}
 
 @indica_shopping
 def home(request, **kwargs):
