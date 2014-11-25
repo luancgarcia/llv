@@ -156,7 +156,7 @@ def slug_upload(value):
 def separa_tres_colunas(lista):
     tamanho = len(lista)
     retorno = lista
-    if tamanho >= 3:
+    if tamanho > 3:
         num = tamanho / 3
         um = lista[:num]
         dois = lista[num:num * 2]
