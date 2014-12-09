@@ -142,7 +142,7 @@ function logadoFacebook(){
 }
 
 function acionaloginFacebook(){
-    document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI;
+    document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI+"&output=embed";
 }
 
 function verificacookies(){
