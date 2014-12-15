@@ -1,3 +1,11 @@
+/*Ajuste para Windows Mobile = old*/
+/*@-ms-viewport {
+    width: auto;
+}
+html,body {
+    -ms-overflow-style: none !important; 
+}*/
+
 #Header {
   margin-bottom: 10px;
 }
@@ -40,6 +48,48 @@
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+
+.tooltips {
+  position: relative;
+  display: inline;
+}
+.tooltips span {
+  position: absolute;
+  left: -20px;
+  width:240px;
+  color: #000;
+  background: #fff;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  visibility: hidden;
+  border-radius: 6px;
+  font-size:12px;
+  font-weight:bold;
+    -webkit-box-shadow: 2px 2px 12px 0px rgba(50, 50, 50, 0.45);
+    -moz-box-shadow:    2px 2px 12px 0px rgba(50, 50, 50, 0.45);
+  box-shadow:         2px 2px 12px 0px rgba(50, 50, 50, 0.45);
+}
+.tooltips span:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-bottom: 8px solid #fff;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+.tooltips:hover span {
+  visibility: visible;
+  opacity: 0.9;
+  top: 30px;
+  left: -20px;
+  margin-left: -76px;
+  z-index: 999;
 }
 
 .fix {
@@ -427,6 +477,7 @@
   z-index: 10;
 }
 
+/*
 #TabletSmart #TutorialMob {
   display: block;
   position: fixed;
@@ -446,10 +497,12 @@
   margin-left: -50px;
   top: 160px;
 }
+*/
+
 #TabletSmart #EscolherShoppingMob {
   display: block;
-  background: url(../img/bg-escolher-shopping.png) repeat;
-  background-size: 50% auto;
+ /* background: url(../img/bg-escolher-shopping.png) repeat;
+  background-size: 50% auto;*/
   padding-bottom: 50px;
 }
 #TabletSmart #EscolherShoppingMob .head-escolhershopping {
@@ -522,9 +575,17 @@
 #TabletSmart #Splash {
   display: none;
 }
+.conteudoSite{
+  background:url(../img/bg-escolher-shopping.png) repeat;
+}
+.envolveContainer{
+	background:#fff;
+}
 #TabletSmart .container {
   padding-top: 90px;
+  padding-bottom:25px;
 }
+
 #TabletSmart #Header {
   position: fixed;
   max-height: 47px;
@@ -541,7 +602,7 @@
   text-align: center;
 }
 #TabletSmart #Header .chamada a {
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-family: "Roboto";
   color: #ffffff;
   display: block;
@@ -556,7 +617,7 @@
 #TabletSmart #Header .head-mob img {
   display: block;
   margin: 0 auto;
-  max-width: 45%;
+  max-width:65%;
 }
 #TabletSmart #Header .head-mob .ico-brs {
   background: url(../img/ico-brs.png) no-repeat 0 0;
@@ -816,13 +877,20 @@
 }
 
 .mask, .maskmenushp, .maskmenu {
-  background-color: #000000;
+  background-color: #110000;
   position: fixed;
   z-index: 100;
   top: 0px;
   left: 0px;
-  right: 0;
-  bottom: 0;
+  /*right: 0;
+  bottom: 0;*/
+  width:100%;
+  height:100%;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+  transform: translateZ(0);
   opacity: 0.85;
   -moz-opacity: 0.85;
   filter: alpha(opacity=85);
@@ -850,6 +918,7 @@
   left: 50%;
   z-index: 200;
 }
+
 #lightbox .loading {
   background: url(../img/loading.gif) no-repeat bottom left;
   position: fixed;

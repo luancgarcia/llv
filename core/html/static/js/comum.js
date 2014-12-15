@@ -194,9 +194,9 @@ $(function(){
         // 	}
         // 	window.location.href = url;
         // });
-    }else{
-		$("body").attr("id","TabletSmart");
-	}
+    }
+	//else{$("body").attr("id","TabletSmart");}
+	
 
 //    $(document.body).on({
 //        click: function(){
