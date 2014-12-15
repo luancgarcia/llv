@@ -30,7 +30,7 @@
               appId      : '{{ FACEBOOK_APP_ID }}',
               status     : true,
               xfbml      : true,
-              version    : 'v2.0'
+              version    : 'v2.1'
             });
 		};
 		(function(d, s, id) {
@@ -70,6 +70,7 @@
 		a cada 4 itens, para tv, adicionar a class lasttv
 	-->
 
+<div class="conteudoSite">
 
 	<div class="container">
 		<div id="menu-shoppings">
@@ -208,8 +209,9 @@
 							</div>
 						</li>
 
-						<li class="fl splash-menu">
-							<a href="javascript:;" class="rpl" title="Não achou a oferta que procurava?">sacola-splasy.png</a>
+						<li class="fl splash-menu tooltips">
+							<a href="javascript:;" class="rpl" title="">&nbsp;</a>
+							<span>Não achou a oferta que procurava?</span>
 						</li>
 
 						{% if sazonal %}
@@ -229,7 +231,7 @@
 	</div>
 
 	{% include 'modais/splash.html' %}
-
+</div>
 	<footer id="Footer" class="fix cl">
         <a href="http://www.kinda.com.br" target="_blank" class="fl"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
         <a href="http://www.multiplan.com.br" target="_blank" class="fr"><img src="{% static 'img/multiplan-footer.png' %}" alt="Kinda"></a>

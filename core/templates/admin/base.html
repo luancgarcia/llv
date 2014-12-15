@@ -222,7 +222,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', end
 {% load i18n %}
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
-
+<div class="conteudoSite">
 {% if not is_popup %}
     <!-- Header -->
     <div id="header" class="navbar navbar-inverse navbar-fixed-top">
@@ -334,6 +334,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', end
 {% endblock js_footer_commons %}
 
 {% block js_footer %}{% endblock js_footer %}
+
+</div> <!-- /.conteudoSite -->
 
 <footer id="Footer" class="fix cl">
             <a href="http://www.kinda.com.br" target="_blank"><img src="{% static 'img/kinda.png' %}" alt="Kinda"></a>
