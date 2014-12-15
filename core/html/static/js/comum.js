@@ -449,8 +449,8 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            logadoFacebook();
-            if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            //logadoFacebook();
+            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -485,9 +485,9 @@ $(function(){
                     }
                });
                return false;
-            }else{
-                disparaModalRequest("/modal_fb_login","300","");
-            }
+            //}else{
+            //    disparaModalRequest("/modal_fb_login","300","");
+            //}
 		}
 	}, "a.like:not(.ativo)");
 
@@ -519,8 +519,8 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
-            logadoFacebook();
-            if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            //logadoFacebook();
+            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -548,9 +548,9 @@ $(function(){
                     }
                });
                return false;
-		    }else{
-                disparaModalRequest("/modal_fb_login","300","");
-            }
+		    //}else{
+             //   disparaModalRequest("/modal_fb_login","300","");
+            //}
 		}
 	}, "p.curtidas:not(.ativo) span");
 
@@ -667,8 +667,8 @@ $(function(){
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-            logadoFacebook();
-            if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            //logadoFacebook();
+            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
@@ -705,9 +705,9 @@ $(function(){
                     }
                });
                return false;
-            }else{
-                disparaModalRequest("/modal_fb_login","300","");
-            }
+            //}else{
+            //    disparaModalRequest("/modal_fb_login","300","");
+            //}
 		}
 
 	}, '#ShareProduto .bt-share');
