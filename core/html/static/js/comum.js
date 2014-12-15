@@ -143,7 +143,35 @@ function logadoFacebook(){
 
 function acionaloginFacebook(){
     //document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI+"&output=embed";
-    document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+url_connect+"&output=embed";
+    //document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+url_connect+"&output=embed";
+    FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+            console.log('siiiimmmmmmm');
+            logado_fb = true;
+        } else if (response.status === 'not_authorized') {
+//            console.log('User logged in, but not autorized');
+        } else {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    FB.api('/me', function (response) {
+                        //                    console.log('Good to see you, ' + response.name + '.');
+                        //                $('p.user span').text(response.name);
+                        //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
+                    });
+                    logado_fb = true;
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            }, {
+                scope: 'publish_actions',
+                return_scopes: true
+            });
+//              return false;
+//              disparaModalRequest("/modal_fb_login","300","");
+              console.log('nao');
+        }
+    });
 }
 
 function verificacookies(){
@@ -450,8 +478,9 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            logadoFacebook();
-            if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            //logadoFacebook();
+            acionaloginFacebook();
+            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -486,9 +515,9 @@ $(function(){
                     }
                });
                return false;
-            }else{
-                disparaModalRequest("/modal_fb_login","300","");
-            }
+            //}else{
+            //    disparaModalRequest("/modal_fb_login","300","");
+            //}
 		}
 	}, "a.like:not(.ativo)");
 
@@ -520,8 +549,9 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
-            logadoFacebook();
-            if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            acionaloginFacebook();
+            //logadoFacebook();
+            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -549,9 +579,9 @@ $(function(){
                     }
                });
                return false;
-		    }else{
-                disparaModalRequest("/modal_fb_login","300","");
-            }
+		    //}else{
+             //   disparaModalRequest("/modal_fb_login","300","");
+            //}
 		}
 	}, "p.curtidas:not(.ativo) span");
 
@@ -669,8 +699,9 @@ $(function(){
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-            logadoFacebook();
-            if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            acionaloginFacebook();
+            //logadoFacebook();
+            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
@@ -707,9 +738,9 @@ $(function(){
                     }
                });
                return false;
-            }else{
-                disparaModalRequest("/modal_fb_login","300","");
-            }
+            //}else{
+            //    disparaModalRequest("/modal_fb_login","300","");
+            //}
 		}
 
 	}, '#ShareProduto .bt-share');
