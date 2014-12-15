@@ -365,6 +365,38 @@ $(function(){
 		}
 	});
 
+    $(document).on('fbload', function(){
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                console.log('siiiimmmmmmm');
+                logado_fb = true;
+            } else if (response.status === 'not_authorized') {
+    //            console.log('User logged in, but not autorized');
+            } else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        console.log('Welcome!  Fetching your information.... ');
+                        FB.api('/me', function (response) {
+                            //                    console.log('Good to see you, ' + response.name + '.');
+                            //                $('p.user span').text(response.name);
+                            //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
+                        });
+                        logado_fb = true;
+                    } else {
+                        console.log('User cancelled login or did not fully authorize.');
+                    }
+                }, {
+                    scope: 'publish_actions',
+                    return_scopes: true
+                });
+    //              return false;
+    //              disparaModalRequest("/modal_fb_login","300","");
+                  console.log('nao');
+            }
+        });
+    });
+
+
 	$(document.body).on({
 		tap: function(){
 			var ico = $("#ico-menu");
