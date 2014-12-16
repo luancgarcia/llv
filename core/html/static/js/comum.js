@@ -49,25 +49,6 @@ function fecharTutorial() {
 	$("#TutorialMob").remove();
 }
 
-function _acionaloginFacebook(){
-    FB.login(function(response) {
-        if (response.authResponse) {
-        // console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function(response) {
-    //             console.log('Good to see you, ' + response.name + '.');
-                $('p.user span').text(response.name);
-                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-            });
-        } else {
-            return false;
-        // console.log('User cancelled login or did not fully authorize.');
-        }
-        }, {
-        scope: 'publish_actions',
-        return_scopes: true
-      });
-}
-
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split('&');
@@ -85,44 +66,33 @@ function logadoFacebook(){
 //    console.log(navigator.userAgent);
     if (!logado_fb) {
         if (window.name.indexOf('app_runner_fb') >= 0) {
-            FB.getLoginStatus(function (response) {
-                if (response.status === 'connected') {
-                    console.log('siiiimmmmmmm');
-                    logado_fb = true;
-                } else if (response.status === 'not_authorized') {
-//            console.log('User logged in, but not autorized');
-                } else {
-                    FB.login(function (response) {
-                        if (response.authResponse) {
-                            console.log('Welcome!  Fetching your information.... ');
-                            FB.api('/me', function (response) {
-                                //                    console.log('Good to see you, ' + response.name + '.');
-                                //                $('p.user span').text(response.name);
-                                //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-                            });
-                            logado_fb = true;
-                        } else {
-//                        console.log('User cancelled login or did not fully authorize.');
-                        }
-                    }, {
-                        scope: 'publish_actions',
-                        return_scopes: true
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    FB.api('/me', function (response) {
+                        console.log('Good to see you, ' + response.name + '.');
+                        //$('p.user span').text(response.name);
+                        // $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
                     });
-//              return false;
-//              disparaModalRequest("/modal_fb_login","300","");
-//              console.log('nao');
+                    logado_fb = true;
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
                 }
+            }, {
+                scope: 'publish_actions',
+                return_scopes: true
             });
         } else {
             if (navigator.userAgent.match('CriOS') || /windows phone|lumia/i.test(navigator.userAgent.toLowerCase())) {
                 //        window.open('https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri='+ document.documentURI +'', '', null);
+                console.log('siiiimmmmmmm windows phone');
                 disparaModalRequest("/modal_fb_login_chrome_ios", "300", "");
             } else {
                 FB.getLoginStatus(function (response) {
                     if (response.status === 'connected') {
                         //var uid = response.authResponse.userID;
                         //var accessToken = response.authResponse.accessToken;
-                        console.log('siiiimmmmmmm');
+                        console.log('siiiimmmmmmm chrome');
                         logado_fb = true;
                         return true;
                     } else if (response.status === 'not_authorized') {
@@ -143,35 +113,7 @@ function logadoFacebook(){
 
 function acionaloginFacebook(){
     //document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+document.documentURI+"&output=embed";
-    //document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+url_connect+"&output=embed";
-    FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            console.log('siiiimmmmmmm');
-            logado_fb = true;
-        } else if (response.status === 'not_authorized') {
-//            console.log('User logged in, but not autorized');
-        } else {
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    console.log('Welcome!  Fetching your information.... ');
-                    FB.api('/me', function (response) {
-                        //                    console.log('Good to see you, ' + response.name + '.');
-                        //                $('p.user span').text(response.name);
-                        //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-                    });
-                    logado_fb = true;
-                } else {
-                    console.log('User cancelled login or did not fully authorize.');
-                }
-            }, {
-                scope: 'publish_actions',
-                return_scopes: true
-            });
-//              return false;
-//              disparaModalRequest("/modal_fb_login","300","");
-              console.log('nao');
-        }
-    });
+    document.location = fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+url_connect+"&output=embed";
 }
 
 function verificacookies(){
@@ -365,38 +307,6 @@ $(function(){
 		}
 	});
 
-    $(document).on('fbload', function(){
-        FB.getLoginStatus(function (response) {
-            if (response.status === 'connected') {
-                console.log('siiiimmmmmmm');
-                logado_fb = true;
-            } else if (response.status === 'not_authorized') {
-    //            console.log('User logged in, but not autorized');
-            } else {
-                FB.login(function (response) {
-                    if (response.authResponse) {
-                        console.log('Welcome!  Fetching your information.... ');
-                        FB.api('/me', function (response) {
-                            //                    console.log('Good to see you, ' + response.name + '.');
-                            //                $('p.user span').text(response.name);
-                            //                $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
-                        });
-                        logado_fb = true;
-                    } else {
-                        console.log('User cancelled login or did not fully authorize.');
-                    }
-                }, {
-                    scope: 'publish_actions',
-                    return_scopes: true
-                });
-    //              return false;
-    //              disparaModalRequest("/modal_fb_login","300","");
-                  console.log('nao');
-            }
-        });
-    });
-
-
 	$(document.body).on({
 		tap: function(){
 			var ico = $("#ico-menu");
@@ -510,9 +420,8 @@ $(function(){
 
     $(document.body).on({
 		click: function(){
-            //logadoFacebook();
-            acionaloginFacebook();
-            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            logadoFacebook();
+            if (logado_fb || window.location.search.indexOf('code') >= 0){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -547,9 +456,9 @@ $(function(){
                     }
                });
                return false;
-            //}else{
-            //    disparaModalRequest("/modal_fb_login","300","");
-            //}
+            }else{
+                disparaModalRequest("/modal_fb_login","300","");
+            }
 		}
 	}, "a.like:not(.ativo)");
 
@@ -581,9 +490,8 @@ $(function(){
 
 	$(document.body).on({
 		click: function(){
-            acionaloginFacebook();
-            //logadoFacebook();
-            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            logadoFacebook();
+            if (logado_fb || window.location.search.indexOf('code') >= 0){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -611,9 +519,9 @@ $(function(){
                     }
                });
                return false;
-		    //}else{
-             //   disparaModalRequest("/modal_fb_login","300","");
-            //}
+		    }else{
+                disparaModalRequest("/modal_fb_login","300","");
+            }
 		}
 	}, "p.curtidas:not(.ativo) span");
 
@@ -673,7 +581,6 @@ $(function(){
 				box_certo.width(qtd_itens*largura_itens+10);
 			}
 
-
 			$("#ShareProduto .col-opcoes .abas li").removeClass("ativo");
 			aba.parent().addClass("ativo");
 
@@ -723,17 +630,16 @@ $(function(){
 
     $(document.body).on({
         click: function(){
-            //acionaloginFacebook();
             console.log('era pra acionar, mas ta desativado');
+            acionaloginFacebook();
         }
     }, '.conectar_fb');
 
 	// Compartilhar
 	$(document.body).on({
 		click: function(){
-            acionaloginFacebook();
-            //logadoFacebook();
-            //if (window.location.search.indexOf('code') >= 0 || logado_fb){
+            logadoFacebook();
+            if (logado_fb || window.location.search.indexOf('code') >= 0){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
@@ -770,9 +676,9 @@ $(function(){
                     }
                });
                return false;
-            //}else{
-            //    disparaModalRequest("/modal_fb_login","300","");
-            //}
+            }else{
+                disparaModalRequest("/modal_fb_login","300","");
+            }
 		}
 
 	}, '#ShareProduto .bt-share');
