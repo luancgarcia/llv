@@ -418,10 +418,14 @@ $(function(){
 //		}
 //	});
 
+	if (window.location.search.indexOf('code') >= 0){
+		logado_fb = true;
+	}
+
     $(document.body).on({
 		click: function(){
             logadoFacebook();
-            if (logado_fb || window.location.search.indexOf('code') >= 0){
+            if (logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
