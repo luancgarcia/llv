@@ -49,7 +49,7 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
     for i in destaques+eventos+ofertas:
         if i['genero'].lower() not in generos:
             generos.append(i['genero'])
-        desconto = int(i['desconto'])
+        desconto = int(i['desconto']) if i.get('desconto', None) else None
         if desconto:
             if not tem_trinta and desconto <= 30:
                 trinta = tem_trinta = True
@@ -58,7 +58,7 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             if not tem_setenta and desconto > 50:
                 setenta = tem_setenta = True
 
-        preco = int(i['preco_final'])
+        preco = int(i['preco_final']) if i.get('preco_final', None) else None
         if preco:
             if not tem_preco1 and preco <= 30:
                 preco1 = tem_preco1 = True
