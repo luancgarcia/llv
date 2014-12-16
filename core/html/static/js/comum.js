@@ -495,7 +495,7 @@ $(function(){
 	$(document.body).on({
 		click: function(){
             logadoFacebook();
-            if (logado_fb || window.location.search.indexOf('code') >= 0){
+            if (logado_fb){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -643,7 +643,7 @@ $(function(){
 	$(document.body).on({
 		click: function(){
             logadoFacebook();
-            if (logado_fb || window.location.search.indexOf('code') >= 0){
+            if (logado_fb){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
