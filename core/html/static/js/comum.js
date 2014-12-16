@@ -425,7 +425,7 @@ $(function(){
     $(document.body).on({
 		click: function(){
             logadoFacebook();
-            if (logado_fb){
+             if (logado_fb || window.name.indexOf('app_runner_fb') >= 0){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -495,7 +495,7 @@ $(function(){
 	$(document.body).on({
 		click: function(){
             logadoFacebook();
-            if (logado_fb){
+            if (logado_fb || window.name.indexOf('app_runner_fb') >= 0){
                 var link = $(this);
                 var id_item = link.attr("data-id");
                 $.ajax({
@@ -643,7 +643,7 @@ $(function(){
 	$(document.body).on({
 		click: function(){
             logadoFacebook();
-            if (logado_fb){
+            if (logado_fb || window.name.indexOf('app_runner_fb') >= 0){
                 var botao_share = $('#ShareProduto .bt-share');
                 var imagem_id = botao_share.attr("data-base");
                 var mascara_id = botao_share.attr("data-mask");
