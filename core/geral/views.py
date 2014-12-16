@@ -497,10 +497,14 @@ def mesclar(request):
     nome_shopping = nome_shopping.replace(" ","")
 
     quebra_linha = '\r\n\r\n\r\n\r\n'
-    if nome_loja:
+    if nome_shopping and nome_loja:
         hashtags = '#LapisVermelho #%s #%s' % (nome_shopping, nome_loja)
+    elif nome_shopping and not nome_loja:
+        hashtags = '#LapisVermelho #%s' % nome_shopping
+    elif not nome_shopping and nome_loja:
+        hashtags = '#LapisVermelho #%s' % nome_loja
     else:
-        hashtags = '#LapisVermelho #%s #%s' % nome_shopping
+        hashtags = '#LapisVermelho'
     mensagem = '%s%s%s%s%s%s%s' % (item_dict['titulo'],
                                     quebra_linha,
                                     item_dict['descricao'],
