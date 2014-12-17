@@ -1,7 +1,8 @@
 <script>
     var url_connect = (window.location != window.parent.location) ? document.referrer: document.location;
     $(document).ready(function() {
-        fb_url = "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+url_connect+"&output=embed";
+        fb_url =
+                "https://www.facebook.com/dialog/oauth?client_id=705413109545842&redirect_uri="+url_connect+"&output=embed&scope=publish_actions";
         $('.conectar_fb_raw').attr('href', fb_url);
     });
 </script>
