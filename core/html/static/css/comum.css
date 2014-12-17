@@ -575,17 +575,27 @@ html,body {
 #TabletSmart #Splash {
   display: none;
 }
+/*Para o rodapé ficar sempre embaixo*/
+html, body{height:100%;}
+.conteudoSiteBg{background:url(../img/bg-escolher-shopping.png) repeat;}
 .conteudoSite{
-  background:url(../img/bg-escolher-shopping.png) repeat;
+  min-height:100%;
+  margin-bottom:-25px;
+}
+.conteudoSite:after {
+  content: "";
+  display: block;
 }
 .envolveContainer{
 	background:#fff;
+}
+.envolveContainer .container {
+  padding-bottom:25px;
 }
 #TabletSmart .container {
   padding-top: 90px;
   padding-bottom:25px;
 }
-
 #TabletSmart #Header {
   position: fixed;
   max-height: 47px;
@@ -610,7 +620,8 @@ html,body {
 }
 #TabletSmart #Header .head-mob {
   background: url(../img/bg-head-mob.png) repeat-x 0 0;
-  height: 60px;
+  /*height: 60px;*/
+  min-height: 60px;
   position: relative;
   min-width: 100%;
 }
