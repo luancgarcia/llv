@@ -12,6 +12,7 @@ html,body {
 #Header figure {
   overflow: hidden;
 }
+#Header figure a{display:block;}
 #Header figure img {
   display: block;
   width: 100%;
