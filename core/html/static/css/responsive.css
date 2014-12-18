@@ -666,4 +666,11 @@
   body, html {
     min-width: 990px;
   }
+
+  .showBigres {
+    display: block;
+  }
+  .showBigres .grid {
+    display: block !important;
+  }
 }

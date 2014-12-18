@@ -227,7 +227,13 @@
 			</header><!-- #Header -->
 
 			{% include 'home-part.html' %}
-
+			{% if eventos %}
+			<div class="showBigres fix">
+				{% for evento in eventos %}
+					{% include 'blocos/evento.html' %}
+				{% endfor %}
+			</div>
+			{% endif %}
 		</div>
 
 		{% include 'modais/splash.html' %}

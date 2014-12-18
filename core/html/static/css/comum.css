@@ -1232,6 +1232,6 @@ body {
   height: 25px;
 }
 
-#EscolherShoppingMob {
+#EscolherShoppingMob, .showBigres {
   display: none;
 }
