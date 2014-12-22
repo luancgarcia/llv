@@ -46,8 +46,8 @@ EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
-# SITE_URL = "https://llv.liquidacaolapisvermelho.com.br"
-SITE_URL = "http://liquidacaolapisvermelho.com.br"
+SITE_URL = "https://llv.liquidacaolapisvermelho.com.br"
+# SITE_URL = "http://liquidacaolapisvermelho.com.br"
 # SITE_URL = "http://localhost:8989"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
@@ -180,15 +180,15 @@ COMPARTILHADAS_PASTA = os.path.join(MEDIA_ROOT, 'compartilhar')
 COMPARTILHADAS_URL = SITE_URL+'/media/compartilhar/'
 
 # secure proxy SSL header and secure cookies
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # session expire at browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # wsgi scheme
-# os.environ['wsgi.url_scheme'] = 'https'
+os.environ['wsgi.url_scheme'] = 'https'
 
 FONTE_FOLDER = os.path.join(STATIC_ROOT, 'fonts')
 FONTE_SHARE = '%s/%s' % (FONTE_FOLDER, 'Arial.ttf')
