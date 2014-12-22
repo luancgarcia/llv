@@ -82,6 +82,7 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
             'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
             'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
             'sazonal': Sazonal.atual(shopping=shopping.id),
+            'shopping_id': shopping.id,
             'shopping_slug': shopping.slug,
             'shopping_nome': shopping.nome,
             'generos': set(generos),
