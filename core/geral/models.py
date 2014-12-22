@@ -380,7 +380,7 @@ class Oferta(EditorialModel):
         else:
             return 'Sem url ainda'
 
-        return '%s/%s/#%s?%s' % (settings.SITE_URL, shopping, tipo, self.slug)
+        return '%s/%s#%s?%s' % (settings.SHARE_URL, shopping, tipo, self.slug)
 
 
 class Destaque(Oferta):
