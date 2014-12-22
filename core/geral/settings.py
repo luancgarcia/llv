@@ -47,7 +47,7 @@ EMAIL_USE_TLS = True
 
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
 # SITE_URL = "https://llv.liquidacaolapisvermelho.com.br"
-SITE_URL = "https://liquidacaolapisvermelho.com.br"
+SITE_URL = "http://liquidacaolapisvermelho.com.br"
 # SITE_URL = "http://localhost:8989"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
