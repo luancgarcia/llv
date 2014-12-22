@@ -397,6 +397,16 @@
     height: 53px;
   }
 }
+
+
+@media (min-width: 530px) and (max-width: 727px) {
+   #TabletSmart #Header .head-mob img {
+  
+  max-width:44%;
+}
+}
+
+
 @media (max-width: 728px) {
   #Splash {
     display: none;
