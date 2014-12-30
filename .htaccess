@@ -2,3 +2,7 @@
 RewriteEngine on
 
 RewriteOptions inherit
+RewriteCond %{HTTP_HOST} ^llv\.liquidacaolapisvermelho\.com\.br$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.llv\.liquidacaolapisvermelho\.com\.br$
+RewriteRule ^/?$ "http\:\/\/www\.liquidacaolapisvermelho\.com\.br\/" [R=301,L]
+
