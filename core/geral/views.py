@@ -289,7 +289,7 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
     return destaques_ofertas_eventos(items)
 
 def mais_items(valores, tipo, id_shopping):
-    ids_para_filtrar = [int(i) for i in valores.split(', ')]
+    ids_para_filtrar = [int(''.join(i.split('.'))) for i in valores.split(', ')]
     hoje = date.today()
     items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
                           .filter(Q(loja__shopping_id=id_shopping) |
