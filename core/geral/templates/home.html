@@ -67,7 +67,7 @@
 </head>
 <body>
 {% if shopping_id == 9 %}
-	<script language='JavaScript1.1' src='//pixel.mathtag.com/event/js?mt_id=644594&mt_adid=133796&v1=&v2=&v3=&s1=&s2=&s3='></script>
+    <script language='JavaScript1.1' src='//pixel.mathtag.com/event/js?mt_id=660521&mt_adid=133796&v1=&v2=&v3=&s1=&s2=&s3='></script>
 {% endif %}
 	<!--
 		a cada dois .grid, no segundo adicionar classe lastmob
@@ -131,13 +131,18 @@
 										{% if categorias|length > 10%}
 										{% for categoria in categorias %}
 										<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
-										{% endfor %}
+                                        {% endfor %}
+                                        
 										{% else %}
 										{% for categoria in categorias %}
 										<li class="cl"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
-										{% empty %}
+                                       
+                                        
+                                         
+                                  {% empty %}
 										<li>Sem categoria com ofertas cadastradas</li>
 										{% endfor %}
+                                         {% if sazonal %}<li class="cl"><a href="{% url 'home_categoria' slug=shopping_slug categoria=sazonal.slug %}" title="{{ sazonal.nome }}">{{ sazonal.nome }}</a></li>{% endif %}
 										{% endif %}
 
 									</ul>
