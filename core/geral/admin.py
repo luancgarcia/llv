@@ -156,7 +156,7 @@ class OfertaAdmin(admin.ModelAdmin):
     inlines = [ImagemInline,]
     exclude = OCULTA_NO_ADMIN + ('shopping',)
     prepopulated_fields = {'slug': ('nome',), }
-    list_filter = ['shopping', 'loja', 'status','genero']
+    list_filter = ['loja', 'status','genero']
     readonly_fields = ('total_compartilhado', 'total_visto', 'total_curtido',
                        'desconto_value', 'autor')
     search_fields = ['nome']
