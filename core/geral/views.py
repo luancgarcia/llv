@@ -470,9 +470,11 @@ def mesclar(request):
     imagem_id = request.POST.get('imagem_id', None)
     mascara_id = request.POST.get('mascara_id', None)
     id_item = request.POST.get('id_item', None)
-    id_item = ''.join(id_item.split('.'))
     if not imagem_id and not mascara_id:
         raise Http404
+    id_item = ''.join(id_item.split('.'))
+    imagem_id = ''.join(imagem_id.split('.'))
+    mascara_id = ''.join(mascara_id.split('.'))
 
     item = imagem = mascara= None
     if id_item:
