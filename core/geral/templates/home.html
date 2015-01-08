@@ -128,6 +128,7 @@
 								<a class="lnk" href="javascript:;">Categorias</a>
 								<div class ="submenu {% if categorias|length <= 10%}auto {% endif %}fix">
 									<ul>
+                                    {% if sazonal %} <li class="cl"><a href="{% url 'home_categoria' slug=shopping_slug categoria=sazonal.slug %}" title="{{ sazonal.nome }}">{{ sazonal.nome}}</a></li> {% endif %}
 										{% if categorias|length > 10%}
 										{% for categoria in categorias %}
 										<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
@@ -136,17 +137,23 @@
 										{% else %}
 										{% for categoria in categorias %}
 										<li class="cl"><a href="{% url 'home_categoria' slug=shopping_slug categoria=categoria.slug %}" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>
-                                       
-                                        
-                                         
+                                 
                                   {% empty %}
 										<li>Sem categoria com ofertas cadastradas</li>
 										{% endfor %}
-                                         {% if sazonal %}<li class="cl"><a href="{% url 'home_categoria' slug=shopping_slug categoria=sazonal.slug %}" title="{{ sazonal.nome }}">{{ sazonal.nome }}</a></li>{% endif %}
-										{% endif %}
+                                  
+                                     
+                               
+                                    {% endif %}
+       
+
 
 									</ul>
+                                    
 								</div>
+                                
+                                
+                                
 							</li>
 
 							<li class="item-menu">
