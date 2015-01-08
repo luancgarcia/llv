@@ -391,6 +391,7 @@ def curtir(request):
     if not id_item and not request.is_ajax():
         raise Http404
 
+    id_item = ''.join(id_item.split('.'))
     item = Oferta.objects.get(id=id_item)
     Log.objects.create(acao=Log.CURTIDA,oferta=item)
 
