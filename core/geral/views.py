@@ -200,7 +200,8 @@ def home_por_categoria(slug, shopping, ids_filtrar):
                                   categoria=categoria,
                                   loja__shopping_id=shopping) \
                           .filter(inicio__lte=hoje,fim__gte=hoje) \
-                          .exclude(id__in=ids_filtrar)
+                          .exclude(id__in=ids_filtrar) \
+                          .order_by('-data_aprovacao')
     return destaques_ofertas_eventos(items)
 
 def categoria(request, categoria):
@@ -236,7 +237,8 @@ def home_por_genero(slug, shopping, ids_filtrar):
                                   genero=genero,
                                   loja__shopping_id=shopping) \
                           .filter(inicio__lte=hoje,fim__gte=hoje) \
-                          .exclude(id__in=ids_filtrar)
+                          .exclude(id__in=ids_filtrar) \
+                          .order_by('-data_aprovacao')
     return destaques_ofertas_eventos(items)
 
 def home_por_loja(slug, shopping, ids_filtrar):
@@ -244,7 +246,8 @@ def home_por_loja(slug, shopping, ids_filtrar):
     loja = Loja.objects.filter(slug=slug,shopping_id=shopping).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja=loja).exclude(id__in=ids_filtrar) \
-                          .filter(inicio__lte=hoje,fim__gte=hoje)
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
+                          .order_by('-data_aprovacao')
 
     return destaques_ofertas_eventos(items)
 
@@ -252,7 +255,8 @@ def home_por_preco(preco, shopping, ids_filtrar):
     hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja__shopping_id=shopping) \
-                          .filter(inicio__lte=hoje,fim__gte=hoje)
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
+                          .order_by('-data_aprovacao')
     if preco == '301':
         items = items.filter(preco_final__gte='301')
     elif preco == '300':
@@ -273,7 +277,8 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
     hoje = date.today()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja__shopping_id=shopping) \
-                          .filter(inicio__lte=hoje,fim__gte=hoje)
+                          .filter(inicio__lte=hoje,fim__gte=hoje) \
+                          .order_by('-data_aprovacao')
 
     porcentagem = int(porcentagem)
     if porcentagem == 30:
@@ -299,7 +304,8 @@ def mais_items(valores, tipo, id_shopping):
                           .filter(Q(loja__shopping_id=id_shopping) |
                                   Q(shopping_id=id_shopping)) \
                           .filter(inicio__lte=hoje,fim__gte=hoje) \
-                          .exclude(id__in=ids_para_filtrar)[:corte]
+                          .exclude(id__in=ids_para_filtrar) \
+                          .order_by('-data_aprovacao')[:corte]
     items_final = []
     for i in items:
         ids_para_filtrar.append(i.id)
