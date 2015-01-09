@@ -68,20 +68,7 @@ class Loja(EditorialModel):
                                    shopping_id=shopping)\
                            .order_by('nome')\
                            .distinct()
-
-        return [l.to_dict() for l in lojas]
-        # from geral.models import Oferta
-        # ofertas =Oferta.itens_por_shopping(shopping)
-        # ofertas = Oferta.objects.filter(status=Oferta.PUBLICADO,
-        #                                 shopping_id=shopping).order_by('nome')
-        # lojas = []
-        # for o in ofertas:
-        #     if o.loja and o.loja not in lojas:
-        #         lojas.append(o.loja)
-        # lojas = cls.objects.filter(publicada=True,
-        #                            shopping_id=shopping).order_by('nome')
-        # filtrado = [l.to_dict() for l in lojas if l.ofertas.filter(status=1)]
-        # return separa_tres_colunas([l.to_dict() for l in lojas])
+        return separa_tres_colunas([l.to_dict() for l in lojas])
 
     @classmethod
     def publicadas_sem_oferta(cls, shopping):
