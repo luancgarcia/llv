@@ -146,7 +146,8 @@ class Sazonal(Categoria):
     def save(self, *args, **kwargs):
         self.sazonal = True
         if self.publicada:
-            Categoria.objects.filter(publicada=True,sazonal=True).update(publicada=False)
+            Categoria.objects.filter(publicada=True,sazonal=True,shopping=self.shopping)\
+                             .update(publicada=False)
         super(Categoria, self).save(*args, **kwargs)
 
     @classmethod
