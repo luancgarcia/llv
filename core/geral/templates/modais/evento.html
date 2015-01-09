@@ -2,7 +2,7 @@
 <div class="content fix" id="modalEvento">
 	<div class="colunaProduto fl">
 		<figure id="fotoProduto" class="fix">
-			{% if evento.desconto or evento.desconto != 0 %}
+			{% if evento.porcentagem or evento.porcentagem != 0 %}
 			<span class="desconto">{{ evento.desconto }}</span>
 			{% endif %}
 			<img src="{{ evento.imagem }}" alt="{{ evento.loja.nome }}" width="" height="" class="fl">

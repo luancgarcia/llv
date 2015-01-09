@@ -17,7 +17,7 @@
 		{% for imagem in oferta.imagens %}
 			{% if forloop.first %}
 			<figure id="fotoProduto" class="fix">
-			{% if oferta.desconto or oferta.desconto != 0 %}
+			{% if oferta.porcentagem or oferta.porcentagem != 0 %}
 				<span class="desconto">{{ oferta.desconto }}</span>
 			{% endif %}
 				<img src="{{ imagem.maior }}" alt="" width="376" height="" class="fl">
