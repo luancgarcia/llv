@@ -123,17 +123,9 @@ class Categoria(EditorialModel):
 
     @classmethod
     def publicadas_com_oferta(cls, shopping=1):
-        ofertas = Oferta.itens_por_shopping(shopping)
-        categorias = []
-        for oferta in ofertas:
-            for categoria in oferta.categoria.all():
-                if not categoria.sazonal and categoria.publicada and \
-                        categoria not in categorias:
-                    categorias.append(categoria)
-        # categorias = cls.objects.filter(shopping_id=shopping,
-        #                                 publicada=True,
-        #                                 sazonal=False).order_by('nome')
-        # filtrado = [c.to_dict() for c in categorias if c.ofertas.filter(status=Oferta.PUBLICADO)]
+        categorias = cls.objects.filter(ofertas__status=1, shopping_id=shopping, sazonal=False, publicada=True) \
+                                .order_by('nome') \
+                                .distinct()
         return separa_tres_colunas([c.to_dict() for c in categorias])
 
 
