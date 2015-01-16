@@ -40,7 +40,7 @@
 		<article class="fix">
 			<p class="chapeu">{{ oferta.chamada_promocional }}</p>
 			<h2 class="titulo">{{ oferta.titulo }}</h2>
-			<p class="descricao">{{ oferta.descricao }}</p>
+			<p class="descricao">{% autoescape off %}{{ oferta.descricao }}{% endautoescape %}</p>
 
 			{% if oferta.preco_inicial %}
             <p class="preco_anterior">de R$ {{oferta.preco_inicial}}</p>
