@@ -158,7 +158,7 @@ class OfertaAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',), }
     list_filter = ['loja__shopping', 'loja', 'status','genero']
     readonly_fields = ('total_compartilhado', 'total_visto', 'total_curtido',
-                       'desconto_value', 'autor')
+                       'desconto_value', 'autor','url',)
     search_fields = ['nome']
     form = OfertaModelForm
 
@@ -222,7 +222,7 @@ class OfertaAdmin(admin.ModelAdmin):
         if not perfil.is_lojista and not perfil.is_marketing:
             fieldsets = (
                 ('Dados', {
-                    'fields': ('total_visto','total_curtido', 'total_compartilhado','autor')
+                    'fields': ('total_visto','total_curtido', 'total_compartilhado','autor', 'url',)
                 }),
                 ('Datas', {
                     'fields': ('inicio','fim')
