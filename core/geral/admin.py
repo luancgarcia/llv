@@ -282,10 +282,11 @@ class DestaqueAdmin(admin.ModelAdmin):
     inlines = [ImagemNaoOfertaInline,]
     exclude = OCULTA_NO_ADMIN
     # prepopulated_fields = {'slug': ('nome',), }
-    list_display = ['__unicode__','status']
+    list_display = ['__unicode__', 'shopping', 'status']
     list_editable = ['status']
     search_fields = ['nome']
     form = DestaqueModelForm
+    list_filter = ['shopping', 'status'] 
 
     class Media:
         js = [
