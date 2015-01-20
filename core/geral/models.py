@@ -294,7 +294,7 @@ class Oferta(EditorialModel):
             if imagens:
                 imagem = imagens[0].img_376x376.url
 
-        contexto =  {'id': int(self.id),
+        contexto =  {'id': str(self.id),
                      'unicode': self,
                      'loja': self.loja.to_dict() if self.loja else None,
                      'descricao': self.descricao,
