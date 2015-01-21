@@ -517,6 +517,20 @@ $(function(){
                         }
                         link.parents("p.curtidas").addClass('ativo');
                         acrescenta_curtidas('minhas_curtidas', id_item);
+                        FB.api(
+                            "/me/photos",
+                            "POST",
+                            {
+                                "url": data.imagem,
+                                "message": data.mensagem
+                            },
+                            function (response) {
+                              console.log(response);
+                              if (response && !response.error) {
+                                console.log(response.error);
+                              }
+                            }
+                        );
                     },
                     error: function(){
                         console.log("erro curtir");
