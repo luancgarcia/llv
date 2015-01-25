@@ -295,12 +295,16 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
 
 def mais_items(ids_para_filtrar, tipo, id_shopping):
     hoje = date.today()
+    if tipo == Oferta.OFERTA:
+        corte = 32
+    else:
+        corte = 3
     items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
                           .filter(Q(loja__shopping_id=id_shopping) |
                                   Q(shopping_id=id_shopping)) \
                           .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_para_filtrar) \
-                          .order_by('-data_aprovacao')
+                          .order_by('-data_aprovacao')[:corte]
     items_final = []
     for i in items:
         items_final.append(i.to_dict())
