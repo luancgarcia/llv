@@ -312,9 +312,12 @@ def limpa_ids(valores):
 
 @csrf_exempt
 def mais_ofertas(request):
-    ultimo_destaque = limpa_ids(request.POST.get('ultimo_destaque', None))
-    ultimo_evento = limpa_ids(request.POST.get('ultimo_evento', None))
-    ultima_oferta = limpa_ids(request.POST.get('ultima_oferta', None))
+    ultimo_destaque = request.POST.get('ultimo_destaque', None)
+    ultimo_destaque = limpa_ids(ultimo_destaque) if ultimo_destaque else None
+    ultimo_evento = request.POST.get('ultimo_evento', None)
+    ultimo_evento = limpa_ids(ultimo_evento) if ultimo_evento else None
+    ultima_oferta = request.POST.get('ultima_oferta', None)
+    ultima_oferta = limpa_ids(ultima_oferta) if ultima_oferta else None
     id_shopping = request.COOKIES.get('shp_id', None)
 
     destaques = eventos = ofertas = []
