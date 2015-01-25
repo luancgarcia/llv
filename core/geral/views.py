@@ -293,7 +293,7 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
 
     return destaques_ofertas_eventos(items)
 
-def mais_items(ids_para_filtrar, tipo, id_shopping):
+def mais_items(ids_para_filtrar, tipo, id_shopping, corte=None):
     hoje = date.today()
     items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
                           .filter(Q(loja__shopping_id=id_shopping) |
@@ -301,6 +301,8 @@ def mais_items(ids_para_filtrar, tipo, id_shopping):
                           .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_para_filtrar) \
                           .order_by('-data_aprovacao')
+    if corte:
+        items = items[:corte]
     items_final = []
     for i in items:
         items_final.append(i.to_dict())
@@ -321,7 +323,7 @@ def mais_ofertas(request):
     id_shopping = request.COOKIES.get('shp_id', None)
 
     destaques = eventos = ofertas = []
-    total_destaques = total_eventos = 0
+    total_destaques = total_eventos = corte = 0
     mais_paginas = False
     if ultimo_destaque:
         destaques = mais_items(ultimo_destaque, Oferta.DESTAQUE, id_shopping)
@@ -329,12 +331,12 @@ def mais_ofertas(request):
     if ultimo_evento:
         eventos = mais_items(ultimo_evento, Oferta.EVENTO, id_shopping)
         total_eventos = len(eventos)
+    if total_destaques or total_eventos:
+        corte = slice_oferta(len(destaques),len(eventos))
     if ultima_oferta:
-        ofertas = mais_items(ultima_oferta, Oferta.OFERTA, id_shopping)
+        ofertas = mais_items(ultima_oferta, Oferta.OFERTA, id_shopping, corte=corte)
         if len(ofertas) > 14:
             mais_paginas = True
-        if total_destaques or total_eventos:
-            ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
     if ultimo_destaque:
         ultimo_destaque_id = ultimo_destaque + [d['id'] for d in destaques]
