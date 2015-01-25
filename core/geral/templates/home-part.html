@@ -50,6 +50,10 @@
 			{% include 'blocos/bloco_dois_sem_evento.html' with destaque=destaques.1 %}
 			{% if destaques.2 %}
 				{% include 'blocos/bloco_tres_sem_evento.html' with destaque=destaques.2 %}
+				<br class="cl">
+				{% for oferta in ofertas|slice:"11:" %}
+					{% include 'blocos/oferta_item.html' %}
+				{% endfor %}
 			{% else %}
 				<br class="cl">
 				{% for oferta in ofertas|slice:"8:" %}
