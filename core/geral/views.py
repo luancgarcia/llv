@@ -327,12 +327,12 @@ def mais_ofertas(request):
     if ultimo_destaque:
         ultimo_destaque = limpa_ids(ultimo_destaque)
         destaques = mais_items(ultimo_destaque, Oferta.DESTAQUE, id_shopping)
-        ultimo_destaque_id = ultimo_destaque + [d['id'] for d in destaques]
+        ultimo_destaque_id = ultimo_destaque + [int(d['id']) for d in destaques]
         total_destaques = len(destaques)
     if ultimo_evento:
         ultimo_evento = limpa_ids(ultimo_evento)
         eventos = mais_items(ultimo_evento, Oferta.EVENTO, id_shopping)
-        ultimo_evento_id = ultimo_evento + [e['id'] for e in eventos]
+        ultimo_evento_id = ultimo_evento + [int(e['id']) for e in eventos]
         total_eventos = len(eventos)
     if ultima_oferta:
         ultima_oferta = limpa_ids(ultima_oferta)
@@ -341,7 +341,7 @@ def mais_ofertas(request):
             mais_paginas = True
         if total_destaques or total_eventos:
             ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
-        ultima_oferta_id = ultima_oferta + [o['id'] for o in ofertas]
+        ultima_oferta_id = ultima_oferta + [int(o['id']) for o in ofertas]
 
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': ultimo_destaque_id,
