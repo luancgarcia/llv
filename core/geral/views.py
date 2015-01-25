@@ -293,7 +293,7 @@ def home_por_desconto(porcentagem, shopping, ids_filtrar):
 
     return destaques_ofertas_eventos(items)
 
-def mais_items(ids_para_filtrar, tipo, id_shopping, corte=None):
+def mais_items(ids_para_filtrar, tipo, id_shopping):
     hoje = date.today()
     items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
                           .filter(Q(loja__shopping_id=id_shopping) |
@@ -301,8 +301,6 @@ def mais_items(ids_para_filtrar, tipo, id_shopping, corte=None):
                           .filter(inicio__lte=hoje,fim__gte=hoje) \
                           .exclude(id__in=ids_para_filtrar) \
                           .order_by('-data_aprovacao')
-    if corte:
-        items = items[:corte]
     items_final = []
     for i in items:
         items_final.append(i.to_dict())
@@ -315,43 +313,31 @@ def limpa_ids(valores):
 @csrf_exempt
 def mais_ofertas(request):
     ultimo_destaque = request.POST.get('ultimo_destaque', None)
-    ultimo_destaque = limpa_ids(ultimo_destaque) if ultimo_destaque else None
     ultimo_evento = request.POST.get('ultimo_evento', None)
-    ultimo_evento = limpa_ids(ultimo_evento) if ultimo_evento else None
     ultima_oferta = request.POST.get('ultima_oferta', None)
-    ultima_oferta = limpa_ids(ultima_oferta) if ultima_oferta else None
     id_shopping = request.COOKIES.get('shp_id', None)
 
-    destaques = eventos = ofertas = []
-    total_destaques = total_eventos = corte = 0
+    destaques = eventos = ofertas = ultimo_destaque_id = ultimo_evento_id = ultima_oferta_id = []
+    total_destaques = total_eventos = 0
     mais_paginas = False
     if ultimo_destaque:
+        ultimo_destaque = limpa_ids(ultimo_destaque)
         destaques = mais_items(ultimo_destaque, Oferta.DESTAQUE, id_shopping)
+        ultimo_destaque_id = ultimo_destaque + [d['id'] for d in destaques]
         total_destaques = len(destaques)
     if ultimo_evento:
+        ultimo_evento = limpa_ids(ultimo_evento)
         eventos = mais_items(ultimo_evento, Oferta.EVENTO, id_shopping)
+        ultimo_evento_id = ultimo_evento + [e['id'] for e in eventos]
         total_eventos = len(eventos)
-    if total_destaques or total_eventos:
-        corte = slice_oferta(len(destaques),len(eventos))
     if ultima_oferta:
-        ofertas = mais_items(ultima_oferta, Oferta.OFERTA, id_shopping, corte=corte)
+        ultima_oferta = limpa_ids(ultima_oferta)
+        ofertas = mais_items(ultima_oferta, Oferta.OFERTA, id_shopping)
         if len(ofertas) > 14:
             mais_paginas = True
-
-    if ultimo_destaque:
-        ultimo_destaque_id = ultimo_destaque + [d['id'] for d in destaques]
-    else:
-        ultimo_destaque_id = [d['id'] for d in destaques]
-
-    if ultimo_evento:
-        ultimo_evento_id = ultimo_evento + [e['id'] for e in eventos]
-    else:
-        ultimo_evento_id = [e['id'] for e in eventos]
-
-    if ultima_oferta:
+        if total_destaques or total_eventos:
+            ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
         ultima_oferta_id = ultima_oferta + [o['id'] for o in ofertas]
-    else:
-        ultima_oferta_id = [o['id'] for o in ofertas]
 
     contexto = {'destaques': destaques,
                 'ultimo_destaque_id': ultimo_destaque_id,
