@@ -336,12 +336,27 @@ def mais_ofertas(request):
         if total_destaques or total_eventos:
             ofertas = ofertas[:slice_oferta(len(destaques),len(eventos))]
 
+    if ultimo_destaque:
+        ultimo_destaque_id = ultimo_destaque + [d['id'] for d in destaques]
+    else:
+        ultimo_destaque_id = [d['id'] for d in destaques]
+
+    if ultimo_evento:
+        ultimo_evento_id = ultimo_evento + [e['id'] for e in eventos]
+    else:
+        ultimo_evento_id = [e['id'] for e in eventos]
+
+    if ultima_oferta:
+        ultima_oferta_id = ultima_oferta + [o['id'] for o in ofertas]
+    else:
+        ultima_oferta_id = [o['id'] for o in ofertas]
+
     contexto = {'destaques': destaques,
-                'ultimo_destaque_id': ultimo_destaque + [d['id'] for d in destaques],
+                'ultimo_destaque_id': ultimo_destaque_id,
                 'eventos': eventos,
-                'ultimo_evento_id': ultimo_evento + [e['id'] for e in eventos],
+                'ultimo_evento_id': ultimo_evento_id,
                 'ofertas': ofertas,
-                'ultima_oferta_id': ultima_oferta + [o['id'] for o in ofertas],
+                'ultima_oferta_id': ultima_oferta_id,
                 'mais_paginas': mais_paginas,
                 'eh_paginacao': True}
 
