@@ -371,6 +371,7 @@ class EventoAdmin(admin.ModelAdmin):
     list_editable = ['status']
     list_display_links = ['nome','genero']
     search_fields = ['nome']
+    list_filter = ['shopping', 'status']
     form = EventoModelForm
 
     fieldsets = (
