@@ -10,6 +10,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.template.defaultfilters import date as _date
 from django.db.models import Q
+from aggregate_if import Count
 from django.db.models.signals import post_save
 from django.conf import settings
 
@@ -374,6 +375,12 @@ class Oferta(EditorialModel):
             return 'Sem url ainda'
 
         return '%s/%s#%s?%s' % (settings.SHARE_URL, shopping, tipo, self.slug)
+
+    @classmethod
+    def query_relatorio(cls, shopping_id, acao):
+        return Oferta.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
+                                                                 logs__acao=acao)))\
+                             .order_by('-vistas')
 
 
 class Destaque(Oferta):
