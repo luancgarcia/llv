@@ -43,9 +43,9 @@
                         <td class="model-name">{{ loja.nome }}</td><td>{{ loja.numero }}</td>
                     </tr>
                     {% endfor %}
-                    <!--<tr>
-                        <td colspan="2"><a href="#">Ver lista completa</a></td>
-                    </tr>-->
+                    <tr>
+                        <td colspan="2"><a href="{% url 'lojas_mais_vistas' shopping_id %}">Ver lista completa</a></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

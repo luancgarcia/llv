@@ -20,31 +20,38 @@
 {% block content %}
 
 <div class="container-fluid">
-        <div class="row-fluid dashboard-tools">
-        <div class="span0 hidden-phone" id="blank">&nbsp;</div>
-        <div class="span5 app-list">
-            <div>
-                <h2>Relatórios</h2>
-            </div>
-            {% if shoppings %}
-                <!--<h2>Shoppings</h2>-->
-                    <table summary="Lista de shoppings" class="table table-striped table-bordered table-condensed">
-                        <tbody>
-                            <tr>
-                                <td class="model-name">
-                                    <ul>
-                                {% for s in shoppings %}
-                                        <li><a href="{% url 'relatorios' s.id %}">{{ s.nome }}</a><br /></li>
-                                {% endfor %}
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-            {% else %}
-                <p>Sem shoppings disponíves para listar.</p>
-            {% endif %}
+    <div class="row-fluid dashboard-tools">
+    <div class="span0 hidden-phone" id="blank">&nbsp;</div>
+    <div class="span9 app-list">
+        <div>
+            <h2>Relatórios por shopping</h2>
         </div>
+    </div>
+    {% for s in shoppings %}
+    <div class="span5 app-list">
+        <table summary="Lista de shoppings" class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <td class="model-name">
+                        <h4><a href="{% url 'relatorios' s.id %}">{{ s.nome }}</a></h4>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="{% url 'lojas_mais_vistas' s.id %}">Lojas mais visualizadas</a></td>
+                    <td><a href="{% url 'lojas_mais_vistas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="">Lojas mais solicitadas</a></td>
+                    <td><a href="{% url 'relatorios' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% empty %}
+        <p>Sem shoppings disponíves para listar.</p>
+    {% endfor %}
 </div>
 
 {% endblock %}
