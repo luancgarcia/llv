@@ -22,9 +22,9 @@
 <div class="container-fluid">
         <div class="row-fluid dashboard-tools">
         <div class="span0 hidden-phone" id="blank">&nbsp;</div>
-        <div class="span9 app-list">
+        <div class="span5 app-list">
             <div>
-                <h2>Lista de Relatórios</h2>
+                <h2>Relatórios</h2>
             </div>
             {% if shoppings %}
                 <!--<h2>Shoppings</h2>-->
@@ -32,9 +32,11 @@
                         <tbody>
                             <tr>
                                 <td class="model-name">
+                                    <ul>
                                 {% for s in shoppings %}
-                                    <a href="#">{{ s.nome }}</a><br />
+                                        <li><a href="{% url 'relatorios' s.id %}">{{ s.nome }}</a><br /></li>
                                 {% endfor %}
+                                    </ul>
                                 </td>
                             </tr>
                         </tbody>
