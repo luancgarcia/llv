@@ -11,7 +11,7 @@ from django.conf import settings
 from django.db.models import Q
 from aggregate_if import Count
 
-from utils.functions import jsonResponse
+from utils.functions import jsonResponse, dict_mais_vistas
 from utils.custom_email import TemplatedEmail
 
 from geral.models import (Categoria, ImagemOferta, Oferta, Log, Mascara,
@@ -652,3 +652,17 @@ def lojas_mais_solicitadas(request, shopping_id):
                 'mais_do_mes': mais_do_mes,
                 'mais_da_semana': mais_da_semana}
     return render(request, "relatorios/lojas_mais_solicitadas.html", contexto)
+
+def ofertas_mais_vistas(request, shopping_id):
+    hoje = date.today()
+    mes = hoje + timedelta(days=-30)
+    semana = hoje + timedelta(days=-7)
+
+    mais_vistas_query = Oferta.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=1, logs__acao=1))).order_by('-vistas')
+
+    contexto = {'tipo': 'oferta',
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_vistas_query.filter(data_criacao__gte=mes)],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_vistas_query.filter(data_criacao__gte=semana)]}
+    return render(request, "relatorios/mais_vistas.html", contexto)
