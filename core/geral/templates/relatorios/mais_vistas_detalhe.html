@@ -1,0 +1,8 @@
+<td class="model-name">
+{% if tipo == 'oferta' %}
+    <a href="/admin/geral/oferta/{{ i.id }}">{{ i.nome }}</a>
+{% else %}
+    {{ i.nome }}
+{% endif %}
+</td>
+<td>{{ i.numero }}</td>

@@ -40,12 +40,9 @@
                 <tbody>
                     {% for i in mais_vistas %}
                     <tr>
-                        <td class="model-name">{{ i.nome }}</td><td>{{ i.numero }}</td>
+                        {% include 'relatorios/mais_vistas_detalhe.html' %}
                     </tr>
                     {% endfor %}
-                    <!--<tr>
-                        <td colspan="2"><a href="#">Ver lista completa</a></td>
-                    </tr>-->
                 </tbody>
             </table>
         </div>
@@ -62,7 +59,7 @@
                 <tbody>
                     {% for i in mais_do_mes %}
                     <tr>
-                        <td class="model-name">{{ i.nome }}</td><td>{{ i.numero }}</td>
+                        {% include 'relatorios/mais_vistas_detalhe.html' %}
                     </tr>
                     {% empty %}
                     <tr><td colspan="2">Sem itens no período</td></tr>
@@ -83,7 +80,7 @@
                 <tbody>
                     {% for i in mais_da_semana %}
                     <tr>
-                        <td class="model-name">{{ i.nome }}</td><td>{{ i.numero }}</td>
+                        {% include 'relatorios/mais_vistas_detalhe.html' 
                     </tr>
                     {% empty %}
                     <tr><td colspan="2">Sem itens no período</td></tr>
