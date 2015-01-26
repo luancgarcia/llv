@@ -2,7 +2,7 @@
 
 import os
 from PIL import Image, ImageDraw, ImageFont
-from datetime import date
+from datetime import date, timedelta
 
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -621,3 +621,19 @@ def relatorios(request, shopping_id):
                 'lojas_mais_vistas': lojas_mais_vistas,
                 'lojas_mais_pedidas': lojas_mais_pedidas}
     return render(request, "relatorios/shopping.html", contexto)
+
+def lojas_mais_vistas(request, shopping_id):
+    hoje = date.today()
+    mes = hoje + timedelta(days=-30)
+    semana = hoje + timedelta(days=-7)
+    lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
+                                                                 only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
+                                          .order_by('-vistas')
+    lojas_mais_vistas = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query]
+    mais_do_mes = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes)]
+    mais_da_semana = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana)]
+    contexto = {'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'lojas_mais_vistas': lojas_mais_vistas,
+                'mais_do_mes': mais_do_mes,
+                'mais_da_semana': mais_da_semana}
+    return render(request, "relatorios/lojas_mais_vistas.html", contexto)

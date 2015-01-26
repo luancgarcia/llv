@@ -66,6 +66,8 @@ urlpatterns = patterns('',
 
     url(r'^relatorios/$', 'geral.views.relatorios_index', name='relatorios_index'),
     url(r'^relatorios/(?P<shopping_id>\d+)/$', 'geral.views.relatorios', name='relatorios'),
+    url(r'^relatorios/lojas_mais_vistas/(?P<shopping_id>\d+)/$', 'geral.views.lojas_mais_vistas',
+        name='lojas_mais_vistas'),
 
     url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
     url(r'^$', 'geral.views.index', name='index'),
