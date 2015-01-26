@@ -659,11 +659,39 @@ def ofertas_mais_vistas(request, shopping_id):
     mes = hoje + timedelta(days=-30)
     semana = hoje + timedelta(days=-7)
 
-    mais_vistas_query = Oferta.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=1, logs__acao=1))).order_by('-vistas')
+    mais_vistas_query = Oferta.query_relatorio(shopping_id, acao=1)
 
     contexto = {'tipo': 'oferta',
                 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
                 'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query],
                 'mais_do_mes': [dict_mais_vistas(l) for l in mais_vistas_query.filter(data_criacao__gte=mes)],
                 'mais_da_semana': [dict_mais_vistas(l)for l in mais_vistas_query.filter(data_criacao__gte=semana)]}
+    return render(request, "relatorios/mais_vistas.html", contexto)
+
+def ofertas_mais_curtidas(request, shopping_id):
+    hoje = date.today()
+    mes = hoje + timedelta(days=-30)
+    semana = hoje + timedelta(days=-7)
+
+    mais_query = Oferta.query_relatorio(shopping_id, acao=2)
+
+    contexto = {'tipo': 'oferta', 'modalidade': 'curtidas',
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_query],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes)],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana)]}
+    return render(request, "relatorios/mais_vistas.html", contexto)
+
+def ofertas_mais_compartilhadas(request, shopping_id):
+    hoje = date.today()
+    mes = hoje + timedelta(days=-30)
+    semana = hoje + timedelta(days=-7)
+
+    mais_query = Oferta.query_relatorio(shopping_id, acao=3)
+
+    contexto = {'tipo': 'oferta', 'modalidade': 'compartilhadas',
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_query],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes)],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana)]}
     return render(request, "relatorios/mais_vistas.html", contexto)

@@ -50,6 +50,14 @@
                     <td><a href="{% url 'ofertas_mais_vistas' s.id %}">Ofertas mais visualizadas</a></td>
                     <td><a href="{% url 'ofertas_mais_vistas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
                 </tr>
+                <tr>
+                    <td><a href="{% url 'ofertas_mais_curtidas' s.id %}">Ofertas mais curtidas</a></td>
+                    <td><a href="{% url 'ofertas_mais_curtidas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'ofertas_mais_compartilhadas' s.id %}">Ofertas mais compartilhadas</a></td>
+                    <td><a href="{% url 'ofertas_mais_compartilhadas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
             </tbody>
         </table>
     </div>
