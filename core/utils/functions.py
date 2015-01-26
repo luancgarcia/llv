@@ -167,3 +167,8 @@ def separa_tres_colunas(lista):
             for c in coluna:
                 retorno.append(c)
     return retorno
+
+def dict_mais_vistas(item):
+    return {'id': item.id,
+            'nome': item.nome,
+            'numero': item.vistas}
