@@ -55,6 +55,20 @@
                 </tbody>
             </table>
             {% endif %}
+            {% if not user.get_profile.is_lojista and not user.get_profile.is_marketing %}
+            <div>
+                <h2>Relatórios</h2>
+            </div>
+            <table class="table table-striped table-bordered table-condensed">
+                <tbody>
+                <tr>
+                    <td>
+                        Relatórios disponíveis <a href="/relatorios/">Acesse</a>.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            {% endif %}
             {% if app_list %}
                 <h2>{% trans 'Apps' %}</h2>
                 {% for app in app_list %}
