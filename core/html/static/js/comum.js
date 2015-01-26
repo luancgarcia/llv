@@ -742,7 +742,7 @@ $( document ).ready(function() {
                         $('.container').append('<br class="cl"><img src="https://llv.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais">');
 	            },
 	            success: function(data) {
-	                $(".grid:last").after(data);
+	                $(".img-loading-mais").after(data);
 	                $(".img-loading-mais").remove();
 	            },
 	            error: function(){
