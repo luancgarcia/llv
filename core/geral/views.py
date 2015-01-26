@@ -629,14 +629,15 @@ def lojas_mais_vistas(request, shopping_id):
     lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
                                                                  only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
                                           .order_by('-vistas')
-    lojas_mais_vistas = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query]
-    mais_do_mes = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes)]
-    mais_da_semana = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana)]
-    contexto = {'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'lojas_mais_vistas': lojas_mais_vistas,
+    lojas_mais_vistas = [dict_mais_vistas(l) for l in lojas_mais_vistas_query]
+    mais_do_mes = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes)]
+    mais_da_semana = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana)]
+    contexto = {'tipo': 'loja',
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'mais_vistas': lojas_mais_vistas,
                 'mais_do_mes': mais_do_mes,
                 'mais_da_semana': mais_da_semana}
-    return render(request, "relatorios/lojas_mais_vistas.html", contexto)
+    return render(request, "relatorios/mais_vistas.html", contexto)
 
 def lojas_mais_solicitadas(request, shopping_id):
     hoje = date.today()
