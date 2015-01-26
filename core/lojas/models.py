@@ -24,7 +24,8 @@ class Shopping(EditorialModel):
         return u'%s' % self.nome
 
     def to_dict(self):
-        return {'nome': self.nome,
+        return {'id': self.id,
+                'nome': self.nome,
                 'slug': self.slug,
                 'id_multiplan': self.id_multiplan}
 
