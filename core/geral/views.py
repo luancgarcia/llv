@@ -637,3 +637,18 @@ def lojas_mais_vistas(request, shopping_id):
                 'mais_do_mes': mais_do_mes,
                 'mais_da_semana': mais_da_semana}
     return render(request, "relatorios/lojas_mais_vistas.html", contexto)
+
+def lojas_mais_solicitadas(request, shopping_id):
+    hoje = date.today()
+    mes = hoje + timedelta(days=-30)
+    semana = hoje + timedelta(days=-7)
+    mais_solicitadas_query = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=shopping_id))) \
+                                         .order_by('-pedidos', '-data_criacao')
+    mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query]
+    mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=mes)]
+    mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=semana)]
+    contexto = {'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'mais_solicitadas': mais_solicitadas,
+                'mais_do_mes': mais_do_mes,
+                'mais_da_semana': mais_da_semana}
+    return render(request, "relatorios/lojas_mais_solicitadas.html", contexto)
