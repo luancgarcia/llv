@@ -76,6 +76,8 @@ urlpatterns = patterns('',
         'geral.views.ofertas_mais_curtidas', name='ofertas_mais_curtidas'),
     url(r'^relatorios/ofertas_mais_compartilhadas/(?P<shopping_id>\d+)/$',
         'geral.views.ofertas_mais_compartilhadas', name='ofertas_mais_compartilhadas'),
+    url(r'^relatorios/categorias_mais_vistas/(?P<shopping_id>\d+)/$',
+        'geral.views.categorias_mais_vistas', name='categorias_mais_vistas'),
 
     url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
     url(r'^$', 'geral.views.index', name='index'),

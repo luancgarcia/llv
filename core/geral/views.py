@@ -695,3 +695,18 @@ def ofertas_mais_compartilhadas(request, shopping_id):
                 'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes)],
                 'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana)]}
     return render(request, "relatorios/mais_vistas.html", contexto)
+
+def categorias_mais_vistas(request, shopping_id):
+    hoje = date.today()
+    mes = hoje + timedelta(days=-30)
+    semana = hoje + timedelta(days=-7)
+
+    mais_query = Categoria.objects.annotate(vistas=Count('pk', only=Q(ofertas__loja__shopping=shopping_id,
+                                                                      ofertas__logs__acao=1))).order_by('-vistas')
+
+    contexto = {'tipo': 'categoria', 'modalidade': None,
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_query],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes)],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana)]}
+    return render(request, "relatorios/mais_vistas.html", contexto)
