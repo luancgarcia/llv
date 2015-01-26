@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
 from django.conf import settings
 from django.db.models import Q
-from aggregate_if import Count, Sum
+from aggregate_if import Count
 
 from utils.functions import jsonResponse
 from utils.custom_email import TemplatedEmail
@@ -617,6 +617,7 @@ def relatorios(request, shopping_id):
     lojas_mais_pedidas = [{'nome': l.nome, 'numero': l.pedidos} for l in lojas_mais_pedidas_query]
 
     contexto = {'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'shopping_id': shopping_id,
                 'lojas_mais_vistas': lojas_mais_vistas,
                 'lojas_mais_pedidas': lojas_mais_pedidas}
     return render(request, "relatorios/shopping.html", contexto)
