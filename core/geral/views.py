@@ -608,11 +608,11 @@ def relatorios_index(request):
 
 def relatorios(request, shopping_id):
     lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
-                                                                 only=Q(ofertas__logs__acao=1,shopping=1)))\
+                                                                 only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
                                           .order_by('-vistas')[:10]
     lojas_mais_vistas = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query]
 
-    lojas_mais_pedidas_query = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=1)))\
+    lojas_mais_pedidas_query = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=shopping_id)))\
                                            .order_by('-pedidos','-data_criacao')[:10]
     lojas_mais_pedidas = [{'nome': l.nome, 'numero': l.pedidos} for l in lojas_mais_pedidas_query]
 
