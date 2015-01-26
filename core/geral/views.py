@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
 from django.conf import settings
 from django.db.models import Q
+from aggregate_if import Count, Sum
 
 from utils.functions import jsonResponse
 from utils.custom_email import TemplatedEmail
@@ -600,3 +601,22 @@ def notifica(request, acao):
         raise
 
     return jsonResponse(contexto)
+
+def relatorios_index(request):
+    contexto = {'shoppings': [s.to_dict() for s in Shopping.objects.all()]}
+    return render(request, "relatorios/index.html", contexto)
+
+def relatorios(request, shopping_id):
+    lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
+                                                                 only=Q(ofertas__logs__acao=1,shopping=1)))\
+                                          .order_by('-vistas')[:10]
+    lojas_mais_vistas = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query]
+
+    lojas_mais_pedidas_query = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=1)))\
+                                           .order_by('-pedidos','-data_criacao')[:10]
+    lojas_mais_pedidas = [{'nome': l.nome, 'numero': l.pedidos} for l in lojas_mais_pedidas_query]
+
+    contexto = {'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'lojas_mais_vistas': lojas_mais_vistas,
+                'lojas_mais_pedidas': lojas_mais_pedidas}
+    return render(request, "relatorios/shopping.html", contexto)
