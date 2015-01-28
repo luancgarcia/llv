@@ -169,6 +169,6 @@ def separa_tres_colunas(lista):
     return retorno
 
 def dict_mais_vistas(item):
-    return {'id': item.id,
+    return {'id': str(int(item.id)),
             'nome': item.nome,
             'numero': item.vistas}
