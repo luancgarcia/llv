@@ -750,17 +750,46 @@ def eventos_mais_compartilhados(request, shopping_id):
     contexto = itens_com_mais(request, shopping_id, Log.COMPARTILHADA, Oferta.EVENTO)
     return render(request, "relatorios/mais_vistas.html", contexto)
 
+@csrf_exempt
 def categorias_mais_vistas(request, shopping_id):
-    hoje = date.today()
-    mes = hoje + timedelta(days=-30)
-    semana = hoje + timedelta(days=-7)
-
-    mais_query = Categoria.objects.annotate(vistas=Count('pk', only=Q(ofertas__loja__shopping=shopping_id,
-                                                                      ofertas__logs__acao=1))).order_by('-vistas')
+    inicio_str = inicio = fim_str = fim = None
+    if request.method == "POST":
+        inicio_str = request.POST.get('inicio', None)
+        inicio = datetime.strptime(inicio_str, '%d/%m/%Y')
+        fim_str = request.POST.get('fim', None)
+        fim = datetime.strptime(fim_str, '%d/%m/%Y')
 
     contexto = {'tipo': 'categoria', 'modalidade': None,
-                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes) if l.vistas],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana) if l.vistas]}
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome}
+
+    if inicio and fim:
+        query_filtro = Categoria.objects.annotate(vistas=Count('pk', only=Q(ofertas__loja__shopping=shopping_id,
+                                                                            ofertas__logs__acao=1,
+                                                                            ofertas__logs__data_criacao__gte=inicio,
+                                                                            ofertas__logs__data_criacao__lte=fim+timedelta(days=1)))) \
+                                        .order_by('-vistas')
+        contexto.update({'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+                         'inicio': inicio_str, 'fim': fim_str})
+    else:
+        hoje = date.today()
+        mes = hoje + timedelta(days=-30)
+        semana = hoje + timedelta(days=-7)
+
+        mais_query = Categoria.objects.annotate(vistas=Count('pk', only=Q(ofertas__loja__shopping=shopping_id,
+                                                                          ofertas__logs__acao=1))).order_by('-vistas')
+
+        mes_query = Categoria.objects.annotate(vistas=Count('pk', only=Q(ofertas__loja__shopping=shopping_id,
+                                                                         ofertas__logs__acao=1,
+                                                                         ofertas__logs__data_criacao__gte=mes)))\
+                                     .order_by('-vistas')
+
+        semana_query = Categoria.objects.annotate(vistas=Count('pk', only=Q(ofertas__loja__shopping=shopping_id,
+                                                                            ofertas__logs__acao=1,
+                                                                            ofertas__logs__data_criacao__gte=semana)))\
+                                        .order_by('-vistas')
+
+        contexto.update({'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
+                    'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
+                    'mais_da_semana': [dict_mais_vistas(l)for l in semana_query if l.vistas]})
+
     return render(request, "relatorios/mais_vistas.html", contexto)
