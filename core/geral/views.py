@@ -644,17 +644,13 @@ def lojas_mais_vistas(request, shopping_id):
                          'inicio': inicio_str, 'fim': fim_str})
     else:
         hoje = date.today()
-        mes = hoje + timedelta(days=-30)
-        semana = hoje + timedelta(days=-7)
-        lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
-                                                                     only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
-                                              .order_by('-vistas')
-        lojas_mais_vistas = [dict_mais_vistas(l) for l in lojas_mais_vistas_query if l.vistas]
-        mais_do_mes = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes) if l.vistas]
-        mais_da_semana = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana) if l.vistas]
-        contexto.update({'mais_vistas': lojas_mais_vistas,
-                         'mais_do_mes': mais_do_mes,
-                         'mais_da_semana': mais_da_semana})
+        mais_vistas = Loja.relatorio_visitas(shopping_id)
+        mes_query = Loja.relatorio_visitas(shopping_id, date=hoje + timedelta(days=-30))
+        semana_query = Loja.relatorio_visitas(shopping_id, date=hoje + timedelta(days=-7))
+        contexto.update({'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas if l.vistas],
+                         'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
+                         'mais_da_semana': [dict_mais_vistas(l) for l in semana_query if l.vistas]})
+
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 @csrf_exempt

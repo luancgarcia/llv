@@ -80,6 +80,18 @@ class Loja(EditorialModel):
         return [l.to_dict() for l in lojas if not l.ofertas.filter(status=1)]
 
     @classmethod
+    def relatorio_visitas(cls, shopping_id, date=None):
+        if not date:
+            return Loja.objects.annotate(vistas=Count('pk', only=Q(ofertas__logs__acao=1,
+                                                             shopping=shopping_id))).order_by('-vistas')
+        else:
+            return Loja.objects.annotate(vistas=Count('pk',
+                                                      only=Q(ofertas__logs__acao=1,
+                                                             shopping=shopping_id,
+                                                             ofertas__logs__data_criacao__gte=date)))\
+                .order_by('-vistas')
+
+    @classmethod
     def relatorio_solicitacoes(cls, shopping_id, date=None):
         if not date:
             return Loja.objects.annotate(
