@@ -683,8 +683,10 @@ def lojas_mais_solicitadas(request, shopping_id):
                                              .order_by('-pedidos')
         mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in solicitadas_query if l.pedidos]
 
-        mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in
-                       solicitadas_query.filter(solicitacoes__data_criacao__gte=mes) if l.pedidos]
+        mes_query = Loja.objects.annotate(
+            pedidos=Count('solicitacoes', only=Q(shopping=shopping_id,solicitacoes__data_criacao__gte=mes))) \
+            .order_by('-pedidos')
+        mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in mes_query if l.pedidos]
 
         mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in solicitadas_query.filter(solicitacoes__data_criacao__gte=semana) if l.pedidos]
         contexto.update({'mais_solicitadas': mais_solicitadas,
