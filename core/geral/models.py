@@ -396,7 +396,8 @@ class Oferta(EditorialModel):
         mes_query = cls.query_relatorio(shopping_id, acao, tipo, date=hoje + timedelta(days=-30))
         semana_query = cls.query_relatorio(shopping_id, acao, tipo, date=hoje + timedelta(days=-7))
 
-        return {'tipo': 'oferta', 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+        return {'tipo': cls.TIPOS[tipo][1],
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
                 'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query if l.vistas],
                 'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
                 'mais_da_semana': [dict_mais_vistas(l) for l in semana_query if l.vistas]}
