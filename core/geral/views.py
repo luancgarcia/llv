@@ -687,7 +687,7 @@ def lojas_mais_solicitadas(request, shopping_id):
     return render(request, "relatorios/lojas_mais_solicitadas.html", contexto)
 
 @csrf_exempt
-def ofertas_mais_vistas(request, shopping_id):
+def itens_com_mais(request, shopping_id, acao, tipo):
     inicio_str = inicio = fim_str = fim = None
     if request.method == "POST":
         inicio_str = request.POST.get('inicio', None)
@@ -696,51 +696,58 @@ def ofertas_mais_vistas(request, shopping_id):
         fim = datetime.strptime(fim_str, '%d/%m/%Y')
 
     if inicio and fim:
-        query_filtro = Oferta.relatorio_filtrado(shopping_id, Log.CLIQUE, Oferta.OFERTA, inicio, fim)
-        contexto = {'tipo': 'oferta','nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+        query_filtro = Oferta.relatorio_filtrado(shopping_id, acao, tipo, inicio, fim)
+        contexto = {'tipo': Oferta.TIPOS[tipo][1], 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
                     'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
                     'inicio': inicio_str, 'fim': fim_str}
     else:
-        contexto = Oferta.itens_mais(shopping_id, Log.CLIQUE, Oferta.OFERTA)
+        contexto = Oferta.itens_mais(shopping_id, acao, tipo)
 
+    return contexto
+
+@csrf_exempt
+def ofertas_mais_vistas(request, shopping_id):
+    contexto = itens_com_mais(request, shopping_id, Log.CLIQUE, Oferta.OFERTA)
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 @csrf_exempt
 def ofertas_mais_curtidas(request, shopping_id):
-    inicio_str = inicio = fim_str = fim = None
-    if request.method == "POST":
-        inicio_str = request.POST.get('inicio', None)
-        inicio = datetime.strptime(inicio_str, '%d/%m/%Y')
-        fim_str = request.POST.get('fim', None)
-        fim = datetime.strptime(fim_str, '%d/%m/%Y')
-
-    if inicio and fim:
-        query_filtro = Oferta.relatorio_filtrado(shopping_id, Log.CURTIDA, Oferta.OFERTA,inicio, fim)
-        contexto = {'tipo': 'oferta', 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                    'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
-                    'inicio': inicio_str, 'fim': fim_str}
-    else:
-        contexto = Oferta.itens_mais(shopping_id, Log.CURTIDA, Oferta.OFERTA)
-
+    contexto = itens_com_mais(request, shopping_id, Log.CURTIDA, Oferta.OFERTA)
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 @csrf_exempt
 def ofertas_mais_compartilhadas(request, shopping_id):
-    inicio_str = inicio = fim_str = fim = None
-    if request.method == "POST":
-        inicio_str = request.POST.get('inicio', None)
-        inicio = datetime.strptime(inicio_str, '%d/%m/%Y')
-        fim_str = request.POST.get('fim', None)
-        fim = datetime.strptime(fim_str, '%d/%m/%Y')
+    contexto = itens_com_mais(request, shopping_id, Log.CURTIDA, Oferta.OFERTA)
+    return render(request, "relatorios/mais_vistas.html", contexto)
 
-    if inicio and fim:
-        query_filtro = Oferta.relatorio_filtrado(shopping_id, Log.COMPARTILHADA, Oferta.OFERTA, inicio, fim)
-        contexto = {'tipo': 'oferta', 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                    'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
-                    'inicio': inicio_str, 'fim': fim_str}
-    else:
-        contexto = Oferta.itens_mais(shopping_id, Log.COMPARTILHADA, Oferta.OFERTA)
+@csrf_exempt
+def destaques_mais_vistos(request, shopping_id):
+    contexto = itens_com_mais(request, shopping_id, Log.CLIQUE, Oferta.DESTAQUE)
+    return render(request, "relatorios/mais_vistas.html", contexto)
 
+@csrf_exempt
+def destaques_mais_curtidos(request, shopping_id):
+    contexto = itens_com_mais(request, shopping_id, Log.CURTIDA, Oferta.DESTAQUE)
+    return render(request, "relatorios/mais_vistas.html", contexto)
+
+@csrf_exempt
+def destaques_mais_compartilhados(request, shopping_id):
+    contexto = itens_com_mais(request, shopping_id, Log.COMPARTILHADA, Oferta.DESTAQUE)
+    return render(request, "relatorios/mais_vistas.html", contexto)
+
+@csrf_exempt
+def eventos_mais_vistos(request, shopping_id):
+    contexto = itens_com_mais(request, shopping_id, Log.CLIQUE, Oferta.EVENTO)
+    return render(request, "relatorios/mais_vistas.html", contexto)
+
+@csrf_exempt
+def eventos_mais_curtidos(request, shopping_id):
+    contexto = itens_com_mais(request, shopping_id, Log.CURTIDA, Oferta.EVENTO)
+    return render(request, "relatorios/mais_vistas.html", contexto)
+
+@csrf_exempt
+def eventos_mais_compartilhados(request, shopping_id):
+    contexto = itens_com_mais(request, shopping_id, Log.COMPARTILHADA, Oferta.EVENTO)
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 def categorias_mais_vistas(request, shopping_id):
