@@ -25,9 +25,13 @@
         <div class="span9">
             <div>
                 <h2>{{ nome_shopping }} - {{ tipo }}s mais {%if modalidade%}{{modalidade}}{%else%}vistas{%endif%}</h2>
-            </div>
+           </div>
         </div>
         {% include 'relatorios/form_filtro.html' %}
+        <div class="span9">
+            <a href="{% url 'relatorios_index' %}"><< Voltar ao índice de relatórios</a>
+            <hr />
+        </div>
         {% if inicio and fim %}
         <div class="span6">
             <div>
