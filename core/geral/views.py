@@ -679,16 +679,12 @@ def lojas_mais_solicitadas(request, shopping_id):
         hoje = date.today()
         mes = hoje + timedelta(days=-30)
         semana = hoje + timedelta(days=-7)
-        solicitadas_query = Loja.objects.annotate(pedidos=Count('solicitacoes', only=Q(shopping=shopping_id))) \
-                                             .order_by('-pedidos')
+        solicitadas_query = Loja.relatorio_solicitacoes(shopping_id)
         mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in solicitadas_query if l.pedidos]
-
-        mes_query = Loja.objects.annotate(
-            pedidos=Count('solicitacoes', only=Q(shopping=shopping_id,solicitacoes__data_criacao__gte=mes))) \
-            .order_by('-pedidos')
+        mes_query = Loja.relatorio_solicitacoes(shopping_id, date=mes)
         mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in mes_query if l.pedidos]
-
-        mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in solicitadas_query.filter(solicitacoes__data_criacao__gte=semana) if l.pedidos]
+        semana_query = Loja.relatorio_solicitacoes(shopping_id, date=semana)
+        mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in semana_query if l.pedidos]
         contexto.update({'mais_solicitadas': mais_solicitadas,
                          'mais_do_mes': mais_do_mes,
                          'mais_da_semana': mais_da_semana})

@@ -5,6 +5,8 @@ from pilkit.processors import Adjust, resize
 
 from django.db import models
 from django.utils.text import slugify
+from django.db.models import Q
+from aggregate_if import Count
 
 from utils.models import EditorialModel
 from utils.functions import separa_tres_colunas
@@ -76,3 +78,14 @@ class Loja(EditorialModel):
         lojas = cls.objects.filter(publicada=True,
                                    shopping_id=shopping).order_by('nome')
         return [l.to_dict() for l in lojas if not l.ofertas.filter(status=1)]
+
+    @classmethod
+    def relatorio_solicitacoes(cls, shopping_id, date=None):
+        if not date:
+            return Loja.objects.annotate(
+                pedidos=Count('solicitacoes', only=Q(shopping=shopping_id))).order_by('-pedidos')
+        else:
+            return Loja.objects.annotate(
+                pedidos=Count('solicitacoes', only=Q(shopping=shopping_id,
+                                                     solicitacoes__data_criacao__gte=date))).order_by('-pedidos')
+
