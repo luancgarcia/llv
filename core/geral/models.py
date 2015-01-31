@@ -401,6 +401,14 @@ class Oferta(EditorialModel):
                 'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
                 'mais_da_semana': [dict_mais_vistas(l) for l in semana_query if l.vistas]}
 
+    @classmethod
+    def relatorio_filtrado(cls, shopping_id, acao, tipo, inicio, fim):
+        return cls.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
+                                                              logs__acao=acao,
+                                                              logs__data_criacao__gte=inicio,
+                                                              logs__data_criacao__lte=fim + timedelta(days=1),
+                                                              tipo=tipo))).order_by('-vistas')
+
 
 class Destaque(Oferta):
     class Meta:
