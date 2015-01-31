@@ -2,7 +2,7 @@
 
 import os
 from PIL import Image, ImageDraw, ImageFont
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -622,21 +622,39 @@ def relatorios(request, shopping_id):
                 'lojas_mais_pedidas': lojas_mais_pedidas}
     return render(request, "relatorios/shopping.html", contexto)
 
+@csrf_exempt
 def lojas_mais_vistas(request, shopping_id):
-    hoje = date.today()
-    mes = hoje + timedelta(days=-30)
-    semana = hoje + timedelta(days=-7)
-    lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
-                                                                 only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
-                                          .order_by('-vistas')
-    lojas_mais_vistas = [dict_mais_vistas(l) for l in lojas_mais_vistas_query if l.vistas]
-    mais_do_mes = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes) if l.vistas]
-    mais_da_semana = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana) if l.vistas]
+    inicio_str = inicio = fim_str = fim = None
+    if request.method == "POST":
+        inicio_str = request.POST.get('inicio', None)
+        inicio = datetime.strptime(inicio_str, '%d/%m/%Y')
+        fim_str = request.POST.get('fim', None)
+        fim = datetime.strptime(fim_str, '%d/%m/%Y')
+
     contexto = {'tipo': 'loja',
-                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': lojas_mais_vistas,
-                'mais_do_mes': mais_do_mes,
-                'mais_da_semana': mais_da_semana}
+                'nome_shopping': Shopping.objects.get(id=shopping_id).nome}
+
+    if inicio and fim:
+        query_filtro = Loja.objects.annotate(vistas=Count('pk', only=Q(ofertas__logs__acao=1,
+                                                                       shopping=shopping_id,
+                                                                       ofertas__logs__data_criacao__gte=inicio,
+                                                                       ofertas__logs__data_criacao__lte=fim)))\
+                                   .order_by('-vistas')
+        contexto.update({'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+                         'inicio': inicio_str, 'fim': fim_str})
+    else:
+        hoje = date.today()
+        mes = hoje + timedelta(days=-30)
+        semana = hoje + timedelta(days=-7)
+        lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
+                                                                     only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
+                                              .order_by('-vistas')
+        lojas_mais_vistas = [dict_mais_vistas(l) for l in lojas_mais_vistas_query if l.vistas]
+        mais_do_mes = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes) if l.vistas]
+        mais_da_semana = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana) if l.vistas]
+        contexto.update({'mais_vistas': lojas_mais_vistas,
+                         'mais_do_mes': mais_do_mes,
+                         'mais_da_semana': mais_da_semana})
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 def lojas_mais_solicitadas(request, shopping_id):
