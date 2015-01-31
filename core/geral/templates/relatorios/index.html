@@ -39,12 +39,53 @@
             </thead>
             <tbody>
                 <tr>
+                    <td colspan="2"><h5>Lojas e Categorias</h5></td>
+                </tr>
+                <tr>
                     <td><a href="{% url 'lojas_mais_vistas' s.id %}">Lojas mais visualizadas</a></td>
                     <td><a href="{% url 'lojas_mais_vistas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
                 </tr>
                 <tr>
                     <td><a href="{% url 'lojas_mais_solicitadas' s.id %}">Lojas mais solicitadas</a></td>
                     <td><a href="{% url 'lojas_mais_solicitadas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'categorias_mais_vistas' s.id %}">Categorias mais visualizadas</a></td>
+                    <td><a href="{% url 'categorias_mais_vistas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h5>Destaques</h5></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'destaques_mais_vistos' s.id %}">Mais visualizados</a></td>
+                    <td><a href="{% url 'destaques_mais_vistos' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'destaques_mais_curtidos' s.id %}">Mais curtidos</a></td>
+                    <td><a href="{% url 'destaques_mais_curtidos' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'ofertas_mais_compartilhadas' s.id %}">Mais compartilhados</a></td>
+                    <td><a href="{% url 'ofertas_mais_compartilhadas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h5>Eventos</h5></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'eventos_mais_vistos' s.id %}">Mais visualizados</a></td>
+                    <td><a href="{% url 'eventos_mais_vistos' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'eventos_mais_curtidos' s.id %}">Mais curtidos</a></td>
+                    <td><a href="{% url 'eventos_mais_curtidos' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'eventos_mais_compartilhados' s.id %}">Mais compartilhados</a></td>
+                    <td><a href="{% url 'eventos_mais_compartilhados' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
+                </tr>
+                <tr>
+                <tr>
+                    <td colspan="2"><h5>Ofertas</h5></td>
                 </tr>
                 <tr>
                     <td><a href="{% url 'ofertas_mais_vistas' s.id %}">Ofertas mais visualizadas</a></td>
@@ -57,10 +98,6 @@
                 <tr>
                     <td><a href="{% url 'ofertas_mais_compartilhadas' s.id %}">Ofertas mais compartilhadas</a></td>
                     <td><a href="{% url 'ofertas_mais_compartilhadas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
-                </tr>
-                <tr>
-                    <td><a href="{% url 'categorias_mais_vistas' s.id %}">Categorias mais visualizadas</a></td>
-                    <td><a href="{% url 'categorias_mais_vistas' s.id %}" class="btn btn-primary pull-right">Acessar</a></td>
                 </tr>
             </tbody>
         </table>
