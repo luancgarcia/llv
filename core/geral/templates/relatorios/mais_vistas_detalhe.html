@@ -1,5 +1,5 @@
 <td class="model-name">
-{% if tipo == 'oferta' %}
+{% if tipo|lower == 'oferta' or tipo|lower == 'destaque' or tipo|lower == 'evento' %}
     <a href="/admin/geral/oferta/{{ i.id }}">{{ i.nome }}</a>
 {% else %}
     {{ i.nome }}
