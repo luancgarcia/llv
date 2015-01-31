@@ -71,6 +71,8 @@
                     <tr>
                         {% include 'relatorios/mais_vistas_detalhe.html' %}
                     </tr>
+                    {% empty %}
+                    <tr><td colspan="2">Sem itens no período</td></tr>
                     {% endfor %}
                 </tbody>
             </table>
