@@ -27,26 +27,7 @@
                 <h2>{{ nome_shopping }} - {{ tipo }}s mais {%if modalidade%}{{modalidade}}{%else%}vistas{%endif%}</h2>
             </div>
         </div>
-        <form enctype="multipart/form-data" action="" method="post" id="evento_form" class="form-horizontal well">
-        <fieldset class="module aligned ">
-        <div class="control-group  field-inicio">
-            <div
-                    class="control-label"><label class="required" for="id_inicio">Data inicial:</label></div>
-            <div class="controls">
-                <input class="vDateField span3" id="id_inicio" name="inicio" size="10" type="text" value="{{ inicio }}" />
-            </div>
-        </div>
-
-        <div class="control-group  field-fim">
-            <div
-                    class="control-label"><label class="required" for="id_fim">Data final:</label></div>
-            <div class="controls">
-                <input class="vDateField span3" id="id_fim" name="fim" size="10" type="text" value="{{ fim}}" />
-            </div>
-        </div>
-        </fieldset>
-            <input type="submit" value="Filtrar" name="_save" class="btn">
-        </form>
+        {% include 'relatorios/form_filtro.html' %}
         {% if inicio and fim %}
         <div class="span6">
             <div>
