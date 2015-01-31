@@ -15,7 +15,7 @@ from django.db.models.signals import post_save
 from django.conf import settings
 
 from utils.models import BaseModel, EditorialModel, OrderedModel
-from utils.functions import separa_tres_colunas
+from utils.functions import separa_tres_colunas, dict_mais_vistas
 from lojas.models import Loja, Shopping
 from geral.signals import cria_envia_notificacao, completa_slug
 from notificacoes.models import Solicitacao
@@ -387,6 +387,19 @@ class Oferta(EditorialModel):
                                                                      logs__acao=acao,
                                                                      logs__data_criacao__gte=date,
                                                                      tipo=tipo))).order_by('-vistas')
+
+    @classmethod
+    def itens_mais(cls, shopping_id, acao, tipo):
+        hoje = date.today()
+
+        mais_vistas_query = cls.query_relatorio(shopping_id, acao, tipo)
+        mes_query = cls.query_relatorio(shopping_id, acao, tipo, date=hoje + timedelta(days=-30))
+        semana_query = cls.query_relatorio(shopping_id, acao, tipo, date=hoje + timedelta(days=-7))
+
+        return {'tipo': 'oferta', 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query if l.vistas],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
+                'mais_da_semana': [dict_mais_vistas(l) for l in semana_query if l.vistas]}
 
 
 class Destaque(Oferta):
