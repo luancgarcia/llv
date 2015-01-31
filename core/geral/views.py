@@ -670,10 +670,10 @@ def lojas_mais_solicitadas(request, shopping_id):
 
     if inicio and fim:
         query_filtro = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=shopping_id,
-                                                                       pedidos__data_criacao__gte=inicio,
-                                                                       pedidos__logs__data_criacao__lte=fim))) \
+                                                                        ofertas__notificacoes__data_criacao__gte=inicio,
+                                                                        ofertas__notificacoes__data_criacao__lte=fim))) \
                                    .order_by('-pedidos')
-        contexto.update({'filtradas': [{'nome': l.nome, 'numero': l.pedidos} for l in query_filtro if l.vistas],
+        contexto.update({'filtradas': [{'nome': l.nome, 'numero': l.pedidos} for l in query_filtro if l.pedidos],
                          'inicio': inicio_str, 'fim': fim_str})
     else:
         hoje = date.today()
