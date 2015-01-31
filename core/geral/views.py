@@ -610,11 +610,11 @@ def relatorios(request, shopping_id):
     lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
                                                                  only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
                                           .order_by('-vistas')[:10]
-    lojas_mais_vistas = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query]
+    lojas_mais_vistas = [{'nome': l.nome, 'numero': l.vistas} for l in lojas_mais_vistas_query if l.vistas]
 
     lojas_mais_pedidas_query = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=shopping_id)))\
                                            .order_by('-pedidos','-data_criacao')[:10]
-    lojas_mais_pedidas = [{'nome': l.nome, 'numero': l.pedidos} for l in lojas_mais_pedidas_query]
+    lojas_mais_pedidas = [{'nome': l.nome, 'numero': l.pedidos} for l in lojas_mais_pedidas_query if l.pedidos]
 
     contexto = {'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
                 'shopping_id': shopping_id,
@@ -629,9 +629,9 @@ def lojas_mais_vistas(request, shopping_id):
     lojas_mais_vistas_query = Loja.objects.annotate(vistas=Count('pk',
                                                                  only=Q(ofertas__logs__acao=1,shopping=shopping_id)))\
                                           .order_by('-vistas')
-    lojas_mais_vistas = [dict_mais_vistas(l) for l in lojas_mais_vistas_query]
-    mais_do_mes = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes)]
-    mais_da_semana = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana)]
+    lojas_mais_vistas = [dict_mais_vistas(l) for l in lojas_mais_vistas_query if l.vistas]
+    mais_do_mes = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=mes) if l.vistas]
+    mais_da_semana = [dict_mais_vistas(l) for l in lojas_mais_vistas_query.filter(data_criacao__gte=semana) if l.vistas]
     contexto = {'tipo': 'loja',
                 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
                 'mais_vistas': lojas_mais_vistas,
@@ -645,9 +645,9 @@ def lojas_mais_solicitadas(request, shopping_id):
     semana = hoje + timedelta(days=-7)
     mais_solicitadas_query = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=shopping_id))) \
                                          .order_by('-pedidos', '-data_criacao')
-    mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query]
-    mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=mes)]
-    mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=semana)]
+    mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query if l.pedidos]
+    mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=mes) if l.pedidos]
+    mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=semana) if l.pedidos]
     contexto = {'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
                 'mais_solicitadas': mais_solicitadas,
                 'mais_do_mes': mais_do_mes,
@@ -663,9 +663,9 @@ def ofertas_mais_vistas(request, shopping_id):
 
     contexto = {'tipo': 'oferta',
                 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_vistas_query.filter(data_criacao__gte=mes)],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_vistas_query.filter(data_criacao__gte=semana)]}
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query if l.vistas],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_vistas_query.filter(data_criacao__gte=mes) if l.vistas],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_vistas_query.filter(data_criacao__gte=semana) if l.vistas]}
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 def ofertas_mais_curtidas(request, shopping_id):
@@ -677,9 +677,9 @@ def ofertas_mais_curtidas(request, shopping_id):
 
     contexto = {'tipo': 'oferta', 'modalidade': 'curtidas',
                 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_query],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes)],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana)]}
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes) if l.vistas],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana) if l.vistas]}
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 def ofertas_mais_compartilhadas(request, shopping_id):
@@ -691,9 +691,9 @@ def ofertas_mais_compartilhadas(request, shopping_id):
 
     contexto = {'tipo': 'oferta', 'modalidade': 'compartilhadas',
                 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_query],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes)],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana)]}
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes) if l.vistas],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana) if l.vistas]}
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 def categorias_mais_vistas(request, shopping_id):
@@ -706,7 +706,7 @@ def categorias_mais_vistas(request, shopping_id):
 
     contexto = {'tipo': 'categoria', 'modalidade': None,
                 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_query],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes)],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana)]}
+                'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
+                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes) if l.vistas],
+                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana) if l.vistas]}
     return render(request, "relatorios/mais_vistas.html", contexto)
