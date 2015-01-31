@@ -670,8 +670,8 @@ def lojas_mais_solicitadas(request, shopping_id):
 
     if inicio and fim:
         query_filtro = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=shopping_id,
-                                                                        ofertas__notificacoes__data_criacao__gte=inicio,
-                                                                        ofertas__notificacoes__data_criacao__lte=fim))) \
+                                                                        solicitacoes__data_criacao__gte=inicio,
+                                                                        solicitacoes__data_criacao__lte=fim))) \
                                    .order_by('-pedidos')
         contexto.update({'filtradas': [{'nome': l.nome, 'numero': l.pedidos} for l in query_filtro if l.pedidos],
                          'inicio': inicio_str, 'fim': fim_str})
@@ -679,11 +679,14 @@ def lojas_mais_solicitadas(request, shopping_id):
         hoje = date.today()
         mes = hoje + timedelta(days=-30)
         semana = hoje + timedelta(days=-7)
-        mais_solicitadas_query = Loja.objects.annotate(pedidos=Count('pk', only=Q(shopping=shopping_id))) \
-                                             .order_by('-pedidos', '-data_criacao')
-        mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query if l.pedidos]
-        mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=mes) if l.pedidos]
-        mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in mais_solicitadas_query.filter(data_criacao__gte=semana) if l.pedidos]
+        solicitadas_query = Loja.objects.annotate(pedidos=Count('solicitacoes', only=Q(shopping=shopping_id))) \
+                                             .order_by('-pedidos')
+        mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in solicitadas_query if l.pedidos]
+
+        mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in
+                       solicitadas_query.filter(solicitacoes__data_criacao__gte=mes) if l.pedidos]
+
+        mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in solicitadas_query.filter(solicitacoes__data_criacao__gte=semana) if l.pedidos]
         contexto.update({'mais_solicitadas': mais_solicitadas,
                          'mais_do_mes': mais_do_mes,
                          'mais_da_semana': mais_da_semana})
