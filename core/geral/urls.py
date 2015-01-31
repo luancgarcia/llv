@@ -70,12 +70,32 @@ urlpatterns = patterns('',
         name='lojas_mais_vistas'),
     url(r'^relatorios/lojas_mais_solicitadas/(?P<shopping_id>\d+)/$',
         'geral.views.lojas_mais_solicitadas', name='lojas_mais_solicitadas'),
+    # relatórios ofertas
     url(r'^relatorios/ofertas_mais_vistas/(?P<shopping_id>\d+)/$', 'geral.views.ofertas_mais_vistas',
         name='ofertas_mais_vistas'),
     url(r'^relatorios/ofertas_mais_curtidas/(?P<shopping_id>\d+)/$',
         'geral.views.ofertas_mais_curtidas', name='ofertas_mais_curtidas'),
     url(r'^relatorios/ofertas_mais_compartilhadas/(?P<shopping_id>\d+)/$',
         'geral.views.ofertas_mais_compartilhadas', name='ofertas_mais_compartilhadas'),
+
+    # relatórios destaques
+    url(r'^relatorios/destaques_mais_vistos/(?P<shopping_id>\d+)/$',
+        'geral.views.destaques_mais_vistos',
+        name='destaques_mais_vistos'),
+    url(r'^relatorios/destaques_mais_curtidos/(?P<shopping_id>\d+)/$',
+        'geral.views.destaques_mais_curtidos', name='destaques_mais_curtidos'),
+    url(r'^relatorios/destaques_mais_compartilhados/(?P<shopping_id>\d+)/$',
+        'geral.views.destaques_mais_compartilhados', name='destaques_mais_compartilhados'),
+
+    # relatórios eventos
+    url(r'^relatorios/eventos_mais_vistos/(?P<shopping_id>\d+)/$',
+        'geral.views.eventos_mais_vistos', name='eventos_mais_vistos'),
+    url(r'^relatorios/eventos_mais_curtidos/(?P<shopping_id>\d+)/$',
+        'geral.views.eventos_mais_curtidos', name='eventos_mais_curtidos'),
+    url(r'^relatorios/eventos_mais_compartilhados/(?P<shopping_id>\d+)/$',
+        'geral.views.eventos_mais_compartilhados', name='eventos_mais_compartilhados'),
+
+    # relatórios categorias
     url(r'^relatorios/categorias_mais_vistas/(?P<shopping_id>\d+)/$',
         'geral.views.categorias_mais_vistas', name='categorias_mais_vistas'),
 
