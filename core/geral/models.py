@@ -377,10 +377,16 @@ class Oferta(EditorialModel):
         return '%s/%s#%s?%s' % (settings.SHARE_URL, shopping, tipo, self.slug)
 
     @classmethod
-    def query_relatorio(cls, shopping_id, acao):
-        return Oferta.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
-                                                                 logs__acao=acao)))\
-                             .order_by('-vistas')
+    def query_relatorio(cls, shopping_id, acao, tipo, date=None):
+        if not date:
+            return Oferta.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
+                                                                 logs__acao=acao,
+                                                                 tipo=tipo))).order_by('-vistas')
+        else:
+            return Oferta.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
+                                                                     logs__acao=acao,
+                                                                     logs__data_criacao__gte=date,
+                                                                     tipo=tipo))).order_by('-vistas')
 
 
 class Destaque(Oferta):
