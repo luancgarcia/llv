@@ -686,46 +686,61 @@ def lojas_mais_solicitadas(request, shopping_id):
                          'mais_da_semana': mais_da_semana})
     return render(request, "relatorios/lojas_mais_solicitadas.html", contexto)
 
+@csrf_exempt
 def ofertas_mais_vistas(request, shopping_id):
-    hoje = date.today()
-    mes = hoje + timedelta(days=-30)
-    semana = hoje + timedelta(days=-7)
+    inicio_str = inicio = fim_str = fim = None
+    if request.method == "POST":
+        inicio_str = request.POST.get('inicio', None)
+        inicio = datetime.strptime(inicio_str, '%d/%m/%Y')
+        fim_str = request.POST.get('fim', None)
+        fim = datetime.strptime(fim_str, '%d/%m/%Y')
 
-    mais_vistas_query = Oferta.query_relatorio(shopping_id, acao=1)
+    if inicio and fim:
+        query_filtro = Oferta.relatorio_filtrado(shopping_id, Log.CLIQUE, Oferta.OFERTA, inicio, fim)
+        contexto = {'tipo': 'oferta','nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                    'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+                    'inicio': inicio_str, 'fim': fim_str}
+    else:
+        contexto = Oferta.itens_mais(shopping_id, Log.CLIQUE, Oferta.OFERTA)
 
-    contexto = {'tipo': 'oferta',
-                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query if l.vistas],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_vistas_query.filter(data_criacao__gte=mes) if l.vistas],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_vistas_query.filter(data_criacao__gte=semana) if l.vistas]}
     return render(request, "relatorios/mais_vistas.html", contexto)
 
+@csrf_exempt
 def ofertas_mais_curtidas(request, shopping_id):
-    hoje = date.today()
-    mes = hoje + timedelta(days=-30)
-    semana = hoje + timedelta(days=-7)
+    inicio_str = inicio = fim_str = fim = None
+    if request.method == "POST":
+        inicio_str = request.POST.get('inicio', None)
+        inicio = datetime.strptime(inicio_str, '%d/%m/%Y')
+        fim_str = request.POST.get('fim', None)
+        fim = datetime.strptime(fim_str, '%d/%m/%Y')
 
-    mais_query = Oferta.query_relatorio(shopping_id, acao=2)
+    if inicio and fim:
+        query_filtro = Oferta.relatorio_filtrado(shopping_id, Log.CURTIDA, Oferta.OFERTA,inicio, fim)
+        contexto = {'tipo': 'oferta', 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                    'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+                    'inicio': inicio_str, 'fim': fim_str}
+    else:
+        contexto = Oferta.itens_mais(shopping_id, Log.CURTIDA, Oferta.OFERTA)
 
-    contexto = {'tipo': 'oferta', 'modalidade': 'curtidas',
-                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes) if l.vistas],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana) if l.vistas]}
     return render(request, "relatorios/mais_vistas.html", contexto)
 
+@csrf_exempt
 def ofertas_mais_compartilhadas(request, shopping_id):
-    hoje = date.today()
-    mes = hoje + timedelta(days=-30)
-    semana = hoje + timedelta(days=-7)
+    inicio_str = inicio = fim_str = fim = None
+    if request.method == "POST":
+        inicio_str = request.POST.get('inicio', None)
+        inicio = datetime.strptime(inicio_str, '%d/%m/%Y')
+        fim_str = request.POST.get('fim', None)
+        fim = datetime.strptime(fim_str, '%d/%m/%Y')
 
-    mais_query = Oferta.query_relatorio(shopping_id, acao=3)
+    if inicio and fim:
+        query_filtro = Oferta.relatorio_filtrado(shopping_id, Log.COMPARTILHADA, Oferta.OFERTA, inicio, fim)
+        contexto = {'tipo': 'oferta', 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
+                    'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+                    'inicio': inicio_str, 'fim': fim_str}
+    else:
+        contexto = Oferta.itens_mais(shopping_id, Log.COMPARTILHADA, Oferta.OFERTA)
 
-    contexto = {'tipo': 'oferta', 'modalidade': 'compartilhadas',
-                'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mais_query.filter(data_criacao__gte=mes) if l.vistas],
-                'mais_da_semana': [dict_mais_vistas(l)for l in mais_query.filter(data_criacao__gte=semana) if l.vistas]}
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 def categorias_mais_vistas(request, shopping_id):
