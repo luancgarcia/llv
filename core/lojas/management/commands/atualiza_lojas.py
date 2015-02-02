@@ -32,13 +32,18 @@ class Command(BaseCommand):
                     total = 0
                     for d in dados:
                         if d.fantasia.nome:
-                            loja, criada = Loja.objects.get_or_create(shopping=shopping,
-                                                                      nome=string.capwords(d.fantasia.nome))
-                            if loja:
-                                loja.publicada = True
-                                loja.id_multilan = d.codPessoa
-                                loja.save()
-                            total += 1
+                            nome = string.capwords(d.fantasia.nome)
+                            try:
+                                loja, criada = Loja.objects.get_or_create(shopping=shopping,
+                                                                          nome=nome)
+                                if loja:
+                                    loja.publicada = True
+                                    loja.id_multilan = d.codPessoa
+                                    loja.save()
+                                total += 1
+                            except:
+                                print '    problema com a loja %s' % nome
+                                pass
                     print '    Total de %s lojas' % total
             else:
                 print ' Houve algum problema.'
