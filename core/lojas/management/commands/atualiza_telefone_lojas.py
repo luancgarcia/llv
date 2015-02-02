@@ -2,7 +2,6 @@
 
 from optparse import make_option
 from suds.client import Client
-import string
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
@@ -24,16 +23,19 @@ class Command(BaseCommand):
             cliente = Client(settings.WSDL_URL)
             if cliente:
                 print ' Contectou'
-                lojas = Loja.objects.all()
+                lojas = Loja.objects.exclude(id_multilan__isnull=True)
                 print ' Iterando sobre %s lojas' % lojas.count()
                 total = 0
                 for loja in lojas:
-                    dado = cliente.service.findLojaById(codigo=loja.id_multiplan, mostrar='todos')
-                    if dado.telefone and dado.telefone[0]:
+                    dado = cliente.service.findLojaById(codigo=loja.id_multilan, mostrar='todos')
+                    try:
                         info = dado.telefone[0]
                         loja.telefone = '(%s) %s' % (info.numDDD, info.numTelefone)
                         loja.save()
                         total += 1
+                    except Exception, e:
+                        print '    loja %s não tem telefone registrado' % loja
+                        pass
                 print '    Total de %s lojas atualizadas' % total
             else:
                 print ' Houve algum problema.'
