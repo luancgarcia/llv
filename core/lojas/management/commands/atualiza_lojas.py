@@ -12,9 +12,9 @@ from lojas.models import Shopping, Loja
 
 class Command(BaseCommand):
     '''
-    Preenche o telefone das lojas consultando o servido do wiseit
+    Atualiza as lojas consultando o servido do wiseit
     '''
-    help = 'Preenche o telefone das lojas consultando o servido do wiseit'
+    help = 'Atualiza as lojas consultando o servido do wiseit'
 
     def handle(self, *args, **options):
         print 45 * '-'
