@@ -39,6 +39,7 @@ class Loja(EditorialModel):
         return os.path.join('lojas','%s.%s' % (fname, extension))
 
     shopping = models.ForeignKey(Shopping, verbose_name=u'Shopping', related_name='lojas')
+    id_multilan = models.IntegerField('Id na Multiplan', null=True, blank=False)
     nome = models.CharField(u'Nome', max_length=100, null=True, blank=False)
     slug = models.CharField(u'Slug', max_length=150, null=True, blank=True)
     logo = models.ImageField(u'Imagem', upload_to=new_filename,
