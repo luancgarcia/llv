@@ -640,7 +640,8 @@ def lojas_mais_vistas(request, shopping_id):
                                                                        ofertas__logs__data_criacao__gte=inicio,
                                                                        ofertas__logs__data_criacao__lte=fim)))\
                                    .order_by('-vistas')
-        contexto.update({'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+        filtradas, total_filtradas = listas_e_totais(query_filtro, 'vistas')
+        contexto.update({'filtradas': filtradas, 'total_filtradas': total_filtradas,
                          'inicio': inicio_str, 'fim': fim_str})
     else:
         hoje = date.today()
@@ -673,7 +674,8 @@ def lojas_mais_solicitadas(request, shopping_id):
                                                                         solicitacoes__data_criacao__gte=inicio,
                                                                         solicitacoes__data_criacao__lte=fim))) \
                                    .order_by('-pedidos')
-        contexto.update({'filtradas': [{'nome': l.nome, 'numero': l.pedidos} for l in query_filtro if l.pedidos],
+        filtradas, total_filtradas = listas_e_totais(query_filtro, 'pedidos')
+        contexto.update({'filtradas': filtradas, 'total_filtradas': total_filtradas,
                          'inicio': inicio_str, 'fim': fim_str})
     else:
         hoje = date.today()
@@ -702,9 +704,9 @@ def itens_com_mais(request, shopping_id, acao, tipo):
     if inicio and fim:
         query_filtro = Oferta.relatorio_filtrado(shopping_id, acao, tipo, inicio, fim)
 
-        filtradas = [dict_mais_vistas(l) for l in query_filtro if l.vistas]
+        filtradas, total_filtradas = listas_e_totais(query_filtro, 'vistas')
         contexto = {'tipo': Oferta.TIPOS[tipo][1], 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                    'filtradas': filtradas, 'total_filtradas': len(filtradas),
+                    'filtradas': filtradas, 'total_filtradas': total_filtradas,
                     'inicio': inicio_str, 'fim': fim_str}
     else:
         contexto = Oferta.itens_mais(shopping_id, acao, tipo)
@@ -774,7 +776,8 @@ def categorias_mais_vistas(request, shopping_id):
                                                                             ofertas__logs__data_criacao__gte=inicio,
                                                                             ofertas__logs__data_criacao__lte=fim+timedelta(days=1)))) \
                                         .order_by('-vistas')
-        contexto.update({'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+        filtradas, total_filtradas = listas_e_totais(query_filtro, 'vistas')
+        contexto.update({'filtradas': filtradas, 'total_filtradas': total_filtradas,
                          'inicio': inicio_str, 'fim': fim_str})
     else:
         hoje = date.today()
