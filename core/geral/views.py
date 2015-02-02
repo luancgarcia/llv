@@ -725,7 +725,7 @@ def ofertas_mais_curtidas(request, shopping_id):
 
 @csrf_exempt
 def ofertas_mais_compartilhadas(request, shopping_id):
-    contexto = itens_com_mais(request, shopping_id, Log.CURTIDA, Oferta.OFERTA)
+    contexto = itens_com_mais(request, shopping_id, Log.COMPARTILHADA, Oferta.OFERTA)
     return render(request, "relatorios/mais_vistas.html", contexto)
 
 @csrf_exempt
