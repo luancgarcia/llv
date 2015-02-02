@@ -15,7 +15,7 @@ from django.db.models.signals import post_save
 from django.conf import settings
 
 from utils.models import BaseModel, EditorialModel, OrderedModel
-from utils.functions import separa_tres_colunas, dict_mais_vistas
+from utils.functions import separa_tres_colunas, dict_mais_vistas, listas_e_totais
 from lojas.models import Loja, Shopping
 from geral.signals import cria_envia_notificacao, completa_slug
 from notificacoes.models import Solicitacao
@@ -396,11 +396,15 @@ class Oferta(EditorialModel):
         mes_query = cls.query_relatorio(shopping_id, acao, tipo, date=hoje + timedelta(days=-30))
         semana_query = cls.query_relatorio(shopping_id, acao, tipo, date=hoje + timedelta(days=-7))
 
+        mais_vistas, total_vistas = listas_e_totais(mais_vistas_query, 'vistas')
+        mais_do_mes, total_mes = listas_e_totais(mes_query, 'vistas')
+        mais_da_semana, total_semana = listas_e_totais(semana_query, 'vistas')
+
         return {'tipo': cls.TIPOS[tipo][1],
                 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas_query if l.vistas],
-                'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
-                'mais_da_semana': [dict_mais_vistas(l) for l in semana_query if l.vistas]}
+                'mais_vistas': mais_vistas, 'total_vistas': total_vistas,
+                'mais_do_mes': mais_do_mes, 'total_mes': total_mes,
+                'mais_da_semana': mais_da_semana, 'total_semana': total_semana}
 
     @classmethod
     def relatorio_filtrado(cls, shopping_id, acao, tipo, inicio, fim):

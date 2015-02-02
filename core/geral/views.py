@@ -11,7 +11,7 @@ from django.conf import settings
 from django.db.models import Q
 from aggregate_if import Count
 
-from utils.functions import jsonResponse, dict_mais_vistas
+from utils.functions import jsonResponse, dict_mais_vistas, listas_e_totais
 from utils.custom_email import TemplatedEmail
 
 from geral.models import (Categoria, ImagemOferta, Oferta, Log, Mascara,
@@ -644,12 +644,16 @@ def lojas_mais_vistas(request, shopping_id):
                          'inicio': inicio_str, 'fim': fim_str})
     else:
         hoje = date.today()
-        mais_vistas = Loja.relatorio_visitas(shopping_id)
+        mais_vistas_query = Loja.relatorio_visitas(shopping_id)
         mes_query = Loja.relatorio_visitas(shopping_id, date=hoje + timedelta(days=-30))
         semana_query = Loja.relatorio_visitas(shopping_id, date=hoje + timedelta(days=-7))
-        contexto.update({'mais_vistas': [dict_mais_vistas(l) for l in mais_vistas if l.vistas],
-                         'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
-                         'mais_da_semana': [dict_mais_vistas(l) for l in semana_query if l.vistas]})
+
+        mais_vistas, total_vistas = listas_e_totais(mais_vistas_query, 'vistas')
+        mais_do_mes, total_mes = listas_e_totais(mes_query, 'vistas')
+        mais_da_semana, total_semana = listas_e_totais(semana_query, 'vistas')
+        contexto.update({'mais_vistas': mais_vistas, 'total_vistas': total_vistas,
+                         'mais_do_mes': mais_do_mes, 'total_mes': total_mes,
+                         'mais_da_semana': mais_da_semana, 'total_semana': total_semana})
 
     return render(request, "relatorios/mais_vistas.html", contexto)
 
@@ -676,14 +680,14 @@ def lojas_mais_solicitadas(request, shopping_id):
         mes = hoje + timedelta(days=-30)
         semana = hoje + timedelta(days=-7)
         solicitadas_query = Loja.relatorio_solicitacoes(shopping_id)
-        mais_solicitadas = [{'nome': l.nome, 'numero': l.pedidos} for l in solicitadas_query if l.pedidos]
+        mais_solicitadas, total_solicitadas = listas_e_totais(solicitadas_query, 'pedidos')
         mes_query = Loja.relatorio_solicitacoes(shopping_id, date=mes)
-        mais_do_mes = [{'nome': l.nome, 'numero': l.pedidos} for l in mes_query if l.pedidos]
+        mais_do_mes, total_mes = listas_e_totais(mes_query, 'pedidos')
         semana_query = Loja.relatorio_solicitacoes(shopping_id, date=semana)
-        mais_da_semana = [{'nome': l.nome, 'numero': l.pedidos} for l in semana_query if l.pedidos]
-        contexto.update({'mais_solicitadas': mais_solicitadas,
-                         'mais_do_mes': mais_do_mes,
-                         'mais_da_semana': mais_da_semana})
+        mais_da_semana, total_semana = listas_e_totais(semana_query, 'pedidos')
+        contexto.update({'mais_solicitadas': mais_solicitadas, 'total_solicitadas': total_solicitadas,
+                         'mais_do_mes': mais_do_mes, 'total_mes': total_mes,
+                         'mais_da_semana': mais_da_semana, 'total_semana': total_semana})
     return render(request, "relatorios/lojas_mais_solicitadas.html", contexto)
 
 @csrf_exempt
@@ -697,8 +701,10 @@ def itens_com_mais(request, shopping_id, acao, tipo):
 
     if inicio and fim:
         query_filtro = Oferta.relatorio_filtrado(shopping_id, acao, tipo, inicio, fim)
+
+        filtradas = [dict_mais_vistas(l) for l in query_filtro if l.vistas]
         contexto = {'tipo': Oferta.TIPOS[tipo][1], 'nome_shopping': Shopping.objects.get(id=shopping_id).nome,
-                    'filtradas': [dict_mais_vistas(l) for l in query_filtro if l.vistas],
+                    'filtradas': filtradas, 'total_filtradas': len(filtradas),
                     'inicio': inicio_str, 'fim': fim_str}
     else:
         contexto = Oferta.itens_mais(shopping_id, acao, tipo)
@@ -788,8 +794,11 @@ def categorias_mais_vistas(request, shopping_id):
                                                                             ofertas__logs__data_criacao__gte=semana)))\
                                         .order_by('-vistas')
 
-        contexto.update({'mais_vistas': [dict_mais_vistas(l) for l in mais_query if l.vistas],
-                    'mais_do_mes': [dict_mais_vistas(l) for l in mes_query if l.vistas],
-                    'mais_da_semana': [dict_mais_vistas(l)for l in semana_query if l.vistas]})
+        mais_vistas, total_vistas = listas_e_totais(mais_query, 'vistas')
+        mais_do_mes, total_mes = listas_e_totais(mes_query, 'vistas')
+        mais_da_semana, total_semana = listas_e_totais(semana_query, 'vistas')
+        contexto.update({'mais_vistas': mais_vistas, 'total_vistas': total_vistas,
+                         'mais_do_mes': mais_do_mes, 'total_mes': total_mes,
+                         'mais_da_semana': mais_da_semana, 'total_semana': total_semana})
 
     return render(request, "relatorios/mais_vistas.html", contexto)

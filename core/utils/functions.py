@@ -172,3 +172,17 @@ def dict_mais_vistas(item):
     return {'id': str(int(item.id)),
             'nome': item.nome,
             'numero': item.vistas}
+
+def listas_e_totais(lista, tipo):
+    retorno = []
+    total = int()
+    for i in lista:
+        if tipo == 'vistas':
+            if i.vistas:
+                retorno.append(dict_mais_vistas(i))
+                total += i.vistas
+        else: # if tipo == 'pedidos'
+            if i.pedidos:
+                retorno.append({'nome': i.nome, 'numero': i.pedidos})
+                total += i.pedidos
+    return retorno, total
