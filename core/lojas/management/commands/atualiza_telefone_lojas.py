@@ -30,7 +30,11 @@ class Command(BaseCommand):
                     dado = cliente.service.findLojaById(codigo=loja.id_multilan, mostrar='todos')
                     try:
                         info = dado.telefone[0]
-                        loja.telefone = '(%s) %s' % (info.numDDD, info.numTelefone)
+                        if info.numDDD:
+                            telefone = '(%s) %s' % (info.numDDD, info.numTelefone)
+                        else:
+                            telefone = '%s' % info.numTelefone
+                        loja.telefone = telefone
                         loja.save()
                         total += 1
                     except Exception, e:
