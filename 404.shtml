@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Language" content="pt-br" />
+      <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Liquidação do Lápis Vermelho</title>
+      <style>
+         body { background:url(bg-novo-app.png); margin:0; padding:0;}
+         .text-novo-app { display:block;width:300px;height:311px;position:absolute;top:50%;left:50%;margin:-155px 0 0 -150px;}
+         .dobra-novo-app {display:block;width:250px;height:224px;position:absolute;bottom:0;right:0;}
+      </style>
+   </head>
+   <body>
+      <img class="text-novo-app" src="texto-novo-app.png" />
+      <img class="dobra-novo-app" src="dobrinha-250.png" />
+   </body>
+</html> 
