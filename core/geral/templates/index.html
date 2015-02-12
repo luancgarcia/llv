@@ -27,9 +27,7 @@
 			return false;
 		}
 
-		if (mobiDetect(userAgent, devices)) {
-			window.location.href = url_redirect;
-		}else{
+		if (!mobiDetect(userAgent, devices)) {
 			window.location.href = 'https://www.facebook.com/LiquidacaoLapisVermelho/app_213439928802953';
 		}
 
