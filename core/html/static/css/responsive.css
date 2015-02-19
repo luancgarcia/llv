@@ -800,7 +800,7 @@
   
  */
 }
-@media (min-width: 820px) and (max-width: 9999999px) {
+@media (min-width: 820px) {
 	
 	
   /* #TutorialMob span.fl {
@@ -878,6 +878,14 @@
     width: auto;
     font-size: 1.3em;
     line-height: normal;
+  }
+
+  .showBigres, 
+  .showBigres .grid.dois-itens-v, 
+  .showBigres .grid.last.dois-itens-v, 
+  .showBigres .grid2.dois-itens-v, 
+  .showBigres .grid2.last.dois-itens-v {
+    display: block !important;
   }
 
   body, html {
