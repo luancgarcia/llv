@@ -244,15 +244,14 @@
 			</header><!-- #Header -->
 
 			{% include 'home-part.html' %}
-			{% if eventos %}
-			<div class="showBigres fix">
-				{% for evento in eventos %}
-					{% include 'blocos/evento.html' %}
-				{% endfor %}
-			</div>
-			{% endif %}
 		</div>
-
+		{% if eventos %}
+		<div class="showBigres fix">
+			{% for evento in eventos %}
+			{% include 'blocos/evento.html' %}
+			{% endfor %}
+		</div>
+		{% endif %}
 		{% include 'modais/splash.html' %}
 	</div>
 </div>
