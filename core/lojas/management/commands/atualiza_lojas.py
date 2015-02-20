@@ -35,10 +35,10 @@ class Command(BaseCommand):
                             nome = string.capwords(d.fantasia.nome)
                             try:
                                 loja, criada = Loja.objects.get_or_create(shopping=shopping,
-                                                                          nome=nome)
+                                                                          id_multiplan=d.codPessoa)
                                 if loja:
                                     loja.publicada = True
-                                    loja.id_multilan = d.codPessoa
+                                    loja.nome = nome
                                     loja.save()
                                 total += 1
                             except:
