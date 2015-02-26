@@ -42,12 +42,23 @@ def ultimo_id(lista):
             ultimo_id = int(i['id'])
     return ultimo_id if ultimo_id > 0 else ''
 
-def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping):
+def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtro=False):
     trinta = tem_trinta = tem_cinq = cinquenta = tem_setenta = setenta \
     = preco1 = tem_preco1 = preco2 = tem_preco2 = preco3 = tem_preco3 = preco4 \
         = tem_preco4 = preco5 = tem_preco5 = False
     generos = []
-    for i in destaques+eventos+ofertas:
+
+    if com_filtro:
+        destaques_x = Oferta.prontos(tipo=Oferta.DESTAQUE, shopping=shopping.id)
+        eventos_x = Oferta.prontos(tipo=Oferta.EVENTO, shopping=shopping.id)
+        ofertas_x = Oferta.prontos(shopping=shopping.id)
+        ofertas_x = ofertas_x[:slice_oferta(len(destaques_x), len(eventos_x))]
+    else:
+        destaques_x = destaques
+        eventos_x = eventos
+        ofertas_x = ofertas
+
+    for i in destaques_x+eventos_x+ofertas_x:
         if i['genero'].lower() not in generos:
             generos.append(i['genero'])
         desconto = int(i['desconto']) if i.get('desconto', None) else None
@@ -172,7 +183,7 @@ def home_com_filtro(request, **kwargs):
                     'mais_paginas': mais_paginas,
                     'eh_paginacao': True}
     else:
-        contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping)
+        contexto = contexto_home(destaques,eventos,ofertas,mais_paginas,shopping,com_filtro=True)
     contexto.update({'data_filtro': 1})
 
     response = render(request, template, contexto)
