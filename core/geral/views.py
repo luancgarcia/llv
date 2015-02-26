@@ -816,3 +816,9 @@ def categorias_mais_vistas(request, shopping_id):
                          'mais_da_semana': mais_da_semana, 'total_semana': total_semana})
 
     return render(request, "relatorios/mais_vistas.html", contexto)
+
+def ribeirao(request):
+    return redirect('/ribeirao-shopping/')
+
+def diamond(request):
+    return redirect('/diamondmall/')

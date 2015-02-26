@@ -15,6 +15,9 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^ribeirao-preto-shopping/', 'geral.views.ribeirao', name='ribeirao'),
+    url(r'^diamondmall-shopping/', 'geral.views.diamond', name='diamond'),
+
     url(r'^modais/(?P<tipo>[\w-]+)/(?P<id_item>\d+)/$',
         'geral.views.modal',
         name='modal'),
