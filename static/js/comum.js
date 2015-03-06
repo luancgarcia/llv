@@ -71,6 +71,7 @@ function logadoFacebook(){
                     console.log('Welcome!  Fetching your information.... ');
                     FB.api('/me', function (response) {
                         console.log('Good to see you, ' + response.name + '.');
+		        fb_user_id = response.id;
                         //$('p.user span').text(response.name);
                         // $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
                     });
@@ -517,6 +518,20 @@ $(function(){
                         }
                         link.parents("p.curtidas").addClass('ativo');
                         acrescenta_curtidas('minhas_curtidas', id_item);
+                        FB.api(
+                            "/me/photos",
+                            "POST",
+                            {
+                                "url": data.imagem,
+                                "message": data.mensagem
+                            },
+                            function (response) {
+                              //console.log(response);
+                              if (response && !response.error) {
+                                console.log(response.error);
+                              }
+                            }
+                        );
                     },
                     error: function(){
                         console.log("erro curtir");
@@ -725,10 +740,10 @@ $( document ).ready(function() {
 	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta},
 	            beforeSend: function(){
 	                // console.log("before send");
-	                $('.container').append('<div align="center"><br class="cl"><img src="https://llv.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais"></div>');
+                        $('.container').append('<br class="cl"><img src="https://www.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais">');
 	            },
 	            success: function(data) {
-	                $(".grid:last").after(data);
+	                $(".img-loading-mais").after(data);
 	                $(".img-loading-mais").remove();
 	            },
 	            error: function(){
@@ -850,7 +865,7 @@ function disparaModalRequest(url, tamanho, qualclasse) {
 		url: url,
 		data:'html',
 		beforeSend: function(){
-			$('body').append("<div class='lightbox preloading'><p class='loading-modal'><img src='static/"+static_url+"/loader-bgescuro.gif' alt='' class='fl' /> <span class='fl'>Carregando</span></p></div>");
+			$('body').append("<div class='lightbox preloading'><p class='loading-modal'><img src='https://www.liquidacaolapisvermelho.com.br/static/img/loader-bgescuro.gif' alt='' class='fl' /> <span class='fl'>Carregando</span></p></div>");
 			// return false;
 		},
 		success: function(conteudo){
