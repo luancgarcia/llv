@@ -71,6 +71,7 @@ function logadoFacebook(){
                     console.log('Welcome!  Fetching your information.... ');
                     FB.api('/me', function (response) {
                         console.log('Good to see you, ' + response.name + '.');
+		        fb_user_id = response.id;
                         //$('p.user span').text(response.name);
                         // $('p.user img').attr('src','https://graph.facebook.com/'+response.id+'/picture?type=small');
                     });
@@ -527,7 +528,7 @@ $(function(){
                             function (response) {
                               //console.log(response);
                               if (response && !response.error) {
-                                //console.log(response.error);
+                                console.log(response.error);
                               }
                             }
                         );
@@ -672,8 +673,11 @@ $(function(){
 //                        console.log("before send");
                     },
                     success: function(data) {
+			console.log(data.imagem);
                         FB.api(
                             "/me/photos",
+                            //"/"+fb_user_id+"/photos",
+			    //"/"+fb_user_id+"/feed",
                             "POST",
                             {
                                 "url": data.imagem,
@@ -681,9 +685,9 @@ $(function(){
                             },
                             function (response) {
                               if (response && !response.error) {
-    //                            console.log(response);
+                                console.log(response);
                               }
-    //                          console.log(response.error);
+                              console.log(response.error);
                             }
                         );
                         fechaModal();
@@ -864,7 +868,7 @@ function disparaModalRequest(url, tamanho, qualclasse) {
 		url: url,
 		data:'html',
 		beforeSend: function(){
-			$('body').append("<div class='lightbox preloading'><p class='loading-modal'><img src='static/"+static_url+"/loader-bgescuro.gif' alt='' class='fl' /> <span class='fl'>Carregando</span></p></div>");
+			$('body').append("<div class='lightbox preloading'><p class='loading-modal'><img src='https://www.liquidacaolapisvermelho.com.br/static/img/loader-bgescuro.gif' alt='' class='fl' /> <span class='fl'>Carregando</span></p></div>");
 			// return false;
 		},
 		success: function(conteudo){
