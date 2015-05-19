@@ -124,7 +124,7 @@ class Categoria(EditorialModel):
 
     @classmethod
     def publicadas_com_oferta(cls, shopping=1):
-        categorias = cls.objects.filter(ofertas__status=1, shopping_id=shopping, sazonal=False, publicada=True) \
+        categorias = cls.objects.filter(ofertas__fim__gt=datetime.now(), ofertas__status=1, shopping_id=shopping, sazonal=False, publicada=True) \
                                 .order_by('nome') \
                                 .distinct()
         return separa_tres_colunas([c.to_dict() for c in categorias])

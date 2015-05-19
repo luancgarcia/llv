@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import os
+from datetime import datetime, timedelta, date
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
@@ -69,6 +70,7 @@ class Loja(EditorialModel):
     @classmethod
     def publicadas_com_oferta(cls, shopping):
         lojas = cls.objects.filter(ofertas__status=1,
+                                   ofertas__fim__gt=datetime.now(), 
                                    shopping_id=shopping)\
                            .order_by('nome')\
                            .distinct()

@@ -47,7 +47,7 @@ EMAIL_USE_TLS = True
 
 # SITE_URL = "https://apps.facebook.com/llv-dev/"
 SITE_URL = "https://www.liquidacaolapisvermelho.com.br"
-SHARE_URL = SITE_URL
+SHARE_URL = "http://www.liquidacaolapisvermelho.com.br"
 #SHARE_URL = "http://liquidacaolapisvermelho.com.br"
 # SITE_URL = "http://localhost:8989"
 
@@ -178,7 +178,7 @@ FACEBOOK_APP_SECRET = "f8b13cf59845de6b51226d8da6f8c1a9"
 WSDL_URL = 'http://wiseit.multiplan.com.br:8080/WebService2/services/wiseitws?wsdl'
 
 COMPARTILHADAS_PASTA = os.path.join(MEDIA_ROOT, 'compartilhar')
-COMPARTILHADAS_URL = SITE_URL+'/media/compartilhar/'
+COMPARTILHADAS_URL = SHARE_URL+'/media/compartilhar/'
 
 # secure proxy SSL header and secure cookies
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
