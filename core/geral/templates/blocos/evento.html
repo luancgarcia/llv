@@ -1,6 +1,6 @@
 <div class="grid dois-itens-v{% if last_div %} last{%endif%}{%if lastmob%} lastmob{%endif%}{%if lasttv%} lasttv{%endif%}">
 	<article class="item vertical">
-		{% if evento.desconto %}
+		{% if evento.porcentagem or evento.porcentagem != 0 %}
 		<span class="desconto">{{ evento.desconto }}</span>
 		{% endif %}
 		<figure>
