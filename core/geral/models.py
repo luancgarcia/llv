@@ -282,18 +282,16 @@ class Oferta(EditorialModel):
 
     def to_dict(self, modal=False):
         imagem = None
+        images = self.imagens.all()
         if self.tipo == Oferta.OFERTA:
-            imagens = self.imagens.filter(oferta__tipo=Oferta.OFERTA)
-            if imagens and imagens[0].imagem:
-                imagem = imagens[0].img_172x172.url
+            if images and images[0].imagem:
+                imagem = images[0].img_172x172.url
         elif self.tipo == Oferta.EVENTO:
-            imagens = self.imagens.filter(oferta__tipo=Oferta.EVENTO)
-            if imagens:
-                imagem = imagens[0].evento_180x445.url
+            if images:
+                imagem = images[0].evento_180x445.url
         else:
-            imagens = self.imagens.filter(oferta__tipo=Oferta.DESTAQUE)
-            if imagens:
-                imagem = imagens[0].img_376x376.url
+            if images:
+                imagem = images[0].img_376x376.url
 
         contexto =  {'id': str(self.id),
                      'unicode': self,
@@ -322,7 +320,7 @@ class Oferta(EditorialModel):
 
         if modal:
             imagens = [{'maior':img.img_600x600.url,
-                        'menor':img.img_94x94.url} for img in self.imagens.all()]
+                        'menor':img.img_94x94.url} for img in images]
             contexto.update({'descricao': self.descricao,
                              'imagens': imagens})
         return contexto
