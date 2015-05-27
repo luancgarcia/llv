@@ -433,7 +433,7 @@ class Evento(Oferta):
 class ImagemOferta(OrderedModel):
     def new_filename(instance, filename):
         fname, dot, extension = filename.rpartition('.')
-        fname = slugify(fname)
+        fname = '%s_%s' % (slugify(unicode(fname)), datetime.now().strftime("%Y%m%d%H%M%S"))
         return os.path.join('ofertas','%s.%s' % (fname, extension))
 
     oferta = models.ForeignKey(Oferta, verbose_name=u'Oferta',
