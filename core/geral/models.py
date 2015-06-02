@@ -415,7 +415,14 @@ class Oferta(EditorialModel):
 
     @classmethod
     def relatorio_filtrado(cls, shopping_id, acao, tipo, inicio, fim):
-        return cls.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
+        if tipo == cls.EVENTO:
+            return cls.objects.annotate(vistas=Count('pk', only=Q(shopping=shopping_id,
+                                                                  logs__acao=acao,
+                                                                  logs__data_criacao__gte=inicio,
+                                                                  logs__data_criacao__lte=fim + timedelta(days=1),
+                                                                  tipo=tipo))).order_by('-vistas')
+        else:
+            return cls.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
                                                               logs__acao=acao,
                                                               logs__data_criacao__gte=inicio,
                                                               logs__data_criacao__lte=fim + timedelta(days=1),
