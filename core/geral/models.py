@@ -376,7 +376,16 @@ class Oferta(EditorialModel):
 
     @classmethod
     def query_relatorio(cls, shopping_id, acao, tipo, date=None):
-        if not date:
+        if tipo == cls.EVENTO and not date:
+            return Oferta.objects.annotate(vistas=Count('pk', only=Q(shopping=shopping_id,
+                                                                     logs__acao=acao,
+                                                                     tipo=tipo))).order_by('-vistas')
+        elif tipo == cls.EVENTO and date:
+            return Oferta.objects.annotate(vistas=Count('pk', only=Q(shopping=shopping_id,
+                                                                     logs__acao=acao,
+                                                                     logs__data_criacao__gte=date,
+                                                                     tipo=tipo))).order_by('-vistas')
+        elif not date:
             return Oferta.objects.annotate(vistas=Count('pk', only=Q(loja__shopping=shopping_id,
                                                                  logs__acao=acao,
                                                                  tipo=tipo))).order_by('-vistas')
