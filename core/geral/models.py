@@ -280,6 +280,62 @@ class Oferta(EditorialModel):
                                           shopping=self.loja.shopping)[:1]
         return marketing[0] if marketing else None
 
+    def get_image(self):
+        imagem = None
+        images = self.imagens.all()
+        if self.tipo == Oferta.OFERTA:
+            if images and images[0].imagem:
+                imagem = images[0].img_172x172.url
+        elif self.tipo == Oferta.EVENTO:
+            if images:
+                imagem = images[0].evento_180x445.url
+        else:
+            if images:
+                imagem = images[0].img_376x376.url
+
+        return imagem
+
+    @classmethod
+    def prontos_api(cls, from_id=None, shopping=1):
+        hoje = date.today()
+        items = cls.objects.filter(status=cls.PUBLICADO) \
+                           .filter(Q(loja__shopping_id=shopping) |
+                                   Q(shopping_id=shopping)) \
+                           .filter(inicio__lte=hoje, fim__gte=hoje) \
+                           .order_by('-data_aprovacao')
+        if from_id:
+            items = items.filter(id__gt=from_id)
+        return [i.to_api() for i in items[:32]]
+
+    def to_api(self):
+        contexto = {'id': str(self.id),
+                    'loja': self.loja.to_dict() if self.loja else None,
+                    'descricao': self.descricao,
+                    'texto_do_link': self.texto_link,
+                    'chamada_promocional': self.texto_promocional,
+                    'imagem': self.get_image(),
+                    'compartilhamentos': self.total_visto,
+                    'curtidas': self.total_curtido,
+                    'categoria': [c.to_dict() for c in self.categoria.all()],
+                    'expira': self.expira_str,
+                    'titulo': self.nome,
+                    'tipo': Oferta.TIPOS[self.tipo][1],
+                    'inicio': _date(self.inicio, 'd/m/Y'),
+                    'fim': _date(self.fim, 'd/m/Y'),
+                    'fim_curto': _date(self.fim, 'd/m'),
+                    'genero': self.GENEROS[self.genero][1],
+                    'porcentagem': self.porcentagem_desconto(),
+                    'desconto': self.desconto,
+                    'preco_final': self.preco_final,
+                    'preco_inicial': self.preco_inicial}
+
+        imagens = [{'maior': img.img_600x600.url,
+                    'menor': img.img_94x94.url} for img in self.imagens.all()]
+
+        contexto.update({'imagens': imagens})
+
+        return contexto
+
     def to_dict(self, modal=False):
         imagem = None
         images = self.imagens.all()
