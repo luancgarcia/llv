@@ -102,6 +102,10 @@ urlpatterns = patterns('',
     url(r'^relatorios/categorias_mais_vistas/(?P<shopping_id>\d+)/$',
         'geral.views.categorias_mais_vistas', name='categorias_mais_vistas'),
 
+    # api webservice
+    # url(r'^api/ofertas/(?P<slug>[\w-]+)$', 'api.views.ofertas', name='api_ofertas'),
+    url(r'^api/ofertas/$', 'api.views.ofertas', name='api_ofertas'),
+
     url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
     url(r'^$', 'geral.views.index', name='index'),
 )
