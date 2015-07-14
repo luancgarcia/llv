@@ -296,11 +296,10 @@ class Oferta(EditorialModel):
         return imagem
 
     @classmethod
-    def prontos_api(cls, from_id=None, shopping=1):
+    def prontos_api(cls, from_id=None, id_multiplan=1):
         hoje = date.today()
-        items = cls.objects.filter(status=cls.PUBLICADO,loja__shopping_id=shopping,
-                                   inicio__lte=hoje, fim__gte=hoje) \
-                           .order_by('-data_aprovacao')
+        items = cls.objects.filter(status=cls.PUBLICADO,loja__shopping__id_multiplan=id_multiplan,
+                                   inicio__lte=hoje, fim__gte=hoje).order_by('-data_aprovacao')
         if from_id:
             items = items.filter(id__gt=from_id)
         return [i.to_api() for i in items[:32]]
