@@ -16,16 +16,15 @@ def retorno(dados, tipo):
 
 def ofertas(request):
     slug = request.GET.get('slug', None)
-    id_shopping = request.GET.get('id_shopping', None)
+    id_multiplan = request.GET.get('id_multiplan', None)
     tipo = request.GET.get('type', None)
     dados = {'error': None, 'error_message': None}
-    if not slug and not id_shopping:
+    if not slug and not id_multiplan:
         dados.update({'error': 'Shopping não informado',
                       'error_message': 'Favor informe a slug do shopping ou id do shopping na '
                                        'Multiplan'})
-    elif id_shopping:
-        shopping = Shopping.objects.get(id_multiplan=id_shopping)
-        dados.update({'ofertas': Oferta.prontos_api(shopping=shopping.id)})
+    elif id_multiplan:
+        dados.update({'ofertas': Oferta.prontos_api(id_multiplan=id_multiplan)})
     else:
         shopping = Shopping.objects.get(slug=slug)
         dados.update({'ofertas': Oferta.prontos_api(shopping=shopping.id)})
