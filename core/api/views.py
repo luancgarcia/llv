@@ -30,12 +30,20 @@ def ofertas(request):
         dados.update({'ofertas': Oferta.prontos_api(shopping=shopping.id)})
     return retorno(dados, tipo)
 
-def shopping(request, slug):
-    if not slug:
-        dados = {'error': u'Slug não informado'}
-    try:
-        mall = Shopping.objects.get(slug=slug)
-        dados = mall.to_api()
-    except ObjectDoesNotExist:
-        dados = {'error': u'Shopping não encontrado'}
+def shoppings(request):
+    slug = request.GET.get('slug', None)
+    nome = request.GET.get('nome', None)
+    dados = {'error': u'Shopping não encontrado'}
+    if not slug and not nome:
+        dados = {'shoppings': [s.to_api() for s in Shopping.objects.all()]}
+    elif slug:
+        try:
+            mall = Shopping.objects.get(slug=slug)
+            dados = mall.to_api()
+        except ObjectDoesNotExist:
+            pass
+    elif nome:
+        malls = Shopping.objects.filter(nome__icontains=nome)
+        if malls:
+            dados = {'shoppings': [s.to_api() for s in malls]}
     return retorno(dados, 'json')
