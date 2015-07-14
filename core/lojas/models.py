@@ -32,6 +32,12 @@ class Shopping(EditorialModel):
                 'slug': self.slug,
                 'id_multiplan': self.id_multiplan}
 
+    def to_api(self):
+        return {'nome': self.nome,
+                'slug': self.slug,
+                'id_multiplan': self.id_multiplan,
+                'total_lojas': self.lojas.count()}
+
 
 class Loja(EditorialModel):
     def new_filename(instance, filename):

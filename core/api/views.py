@@ -2,8 +2,10 @@
 import simplejson as json
 
 from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 
-from geral.models import Oferta, Shopping
+from geral.models import Oferta
+from lojas.models import Shopping
 
 
 def retorno(dados, tipo):
@@ -23,3 +25,13 @@ def ofertas(request):
         shopping = Shopping.objects.get(slug=slug)
         dados.update({'ofertas': Oferta.prontos_api(shopping=shopping.id)})
     return retorno(dados, tipo)
+
+def shopping(request, slug):
+    if not slug:
+        dados = {'error': u'Slug não informado'}
+    try:
+        mall = Shopping.objects.get(slug=slug)
+        dados = mall.to_api()
+    except ObjectDoesNotExist:
+        dados = {'error': u'Shopping não encontrado'}
+    return retorno(dados, 'json')
