@@ -298,10 +298,8 @@ class Oferta(EditorialModel):
     @classmethod
     def prontos_api(cls, from_id=None, shopping=1):
         hoje = date.today()
-        items = cls.objects.filter(status=cls.PUBLICADO) \
-                           .filter(Q(loja__shopping_id=shopping) |
-                                   Q(shopping_id=shopping)) \
-                           .filter(inicio__lte=hoje, fim__gte=hoje) \
+        items = cls.objects.filter(status=cls.PUBLICADO,loja__shopping_id=shopping,
+                                   inicio__lte=hoje, fim__gte=hoje) \
                            .order_by('-data_aprovacao')
         if from_id:
             items = items.filter(id__gt=from_id)
