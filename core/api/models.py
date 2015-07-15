@@ -13,6 +13,13 @@ class ApiUser(models.Model):
     email = models.EmailField('E-mail', unique=True)
     token = models.CharField('Token', max_length=64, editable=False)
 
+    class Meta:
+        verbose_name = u'Usuário de API'
+        verbose_name_plural = u'Usuários da API'
+
+    def __unicode__(self):
+        return '%s - %s (%s)' % (self.nome, self.email, self.shopping.nome)
+
     @classmethod
     def create_token(cls, slug_shopping):
         '''
@@ -28,6 +35,13 @@ class ApiSession(models.Model):
     inicio = models.DateTimeField(u'Início', auto_now_add=True)
     fim = models.DateTimeField(u'Fim')
 
+    class Meta:
+        verbose_name = u'Sessão da API'
+        verbose_name_plural = u'Sessões da API'
+
+    def __unicode__(self):
+        return '%s - %s' % (self.user, self.inicio)
+
     #Todo:
     # - criar método pra reportar tempo passado desde o inicio
     # - terminar a sessão ou expirar o tempo, fechar sessão e gravar fim
@@ -35,3 +49,10 @@ class ApiSession(models.Model):
 
 class ApiLog(models.Model):
     sessao = models.ForeignKey(ApiSession, related_name='logs', verbose_name=u'Sessão do usuário')
+
+    class Meta:
+        verbose_name = u'Log da API'
+        verbose_name_plural = u'Logs da API'
+
+    def __unicode__(self):
+        return u'log da sessão %s' % self.sessao
