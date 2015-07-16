@@ -76,6 +76,7 @@ class Loja(EditorialModel):
     @classmethod
     def publicadas_com_oferta(cls, shopping):
         lojas = cls.objects.filter(ofertas__status=1,
+                                   ofertas__inicio__lte=date.today(),
                                    ofertas__fim__gt=datetime.now(), 
                                    shopping_id=shopping)\
                            .order_by('nome')\
