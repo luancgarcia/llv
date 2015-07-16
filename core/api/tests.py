@@ -41,6 +41,12 @@ class ApiUserModelTest(TestCase):
         self.assertEquals(only_user_in_database.shopping, shopping)
 
 
+def create_new_user():
+    shopping = ShoppingModelTest._create_shopping()
+    token = ApiUser.create_token(shopping.slug)
+    user = ApiUserModelTest._create_user(shopping, token)
+    return user
+
 class ApiSessionModelTest(TestCase):
     @classmethod
     def _create_session(cls, user, inicio, fim):
