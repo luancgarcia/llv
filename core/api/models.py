@@ -11,7 +11,7 @@ class ApiUser(models.Model):
     shopping = models.ForeignKey(Shopping, related_name='tokens', verbose_name=u'Shopping')
     nome = models.CharField(u'Nome', max_length=255)
     email = models.EmailField('E-mail', unique=True)
-    token = models.CharField('Token', max_length=64, editable=False)
+    token = models.CharField('Token', max_length=64, null=False)
 
     class Meta:
         verbose_name = u'Usuário de API'
@@ -29,6 +29,13 @@ class ApiUser(models.Model):
         base_token = '%s@%s' % (slug_shopping, datetime.now())
         return hashlib.sha256(base_token).hexdigest()
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.token = self.create_token(self.shopping.slug)
+        super(ApiUser, self).save(*args, **kwargs)
+
+    # todo: criar método para notificar usuário que chave foi criada
+
 
 class ApiSession(models.Model):
     user = models.ForeignKey(ApiUser, related_name='sessoes', verbose_name=u'Usuário da API')
@@ -42,9 +49,8 @@ class ApiSession(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.user, self.inicio)
 
-    #Todo:
-    # - criar método pra reportar tempo passado desde o inicio
-    # - terminar a sessão ou expirar o tempo, fechar sessão e gravar fim
+    #Todo: criar método pra reportar tempo passado desde o inicio
+    #Todo: terminar a sessão ou expirar o tempo, fechar sessão e gravar fim
 
 
 class ApiLog(models.Model):
