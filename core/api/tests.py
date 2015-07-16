@@ -3,7 +3,7 @@ from datetime import datetime
 
 from django.test import TestCase
 
-from models import ApiUser, ApiSession
+from models import ApiUser, ApiSession, ApiLog
 from lojas.tests import ShoppingModelTest
 
 class ApiUserModelTest(TestCase):
@@ -58,9 +58,7 @@ class ApiSessionModelTest(TestCase):
         return
 
     def create_new_session_and_save_it_in_the_database(self):
-        shopping = ShoppingModelTest._create_shopping()
-        token = ApiUser.create_token(shopping.slug)
-        user = ApiUserModelTest._create_user(shopping, token)
+        user = create_new_user()
         inicio = datetime.now()
 
         # Check if session can be created and saved on the database
@@ -77,3 +75,30 @@ class ApiSessionModelTest(TestCase):
         self.assertEquals(only_session_in_database.user, user)
         self.assertEquals(only_session_in_database.inicio, inicio)
         self.assertEquals(only_session_in_database.fmi, None)
+
+
+class ApiLogModelTest(TestCase):
+    @classmethod
+    def _create_log(cls, sessao):
+        log = ApiLog()
+        log.sessao = sessao
+        log.save()
+        return log
+
+    def create_new_log_and_save_it_the_database(self):
+        user = create_new_user()
+        inicio = datetime.now()
+        sessao = ApiSessionModelTest._create_session(user, inicio, None)
+
+        # Check if session can be created and saved on the database
+        log = self._create_log(sessao)
+
+        # can it be found?
+        all_logs_in_database = ApiLog.objects.all()
+        self.assertEquals(len(all_logs_in_database), 1)
+        only_log_in_database = all_logs_in_database[0]
+
+        # attributes
+        self.assertEquals(only_log_in_database, log)
+
+        self.assertEquals(only_log_in_database.sessao, sessao)
