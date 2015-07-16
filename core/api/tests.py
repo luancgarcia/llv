@@ -6,11 +6,12 @@ from lojas.tests import ShoppingModelTest
 
 class ApiUserModelTest(TestCase):
     @classmethod
-    def _create_user(cls, shopping, name='Usuario teste', email='nada@void.com'):
+    def _create_user(cls, shopping, token, name='Usuario teste', email='nada@void.com'):
         user = ApiUser()
         user.shopping = shopping
         user.nome = name
         user.email = email
+        user.token = token
         user.save()
         return user
 
@@ -19,9 +20,10 @@ class ApiUserModelTest(TestCase):
         Start creating a new shopping
         '''
         shopping = ShoppingModelTest._create_shopping()
+        token = ApiUser.create_token(shopping.slug)
 
         # Check if user can be created and saved on the database
-        user = self._create_user(shopping)
+        user = self._create_user(shopping, token)
 
         # Now check if it can be found in the database
         all_users_in_database = ApiUser.objects.all()
@@ -33,4 +35,5 @@ class ApiUserModelTest(TestCase):
 
         self.assertEquals(only_user_in_database.nome, 'Usuario teste')
         self.assertEquals(only_user_in_database.email, 'nada@void.com')
+        self.assertEquals(only_user_in_database.token, token)
         self.assertEquals(only_user_in_database.shopping, shopping)
