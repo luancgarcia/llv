@@ -4,9 +4,9 @@ from optparse import make_option
 from suds.client import Client
 import string
 
-from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from django.utils.text import slugify
 
 from lojas.models import Shopping, Loja
 
@@ -38,6 +38,7 @@ class Command(BaseCommand):
                                                                   nome=nome)
                         if loja:
                             loja.publicada = True
+                            loja.slug = slugify(unicode(nome))
                             loja.save()
             else:
                 print ' Houve algum problema.'

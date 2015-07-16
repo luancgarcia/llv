@@ -6,6 +6,7 @@ import string
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from django.utils.text import slugify
 
 from lojas.models import Shopping, Loja
 
@@ -39,6 +40,7 @@ class Command(BaseCommand):
                                 if loja:
                                     loja.publicada = True
                                     loja.nome = nome
+                                    loja.slug = slugify(unicode(nome))
                                     loja.save()
                                 total += 1
                             except Exception, e:
