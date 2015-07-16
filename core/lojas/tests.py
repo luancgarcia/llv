@@ -23,7 +23,6 @@ class ShoppingModelTest(TestCase):
 
         # Now check if it can be found in the database
         all_malls_in_database = Shopping.objects.all()
-        printa(all_malls_in_database)
         self.assertEquals(len(all_malls_in_database), 1)
         only_mall_in_database = all_malls_in_database[0]
 
