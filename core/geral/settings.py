@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'utils',
     'notificacoes',
     'api',
+    'rankings',
     'imagekit',
 
     'south',
