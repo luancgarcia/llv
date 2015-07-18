@@ -12,6 +12,9 @@ class Intervalo(BaseModel):
         verbose_name = u'Intervalo'
         verbose_name_plural = u'Intervalos'
 
+    def __unicode__(self):
+        return u'%s a %s' % (self.inicio.strftime("%d/%m/%Y"), self.fim.strftime("%d/%m/%Y"))
+
 
 class Ponto(BaseModel):
     intervalo = models.ForeignKey(Intervalo, verbose_name='Intervalo', related_name='pontos')
@@ -24,10 +27,11 @@ class Ponto(BaseModel):
     desconto_50 = models.IntegerField(u'Descontos de 31% a 50%', null=True) # 2 pontos cada
     desconto_70 = models.IntegerField(u'Descontos de 51% a 70%', null=True) # 3 pontos cada
     desconto_100 = models.IntegerField(u'Descontos acima de 70%', null=True) # 4 pontos cada
+    total = models.IntegerField(u'Total', null=True)
 
     class Meta:
         verbose_name = u'Ponto'
         verbose_name_plural = u'Pontos'
 
     def __unicode__(self):
-        return u'pontos do intervalo %s da loja %s' % (self.intervalo, self.loja)
+        return u'%s pontos do intervalo %s da loja %s' % (self.total, self.intervalo, self.loja)
