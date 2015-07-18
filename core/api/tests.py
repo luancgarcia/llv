@@ -57,7 +57,7 @@ class ApiSessionModelTest(TestCase):
         sessao.save()
         return
 
-    def create_new_session_and_save_it_in_the_database(self):
+    def test_create_new_session_and_save_it_in_the_database(self):
         user = create_new_user()
         inicio = datetime.now()
 
@@ -74,7 +74,7 @@ class ApiSessionModelTest(TestCase):
 
         self.assertEquals(only_session_in_database.user, user)
         self.assertEquals(only_session_in_database.inicio, inicio)
-        self.assertEquals(only_session_in_database.fmi, None)
+        self.assertEquals(only_session_in_database.fim, None)
 
 
 class ApiLogModelTest(TestCase):
