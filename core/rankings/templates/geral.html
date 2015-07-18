@@ -1,0 +1,86 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+    <style type="text/css">
+
+    </style>
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row-fluid dashboard-tools">
+    <div class="span0 hidden-phone" id="blank">&nbsp;</div>
+    <div class="span9 app-list">
+        <div>
+            <h2>Rankings por shopping</h2>
+        </div>
+    </div>
+    <div class="span9 app-list">
+        <div>
+            <p><a href="/admin"><< Voltar a página inicial</a></p>
+        </div>
+    </div>
+    {% for s in shoppings %}
+    <div class="span5 app-list">
+        <table summary="Lista de shoppings" class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <td class="model-name">
+                        <h4>{{ s.nome }}</h4>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for loja in s.lojas %}
+                <tr>
+                    <td>{{ loja.loja }}</td>
+                    <td>{{ loja.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% empty %}
+        <p>Sem shoppings disponíves para listar.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block js_footer %}
+    <script type="text/javascript">
+    (function ($) {
+        swap_containers = function(container){
+            container = $(container);
+            container.remove();
+
+            $('.dashboard-tools').append(container.prop('outerHTML'));
+        }
+
+        swap_if_necessary = function(){
+            width = Math.max( $(window).innerWidth(), window.innerWidth)
+            if(width < '767' && $('.recent-actions').isAfter('.app-list')){
+                swap_containers('.recent-actions');
+            }
+            else if(width > '767' && $('.recent-actions').isBefore('.app-list')){
+                swap_containers('.app-list');
+            }
+        }
+
+        $(window).resize(swap_if_necessary);
+        $(document).ready(swap_if_necessary);
+    })(django.jQuery);
+    </script>
+{% endblock js_footer %}
