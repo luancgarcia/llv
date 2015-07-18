@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.test import TestCase
 
-from models import Shopping
+from models import Shopping, Loja
 
 
 class ShoppingModelTest(TestCase):
@@ -31,3 +31,12 @@ class ShoppingModelTest(TestCase):
 
         self.assertEquals(only_mall_in_database.nome, 'Shopping teste')
         self.assertEquals(only_mall_in_database.slug, 'shopping-teste')
+
+
+class LojaModelTest(TestCase):
+    @classmethod
+    def _create_loja(cls):
+        loja = Loja()
+        loja.shopping = ShoppingModelTest._create_shopping()
+        loja.save()
+        return loja
