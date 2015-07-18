@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 import hashlib
-from datetime import datetime
+from datetime import date
 
 from django.db import models
 
@@ -26,7 +26,7 @@ class ApiUser(models.Model):
         Gera token de cada usuário com acesso à API
         Deve ser usado apenas ao criar e campo não deve ser atualizado mais, em tempo algum.
         '''
-        base_token = '%s@%s' % (slug_shopping, datetime.now())
+        base_token = '%s@%s' % (slug_shopping, date.today())
         return hashlib.sha256(base_token).hexdigest()
 
     def save(self, *args, **kwargs):
