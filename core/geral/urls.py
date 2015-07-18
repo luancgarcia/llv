@@ -107,6 +107,8 @@ urlpatterns = patterns('',
     url(r'^api/ofertas/$', 'api.views.ofertas', name='api_ofertas'),
     url(r'^api/shoppings/$', 'api.views.shoppings', name='api_shopping'),
 
+    url(r'^ranking/$', 'rankings.views.ranking_index', name='ranking_index'),
+
     url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
     url(r'^$', 'geral.views.index', name='index'),
 )
