@@ -40,7 +40,7 @@ class ApiUser(models.Model):
 class ApiSession(models.Model):
     user = models.ForeignKey(ApiUser, related_name='sessoes', verbose_name=u'Usuário da API')
     inicio = models.DateTimeField(u'Início', auto_now_add=True)
-    fim = models.DateTimeField(u'Fim')
+    fim = models.DateTimeField(u'Fim', null=True)
 
     class Meta:
         verbose_name = u'Sessão da API'
