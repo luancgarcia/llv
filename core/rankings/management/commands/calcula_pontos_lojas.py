@@ -41,15 +41,26 @@ class Command(BaseCommand):
                     ofertas = loja.ofertas.exclude(status__in=[0,3]) \
                                           .filter(data_aprovacao__gte=dez_dias_atras)
 
-                    ponto.produtos = ofertas.count()
-                    ponto.fotos = sum([o.imagens.count() for o in ofertas])
-                    ponto.likes = sum([o.logs.filter(acao=Log.CURTIDA).count() for o in ofertas])
-                    ponto.shares = sum([o.logs.filter(acao=Log.COMPARTILHADA).count()*2 for o in ofertas])
-                    ponto.desconto_30 = ofertas.filter(desconto__lte=30).count()
-                    ponto.desconto_50 = ofertas.filter(desconto__gte=31,desconto__lte=50).count()*2
-                    ponto.desconto_70 = ofertas.filter(desconto__gte=51,desconto__lte=70).count()*3
-                    ponto.desconto_100 = ofertas.filter(desconto__gte=71,
-                                                        desconto__lte=100).count()*4
+                    produtos = ofertas.count()
+                    fotos = sum([o.imagens.count() for o in ofertas])
+                    likes = sum([o.logs.filter(acao=Log.CURTIDA).count() for o in ofertas])
+                    shares = sum([o.logs.filter(acao=Log.COMPARTILHADA).count()*2 for o in ofertas])
+                    desconto_30 = ofertas.filter(desconto__lte=30).count()
+                    desconto_50 = ofertas.filter(desconto__gte=31,desconto__lte=50).count()*2
+                    desconto_70 = ofertas.filter(desconto__gte=51,desconto__lte=70).count()*3
+                    desconto_100 = ofertas.filter(desconto__gte=71,desconto__lte=100).count()*4
+
+                    ponto.produtos = produtos
+                    ponto.fotos = fotos
+                    ponto.likes = likes
+                    ponto.shares = shares
+                    ponto.desconto_30 = desconto_30
+                    ponto.desconto_50 = desconto_50
+                    ponto.desconto_70 = desconto_70
+                    ponto.desconto_100 = desconto_100
+
+                    ponto.total = produtos+fotos+likes+shares+desconto_30+desconto_50+desconto_70\
+                                  +desconto_100
                     ponto.save()
 
         # close_old_connections()
