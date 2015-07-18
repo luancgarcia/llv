@@ -35,3 +35,11 @@ class Ponto(BaseModel):
 
     def __unicode__(self):
         return u'%s pontos do intervalo %s da loja %s' % (self.total, self.intervalo, self.loja)
+
+    def to_dict(self):
+        return {'loja': self.loja.nome,
+                'total': self.total}
+
+    @classmethod
+    def dez_mais(cls, shopping):
+        return cls.objects.filter(loja__shopping_id=shopping).order_by('-total')[:10]
