@@ -10,6 +10,7 @@ from django.http import Http404
 from django.conf import settings
 from django.db.models import Q
 from aggregate_if import Count
+from django.contrib.admin.views.decorators import staff_member_required
 
 from utils.functions import jsonResponse, dict_mais_vistas, listas_e_totais
 from utils.custom_email import TemplatedEmail
@@ -619,6 +620,7 @@ def notifica(request, acao):
 
     return jsonResponse(contexto)
 
+@staff_member_required
 def relatorios_index(request):
     contexto = {'shoppings': [s.to_dict() for s in Shopping.objects.all()]}
     return render(request, "relatorios/index.html", contexto)
