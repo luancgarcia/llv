@@ -14,4 +14,4 @@ core/geral/static/sass/.sass-cache/*
 !procedures/*.sql
 !triggers/*.sql
 core/html/static/sass/.sass-cache/*
-
+.coverage
