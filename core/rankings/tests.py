@@ -19,6 +19,7 @@ class IntervaloModelTest(TestCase):
 
     def test_creating_intervalo_and_save_it_in_the_database(self):
         intervalo = self._create_intervalo(inicio, fim)
+        unicode_str = u'%s a %s' % (inicio.strftime("%d/%m/%Y"), fim.strftime("%d/%m/%Y"))
 
         all_intervalos_saved = Intervalo.objects.all()
         self.assertEquals(len(all_intervalos_saved), 1)
@@ -27,6 +28,7 @@ class IntervaloModelTest(TestCase):
         self.assertEquals(only_intervalo_saved, intervalo)
         self.assertEquals(only_intervalo_saved.inicio, inicio)
         self.assertEquals(only_intervalo_saved.fim, fim)
+        self.assertEquals(only_intervalo_saved.__unicode__(), unicode_str)
 
 
 class PontoModelTest(TestCase):
@@ -43,6 +45,7 @@ class PontoModelTest(TestCase):
         ponto.desconto_50 = 2
         ponto.desconto_70 = 3
         ponto.desconto_100 = 4
+        ponto.total = 15
         ponto.save()
         return ponto
 
@@ -50,6 +53,7 @@ class PontoModelTest(TestCase):
         intervalo = IntervaloModelTest._create_intervalo(inicio, fim)
         loja = LojaModelTest._create_loja()
         ponto = self._create_ponto(intervalo, loja)
+        unicode_str = u'%s pontos do intervalo %s da loja %s' % (15, intervalo, loja)
 
         all_pontos_saved = Ponto.objects.all()
         self.assertEquals(all_pontos_saved.count(), 1)
@@ -61,3 +65,6 @@ class PontoModelTest(TestCase):
         self.assertEquals(only_ponto_saved.loja, loja)
         self.assertEquals(only_ponto_saved.shares, 2)
         self.assertEquals(only_ponto_saved.desconto_100, 4)
+        self.assertEquals(only_ponto_saved.__unicode__(), unicode_str)
+        self.assertEquals(only_ponto_saved.to_dict(), {'loja': loja.nome, 'total': 15})
+        self.assertEquals(only_ponto_saved.dez_mais(loja.shopping.id).count(), 1)
