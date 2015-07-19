@@ -6,4 +6,13 @@ RewriteOptions inherit
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} !^www\.
+#RewriteCond %{REQUEST_URI} !/media/ [NC]
 RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^llv\.liquidacaolapisvermelho\.com\.br\/$ [OR]
+RewriteCond %{HTTP_HOST} ^liquidacaolapisvermelho\.com\.br\/$ [OR]
+RewriteCond %{HTTP_HOST} ^llv\.liquidacaolapisvermelho\.com\.br$
+RewriteCond %{HTTP_HOST} ^liquidacaolapisvermelho\.com\.br$ [OR]
+RewriteRule ^admin\/$ "https\:\/\/www\.liquidacaolapisvermelho\.com\.br\/admin" [R=301,L]
+RewriteRule ^admin$ "https\:\/\/www\.liquidacaolapisvermelho\.com\.br\/admin" [R=301,L]
+
