@@ -302,9 +302,9 @@ class Oferta(EditorialModel):
                                    inicio__lte=hoje, fim__gte=hoje).order_by('-data_aprovacao')
         if from_id:
             filtro = cls.objects.get(id=from_id)
-            items = items.filter(data_aprovacao__lte=filtro.data_aprovacao)
-
-        return [i.to_api() for i in items[:32]], items.reverse()[0].id if items else None
+            items = items.filter(data_aprovacao__lt=filtro.data_aprovacao)
+        items = items[:32]
+        return [i.to_api() for i in items], items[::-1][0].id if items else None
 
     def to_api(self):
         contexto = {'id': str(self.id),
