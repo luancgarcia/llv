@@ -301,8 +301,10 @@ class Oferta(EditorialModel):
         items = cls.objects.filter(status=cls.PUBLICADO,loja__shopping__id_multiplan=id_multiplan,
                                    inicio__lte=hoje, fim__gte=hoje).order_by('-data_aprovacao')
         if from_id:
-            items = items.filter(id__gt=from_id)
-        return [i.to_api() for i in items[:32]]
+            filtro = cls.objects.get(id=from_id)
+            items = items.filter(data_aprovacao__lte=filtro.data_aprovacao)
+
+        return [i.to_api() for i in items[:32]], items.reverse()[0].id if items else None
 
     def to_api(self):
         contexto = {'id': str(self.id),
