@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from geral.models import Oferta
 from lojas.models import Shopping
+from decorators import valida_token
 
 
 def retorno(dados, tipo):
@@ -14,9 +15,8 @@ def retorno(dados, tipo):
     else:
         return HttpResponse(json.dumps(dados), content_type="application/json")
 
-def ofertas(request):
-    slug = request.GET.get('slug', None)
-    id_multiplan = request.GET.get('id_multiplan', None)
+@valida_token
+def ofertas(request, *args, **kwargs):
     tipo = request.GET.get('type', None)
     from_id = request.GET.get('ultimo_id', None)
     dados = {'error': None, 'error_message': None}
