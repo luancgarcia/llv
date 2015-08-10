@@ -18,23 +18,28 @@ def retorno(dados, tipo):
 @valida_token
 def ofertas(request, *args, **kwargs):
     tipo = request.GET.get('type', None)
-    from_id = request.GET.get('ultimo_id', None)
-    dados = {'error': None, 'error_message': None}
-    ofertas = ultimo_id = None
-    if not slug and not id_multiplan:
-        dados.update({'error': 'Shopping não informado',
-                      'error_message': 'Favor informe a slug do shopping ou id do shopping na '
-                                       'Multiplan'})
-    elif id_multiplan:
-        if from_id:
-            ofertas, ultimo_id = Oferta.prontos_api(id_multiplan=id_multiplan,from_id=from_id)
-        else:
-            ofertas, ultimo_id = Oferta.prontos_api(id_multiplan=id_multiplan)
+    if request.method != 'GET':
+        dados = {'error': u'Método inválido', 'error_message': u'Método não permitido nesse serviço'}
     else:
-        shopping = Shopping.objects.get(slug=slug)
-        ofertas, ultimo_id = Oferta.prontos_api(id_multiplan=shopping.id_multiplan)
+        slug = request.GET.get('slug', None)
+        id_multiplan = request.GET.get('id_multiplan', None)
+        from_id = request.GET.get('ultimo_id', None)
+        dados = {'error': None, 'error_message': None}
+        ofertas = ultimo_id = None
+        if not slug and not id_multiplan:
+            dados.update({'error': 'Shopping não informado',
+                          'error_message': 'Favor informe a slug do shopping ou id do shopping na '
+                                           'Multiplan'})
+        elif id_multiplan:
+            if from_id:
+                ofertas, ultimo_id = Oferta.prontos_api(id_multiplan=id_multiplan,from_id=from_id)
+            else:
+                ofertas, ultimo_id = Oferta.prontos_api(id_multiplan=id_multiplan)
+        else:
+            shopping = Shopping.objects.get(slug=slug)
+            ofertas, ultimo_id = Oferta.prontos_api(id_multiplan=shopping.id_multiplan)
 
-    dados.update({'ofertas': ofertas, 'ultimo_id': ultimo_id})
+        dados.update({'ofertas': ofertas, 'ultimo_id': ultimo_id})
     return retorno(dados, tipo)
 
 def shoppings(request):
