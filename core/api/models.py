@@ -30,8 +30,11 @@ class ApiUser(models.Model):
         return hashlib.sha256(base_token).hexdigest()
 
     def save(self, *args, **kwargs):
+        '''
+        ao salvar, se estiver criando, gera token
+        '''
         if not self.id:
-            self.token = self.create_token(self.shopping.slug)
+            self.token = self.create_token(self.shopping[0].slug if self.shopping else self.email)
         super(ApiUser, self).save(*args, **kwargs)
 
     # todo: criar método para notificar usuário que chave foi criada
