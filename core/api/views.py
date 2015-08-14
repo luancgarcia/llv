@@ -23,6 +23,7 @@ def ofertas(request, *args, **kwargs):
     else:
         slug = request.GET.get('slug', None)
         id_multiplan = request.GET.get('id_multiplan', None)
+        id_multiplan = int(id_multiplan) if id_multiplan else None
         from_id = request.GET.get('ultimo_id', None)
         dados = {'error': None, 'error_message': None}
         ofertas = ultimo_id = None
@@ -30,6 +31,22 @@ def ofertas(request, *args, **kwargs):
             dados.update({'error': 'Shopping não informado',
                           'error_message': 'Favor informe a slug do shopping ou id do shopping na '
                                            'Multiplan'})
+        elif id_multiplan or slug:
+            usuario = kwargs.get('usuario', None)
+            ids_do_usuario = [int(s.id_multiplan) for s in usuario.shopping.all()]
+            slugs_do_usuario = [s.slug for s in usuario.shopping.all()]
+            tem_acesso = True
+
+            if id_multiplan and id_multiplan not in ids_do_usuario:
+                tem_acesso = False
+            if slug and slug not in slugs_do_usuario:
+                tem_acesso = False
+
+            if not tem_acesso:
+                dados.update({'error': 'Sem acesso ao shopping',
+                              'error_message': 'Sua perfil não tem acesso a dados desse shopping'})
+
+                return retorno(dados, tipo)
         elif id_multiplan:
             if from_id:
                 ofertas, ultimo_id = Oferta.prontos_api(id_multiplan=id_multiplan,from_id=from_id)
