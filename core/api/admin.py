@@ -5,7 +5,7 @@ from models import ApiUser, ApiSession, ApiLog
 
 class ApiUserAdmin(admin.ModelAdmin):
     readonly_fields = ['token']
-    list_display = ['nome', 'email', 'shopping']
+    list_display = ['nome', 'email']
     list_filter = ['shopping']
 
 
