@@ -18,7 +18,7 @@ class ApiUser(models.Model):
         verbose_name_plural = u'Usuários da API'
 
     def __unicode__(self):
-        return '%s - %s (%s)' % (self.nome, self.email, self.shopping.nome)
+        return '%s (%s)' % (self.nome, self.email)
 
     @classmethod
     def create_token(cls, slug_shopping):
