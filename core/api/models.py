@@ -21,12 +21,12 @@ class ApiUser(models.Model):
         return '%s (%s)' % (self.nome, self.email)
 
     @classmethod
-    def create_token(cls, slug_shopping):
+    def create_token(cls, parametro):
         '''
         Gera token de cada usuário com acesso à API
         Deve ser usado apenas ao criar e campo não deve ser atualizado mais, em tempo algum.
         '''
-        base_token = '%s@%s' % (slug_shopping, date.today())
+        base_token = '%s@%s' % (parametro, date.today())
         return hashlib.sha256(base_token).hexdigest()
 
     def save(self, *args, **kwargs):
