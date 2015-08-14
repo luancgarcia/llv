@@ -239,10 +239,16 @@ class Oferta(EditorialModel):
             notificacoes = self.notificacoes.all()
             if notificacoes:
                 for n in notificacoes:
-                    n.notifica_aprovacao()
+                    try:
+                        n.notifica_aprovacao()
+                    except:
+                        pass
 
             for s in Solicitacao.objects.filter(loja=self.loja):
-                s.responde_solicitacao()
+                try:
+                    s.responde_solicitacao()
+                except:
+                    pass
         super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
