@@ -8,7 +8,7 @@ from lojas.models import Shopping
 
 
 class ApiUser(models.Model):
-    shopping = models.ForeignKey(Shopping, related_name='tokens', verbose_name=u'Shopping')
+    shopping = models.ManyToManyField(Shopping, related_name='tokens', verbose_name=u'Shopping')
     nome = models.CharField(u'Nome', max_length=255)
     email = models.EmailField('E-mail', unique=True)
     token = models.CharField('Token', max_length=64, null=False)
