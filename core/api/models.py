@@ -5,6 +5,7 @@ from datetime import date
 from django.db import models
 
 from lojas.models import Shopping
+from signals import apiuser_post_save
 
 
 class ApiUser(models.Model):
@@ -28,14 +29,6 @@ class ApiUser(models.Model):
         '''
         base_token = '%s@%s' % (parametro, date.today())
         return hashlib.sha256(base_token).hexdigest()
-
-    def save(self, *args, **kwargs):
-        '''
-        ao salvar, se estiver criando, gera token
-        '''
-        if not self.id:
-            self.token = self.create_token(self.shopping[0].slug if self.shopping else self.email)
-        super(ApiUser, self).save(*args, **kwargs)
 
     # todo: criar método para notificar usuário que chave foi criada
 
@@ -65,3 +58,6 @@ class ApiLog(models.Model):
 
     def __unicode__(self):
         return u'log da sessão %s' % self.sessao
+
+
+models.signals.post_save.connect(apiuser_post_save, sender=ApiUser)
