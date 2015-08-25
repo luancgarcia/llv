@@ -20,15 +20,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         malls = Shopping.objects.all()
         hoje = date.today()
-        dez_dias_atras = hoje - timedelta(days=-10)
+        dez_dias_atras = hoje - timedelta(days=10)
 
         # cria novo intervalo
         intervalo, criar = Intervalo.objects.get_or_create(inicio=dez_dias_atras, fim=hoje)
 
         for shopping in malls:
             print 'Vendo lojas do %s' % shopping.nome
-            # lojas = Loja.objects.filter(ofertas__status=1,ofertas__inicio__lte=date.today(),ofertas__fim__gt=datetime.now(),shopping_id=shopping.id).distinct()
-            lojas = Loja.objects.filter(shopping_id=shopping.id).distinct()
+            lojas = Loja.objects.filter(ofertas__status=1,ofertas__inicio__lte=date.today(),ofertas__fim__gt=datetime.now(),shopping_id=shopping.id).distinct()
+            # lojas = Loja.objects.filter(shopping_id=shopping.id).distinct()
 
             for loja in lojas:
                 print '    calculando pontos de %s' % loja.nome
@@ -37,7 +37,6 @@ class Command(BaseCommand):
                 ponto, c = Ponto.objects.get_or_create(intervalo=intervalo,loja=loja)
 
                 if ponto:
-                    # import ipdb;ipdb.set_trace()
                     ofertas = loja.ofertas.exclude(status__in=[0,3]) \
                                           .filter(data_aprovacao__gte=dez_dias_atras)
 
@@ -63,4 +62,4 @@ class Command(BaseCommand):
                                   +desconto_100
                     ponto.save()
 
-        # close_old_connections()
+        close_old_connections()
