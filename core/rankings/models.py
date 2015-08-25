@@ -41,5 +41,5 @@ class Ponto(BaseModel):
                 'total': self.total}
 
     @classmethod
-    def dez_mais(cls, shopping):
-        return cls.objects.filter(loja__shopping_id=shopping).order_by('-total')[:10]
+    def dez_mais(cls, shopping, intervalo):
+        return cls.objects.filter(loja__shopping_id=shopping,intervalo_id=intervalo).order_by('-total', 'loja__nome')[:10]
