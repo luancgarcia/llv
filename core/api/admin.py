@@ -9,6 +9,14 @@ class ApiUserAdmin(admin.ModelAdmin):
     list_filter = ['shopping']
 
 
+class ApiSessionAdmin(admin.ModelAdmin):
+    list_display = ['user', 'inicio', 'fim']
+
+
+class ApiLogAdmin(admin.ModelAdmin):
+    list_display = ['sessao', 'tipo_de_log']
+    list_filter = ['tipo',]
+
 admin.site.register(ApiUser, ApiUserAdmin)
-admin.site.register(ApiSession)
-admin.site.register(ApiLog)
+admin.site.register(ApiSession, ApiSessionAdmin)
+admin.site.register(ApiLog, ApiLogAdmin)
