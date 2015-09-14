@@ -75,8 +75,8 @@ class ApiSession(BaseModel):
 
 
 class ApiLog(BaseModel):
-    AUTENTICACAO = 0
     CONSUMO = 1
+    AUTENTICACAO = 2
 
     TIPO = (
         (AUTENTICACAO, u'Autenticação'),
