@@ -127,7 +127,8 @@ class Categoria(EditorialModel):
         categorias = cls.objects.filter(ofertas__fim__gt=datetime.now(), ofertas__status=1, shopping_id=shopping, sazonal=False, publicada=True) \
                                 .order_by('nome') \
                                 .distinct()
-        return separa_tres_colunas([c.to_dict() for c in categorias])
+        return categorias
+        '''return separa_tres_colunas([c.to_dict() for c in categorias])'''
 
 
 class Sazonal(Categoria):

@@ -81,7 +81,8 @@ class Loja(EditorialModel):
                                    shopping_id=shopping)\
                            .order_by('nome')\
                            .distinct()
-        return separa_tres_colunas([l.to_dict() for l in lojas])
+        return lojas
+        '''return separa_tres_colunas([l.to_dict() for l in lojas])'''
 
     @classmethod
     def publicadas_sem_oferta(cls, shopping):
