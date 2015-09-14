@@ -69,6 +69,7 @@ class ApiSession(BaseModel):
             sessao = tem_sessao
         else:
             sessao = cls.objects.create(user=usuario)
+            ApiLog.cria_log(sessao, u'%s autenticado' % usuario, ApiLog.AUTENTICACAO)
 
         return sessao
 
