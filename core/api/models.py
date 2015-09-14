@@ -85,7 +85,7 @@ class ApiLog(BaseModel):
 
     sessao = models.ForeignKey(ApiSession, related_name='logs', verbose_name=u'Sessão do usuário')
     texto = models.CharField(u'Text', blank=True, null=True, max_length=255)
-    tipo = models.IntegerField(u'Tipo', blank=False, null=True)
+    tipo = models.IntegerField(u'Tipo', blank=False, null=True, choices=TIPO)
 
     class Meta:
         verbose_name = u'Log da API'
