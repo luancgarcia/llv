@@ -74,7 +74,7 @@ class ApiSession(BaseModel):
         return sessao
 
 
-class ApiLog(models.Model):
+class ApiLog(BaseModel):
     AUTENTICACAO = 0
     CONSUMO = 1
 
