@@ -98,5 +98,9 @@ class ApiLog(BaseModel):
     def cria_log(cls, sessao, texto, tipo):
         cls.objects.create(sessao=sessao, texto=texto[:254], tipo=tipo)
 
+    @property
+    def tipo_de_log(self):
+        return u'%s' % self.TIPO[self.tipo][1]
+
 
 models.signals.post_save.connect(apiuser_post_save, sender=ApiUser)
