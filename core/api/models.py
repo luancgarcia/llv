@@ -54,16 +54,16 @@ class ApiSession(BaseModel):
         for a in abertas:
             deveria_expirar = a.inicio + timedelta(minutes=settings.TEMPO_MAXIMO_SESSAO_API)
             if datetime.now() >= deveria_expirar:
-                a.fim = a.inicio + timedelta(minutes=settings.TEMPO_MAXIMO_SESSAO_API)
+                a.fim = deveria_expirar
                 a.save()
 
     @classmethod
     def cria_sessao(cls, usuario):
         cls.finaliza_sessoes_abertas(usuario)
         try:
-            tem_sessao = cls.objects.get_or_none(user=usuario, fim__is_null=True)
+            tem_sessao = cls.objects.get_or_none(user=usuario, fim__isnull=True)
         except:
-            tem_sessao = cls.objects.filter(user=usuario, fim__is_null=True).latest('id')
+            tem_sessao = cls.objects.filter(user=usuario, fim__isnull=True).latest('id')
 
         if tem_sessao:
             sessao = tem_sessao
@@ -86,7 +86,7 @@ class ApiLog(models.Model):
 
     @classmethod
     def cria_log(cls, sessao, texto):
-        cls.objects.create(sessa=sessao, texto=texto[:254])
+        cls.objects.create(sessao=sessao, texto=texto[:254])
 
 
 models.signals.post_save.connect(apiuser_post_save, sender=ApiUser)
