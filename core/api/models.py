@@ -71,5 +71,9 @@ class ApiLog(models.Model):
     def __unicode__(self):
         return u'log da sessão %s' % self.sessao
 
+    @classmethod
+    def cria_log(cls, sessao, texto):
+        cls.objects.create(sessa=sessao, texto=texto[:254])
+
 
 models.signals.post_save.connect(apiuser_post_save, sender=ApiUser)
