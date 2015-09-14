@@ -1,11 +1,14 @@
 # -*- encoding: utf-8 -*-
 import hashlib
-from datetime import date
+from datetime import date, datetime, timedelta
 
 from django.db import models
+from django.conf import settings
 
 from lojas.models import Shopping
 from signals import apiuser_post_save
+
+from utils.models import BaseModel
 
 
 class ApiUser(models.Model):
@@ -33,7 +36,7 @@ class ApiUser(models.Model):
     # todo: criar método para notificar usuário que chave foi criada
 
 
-class ApiSession(models.Model):
+class ApiSession(BaseModel):
     user = models.ForeignKey(ApiUser, related_name='sessoes', verbose_name=u'Usuário da API')
     inicio = models.DateTimeField(u'Início', auto_now_add=True)
     fim = models.DateTimeField(u'Fim', null=True)
@@ -45,8 +48,16 @@ class ApiSession(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.user, self.inicio)
 
-    #Todo: criar método pra reportar tempo passado desde o inicio
-    #Todo: terminar a sessão ou expirar o tempo, fechar sessão e gravar fim
+    @classmethod
+    def finaliza_sessoes_abertas(cls, usuario):
+        abertas = cls.objects.filter(user=usuario, fim__isnull=True)
+        for a in abertas:
+            deveria_expirar = a.inicio + timedelta(minutes=settings.TEMPO_MAXIMO_SESSAO_API)
+            if datetime.now() >= deveria_expirar:
+                a.fim = a.inicio + timedelta(minutes=settings.TEMPO_MAXIMO_SESSAO_API)
+                a.save()
+
+    
 
 
 class ApiLog(models.Model):
