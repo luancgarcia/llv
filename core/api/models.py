@@ -46,7 +46,7 @@ class ApiSession(BaseModel):
         verbose_name_plural = u'Sessões da API'
 
     def __unicode__(self):
-        return '%s - %s' % (self.user, self.inicio)
+        return u'%s - %s' % (self.user, self.inicio)
 
     @classmethod
     def finaliza_sessoes_abertas(cls, usuario):
