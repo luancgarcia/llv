@@ -34,11 +34,11 @@ class BaseModel(models.Model):
     todos as entidades do sistema devem possuir.'''
 
     data_criacao = models.DateTimeField(
-        u"data da criação", auto_now_add=True, editable=False
+        u"data da criação", auto_now_add=True, editable=False, null=True
     )
     data_atualizacao = models.DateTimeField(
         u"data da atualização", auto_now=True, auto_now_add=True,
-        editable=False
+        editable=False, null = True
     )
 
     objects = BaseManager()
