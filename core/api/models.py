@@ -57,7 +57,20 @@ class ApiSession(BaseModel):
                 a.fim = a.inicio + timedelta(minutes=settings.TEMPO_MAXIMO_SESSAO_API)
                 a.save()
 
-    
+    @classmethod
+    def cria_sessao(cls, usuario):
+        cls.finaliza_sessoes_abertas(usuario)
+        try:
+            tem_sessao = cls.objects.get_or_none(user=usuario, fim__is_null=True)
+        except:
+            tem_sessao = cls.objects.filter(user=usuario, fim__is_null=True).latest('id')
+
+        if tem_sessao:
+            sessao = tem_sessao
+        else:
+            sessao = cls.objects.create(user=usuario)
+
+        return sessao
 
 
 class ApiLog(models.Model):
