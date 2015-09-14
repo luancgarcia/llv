@@ -14,7 +14,7 @@ class ApiSessionAdmin(admin.ModelAdmin):
 
 
 class ApiLogAdmin(admin.ModelAdmin):
-    list_display = ['sessao', 'tipo_de_log']
+    list_display = ['texto', 'tipo_de_log', 'data_criacao']
     list_filter = ['tipo',]
 
 admin.site.register(ApiUser, ApiUserAdmin)

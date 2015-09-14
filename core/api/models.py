@@ -101,7 +101,7 @@ class ApiLog(BaseModel):
     @property
     def tipo_de_log(self):
         if self.tipo:
-            return u'%s' % self.TIPO[self.tipo][1]
+            return u'%s' % self.TIPO[self.tipo-1][1]
         else:
             return u''
 
