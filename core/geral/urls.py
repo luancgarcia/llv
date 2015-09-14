@@ -109,6 +109,11 @@ urlpatterns = patterns('',
 
     url(r'^ranking/$', 'rankings.views.ranking_index', name='ranking_index'),
 
+    url(r'^admin/ajax_command/(?P<command>[\w_-]+)/$',
+        'admin.views.ajax_command', name='ajax_command'),
+    url(r'^admin/force/command/(?P<comando>[\w_-]+)/$',
+        'admin.views.command', name='command'),
+
     url(r'^(?P<slug>[\w-]+)/$', 'geral.views.home', name='home'),
     url(r'^$', 'geral.views.index', name='index'),
 )
