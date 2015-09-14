@@ -57,6 +57,23 @@
             {% endif %}
             {% if not user.get_profile.is_lojista and not user.get_profile.is_marketing %}
             <div>
+                <h2>Comandos</h2>
+            </div>
+            <table class="table table-striped table-bordered table-condensed">
+                <tbody>
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-danger dropdown-toggle btn-comando"
+                                id="atualiza_lojas"
+                                onClick="executar_comando('/admin/force/command/atualiza_lojas/', 'atualiza_lojas', 'Atualiza lojas');">Atualiza lojas</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle btn-comando"
+                                id="expira_itens"
+                                onClick="executar_comando('/admin/force/command/expira_itens_vencidos/', 'expira_itens', 'Expira itens vencidos');">Expira itens vencidos</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
                 <h2>Relatórios</h2>
             </div>
             <table class="table table-striped table-bordered table-condensed">

@@ -176,6 +176,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', end
         top: 5px;
         overflow: hidden;
     }
+    .btn-comando {
+        margin: 15px !important;
+    }
 }
 
 </style>
@@ -213,6 +216,35 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc5b5f', end
             }
         });
     });
+    function executar_comando(url, id_elemento, texto_original){
+        var box = $("#"+id_elemento);
+
+        var loading = 'Executando commando . . .';
+        var sucesso = 'Executado';
+        var falha = 'Houve um erro';
+        $.ajax({
+            url: url,
+            type: "GET",
+            timeout: 900000,
+            dataType: 'json',
+            beforeSend: function(){
+                box.fadeOut(function(){box.text(loading)});
+                box.fadeIn();
+            },
+            success: function(data){
+                box.fadeOut('slow', function(){box.text(sucesso)});
+                box.fadeIn('slow');
+
+            },
+            error:function (xhr, ajaxOptions, thrownError){
+                box.fadeOut('slow', function(){box.text(falha)});
+                box.fadeIn('slow');
+                return false;
+            }
+        });
+        box.fadeOut(function(){box.text(texto_original)});
+        box.fadeIn();
+    };
 </script>
 
 {% block extrahead %}{% endblock %}
