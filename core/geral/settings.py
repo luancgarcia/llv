@@ -196,7 +196,7 @@ os.environ['wsgi.url_scheme'] = 'https'
 FONTE_FOLDER = os.path.join(STATIC_ROOT, 'fonts')
 FONTE_SHARE = '%s/%s' % (FONTE_FOLDER, 'Arial.ttf')
 
-TEMPO_MAXIMO_SESSAO_API = '10' # em minutos
+TEMPO_MAXIMO_SESSAO_API = 10 # em minutos
 
 try:
     from custom_settings import *
