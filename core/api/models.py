@@ -51,6 +51,7 @@ class ApiSession(models.Model):
 
 class ApiLog(models.Model):
     sessao = models.ForeignKey(ApiSession, related_name='logs', verbose_name=u'Sessão do usuário')
+    texto = models.CharField(u'Text', blank=True, null=True, max_length=255)
 
     class Meta:
         verbose_name = u'Log da API'
