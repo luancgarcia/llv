@@ -110,7 +110,7 @@ urlpatterns = patterns('',
     url(r'^ranking/$', 'rankings.views.ranking_index', name='ranking_index'),
 
     url(r'^ajax_command/(?P<command>[\w_-]+)/$',
-        'notificaoes.views.ajax_command', name='ajax_command'),
+        'notificacoes.views.ajax_command', name='ajax_command'),
     url(r'^force/command/(?P<comando>[\w_-]+)/$',
         'notificacoes.views.command', name='command'),
 
