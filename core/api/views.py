@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from geral.models import Oferta
 from lojas.models import Shopping
 from decorators import valida_token
+from api.models import ApiLog
 
 
 def retorno(dados, tipo):
@@ -32,6 +33,8 @@ def ofertas(request, *args, **kwargs):
                                            'Multiplan'})
         elif id_multiplan or slug:
             usuario = kwargs.get('usuario', None)
+            ApiLog.cria_log(kwargs['sessao'], u'%s listou ofertas' % usuario, ApiLog.CONSUMO)
+
             ids_do_usuario = [int(s.id_multiplan) for s in usuario.shopping.all()]
             slugs_do_usuario = [s.slug for s in usuario.shopping.all()]
             tem_acesso = True
