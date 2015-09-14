@@ -94,8 +94,8 @@ class ApiLog(models.Model):
         return u'log da sessão %s' % self.sessao
 
     @classmethod
-    def cria_log(cls, sessao, texto):
-        cls.objects.create(sessao=sessao, texto=texto[:254])
+    def cria_log(cls, sessao, texto, tipo):
+        cls.objects.create(sessao=sessao, texto=texto[:254], tipo=tipo)
 
 
 models.signals.post_save.connect(apiuser_post_save, sender=ApiUser)
