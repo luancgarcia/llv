@@ -100,7 +100,10 @@ class ApiLog(BaseModel):
 
     @property
     def tipo_de_log(self):
-        return u'%s' % self.TIPO[self.tipo][1]
+        if self.tipo:
+            return u'%s' % self.TIPO[self.tipo][1]
+        else:
+            return u''
 
 
 models.signals.post_save.connect(apiuser_post_save, sender=ApiUser)
