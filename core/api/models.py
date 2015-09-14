@@ -79,8 +79,8 @@ class ApiLog(BaseModel):
     AUTENTICACAO = 2
 
     TIPO = (
-        (AUTENTICACAO, u'Autenticação'),
-        (CONSUMO, u'Consumo de dados')
+        (CONSUMO, u'Consumo de dados'),
+        (AUTENTICACAO, u'Autenticação')
     )
 
     sessao = models.ForeignKey(ApiSession, related_name='logs', verbose_name=u'Sessão do usuário')
