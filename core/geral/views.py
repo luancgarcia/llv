@@ -60,7 +60,7 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
         ofertas_x = ofertas
 
     for i in destaques_x+eventos_x+ofertas_x:
-        if i['genero'].lower() not in generos:
+        if i.get('genero', None) and i['genero'].lower() not in generos:
             generos.append(i['genero'])
         desconto = int(i['desconto']) if i.get('desconto', None) else None
         if desconto:
