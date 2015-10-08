@@ -367,11 +367,11 @@ class Oferta(EditorialModel):
                      'expira': self.expira,
                      'expira_str': self.expira_str,
                      'titulo': self.nome,
-                     'tipo': Oferta.TIPOS[self.tipo][1],
+                     'tipo': Oferta.TIPOS[self.tipo][1] if self.tipo else None,
                      'inicio': _date(self.inicio, 'd/m/Y'),
                      'fim': _date(self.fim, 'd/m/Y'),
                      'fim_curto': _date(self.fim, 'd/m'),
-                     'genero': self.GENEROS[self.genero][1],
+                     'genero': self.GENEROS[self.genero][1] if self.genero else None,
                      'porcentagem': self.porcentagem_desconto(),
                      'desconto': self.desconto}
 
