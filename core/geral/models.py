@@ -174,11 +174,13 @@ class Oferta(EditorialModel):
     PUBLICADO = 1
     EXPIRADO = 2
     RASCUNHO = 3
+    REPROVADO = 4
     STATUSES = (
         (PENDENTE, u'Pendente'),
         (PUBLICADO, u'Publicado'),
         (EXPIRADO, u'Expirado'),
         (RASCUNHO, u'Rascunho'),
+        (REPROVADO, u'Reprovado'),
     )
 
     MASCULINO =0
@@ -221,6 +223,7 @@ class Oferta(EditorialModel):
                               help_text=u'Informe a data para ficar online')
     fim = models.DateField(u'Data de expiração', null=True, blank=False,
                            help_text=u'Informe a data para ficar offline ')
+    razao = models.TextField(u'Razão da reprovação', null=True, blank=True)
 
     class Meta:
         verbose_name=u'Oferta'
