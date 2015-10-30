@@ -43,6 +43,10 @@ class Notificacao(BaseNotificacao):
     def __unicode__(self):
         return u'%s' % self.oferta
 
+    @property
+    def url_oferta(self):
+        return self.oferta.url if self.oferta else None
+
     def save(self, *args, **kwargs):
         if not self.mensagem:
             self.mensagem = u'Nova oferta para aprovacao - %s' % self.oferta

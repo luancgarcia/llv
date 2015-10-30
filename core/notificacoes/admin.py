@@ -10,7 +10,7 @@ class NotificacaoAdmin(admin.ModelAdmin):
     exclude = ['publicada']
     list_filter = ['lida','resolvida']
     list_display = ['solicitante', 'responsavel', 'oferta', 'lida', 'resolvida',
-                    'enviada_mkt', 'enviada_lojista']
+                    'enviada_mkt', 'enviada_lojista', 'url_oferta']
     list_editable = ['lida']
 
     def queryset(self, request):
