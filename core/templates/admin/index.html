@@ -85,6 +85,8 @@
                 </tr>
                 </tbody>
             </table>
+            {% endif %}
+            {% if not user.get_profile.is_lojista %}
             <div>
                 <h2>Rankings</h2>
             </div>
