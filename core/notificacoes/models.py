@@ -78,6 +78,24 @@ class Notificacao(BaseNotificacao):
             except:
                 raise
 
+    def notifica_reprovacao(self, razao):
+        autor = self.solicitante
+        if autor and autor.user.email:
+            assunto = u'Sua oferta NÃO foi aprovada'
+            try:
+                dados = self.to_dict()
+                dados['razao'] = razao
+                para = settings.NOTIFICACAO + [autor.user.email]
+                TemplatedEmail(para, assunto, 'email/reprovacao.html',
+                               dados, send_now=True)
+                self.enviada_lojista = True
+                self.resolvida = False
+                self.lida = True
+                self.save()
+            except:
+                raise
+
+
     def to_dict(self):
         return {'id': self.id,
                 'mensagem': self.mensagem,
