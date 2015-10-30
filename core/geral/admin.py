@@ -228,7 +228,7 @@ class OfertaAdmin(admin.ModelAdmin):
                     'fields': ('inicio','fim')
                 }),
                 ('Informações', {
-                    'fields': ('status','loja','nome','slug','categoria','genero',
+                    'fields': ('status', 'razao', 'loja', 'nome', 'slug', 'categoria', 'genero',
                                'descricao', 'texto_promocional',)
                 }),
                 ('Digite os valores do produto', {
@@ -241,7 +241,7 @@ class OfertaAdmin(admin.ModelAdmin):
                     'fields': ('inicio', 'fim')
                 }),
                 ('Informações', {
-                    'fields': ('status','loja','nome','slug','categoria','genero',
+                    'fields': ('status', 'razao', 'loja', 'nome', 'slug', 'categoria', 'genero',
                                'descricao', 'texto_promocional',)
                 }),
                 ('Digite os valores do produto', {
