@@ -47,177 +47,7 @@
   display: inline;
 }
 
-@media (max-width: 820px){
-	#TabletSmart .container{padding-top:130px;}
-}
-
-@media (max-width: 810px){
-	#TabletSmart #EscolherShoppingMob .campo .tit-campo{margin-bottom:18px;}
-	.colunaDados{
-		width:45%;
-		margin:0 0 0 9%;
-	}
-		.colunaDados .descricao{width:auto;}
-	.colunaProduto{
-		width:45%;
-		margin:0;
-	}
-	
-  #lightbox .lightbox {
-    top: 20px;
-    left: 10px !important;
-    right: 10px !important;
-    margin: 0 !important;
-    width: auto !important;
-    padding-bottom: 20px;
-  }
-  #lightbox.share_produto .fechar_modal {
-    width: 13px;
-    height: 17px;
-    background: url(../img/fechar_modal.png) no-repeat 0 0px;
-    position: absolute;
-    z-index: 10;
-  }
-
-  #fotoProduto {
-    margin-bottom: 0px;
-  }
-  #fotoProduto img {
-    width: 100%;
-  }
-
-  .colunaDados .preco_anterior {
-    float: left;
-    padding: 10px 15px 0 0;
-  }
-  .colunaDados .preco_atual {
-    float: left;
-  }
-  .colunaDados .qualMarca {
-    width: 100%;
-  }
-  .colunaDados .qualMarca .foot {
-    margin: 0 35px;
-  }
-  .colunaDados .curtidas {
-	clear:left;
-    line-height: 16px;
-    float: left;
-    width: 45%;
-    text-align: center;
-    padding: 0 2%;
-  }
-  .colunaDados .curtidas.ativo span {
-    padding-left: 0 !important;
-  }
-  .colunaDados .curtidas span {
-    display: block;
-    background-position: top center;
-    padding-top: 40px;
-    padding-left: 0;
-  }
-  .colunaDados .share {
-    line-height: 16px;
-    float: left;
-    width: 45%;
-    text-align: center;
-    padding: 0 2%;
-  }
-  .colunaDados .share a {
-    display: block;
-    background-position: top center;
-    padding-top: 40px;
-    padding-left: 0;
-  }
-
-  #ShareProduto .content-share {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  
-  #ShareProduto .content-share .col-produto footer {
-    padding-bottom: 10px;
-  }
-  #ShareProduto .content-share .col-produto .bt-reset {
-    font-size: 1em;
-    margin-left: 0px;
-    padding: 0 10px;
-  }
-  #ShareProduto .content-share .col-produto .bt-share {
-    font-size: 1.1em;
-    margin-right: 0px;
-  }
-  #ShareProduto .content-share .col-opcoes {
-    width: auto !important;
-    float: none;
-    clear: both;
-  }
-  #ShareProduto .content-share .col-opcoes .content-opcoes {
-    padding-right: 0px;
-    border-right: 1px solid #d2daea;
-    overflow: auto;
-  }
-  #ShareProduto .content-share .col-opcoes .content-opcoes ul li {
-    width: 92px;
-    height: 91px;
-	margin-bottom:9px;
-  }
-  #ShareProduto .content-share .col-opcoes .content-opcoes ul li a {
-    width: 90px;
-    height: 89px;
-  }
-  #ShareProduto .content-share .col-opcoes .content-opcoes ul li img {
-    width: 100%;
-  }
-
-  #foto-share {
-    width: auto !important;
-    height: auto !important;
-    overflow: hidden;
-    padding: 4px;
-  }
-  #foto-share div {
-    position: relative;
-  }
-  #foto-share .prod {
-    float: left;
-  }
-  #foto-share .sec {
-    width: 100%;
-    display: block;
-    top: 0px;
-    left: 0px;
-  }
-}
-
-@media (max-width: 650px){
-	.colunaDados, .colunaProduto{
-		width:100%;
-		margin:0;
-	}
-	#TabletSmart .container{padding-top:120px;}
-  
-}
-
-@media (max-width: 550px){
-	#ShareProduto .content-share .col-produto {
-		width: auto !important;
-		float: none;
-		margin-bottom: 10px;
-		clear: both;
-		padding-bottom: 0px;
-	  }
-    #ShareProduto .content-share .col-opcoes .content-opcoes ul {
-      overflow: auto !important;
-      height: 115px;
-    }
-	#ShareProduto .content-share .col-opcoes .content-opcoes ul li {
-      margin-bottom: 0px;
-    }
-}
-
 @media (max-width: 480px) {
- /*
   #TutorialMob {
     display: block;
     position: fixed;
@@ -238,14 +68,19 @@
     margin-left: -50px;
     top: 160px;
   }
-*/
-  #TabletSmart .container{padding-top:100px;}
+
   #EscolherShoppingMob {
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
     background: url(../img/bg-escolher-shopping.png) repeat;
     background-size: 50% auto;
-    padding-bottom: 40px;
-
+    overflow: auto;
+    padding-bottom: 50px;
   }
   #EscolherShoppingMob .head-escolhershopping {
     background: url(../img/ico-brs-escolher-shopping.png) no-repeat 0 0, url(../img/ico-brs-escolher-shopping.png) no-repeat right 0;
@@ -276,10 +111,10 @@
     height: 45px;
     box-sizing: border-box;
     padding-left: 64px;
-    font-size: 1.4em;
-    color: #ffaaaa;
+    font-size: 1.5em;
+    color: #ffffff;
     margin-top: 10px;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
   }
   #EscolherShoppingMob .escolher-shopping {
     background: transparent;
@@ -305,11 +140,11 @@
     margin: 0 auto;
   }
   #EscolherShoppingMob .foot {
-    /*position: fixed;*/
-    /*bottom: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*height: 0;*/
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0;
     text-align: center;
     height: 27px;
     background-color: #ffffff;
@@ -554,15 +389,6 @@
   #menu-shoppings {
     display: block;
   }
-  
-  #Header .head-mob img {
-    display: block;
-    margin: 0 auto;
-	max-width: 65%;
-	
-	
-  }
-  
 }
 @media (min-width: 481px) and (max-width: 728px) {
   .item .content .marca {
@@ -576,39 +402,7 @@
   .dois-itens-v .vertical .content {
     height: 53px;
   }
-  
-   #Header .head-mob img {
-    display: block;
-    margin: 0 auto;
-    max-width: 60%;
-	
-  }
-  
 }
-
-@media (min-width: 320px) and (max-width: 400px) {
-  .item .content .marca {
-    display: none;
-  }
-
-  .grid .item .content .descricao {
-    font-size: 1.1em;
-  }
-
-  .dois-itens-v .vertical .content {
-    height: 53px;
-  }
-  
-   #Header .head-mob img {
-    display: block;
-    margin: 0 auto;
-    max-width: 65%;
-	
-  }
-  
-}
-
-
 @media (max-width: 728px) {
   #Splash {
     display: none;
@@ -629,12 +423,12 @@
   }
   #Header .chamada {
     background-color: #d51924;
-    min-height: 34px;
+    height: 34px;
     clear: both;
     text-align: center;
   }
   #Header .chamada a {
-    font-size: 1.1em;
+    font-size: 1.6em;
     font-family: "Roboto";
     color: #ffffff;
     display: block;
@@ -643,7 +437,7 @@
   #Header .head-mob {
     background: url(../img/bg-head-mob.png) repeat-x 0 0;
     background-size: auto 100%;
-    /*height: 60px;*/
+    height: 60px;
     position: relative;
     min-width: 100%;
   }
@@ -791,25 +585,20 @@
     margin-left: 0px;
   }
 
- /* #TutorialMob span.fl {
+  #TutorialMob span.fl {
     margin-left: 60px;
   }
   #TutorialMob span.fr {
     margin-right: 60px;
   }
-  
- */
 }
-@media (min-width: 820px) {
-	
-	
-  /* #TutorialMob span.fl {
+@media (min-width: 820px) and (max-width: 9999999px) {
+  #TutorialMob span.fl {
     margin-left: 60px;
   }
   #TutorialMob span.fr {
     margin-right: 60px;
   }
-  */
 
   #TabletSmart .container {
     padding-top: 150px !important;
@@ -859,9 +648,6 @@
     margin-right: 0.38412%;
     margin-right: 0.2599%;
   }
-  .grid.dois-itens-v, .grid.last.dois-itens-v, .grid2.dois-itens-v, .grid2.last.dois-itens-v {
-    display: none;
-  }
   .grid .item figure, .grid.last .item figure, .grid2 .item figure, .grid2.last .item figure {
     margin-bottom: 0px;
   }
@@ -878,14 +664,6 @@
     width: auto;
     font-size: 1.3em;
     line-height: normal;
-  }
-
-  .showBigres, 
-  .showBigres .grid.dois-itens-v, 
-  .showBigres .grid.last.dois-itens-v, 
-  .showBigres .grid2.dois-itens-v, 
-  .showBigres .grid2.last.dois-itens-v {
-    display: block !important;
   }
 
   body, html {
