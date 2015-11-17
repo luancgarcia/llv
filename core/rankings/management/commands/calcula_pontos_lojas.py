@@ -27,7 +27,12 @@ class Command(BaseCommand):
 
         for shopping in malls:
             print 'Vendo lojas do %s' % shopping.nome
-            lojas = Loja.objects.filter(ofertas__status=1,ofertas__inicio__lte=date.today(),ofertas__fim__gt=datetime.now(),shopping_id=shopping.id).distinct()
+            lojas = Loja.objects.filter(ofertas__status=1,
+                                        ofertas__data_aprovacao__gte=dez_dias_atras,
+                                        shopping_id=shopping.id).distinct()
+            # lojas = Loja.objects.filter(ofertas__status=1, ofertas__inicio__lte=date.today(),
+            #                             ofertas__fim__gt=datetime.now(),
+            #                             shopping_id=shopping.id).distinct()
             # lojas = Loja.objects.filter(shopping_id=shopping.id).distinct()
 
             for loja in lojas:
@@ -37,8 +42,8 @@ class Command(BaseCommand):
                 ponto, c = Ponto.objects.get_or_create(intervalo=intervalo,loja=loja)
 
                 if ponto:
-                    ofertas = loja.ofertas.exclude(status__in=[0,3]) \
-                                          .filter(data_aprovacao__gte=dez_dias_atras)
+                    # ofertas = loja.ofertas.exclude(status__in=[0,3]).filter(data_aprovacao__gte=dez_dias_atras)
+                    ofertas = loja.ofertas.filter(status=1,data_aprovacao__gte=dez_dias_atras)
 
                     produtos = ofertas.count()
                     fotos = sum([o.imagens.count() for o in ofertas])
