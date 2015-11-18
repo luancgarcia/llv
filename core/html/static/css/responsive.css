@@ -648,6 +648,17 @@
     margin-right: 0.38412%;
     margin-right: 0.2599%;
   }
+  .grid.dois-itens-v, .grid.last.dois-itens-v, .grid2.dois-itens-v, .grid2.last.dois-itens-v {
+    display: inline;
+    float: none;
+    margin: 0px;
+  }
+  .grid.dois-itens-v .item, .grid.last.dois-itens-v .item, .grid2.dois-itens-v .item, .grid2.last.dois-itens-v .item {
+    width: 24.71191%;
+    float: left;
+    margin-right: 0.38412%;
+    margin-right: 0.2599%;
+  }
   .grid .item figure, .grid.last .item figure, .grid2 .item figure, .grid2.last .item figure {
     margin-bottom: 0px;
   }
@@ -664,6 +675,9 @@
     width: auto;
     font-size: 1.3em;
     line-height: normal;
+  }
+  .grid .item.vertical, .grid.last .item.vertical, .grid2 .item.vertical, .grid2.last .item.vertical {
+    display: none;
   }
 
   body, html {

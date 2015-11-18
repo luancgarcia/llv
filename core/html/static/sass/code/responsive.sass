@@ -408,7 +408,7 @@
 			img
 				max-width: 100%
 
-	br.cl
+	br.cl 
 		display: none
 
 	.container
@@ -426,9 +426,14 @@
 			+span-columns(2, $coluna_responsive)
 			margin-right: 0.2599%
 
-		//&.dois-itens-v
-		//	display: none
+		&.dois-itens-v
+			display: inline
+			float: none
+			margin: 0px
 
+			.item
+				+span-columns(2, $coluna_responsive)
+				margin-right: 0.2599%
 
 		.item
 			figure
@@ -445,7 +450,9 @@
 					width: auto
 					font-size: 1.3em
 					line-height: normal
-
+			
+			&.vertical
+				display: none
 
 	body, html 
 		min-width: 990px
