@@ -658,6 +658,7 @@
     float: left;
     margin-right: 0.38412%;
     margin-right: 0.2599%;
+    margin-bottom: 1px;
   }
   .grid .item figure, .grid.last .item figure, .grid2 .item figure, .grid2.last .item figure {
     margin-bottom: 0px;
