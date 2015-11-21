@@ -23,7 +23,10 @@
 				{% endif%}
 			{% else %}
 				{% if eventos.1 %}
-					{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 %}
+					{% include 'blocos/bloco_tres_sem_destaque.html' with evento=eventos.1 ultimo=False %}
+					{% if eventos.2 %}
+						{% include 'blocos/bloco_quatro.html' with evento=eventos.2 ultimo=True %}
+					{% endif %}
 				{% else %}
 					<br class="cl">
 					{% for oferta in ofertas|slice:"6:" %}
