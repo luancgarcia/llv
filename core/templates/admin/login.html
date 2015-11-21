@@ -61,7 +61,11 @@
             {% if password_reset_url %}
                 <p class="forgotten-password">
                     <a href="{{ password_reset_url }}">
-                        {% trans 'Forgotten your password or username?' %}
+                        {% comment %}{% trans 'Forgotten your password or username?' %}{% endcomment %}
+                        Esqueceu sua senha?
+                    </a> |
+                    <a href="{% url 'admin_login_recover' %}">
+                        Esqueceu seu login?
                     </a>
                 </p>
             {% endif %}
