@@ -653,6 +653,7 @@
     float: none;
     margin: 0px;
   }
+  
   .grid.dois-itens-v .item, .grid.last.dois-itens-v .item, .grid2.dois-itens-v .item, .grid2.last.dois-itens-v .item {
     width: 24.71191%;
     float: left;
@@ -680,6 +681,10 @@
   .grid .item.vertical, .grid.last .item.vertical, .grid2 .item.vertical, .grid2.last .item.vertical {
     display: none;
   }
+
+  .showBigres .grid .item.vertical, .showBigres .grid.last .item.vertical, .showBigres .grid2 .item.vertical, .showBigres .grid2.last .item.vertical {
+    display: block;
+  } 
 
   body, html {
     min-width: 990px;
