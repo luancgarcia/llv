@@ -677,6 +677,9 @@
     font-size: 1.3em;
     line-height: normal;
   }
+  .grid .item.vertical, .grid.last .item.vertical, .grid2 .item.vertical, .grid2.last .item.vertical {
+    display: none;
+  }
 
   body, html {
     min-width: 990px;
