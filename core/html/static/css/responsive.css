@@ -686,13 +686,19 @@
   }
   .showBigres .grid .item.vertical, .showBigres .grid.last .item.vertical, .showBigres .grid2 .item.vertical, .showBigres .grid2.last .item.vertical {
     display: block;
-    
+    width: 100%;
   } 
 
   .showBigres .grid.dois-itens-v, .showBigres .grid.last.dois-itens-v, .showBigres .grid2.dois-itens-v, .showBigres .grid2.last.dois-itens-v {
     float: left;
     margin-right: 0.38412%;
     margin-right: 0.2599%;
+  }
+
+  #TabletSmart .container.showBigres {
+    padding-top: 0px !important;
+    margin-top: -25px !important;
+    padding-bottom: 25px !important
   }
 
   body, html {
