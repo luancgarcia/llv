@@ -416,14 +416,11 @@ class Oferta(EditorialModel):
     def prontos(cls, tipo=0, from_id=None, shopping=1):
         hoje = date.today()
         if tipo == cls.DESTAQUE or tipo == cls.EVENTO:
-            items = cls.objects.filter(shopping_id=shopping,tipo=tipo,status=cls.PUBLICADO,
-                                       inicio__lte=hoje,fim__gte=hoje).order_by('-data_aprovacao')
+            items = cls.objects.filter(shopping_id=shopping,tipo=tipo,status=cls.PUBLICADO).order_by('-data_aprovacao')
         else:
-            items = cls.objects.filter(loja__shopping_id=shopping,
-                                       tipo=tipo,
-                                       status=cls.PUBLICADO,
-                                       inicio__lte=hoje,fim__gte=hoje) \
-                               .order_by('-data_aprovacao')
+            items = cls.objects.filter(loja__shopping_id=shopping,tipo=tipo,status=cls.PUBLICADO).order_by('-data_aprovacao')
+
+
         if from_id:
             items = items.filter(id__gt=from_id)
         if tipo == cls.OFERTA:
