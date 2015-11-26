@@ -52,3 +52,6 @@ def command(request, comando):
         context = {'resultado': 'Comando indisponível'}
 
     return jsonResponse(context)
+
+# def recuperar_login(request):
+#     return
