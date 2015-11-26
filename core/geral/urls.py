@@ -30,10 +30,7 @@ urlpatterns = patterns('',
     url(r'^user/password/done/$',
         'django.contrib.auth.views.password_reset_complete',
         name='password_reset_complete'),
-    url(r'^recuperar_senha/',
-        'admin.views.recuperar_senha',
-        {'post_reset_redirect': '/user/password/reset/done/'},
-        name='admin_password_reset'),
+
     # url(r'^recuperar_login/', 'admin.views.recuperar_login', name='admin_login_recover'),
 
     url(r'^ribeirao-preto-shopping/', 'geral.views.ribeirao', name='ribeirao'),
