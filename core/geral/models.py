@@ -242,31 +242,31 @@ class Oferta(EditorialModel):
                                     separador,
                                     preco_final)
 
-    def save(self, *args, **kwargs):
-        if self.status == Oferta.PUBLICADO:
-            self.data_aprovacao = datetime.now()
-            notificacoes = self.notificacoes.all()
-            if notificacoes:
-                for n in notificacoes:
-                    try:
-                        n.notifica_aprovacao()
-                    except:
-                        pass
+    #def save(self, *args, **kwargs):
+    #    if self.status == Oferta.PUBLICADO:
+    #        self.data_aprovacao = datetime.now()
+    #        notificacoes = self.notificacoes.all()
+    #        if notificacoes:
+    #            for n in notificacoes:
+    #                try:
+    #                    n.notifica_aprovacao()
+    #                except:
+    #                    pass
 
-            for s in Solicitacao.objects.filter(loja=self.loja):
-                try:
-                    s.responde_solicitacao()
-                except:
-                    pass
-        elif self.status == Oferta.REPROVADO:
-            notificacoes = self.notificacoes.all()
-            if notificacoes:
-                for n in notificacoes:
-                    try:
-                        n.notifica_reprovacao(self.razao)
-                    except:
-                        pass
-        super(Oferta, self).save(*args, **kwargs)
+    #        for s in Solicitacao.objects.filter(loja=self.loja):
+    #            try:
+    #                s.responde_solicitacao()
+    #            except:
+    #                pass
+    #    elif self.status == Oferta.REPROVADO:
+    #        notificacoes = self.notificacoes.all()
+    #        if notificacoes:
+    #            for n in notificacoes:
+    #                try:
+    #                    n.notifica_reprovacao(self.razao)
+    #                except:
+    #                    pass
+    #    super(Oferta, self).save(*args, **kwargs)
 
     def desconto_value(self):
         return u'%s%%' % self.desconto if self.desconto else ''
