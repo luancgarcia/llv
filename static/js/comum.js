@@ -673,8 +673,11 @@ $(function(){
 //                        console.log("before send");
                     },
                     success: function(data) {
+			console.log(data.imagem);
                         FB.api(
                             "/me/photos",
+                            //"/"+fb_user_id+"/photos",
+			    //"/"+fb_user_id+"/feed",
                             "POST",
                             {
                                 "url": data.imagem,
@@ -682,9 +685,9 @@ $(function(){
                             },
                             function (response) {
                               if (response && !response.error) {
-    //                            console.log(response);
+                                console.log(response);
                               }
-    //                          console.log(response.error);
+                              console.log(response.error);
                             }
                         );
                         fechaModal();
@@ -740,7 +743,7 @@ $( document ).ready(function() {
 	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta},
 	            beforeSend: function(){
 	                // console.log("before send");
-                        $('.container').append('<br class="cl"><img src="https://www.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais">');
+                        $('.container:first').append('<br class="cl"><img src="https://www.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais">');
 	            },
 	            success: function(data) {
 	                $(".img-loading-mais").after(data);
