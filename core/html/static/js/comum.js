@@ -743,7 +743,7 @@ $( document ).ready(function() {
 	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta},
 	            beforeSend: function(){
 	                // console.log("before send");
-                        $('.container').append('<br class="cl"><img src="https://www.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais">');
+                        $('.container:first').append('<br class="cl"><img src="https://www.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais">');
 	            },
 	            success: function(data) {
 	                $(".img-loading-mais").after(data);

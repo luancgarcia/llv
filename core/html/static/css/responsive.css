@@ -653,6 +653,7 @@
     float: none;
     margin: 0px;
   }
+  
   .grid.dois-itens-v .item, .grid.last.dois-itens-v .item, .grid2.dois-itens-v .item, .grid2.last.dois-itens-v .item {
     width: 24.71191%;
     float: left;
@@ -679,6 +680,25 @@
   }
   .grid .item.vertical, .grid.last .item.vertical, .grid2 .item.vertical, .grid2.last .item.vertical {
     display: none;
+  }
+  .showBigres {
+    display: block;
+  }
+  .showBigres .grid .item.vertical, .showBigres .grid.last .item.vertical, .showBigres .grid2 .item.vertical, .showBigres .grid2.last .item.vertical {
+    display: block;
+    width: 100%;
+  } 
+
+  .showBigres .grid.dois-itens-v, .showBigres .grid.last.dois-itens-v, .showBigres .grid2.dois-itens-v, .showBigres .grid2.last.dois-itens-v {
+    float: left;
+    margin-right: 0.38412%;
+    margin-right: 0.2599%;
+  }
+
+  #TabletSmart .container.showBigres {
+    padding-top: 0px !important;
+    margin-top: -25px !important;
+    padding-bottom: 50px !important
   }
 
   body, html {
