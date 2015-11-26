@@ -57,15 +57,15 @@
                     <input class="btn btn-primary" type="submit" value="{% trans 'Log in' %}">
                 </fieldset>
             </form>
-            {% url 'admin_password_reset' as password_reset_url %}
+            {% url 'password_reset' as password_reset_url %}
             {% if password_reset_url %}
                 <p class="forgotten-password">
                     <a href="{{ password_reset_url }}">
                         {% comment %}{% trans 'Forgotten your password or username?' %}{% endcomment %}
                         Esqueceu sua senha?
-                    </a> |
-                    <a href="{% url 'admin_login_recover' %}">
-                        Esqueceu seu login?
+                    <!--</a> |-->
+                    <!--<a href="{% url 'admin_login_recover' %}">-->
+                        <!--Esqueceu seu login?-->
                     </a>
                 </p>
             {% endif %}
