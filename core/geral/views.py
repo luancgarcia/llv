@@ -376,7 +376,8 @@ def mais_ofertas(request):
     ultimo_destaque = request.POST.get('ultimo_destaque', None)
     ultimo_evento = request.POST.get('ultimo_evento', None)
     ultima_oferta = request.POST.get('ultima_oferta', None)
-    id_shopping = request.COOKIES.get('shp_id', None)
+    id_shopping_cookie = request.COOKIES.get('shp_id', None)
+    id_shopping = request.POST.get('shopping_id', id_shopping_cookie)
 
     destaques = eventos = ofertas = ultimo_destaque_id = ultimo_evento_id = ultima_oferta_id = []
     total_destaques = total_eventos = 0

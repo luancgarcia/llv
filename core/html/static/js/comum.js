@@ -723,6 +723,7 @@ $( document ).ready(function() {
 			var ultimo_destaque = container.attr('data-destaque');
 			var ultimo_evento = container.attr('data-evento');
 			var ultima_oferta = container.attr('data-oferta');
+			var shopping_id = container.attr('shopping-id');
 			var filtro = container.attr('data-filtro');
 			if (filtro){
 				var url = '?mais_ofertas=sim';
@@ -740,7 +741,7 @@ $( document ).ready(function() {
 	            type: "POST",
 	            url: url,
 	            dataType: "html",
-	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta},
+	            data: {ultimo_destaque:ultimo_destaque,ultimo_evento:ultimo_evento,ultima_oferta:ultima_oferta,shopping_id:shopping_id},
 	            beforeSend: function(){
 	                // console.log("before send");
                         $('.container:first').append('<br class="cl"><img src="https://www.liquidacaolapisvermelho.com.br/static/img/loading-llv.gif" class="img-loading-mais">');
@@ -749,8 +750,9 @@ $( document ).ready(function() {
 	                $(".img-loading-mais").after(data);
 	                $(".img-loading-mais").remove();
 	            },
-	            error: function(){
+	            error: function(data){
 	                console.log("erro enviar");
+					console.log(data);
 	            }
 	       });
 	       return false;
