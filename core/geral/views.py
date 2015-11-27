@@ -129,7 +129,7 @@ def home(request, **kwargs):
 
 def split_ids(valores):
     if valores:
-        return [int(i) for i in valores.split(', ')]
+        return [int(''.join(i.split('.'))) for i in valores.split(', ')]
     return []
 
 @indica_shopping
