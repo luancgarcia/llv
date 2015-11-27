@@ -60,10 +60,11 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
         eventos_x = eventos
         ofertas_x = ofertas
 
-    for i in destaques_x+eventos_x+ofertas_x:
-        if i.get('genero', None) and i['genero'].lower() not in generos:
-            generos.append(i['genero'])
-        desconto = int(i['desconto']) if i.get('desconto', None) else None
+    lojas_dict = {}
+    for i in Oferta.itens_por_shopping(shopping=shopping.id):
+        if i.genero and Oferta.GENEROS[i.genero][1].lower() not in generos:
+            generos.append(Oferta.GENEROS[i.genero][1])
+        desconto = int(i.desconto) if i.desconto else None
         if desconto:
             if not tem_trinta and desconto <= 30:
                 trinta = tem_trinta = True
@@ -72,7 +73,7 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
             if not tem_setenta and desconto > 50:
                 setenta = tem_setenta = True
 
-        preco = int(i['preco_final']) if i.get('preco_final', None) else None
+        preco = int(i.preco_final) if i.preco_final else None
         if preco:
             if not tem_preco1 and preco <= 30:
                 preco1 = tem_preco1 = True
@@ -84,6 +85,33 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
                 preco4 = tem_preco4 = True
             if not tem_preco5 and preco > 300:
                 preco5 = tem_preco5 = True
+        if i.loja:
+            lojas_dict[i.loja.slug] = i.loja.nome
+    #for i in destaques_x+eventos_x+ofertas_x:
+    #    if i.get('genero', None) and i['genero'].lower() not in generos:
+    #        generos.append(i['genero'])
+    #    desconto = int(i['desconto']) if i.get('desconto', None) else None
+    #    if desconto:
+    #        if not tem_trinta and desconto <= 30:
+    #            trinta = tem_trinta = True
+    #        if not tem_cinq and desconto > 30 and desconto <= 50:
+    #            cinquenta = tem_cinq = True
+    #        if not tem_setenta and desconto > 50:
+    #            setenta = tem_setenta = True
+    #    if i.get('loja', None):
+    #        lojas_dict[i['loja']['slug']] = i['loja']['nome'] 
+    #    preco = int(i['preco_final']) if i.get('preco_final', None) else None
+    #    if preco:
+    #        if not tem_preco1 and preco <= 30:
+    #            preco1 = tem_preco1 = True
+    #        if not tem_preco2 and preco > 30 and preco <= 50:
+    #            preco2 = tem_preco2 = True
+    #        if not tem_preco3 and preco > 50 and preco <= 100:
+    #            preco3 = tem_preco3 = True
+    #        if not tem_preco4 and preco > 100 and preco <= 300:
+    #            preco4 = tem_preco4 = True
+    #        if not tem_preco5 and preco > 300:
+    #            preco5 = tem_preco5 = True
 
     return {'destaques': destaques,
             'ultimo_destaque_id': [int(d['id']) for d in destaques],
@@ -93,7 +121,8 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
             'ultima_oferta_id': [int(o['id']) for o in ofertas],
             'categorias': Categoria.publicadas_com_oferta(shopping.id),
             'mais_paginas': mais_paginas,
-            'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
+            #'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
+            'lojas_dict': lojas_dict, 
             'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
             'sazonal': Sazonal.atual(shopping=shopping.id),
             'shopping_id': shopping.id,

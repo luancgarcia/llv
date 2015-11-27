@@ -172,12 +172,12 @@
 								<div class="submenu {% if lojas|length <= 10%}auto {% endif %}fix">
 									<ul>
 										{% if lojas|length > 10%}
-										{% for loja in lojas %}
-										<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' slug=shopping_slug loja=loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+										{% for slug, nome in lojas_dict.items %}
+										<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' slug=shopping_slug loja=slug %}" title="{{ nome }}">{{ nome }}</a></li>
 										{% endfor %}
 										{% else %}
-										{% for loja in lojas %}
-										<li class="cl"><a href="{% url 'home_loja' slug=shopping_slug loja=loja.slug %}" title="{{ loja.nome }}">{{ loja.nome }}</a></li>
+										{% for slug, nome in lojas_dict.items %}
+										<li class="cl"><a href="{% url 'home_loja' slug=shopping_slug loja=slug %}" title="{{ nome }}">{{ nome }}</a></li>
 										{% empty %}
 										<li>Sem loja com ofertas cadastradas</li>
 										{% endfor %}
