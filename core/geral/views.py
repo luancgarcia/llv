@@ -343,29 +343,29 @@ def mais_items(ids_para_filtrar, tipo, id_shopping):
     else:
         corte = 3
 
-    cache_key = 'MAIS_%s_%s_%s' % (id_shopping, tipo, ''.join(map(str, ids_para_filtrar)))
-    cache_mais = cache.get(cache_key)
+    # cache_key = 'MAIS_%s_%s_%s' % (id_shopping, tipo, ''.join(map(str, ids_para_filtrar)))
+    # cache_mais = cache.get(cache_key)
 
-    if cache_mais:
-        return cache_mais
-    else:
-        items = Oferta.objects.filter(loja__shopping_id=id_shopping,
-                                      tipo=tipo,
-                                      status=Oferta.PUBLICADO,
-                                      inicio__lte=hoje, fim__gte=hoje) \
-                               .exclude(id__in=ids_para_filtrar) \
-                               .order_by('-data_aprovacao')[:corte]
+    # if cache_mais:
+    #     return cache_mais
+    # else:
+    items = Oferta.objects.filter(loja__shopping_id=id_shopping,
+                                  tipo=tipo,
+                                  status=Oferta.PUBLICADO,
+                                  inicio__lte=hoje, fim__gte=hoje) \
+                           .exclude(id__in=ids_para_filtrar) \
+                           .order_by('-data_aprovacao')[:corte]
         # items = Oferta.objects.filter(tipo=tipo,status=Oferta.PUBLICADO)\
         #                       .filter(Q(loja__shopping_id=id_shopping) |
         #                               Q(shopping_id=id_shopping)) \
         #                       .filter(inicio__lte=hoje,fim__gte=hoje) \
         #                       .exclude(id__in=ids_para_filtrar) \
         #                       .order_by('-data_aprovacao')[:corte]
-        items_final = []
-        for i in items:
-            items_final.append(i.to_dict())
-        cache.set(cache_key, items_final)
-
+        # items_final = []
+        # for i in items:
+        #     items_final.append(i.to_dict())
+        # cache.set(cache_key, items_final)
+    items_final = [i.to_dict() for i in items]
     return items_final
 
 def limpa_ids(valores):
