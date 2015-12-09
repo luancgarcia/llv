@@ -3,6 +3,7 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
 from datetime import date, timedelta, datetime
+from collections import OrderedDict
 
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -122,7 +123,7 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
             'categorias': Categoria.publicadas_com_oferta(shopping.id),
             'mais_paginas': mais_paginas,
             #'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
-            'lojas_dict': lojas_dict, 
+            'lojas_dict': dict(OrderedDict(sorted(lojas_dict.items(), ket=lambda n: t[0]))),
             'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
             'sazonal': Sazonal.atual(shopping=shopping.id),
             'shopping_id': shopping.id,
