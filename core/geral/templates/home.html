@@ -171,7 +171,7 @@
 								<a class="lnk" href="javascript:;">Lojas</a>
 								<div class="submenu {% if lojas|length <= 10%}auto {% endif %}fix">
 									<ul>
-										{% if lojas|length > 10%}
+										{% if lojas_dict|length > 10%}
 										{% for slug, nome in lojas_dict.items %}
 										<li class="{% cycle '' 'mid' '' %}"><a href="{% url 'home_loja' slug=shopping_slug loja=slug %}" title="{{ nome }}">{{ nome }}</a></li>
 										{% endfor %}
