@@ -409,7 +409,8 @@ def mais_ofertas(request):
                 'ofertas': ofertas,
                 'ultima_oferta_id': ultima_oferta_id,
                 'mais_paginas': mais_paginas,
-                'eh_paginacao': True}
+                'eh_paginacao': True,
+                'shopping_id': id_shopping}
 
     return render(request, "home-part.html", contexto)
 
