@@ -123,7 +123,7 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
             'categorias': Categoria.publicadas_com_oferta(shopping.id),
             'mais_paginas': mais_paginas,
             #'lojas': Loja.publicadas_com_oferta(shopping=shopping.id),
-            'lojas_dict': dict(OrderedDict(sorted(lojas_dict.items(), ket=lambda n: t[0]))),
+            'lojas_dict': OrderedDict(sorted(lojas_dict.items(), key=lambda n: n[1])),
             'lojas_splash': Loja.publicadas_sem_oferta(shopping=shopping.id),
             'sazonal': Sazonal.atual(shopping=shopping.id),
             'shopping_id': shopping.id,
@@ -370,8 +370,18 @@ def mais_items(ids_para_filtrar, tipo, id_shopping):
     return items_final
 
 def limpa_ids(valores):
-    return [int(''.join(i.split('.'))) for i in valores.split(', ')]
-
+    ids = []
+    for i in valores.split(', '):
+        limpa = i.replace('.','')
+        if limpa:
+	    try:
+		id_inteiro = int(limpa)
+		ids.append(id_inteiro)
+	    except:
+		pass
+    #return [int(''.join(i.split('.'))) for i in valores.split(', ')]
+    #return ids
+    return [ int(float(i.replace('.',''))) for i in valores.split(', ')]
 @csrf_exempt
 def mais_ofertas(request):
     ultimo_destaque = request.POST.get('ultimo_destaque', None)
