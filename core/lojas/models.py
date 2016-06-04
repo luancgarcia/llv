@@ -78,7 +78,7 @@ class Loja(EditorialModel):
         lojas = cls.objects.filter(ofertas__status=1,
                                    ofertas__inicio__lte=date.today(),
                                    ofertas__fim__gt=datetime.now(), 
-                                   shopping_id=shopping)\
+                                   ofertas__loja__shopping_id=shopping)\
                            .order_by('nome')\
                            .distinct()
         return lojas

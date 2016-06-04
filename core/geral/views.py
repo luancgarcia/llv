@@ -63,7 +63,9 @@ def contexto_home(destaques, eventos, ofertas, mais_paginas, shopping, com_filtr
 
     lojas_dict = {}
     for i in Oferta.itens_por_shopping(shopping=shopping.id):
-        if i.genero and Oferta.GENEROS[i.genero][1].lower() not in generos:
+        #Condição antiga. **Fabiano Miranda**
+        #if i.genero and Oferta.GENEROS[i.genero][1].lower() not in generos: 
+        if Oferta.GENEROS[i.genero][1].lower() not in generos:
             generos.append(Oferta.GENEROS[i.genero][1])
         desconto = int(i.desconto) if i.desconto else None
         if desconto:
@@ -287,7 +289,8 @@ def home_por_genero(slug, shopping, ids_filtrar):
 
 def home_por_loja(slug, shopping, ids_filtrar):
     hoje = date.today()
-    loja = Loja.objects.filter(slug=slug,shopping_id=shopping).get()
+    #loja = Loja.objects.filter(slug=slug,shopping_id=shopping).get() **Fabiano Miranda**
+    loja = Loja.objects.filter(slug=slug,shopping_id=shopping,publicada=1).get()
     items = Oferta.objects.filter(status=Oferta.PUBLICADO,
                                   loja=loja).exclude(id__in=ids_filtrar) \
                           .filter(inicio__lte=hoje,fim__gte=hoje) \
