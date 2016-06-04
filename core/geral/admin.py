@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-
 from imagekit.admin import AdminThumbnail
 
 from django.contrib import admin
@@ -10,7 +9,7 @@ from django.db.models import Q
 
 from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento,
                           Mascara, PerfilMarketing, PerfilLojista, PerfilAdministrador,
-                          Sazonal)
+                          Sazonal, Cupom)
 from lojas.models import Loja, Shopping
 
 
@@ -279,7 +278,7 @@ class DestaqueModelForm(ModelForm):
         localized_fields = ('__all__')
 
 
-class DestaqueCupom(admin.ModelAdmin):
+class DestaqueAdmin(admin.ModelAdmin):
     inlines = [ImagemNaoOfertaInline, ]
     exclude = OCULTA_NO_ADMIN
     # prepopulated_fields = {'slug': ('nome',), }
@@ -335,8 +334,6 @@ class DestaqueCupom(admin.ModelAdmin):
             )
         return super(DestaqueCupom, self).formfield_for_manytomany(db_field, request, **kwargs)
 
-
-class DestaqueAdmin(admin.ModelAdmin, DestaqueCupom):
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
         qs = qs.filter(tipo=Oferta.DESTAQUE)
@@ -354,7 +351,62 @@ class DestaqueAdmin(admin.ModelAdmin, DestaqueCupom):
         obj.save()
 
 
-class CupomAdmin(admin.ModelAdmin, DestaqueCupom):
+class CupomAdmin(admin.ModelAdmin):
+    inlines = [ImagemNaoOfertaInline, ]
+    exclude = OCULTA_NO_ADMIN
+    # prepopulated_fields = {'slug': ('nome',), }
+    list_display = ['__unicode__', 'shopping', 'status']
+    list_editable = ['status']
+    search_fields = ['nome']
+    form = DestaqueModelForm
+    list_filter = ['shopping', 'status']
+
+    class Media:
+        js = [
+            'js/preco_desconto_admin.js',
+            'js/jquery.maskMoney.min.js',
+            'js/comum_admin.js',
+        ]
+
+    fieldsets = (
+        ('Datas', {
+            'fields': ('inicio', 'fim')
+        }),
+        ('Informações', {
+            'fields': (
+                'status', 'loja', 'shopping', 'nome', 'slug', 'categoria',
+                'genero', 'descricao', 'texto_promocional',)
+        }),
+        ('Digite os valores do produto', {
+            'fields': (('preco_inicial', 'preco_final'), 'desconto')
+        }),
+    )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        if db_field.name == "loja":
+            if perfil.is_marketing and perfil.shopping:
+                kwargs["queryset"] = Loja.objects.filter(
+                    shopping=perfil.shopping)
+            else:
+                kwargs["queryset"] = Loja.objects.all()
+        if db_field.name == "shopping":
+            if perfil.is_marketing and perfil.shopping:
+                kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping.id)
+            else:
+                kwargs["queryset"] = Shopping.objects.all()
+        return super(DestaqueAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        loja_shopping = perfil.loja.shopping if perfil.loja else None
+        if db_field.name == "categoria" and (perfil.shopping or loja_shopping):
+            kwargs["queryset"] = Categoria.objects.filter(
+                Q(shopping=perfil.shopping) |
+                Q(shopping=loja_shopping)
+            )
+        return super(DestaqueCupom, self).formfield_for_manytomany(db_field, request, **kwargs)
+
     def queryset(self, request):
         qs = super(CupomAdmin, self).queryset(request)
         qs = qs.filter(tipo=Oferta.DESTAQUE, subtipo=Oferta.CUPOM)
@@ -530,6 +582,7 @@ class MascaraAdmin(admin.ModelAdmin):
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Oferta, OfertaAdmin)
 admin.site.register(Destaque, DestaqueAdmin)
+admin.site.register(Cupom, CupomAdmin)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(ImagemOferta, ImagemOfertaAdmin)
 admin.site.register(Log, LogAdmin)
