@@ -52,12 +52,12 @@ SHARE_URL = "http://www.liquidacaolapisvermelho.com.br"
 # SITE_URL = "http://localhost:8989"
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-# STATIC_URL = '/static/'
+# STATIC_URL = 'http://img.liquidacaolapisvermelho.com.br/static/'
 STATIC_URL = '%s%s' % (SITE_URL, '/static/')
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
-# MEDIA_URL = '/media/'
-MEDIA_URL = '%s%s' % (SITE_URL, '/media/')
+MEDIA_URL = 'http://cdn.liquidacaolapisvermelho.com.br/media/'
+# MEDIA_URL = '%s%s' % (SITE_URL, '/media/')
 
 STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, "static"),
