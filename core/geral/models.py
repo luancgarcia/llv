@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+import random
+import string
 import os
 
 from datetime import datetime, timedelta, date
@@ -184,8 +186,15 @@ class Oferta(EditorialModel):
     GENEROS = (
         (MASCULINO, u'Masculino'),
         (FEMININO, u'Feminino'),
-        (INFANTIL,u'Infantil'),
-        (UNISSEX,u'Unissex'),
+        (INFANTIL, u'Infantil'),
+        (UNISSEX, u'Unissex'),
+    )
+
+    REGULAR = 0
+    CUPOM = 1
+    SUBTIPOS = (
+        (REGULAR, u'Regular'),
+        (CUPOM, u'Cupom'),
     )
 
     loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='ofertas',
@@ -194,6 +203,7 @@ class Oferta(EditorialModel):
                                  blank=True, related_name='ofertas')
     categoria = models.ManyToManyField(Categoria, verbose_name=u'Categoria', null=True,
                                        blank=True, related_name='ofertas')
+    subtipo = models.IntegerField(verbose_name=u'Sub-tipo', null=True, blank=True, choices=SUBTIPOS, default=REGULAR)
     nome = models.CharField(u'Título', max_length=200, null=True, blank=False)
     slug = models.SlugField(max_length=250, null=True, blank=True, unique=True)
     descricao = models.TextField(u'Descrição do produto', blank=True, null=True)
@@ -525,6 +535,10 @@ class Cupom(Destaque):
         proxy = True
         verbose_name = u'Cupom'
         verbose_name_plural = u'Cupons'
+
+    def save(self, *args, **kwargs):
+        self.subtipo = Oferta.CUPOM
+        super(Cupom, self).save(*args, **kwargs)
 
 
 class ImagemOferta(OrderedModel):

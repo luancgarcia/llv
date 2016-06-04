@@ -14,7 +14,7 @@ from geral.models import (Categoria, Oferta, ImagemOferta, Log, Destaque, Evento
 from lojas.models import Loja, Shopping
 
 
-OCULTA_NO_ADMIN = ('tipo','evento','data_aprovacao','publicada','autor','texto_link')
+OCULTA_NO_ADMIN = ('tipo', 'evento', 'data_aprovacao', 'publicada', 'autor', 'texto_link', 'subtipo')
 
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['nome','shopping','publicada']
@@ -278,15 +278,16 @@ class DestaqueModelForm(ModelForm):
         model = Destaque
         localized_fields = ('__all__')
 
-class DestaqueAdmin(admin.ModelAdmin):
-    inlines = [ImagemNaoOfertaInline,]
+
+class DestaqueCupom(admin.ModelAdmin):
+    inlines = [ImagemNaoOfertaInline, ]
     exclude = OCULTA_NO_ADMIN
     # prepopulated_fields = {'slug': ('nome',), }
     list_display = ['__unicode__', 'shopping', 'status']
     list_editable = ['status']
     search_fields = ['nome']
     form = DestaqueModelForm
-    list_filter = ['shopping', 'status'] 
+    list_filter = ['shopping', 'status']
 
     class Media:
         js = [
@@ -322,10 +323,20 @@ class DestaqueAdmin(admin.ModelAdmin):
                 kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping.id)
             else:
                 kwargs["queryset"] = Shopping.objects.all()
-        return super(DestaqueAdmin, self).formfield_for_foreignkey(db_field,
-                                                                   request,
-                                                                   **kwargs)
+        return super(DestaqueAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        perfil = request.user.perfil.get()
+        loja_shopping = perfil.loja.shopping if perfil.loja else None
+        if db_field.name == "categoria" and (perfil.shopping or loja_shopping):
+            kwargs["queryset"] = Categoria.objects.filter(
+                Q(shopping=perfil.shopping) |
+                Q(shopping=loja_shopping)
+            )
+        return super(DestaqueCupom, self).formfield_for_manytomany(db_field, request, **kwargs)
+
+
+class DestaqueAdmin(admin.ModelAdmin, DestaqueCupom):
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
         qs = qs.filter(tipo=Oferta.DESTAQUE)
@@ -338,22 +349,27 @@ class DestaqueAdmin(admin.ModelAdmin):
                            Q(autor__shopping=perfil.shopping))
         return qs
 
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
+    def save_model(self, request, obj, form, change):
+        obj.tipo = Oferta.DESTAQUE
+        obj.save()
+
+
+class CupomAdmin(admin.ModelAdmin, DestaqueCupom):
+    def queryset(self, request):
+        qs = super(CupomAdmin, self).queryset(request)
+        qs = qs.filter(tipo=Oferta.DESTAQUE, subtipo=Oferta.CUPOM)
         perfil = request.user.perfil.get()
-        loja_shopping = None
-        if perfil.loja:
-            loja_shopping = perfil.loja.shopping
-        if db_field.name == "categoria" and (perfil.shopping or loja_shopping):
-            kwargs["queryset"] = Categoria.objects.filter(
-                Q(shopping=perfil.shopping) |
-                Q(shopping=loja_shopping)
-            )
-        return super(DestaqueAdmin, self).formfield_for_manytomany(db_field,
-                                                                 request,
-                                                                 **kwargs)
+        if perfil.is_lojista:
+            qs = qs.filter(loja=perfil.loja)
+        if perfil.is_marketing and perfil.shopping:
+            qs = qs.filter(Q(shopping=perfil.shopping) |
+                           Q(loja__shopping=perfil.shopping) |
+                           Q(autor__shopping=perfil.shopping))
+        return qs
 
     def save_model(self, request, obj, form, change):
         obj.tipo = Oferta.DESTAQUE
+        obj.subtipo = Oferta.CUPOM
         obj.save()
 
 
