@@ -12,7 +12,7 @@ var userAgent = navigator.userAgent.toLowerCase();
 var devices = new Array('nokia','iphone','blackberry','sony','lg',
 'htc_tattoo','samsung','symbian','SymbianOS','elaine','palm',
 'series60','windows ce','android','obigo','netfront',
-'openwave','mobilexplorer','operamini','BlackBerry');
+'openwave','mobilexplorer','operamini','ipad','BlackBerry');
 var url_redirect = 'https://www.liquidacaolapisvermelho.com.br';
 
 function mobiDetect(userAgent, devices) {
