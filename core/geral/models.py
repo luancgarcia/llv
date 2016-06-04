@@ -536,9 +536,15 @@ class Cupom(Oferta):
         verbose_name = u'Cupom'
         verbose_name_plural = u'Cupons'
 
-    def save(self, *args, **kwargs):
-        self.subtipo = Oferta.CUPOM
-        super(Cupom, self).save(*args, **kwargs)
+
+class CupomLoja(BaseModel):
+    cupom = models.ForeignKey(Cupom, verbose_name=u'Loja', related_name='cupons')
+    loja = models.ForeignKey(Loja, verbose_name=u'Loja', related_name='cupons')
+    codigo = models.CharField(verbose_name=u'Código', max_length=20, null=False, blank=False)
+
+    @staticmethod
+    def gera_codigo():
+        return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(20))
 
 
 class ImagemOferta(OrderedModel):
