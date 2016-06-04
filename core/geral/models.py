@@ -530,7 +530,7 @@ class Evento(Oferta):
         return u'%s' % self.nome
 
 
-class Cupom(Destaque):
+class Cupom(Oferta):
     class Meta:
         proxy = True
         verbose_name = u'Cupom'
