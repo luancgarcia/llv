@@ -351,6 +351,17 @@ class DestaqueAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class CupomModelForm(ModelForm):
+    class Meta:
+        model = Cupom
+        localized_fields = ('__all__')
+
+    def __init__(self, *args, **kwargs):
+        super(CupomModelForm, self).__init__(*args, **kwargs)
+
+        self.fields['loja'].required = True
+
+
 class CupomAdmin(admin.ModelAdmin):
     inlines = [ImagemNaoOfertaInline, ]
     exclude = OCULTA_NO_ADMIN
@@ -358,7 +369,7 @@ class CupomAdmin(admin.ModelAdmin):
     list_display = ['__unicode__', 'shopping', 'status']
     list_editable = ['status']
     search_fields = ['nome']
-    form = DestaqueModelForm
+    form = CupomModelForm
     list_filter = ['shopping', 'status']
 
     class Media:
@@ -420,8 +431,6 @@ class CupomAdmin(admin.ModelAdmin):
         return qs
 
     def save_model(self, request, obj, form, change):
-        if not obj.loja:
-            raise ValidationError("Loja é campo obrigatório para Cupons")
         obj.tipo = Oferta.DESTAQUE
         obj.subtipo = Oferta.CUPOM
         obj.save()
