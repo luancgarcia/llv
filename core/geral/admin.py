@@ -332,7 +332,7 @@ class DestaqueAdmin(admin.ModelAdmin):
                 Q(shopping=perfil.shopping) |
                 Q(shopping=loja_shopping)
             )
-        return super(DestaqueCupom, self).formfield_for_manytomany(db_field, request, **kwargs)
+        return super(DestaqueAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
     def queryset(self, request):
         qs = super(DestaqueAdmin, self).queryset(request)
@@ -395,7 +395,7 @@ class CupomAdmin(admin.ModelAdmin):
                 kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping.id)
             else:
                 kwargs["queryset"] = Shopping.objects.all()
-        return super(DestaqueAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        return super(CupomAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         perfil = request.user.perfil.get()
@@ -405,7 +405,7 @@ class CupomAdmin(admin.ModelAdmin):
                 Q(shopping=perfil.shopping) |
                 Q(shopping=loja_shopping)
             )
-        return super(DestaqueCupom, self).formfield_for_manytomany(db_field, request, **kwargs)
+        return super(CupomAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
     def queryset(self, request):
         qs = super(CupomAdmin, self).queryset(request)
