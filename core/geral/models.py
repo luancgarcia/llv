@@ -395,7 +395,8 @@ class Oferta(EditorialModel):
                     'fim_curto': _date(self.fim, 'd/m'),
                     'genero': self.GENEROS[self.genero][1] if self.genero in [0, 1, 2, 3] else None,
                     'porcentagem': self.porcentagem_desconto(),
-                    'desconto': self.desconto}
+                    'desconto': self.desconto,
+                    'cupom': True if self.subtipo == self.CUPOM else False}
 
         if not self.tipo == Oferta.EVENTO:
             contexto.update({'preco_final': self.preco_final,
