@@ -15,7 +15,7 @@
 			<p class="chapeu">{{ destaque.chamada_promocional }}</p>
 			<h2 class="titulo">{{ destaque.titulo }}</h2>
 			<p class="descricao">{{ destaque.descricao }}</p>
-
+			{% if destaque.cupom %}<h2 class="titulo">gerar cupom</h2>{% endif %}
 			{% if destaque.preco_inicial %}
             <p class="preco_anterior">de R$ {{ destaque.preco_inicial }}</p>
             {% endif %}
