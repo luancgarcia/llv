@@ -515,11 +515,22 @@ class Oferta(EditorialModel):
                                                                   tipo=tipo))).order_by('-vistas')
 
 
+class DestaqueManager(models.Manager):
+    def get_queryset(self):
+        return super(DestaqueManager, self).get_queryset().filter(tipo=Oferta.DESTAQUE).exclude(subtipo=Oferta.CUPOM)
+
 class Destaque(Oferta):
     class Meta:
         proxy = True
         verbose_name = u'Destaque'
         verbose_name_plural = u'Destaques'
+
+    objects = DestaqueManager()
+
+
+class EventoManager(models.Manager):
+    def get_queryset(self):
+        return super(EventoManager, self).get_queryset().filter(tipo=Oferta.EVENTO)
 
 
 class Evento(Oferta):
@@ -531,12 +542,21 @@ class Evento(Oferta):
     def __unicode__(self):
         return u'%s' % self.nome
 
+    objects = EventoManager()
+
+
+class CupomManager(models.Manager):
+    def get_queryset(self):
+        return super(CupomManager, self).get_queryset().filter(tipo=Oferta.DESTAQUE, subtipo=Oferta.CUPOM)
+
 
 class Cupom(Oferta):
     class Meta:
         proxy = True
         verbose_name = u'Cupom'
         verbose_name_plural = u'Cupons'
+
+    objects = CupomManager()
 
     def clean_loja(self):
         if not self.cleaned_data['loja']:
