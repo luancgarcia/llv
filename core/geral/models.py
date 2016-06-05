@@ -4,6 +4,8 @@ import string
 import os
 
 from datetime import datetime, timedelta, date
+
+from django.core.exceptions import ValidationError
 from imagekit.models import ImageSpecField
 from pilkit.processors import Adjust, resize
 
@@ -535,6 +537,11 @@ class Cupom(Oferta):
         proxy = True
         verbose_name = u'Cupom'
         verbose_name_plural = u'Cupons'
+
+    def clean_loja(self):
+        if not self.cleaned_data['loja']:
+            raise ValidationError("Loja é obrigatório para cupom")
+        return self.cleaned_data['loja']
 
 
 class CupomLoja(BaseModel):
