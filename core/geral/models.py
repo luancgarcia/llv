@@ -569,6 +569,11 @@ class CupomLoja(BaseModel):
     def gera_codigo():
         return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(20))
 
+    def save(self, *args, **kwargs):
+        if not self.codigo:
+            self.codigo = self.gera_codigo()
+        super(CupomLoja, self).save(*args, **kwargs)
+
 
 class ImagemOferta(OrderedModel):
     def new_filename(instance, filename):

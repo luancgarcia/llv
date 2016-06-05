@@ -548,7 +548,7 @@ def modal_cupom(request, id_cupom):
         raise Http404
 
     cupom = Cupom.objects.get(id=id_cupom)
-    cupomloja = CupomLoja.objects.create(cupom=cupom, loja=cupom.loja, codigo=Cupom.gera_codigo())
+    cupomloja = CupomLoja.objects.create(cupom=cupom, loja=cupom.loja)
 
     contexto = {'loja': cupom.loja.to_dict(),
                 'codigo': cupomloja.codigo}
