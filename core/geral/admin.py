@@ -420,6 +420,8 @@ class CupomAdmin(admin.ModelAdmin):
         return qs
 
     def save_model(self, request, obj, form, change):
+        if not obj.loja:
+            raise ValidationError("Loja é campo obrigatório para Cupons")
         obj.tipo = Oferta.DESTAQUE
         obj.subtipo = Oferta.CUPOM
         obj.save()

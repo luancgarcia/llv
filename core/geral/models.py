@@ -558,11 +558,6 @@ class Cupom(Oferta):
 
     objects = CupomManager()
 
-    def clean_loja(self):
-        if not self.cleaned_data['loja']:
-            raise ValidationError("Loja é obrigatório para cupom")
-        return self.cleaned_data['loja']
-
 
 class CupomLoja(BaseModel):
     cupom = models.ForeignKey(Cupom, verbose_name=u'Loja', related_name='cupons')
