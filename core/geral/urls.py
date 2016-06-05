@@ -47,6 +47,8 @@ urlpatterns = patterns('',
         'geral.views.modal_share',
         name='modal_share'),
 
+    url(r'^gerar_cupom/(?P<id_cupom>\d+)/$', 'geral.views.modal_cupom', name='modal_cupom'),
+
     url(r'^curtir/$', 'geral.views.curtir', name='curtir'),
     url(r'^descurtir/$', 'geral.views.descurtir', name='descurtir'),
     url(r'^mesclar/$', 'geral.views.mesclar', name='mesclar'),

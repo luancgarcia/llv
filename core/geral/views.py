@@ -18,7 +18,7 @@ from utils.functions import jsonResponse, dict_mais_vistas, listas_e_totais
 from utils.custom_email import TemplatedEmail
 
 from geral.models import (Categoria, ImagemOferta, Oferta, Log, Mascara,
-                          Sazonal, Perfil)
+                          Sazonal, Perfil, Cupom, CupomLoja)
 from .decorators import indica_shopping
 from lojas.models import Loja, Shopping
 from notificacoes.models import Solicitacao
@@ -541,6 +541,19 @@ def modal_share(request, id_item):
                 'imagens_sazonal': imagens_sazonal}
 
     return render(request, "modais/share.html", contexto)
+
+@csrf_exempt
+def modal_cupom(request, id_cupom):
+    if not request.is_ajax():
+        raise Http404
+
+    cupom = Cupom.objects.get(id=id_cupom)
+    cupomloja = CupomLoja.objects.create(cupom=cupom, loja=cupom.loja, codigo=Cupom.gera_codigo())
+
+    contexto = {'loja': cupom.loja.to_dict(),
+                'codigo': cupomloja.codigo}
+
+    return render(request, "modais/cupom.html", contexto)
 
 @csrf_exempt
 def mesclar(request):
