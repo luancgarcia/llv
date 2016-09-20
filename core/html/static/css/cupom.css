@@ -1,0 +1,80 @@
+body {
+	margin:0px auto;
+	font-family:Tahoma, Geneva, sans-serif;
+	text-align:center;
+	color:#2e2e2e;
+}
+
+#content {
+	
+	width:365px;
+	height:auto;
+	clear: both
+	
+}
+
+#header {
+	
+	width:365px;
+	height:auto;
+	display: table;
+	content: '';
+	clear: both
+	
+}
+
+#header p {
+	
+	font-size:12px;
+	color:#ce1e06;
+	margin-top:-1px;
+	
+}
+
+
+#informacoes {
+	
+	width:300px;
+	margin-left:30px;
+
+}
+
+
+#informacoes .img {
+	display:block;
+	float:none;
+	width:200px;
+	height:200px;
+}
+
+#informacoes .estoque {
+	color: #7d7b7b;
+	font-size:10px;
+	
+}
+
+#informacoes .txtOferta {
+	
+	font-size:14px;
+	
+}
+
+.loja {
+	
+	width:300px;
+	background-color:#fcfafa;
+	border:1px;
+	border-color:#edebeb;
+	padding:2px 0 2px 0;
+	font-size:14px;
+	text-align:center;
+}
+
+.loja .nomeLoja {
+	margin-bottom:-10px;
+}
+
+#footer p {
+font-size:12px;
+color: #535252;
+}

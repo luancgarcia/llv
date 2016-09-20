@@ -1,9 +1,38 @@
-<div class="content fix" id="ShareProduto">
-	<header class="head">
-		<h3 class="titulo">Cupom</h3>
-	</header>
-	<section class="fix content-share">
-		<h1>Cupom para loja {{ loja.nome }}</h1>
-		<h2>{{ codigo }}</h2>
-	</section>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cupom - Lápis Vermelho</title>
+
+<!-- Styles -->
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/cupom.css">
+
+</head>
+
+<body>
+
+<div id="content">
+    <div id="header">
+        <img src="{% static 'img/header-cupom.png' %}" />
+        <p>{{ codigo }}</p>
+    </div>
+
+    <div id="informacoes">
+        <img src="{% static 'img/img-cupom.png' %}" />
+        <p class="estoque">Esse cupom é válido até 03/11 ou enquanto durar o estoque.</p>
+        <p class="txtOferta">Apresente o cupom na loja e receba o desconto em suas compras. O desconto vale para a coleção passada - Primavera 2016.</p>
+
+            <div class="loja">
+                <p class="nomeLoja">{{ loja.nome }}</p>
+                <p class="telLoja">{{ loja.telefone }}</p>
+            </div>
+
+        <div id="footer">
+          <p>Baixe o cupom para o seu celular e apresente na loja para resgatar seu desconto.</p>
+        </div>
+    </div>
 </div>
+
+</body>
+</html>
