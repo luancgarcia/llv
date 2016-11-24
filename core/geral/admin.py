@@ -36,7 +36,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         perfil = request.user.perfil.get()
-        if db_field.name == "shopping":
+        if not perfil.is_adm and db_field.name == "shopping":
             kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping_id)
 
         return super(CategoriaAdmin, self).formfield_for_foreignkey(db_field,
@@ -64,7 +64,7 @@ class SazonalAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         perfil = request.user.perfil.get()
-        if db_field.name == "shopping":
+        if not perfil.is_adm and db_field.name == "shopping":
             kwargs["queryset"] = Shopping.objects.filter(id=perfil.shopping_id)
         return super(SazonalAdmin, self).formfield_for_foreignkey(db_field,
                                                                   request,
